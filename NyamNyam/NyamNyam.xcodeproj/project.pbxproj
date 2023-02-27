@@ -110,9 +110,9 @@
 		ABEAFBC929AC9ED3002C3119 /* NyamNyam */ = {
 			isa = PBXGroup;
 			children = (
+				ABEAFBFA29AC9EDC002C3119 /* Application */,
 				ABEAFBFE29ACA051002C3119 /* Global */,
 				ABEAFBFB29AC9EEA002C3119 /* Network */,
-				ABEAFBFA29AC9EDC002C3119 /* Application */,
 				ABEAFBFC29AC9F03002C3119 /* Screens */,
 				ABEAFBD329AC9ED4002C3119 /* Assets.xcassets */,
 				ABEAFBD829AC9ED4002C3119 /* Info.plist */,
