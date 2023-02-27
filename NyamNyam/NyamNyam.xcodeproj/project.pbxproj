@@ -49,6 +49,7 @@
 		ABEAFBE729AC9ED4002C3119 /* NyamNyamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NyamNyamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABEAFBEB29AC9ED4002C3119 /* NyamNyamUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NyamNyamUITests.swift; sourceTree = "<group>"; };
 		ABEAFBED29AC9ED4002C3119 /* NyamNyamUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NyamNyamUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		ABEAFBFD29ACA00B002C3119 /* Dummy.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Dummy.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +139,7 @@
 		ABEAFBFB29AC9EEA002C3119 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
+				ABEAFBFD29ACA00B002C3119 /* Dummy.json */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
