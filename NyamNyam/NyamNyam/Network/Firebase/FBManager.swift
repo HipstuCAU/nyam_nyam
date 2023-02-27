@@ -7,7 +7,7 @@
 
 import Foundation
 
-class FBManager {
+final class FBManager {
     static let shared = FBManager()
     
     private init() { }
