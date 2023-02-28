@@ -23,6 +23,7 @@
 		ABEAFC1029ACB1FF002C3119 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = ABEAFC0F29ACB1FF002C3119 /* SnapKit */; };
 		ABEAFC1329AD279A002C3119 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC1229AD279A002C3119 /* Meal.swift */; };
 		ABEAFC1529AD2F36002C3119 /* Campus.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC1429AD2F36002C3119 /* Campus.swift */; };
+		ABEAFC1829ADC2B0002C3119 /* OptionSelectModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC1729ADC2B0002C3119 /* OptionSelectModuleViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		ABEAFC0C29ACA59E002C3119 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		ABEAFC1229AD279A002C3119 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 		ABEAFC1429AD2F36002C3119 /* Campus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Campus.swift; sourceTree = "<group>"; };
+		ABEAFC1729ADC2B0002C3119 /* OptionSelectModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectModuleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,8 +219,17 @@
 		ABEAFC1129ACB8DB002C3119 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				ABEAFC1629ADC24D002C3119 /* OptionSelectModule */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		ABEAFC1629ADC24D002C3119 /* OptionSelectModule */ = {
+			isa = PBXGroup;
+			children = (
+				ABEAFC1729ADC2B0002C3119 /* OptionSelectModuleViewController.swift */,
+			);
+			path = OptionSelectModule;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -363,6 +374,7 @@
 				ABEAFC0D29ACA59E002C3119 /* HomeViewModel.swift in Sources */,
 				ABEAFC1529AD2F36002C3119 /* Campus.swift in Sources */,
 				ABEAFC1329AD279A002C3119 /* Meal.swift in Sources */,
+				ABEAFC1829ADC2B0002C3119 /* OptionSelectModuleViewController.swift in Sources */,
 				ABEAFBCB29AC9ED3002C3119 /* AppDelegate.swift in Sources */,
 				ABEAFC0A29ACA523002C3119 /* FBManager.swift in Sources */,
 				ABEAFC0729ACA4E5002C3119 /* String+.swift in Sources */,

@@ -8,24 +8,28 @@
 import UIKit
 import SnapKit
 
-class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController {
     let viewModel = HomeViewModel()
-
-    let testLabel = UILabel()
+    let OptionSelectModule = OptionSelectModuleViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        view.addSubview(testLabel)
-        testLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-        }
-        testLabel.text = "힙스터들 환영해!!"
-        testLabel.textColor = .blue
-        testLabel.textAlignment = .center
-        testLabel.font = .systemFont(ofSize: 30)
+        view.backgroundColor = .white
+        setOptionSelectModuleLayout()
     }
+}
 
-
+extension HomeViewController {
+    private func setOptionSelectModuleLayout() {
+        self.addChild(OptionSelectModule)
+        self.view.addSubview(OptionSelectModule.view)
+        OptionSelectModule.didMove(toParent: self)
+        OptionSelectModule.view.snp.makeConstraints { make in
+            make.top.equalTo(view.snp.top).offset(63)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
+            make.height.equalTo(156)
+        }
+    }
 }
 
