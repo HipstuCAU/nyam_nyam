@@ -26,6 +26,7 @@ extension HomeViewController {
         
         if isFirstLaunch {
             UserDefaults.standard.campus = Campus.seoul.rawValue
+            // MARK: 이곳에 첫 Launch시 실행할 작업들이 들어갑니다.
         }
     }
 }
