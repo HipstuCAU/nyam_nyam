@@ -23,8 +23,9 @@ final class OptionSelectModuleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind(to: viewModel)
         view.backgroundColor = .yellow
+        bind(to: viewModel)
+        setCampusSelectViewLayout()
     }
     
     private func bind(to viewModel: HomeViewModel) {
@@ -33,6 +34,16 @@ final class OptionSelectModuleViewController: UIViewController {
         }
         viewModel.indexOfCafetera.observe(on: self) { _ in
             print(viewModel.indexOfCafetera.value)
+        }
+    }
+}
+
+private extension OptionSelectModuleViewController {
+    func setCampusSelectViewLayout() {
+        view.addSubview(campusSelectView)
+        campusSelectView.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
+            make.height.equalTo(41)
         }
     }
 }
