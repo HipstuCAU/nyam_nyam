@@ -14,8 +14,19 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setOptionsWithFirstLaunch()
         view.backgroundColor = .white
         setOptionSelectModuleLayout()
+    }
+}
+
+extension HomeViewController {
+    private func setOptionsWithFirstLaunch() {
+        let isFirstLaunch = !UserDefaults.standard.isFirstLaunch
+        
+        if isFirstLaunch {
+            UserDefaults.standard.campus = Campus.seoul.rawValue
+        }
     }
 }
 

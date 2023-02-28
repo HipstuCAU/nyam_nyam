@@ -10,6 +10,8 @@ import UIKit
 final class OptionSelectModuleViewController: UIViewController {
     let viewModel: HomeViewModel
     
+    let campusSelectView = CampusSelectView()
+    
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
