@@ -28,6 +28,12 @@ final class OptionSelectModuleViewController: UIViewController {
         setCampusSelectViewLayout()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        campusSelectView.campusNameLabel.text = UserDefaults.standard.campus == Campus.seoul.rawValue ? "서울캠퍼스" : "안성캠퍼스"
+        
+    }
+    
     private func bind(to viewModel: HomeViewModel) {
         viewModel.indexOfDate.observe(on: self) { _ in
             print(viewModel.indexOfDate.value)
@@ -38,6 +44,7 @@ final class OptionSelectModuleViewController: UIViewController {
     }
 }
 
+// MARK: - OptionSelectModule
 private extension OptionSelectModuleViewController {
     func setCampusSelectViewLayout() {
         view.addSubview(campusSelectView)
