@@ -24,6 +24,7 @@
 		ABEAFC1329AD279A002C3119 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC1229AD279A002C3119 /* Meal.swift */; };
 		ABEAFC1529AD2F36002C3119 /* Campus.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC1429AD2F36002C3119 /* Campus.swift */; };
 		ABEAFC1829ADC2B0002C3119 /* OptionSelectModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC1729ADC2B0002C3119 /* OptionSelectModuleViewController.swift */; };
+		ABEAFC1B29AE24B2002C3119 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC1A29AE24B2002C3119 /* Observable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		ABEAFC1229AD279A002C3119 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 		ABEAFC1429AD2F36002C3119 /* Campus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Campus.swift; sourceTree = "<group>"; };
 		ABEAFC1729ADC2B0002C3119 /* OptionSelectModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectModuleViewController.swift; sourceTree = "<group>"; };
+		ABEAFC1A29AE24B2002C3119 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -166,6 +168,7 @@
 		ABEAFBFC29AC9F03002C3119 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				ABEAFC1929AE24A4002C3119 /* Base */,
 				ABEAFC0B29ACA58A002C3119 /* Home */,
 			);
 			path = Screens;
@@ -230,6 +233,14 @@
 				ABEAFC1729ADC2B0002C3119 /* OptionSelectModuleViewController.swift */,
 			);
 			path = OptionSelectModule;
+			sourceTree = "<group>";
+		};
+		ABEAFC1929AE24A4002C3119 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				ABEAFC1A29AE24B2002C3119 /* Observable.swift */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -372,6 +383,7 @@
 				ABEAFBCF29AC9ED3002C3119 /* HomeViewController.swift in Sources */,
 				ABEAFC0429ACA4B1002C3119 /* Date+.swift in Sources */,
 				ABEAFC0D29ACA59E002C3119 /* HomeViewModel.swift in Sources */,
+				ABEAFC1B29AE24B2002C3119 /* Observable.swift in Sources */,
 				ABEAFC1529AD2F36002C3119 /* Campus.swift in Sources */,
 				ABEAFC1329AD279A002C3119 /* Meal.swift in Sources */,
 				ABEAFC1829ADC2B0002C3119 /* OptionSelectModuleViewController.swift in Sources */,

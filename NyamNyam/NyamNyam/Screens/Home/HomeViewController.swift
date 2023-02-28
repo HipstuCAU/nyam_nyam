@@ -10,7 +10,7 @@ import SnapKit
 
 final class HomeViewController: UIViewController {
     let viewModel = HomeViewModel()
-    let OptionSelectModule = OptionSelectModuleViewController()
+    lazy var OptionSelectModule = OptionSelectModuleViewController(viewModel: viewModel)
     
     override func viewDidLoad() {
         super.viewDidLoad()
