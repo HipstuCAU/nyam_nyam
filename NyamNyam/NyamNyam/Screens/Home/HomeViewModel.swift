@@ -15,20 +15,41 @@ final class HomeViewModel {
     let seoulMeals: [MealsForDay] = Campus.seoul.mealsForAllDayByCampus()
     let ansungMeals: [MealsForDay] = Campus.ansung.mealsForAllDayByCampus()
     
-    // TODO: - date picker 값
-    var indexOfDate: Int {
-        return 0 // 오늘 Date를 기준으로 계산 필요 (startDayOfWeek로부터 얼마나 떨어져 있는지)
-    }
-    var dateList: [Date] {
-        return [] // 오늘 날짜의 start day of week를 계산해서 7일 동안의 date 배열
-    }
+    // MARK: - date picker 값
+    var dateList: [Date]
+    var indexOfDate: Observable<Int>
+    var pickedDate: Observable<Date>
     
-    // TODO: - cafeteria picker 값
-    var indexOfCafetera: Int = 0
-    // userCafeterias는 Cafeteria가 유저 선택에 따라 차례대로 들어간 값입니다.
-    // 해당 값은 userDefault에 저장됩니다.
-    var currentCafeteria: Cafeteria {
-        userCafeterias[indexOfCafetera] // UserDefault의 Cafeterias 순서
+    // MARK: - cafeteria picker 값
+    var cafeteriaList: [Cafeteria]
+    var indexOfCafetera: Observable<Int>
+    var pickedCafeteria: Observable<Cafeteria>
+    
+    
+    init() {
+        self.indexOfDate = Observable(getIndexOfDate())
+        self.dateList = prepareDateList()
+        self.pickedDate = Observable(dateList[indexOfDate.value])
+        
+        self.cafeteriaList = userCafeterias // TODO: - UserDefault로 수정 필요
+        self.indexOfCafetera = Observable(0)
+        self.pickedCafeteria = Observable(cafeteriaList[indexOfCafetera.value])
+        
+        func getIndexOfDate() -> Int {
+            // 오늘 Date를 기준으로 계산 필요 (startDayOfWeek로부터 얼마나 떨어져 있는지)
+            return 0
+        }
+        
+        func prepareDateList() -> [Date] {
+            // 오늘 날짜의 start day of week를 계산해서 7일 동안의 date 배열
+            return ["23.02.28".formatStringToDate() ?? Date(),
+                    "23.03.01".formatStringToDate() ?? Date(),
+                    "23.03.02".formatStringToDate() ?? Date(),
+                    "23.03.03".formatStringToDate() ?? Date(),
+                    "23.03.04".formatStringToDate() ?? Date(),
+                    "23.03.05".formatStringToDate() ?? Date(),
+                    "23.03.06".formatStringToDate() ?? Date(),]
+        }
     }
     
 }
