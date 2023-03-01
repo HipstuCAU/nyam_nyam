@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Campus {
+enum Campus: String {
     case seoul
     case ansung
     

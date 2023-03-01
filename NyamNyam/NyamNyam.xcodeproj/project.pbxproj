@@ -25,6 +25,8 @@
 		ABEAFC1529AD2F36002C3119 /* Campus.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC1429AD2F36002C3119 /* Campus.swift */; };
 		ABEAFC1829ADC2B0002C3119 /* OptionSelectModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC1729ADC2B0002C3119 /* OptionSelectModuleViewController.swift */; };
 		ABEAFC1B29AE24B2002C3119 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC1A29AE24B2002C3119 /* Observable.swift */; };
+		ABEAFC1D29AE6337002C3119 /* CampusSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC1C29AE6337002C3119 /* CampusSelectView.swift */; };
+		ABEAFC1F29AE6769002C3119 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC1E29AE6769002C3119 /* UserDefaults+.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +69,8 @@
 		ABEAFC1429AD2F36002C3119 /* Campus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Campus.swift; sourceTree = "<group>"; };
 		ABEAFC1729ADC2B0002C3119 /* OptionSelectModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectModuleViewController.swift; sourceTree = "<group>"; };
 		ABEAFC1A29AE24B2002C3119 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
+		ABEAFC1C29AE6337002C3119 /* CampusSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusSelectView.swift; sourceTree = "<group>"; };
+		ABEAFC1E29AE6769002C3119 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +201,7 @@
 			children = (
 				ABEAFC0329ACA4B1002C3119 /* Date+.swift */,
 				ABEAFC0629ACA4E5002C3119 /* String+.swift */,
+				ABEAFC1E29AE6769002C3119 /* UserDefaults+.swift */,
 			);
 			path = "Extension+";
 			sourceTree = "<group>";
@@ -231,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				ABEAFC1729ADC2B0002C3119 /* OptionSelectModuleViewController.swift */,
+				ABEAFC1C29AE6337002C3119 /* CampusSelectView.swift */,
 			);
 			path = OptionSelectModule;
 			sourceTree = "<group>";
@@ -381,6 +387,7 @@
 			files = (
 				ABEAFC0129ACA0E4002C3119 /* MealsForDay.swift in Sources */,
 				ABEAFBCF29AC9ED3002C3119 /* HomeViewController.swift in Sources */,
+				ABEAFC1F29AE6769002C3119 /* UserDefaults+.swift in Sources */,
 				ABEAFC0429ACA4B1002C3119 /* Date+.swift in Sources */,
 				ABEAFC0D29ACA59E002C3119 /* HomeViewModel.swift in Sources */,
 				ABEAFC1B29AE24B2002C3119 /* Observable.swift in Sources */,
@@ -390,6 +397,7 @@
 				ABEAFBCB29AC9ED3002C3119 /* AppDelegate.swift in Sources */,
 				ABEAFC0A29ACA523002C3119 /* FBManager.swift in Sources */,
 				ABEAFC0729ACA4E5002C3119 /* String+.swift in Sources */,
+				ABEAFC1D29AE6337002C3119 /* CampusSelectView.swift in Sources */,
 				ABEAFBCD29AC9ED3002C3119 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
