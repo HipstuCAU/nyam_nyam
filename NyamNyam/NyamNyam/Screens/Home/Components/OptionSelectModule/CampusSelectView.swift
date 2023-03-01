@@ -7,7 +7,14 @@
 
 import UIKit
 
+protocol CampusSelectViewDelegate: AnyObject {
+    func showActionSheet()
+}
+
 final class CampusSelectView: UIView {
+    
+    weak var delegate: CampusSelectViewDelegate?
+    
     let campusNameLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 26, weight: .bold)
@@ -22,9 +29,10 @@ final class CampusSelectView: UIView {
         return image
     }()
     
-    let overlappedButton: UIButton = {
+    lazy var overlappedButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .clear
+        button.addTarget(self, action: #selector(overlappedButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -34,6 +42,10 @@ final class CampusSelectView: UIView {
         setCampusNameLabelLayout()
         setOptionIconViewLayout()
         setOverlappedButtonLayout()
+    }
+    
+    @objc func overlappedButtonPressed(_ sender: UIButton) {
+        delegate?.showActionSheet()
     }
     
     required init?(coder: NSCoder) {
@@ -48,6 +60,7 @@ private extension CampusSelectView {
             make.top.equalToSuperview()
             make.leading.equalTo(20)
         }
+        campusNameLabel.isUserInteractionEnabled = false
     }
     
     func setOptionIconViewLayout() {
@@ -58,6 +71,7 @@ private extension CampusSelectView {
             make.width.equalTo(16.19)
             make.height.equalTo(9.44)
         }
+        optionIconView.isUserInteractionEnabled = false
     }
     
     func setOverlappedButtonLayout() {
