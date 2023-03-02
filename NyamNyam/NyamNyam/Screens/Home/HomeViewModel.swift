@@ -12,6 +12,7 @@ var userCafeterias: [Cafeteria] = [.chamseulgi, .blueMirA, .blueMirB, .student, 
 
 
 final class HomeViewModel {
+    var currentCampus: Observable<Campus>
     let seoulMeals: [MealsForDay] = Campus.seoul.mealsForAllDayByCampus()
     let ansungMeals: [MealsForDay] = Campus.ansung.mealsForAllDayByCampus()
     
@@ -27,6 +28,8 @@ final class HomeViewModel {
     
     
     init() {
+        self.currentCampus = Observable(Campus(rawValue: UserDefaults.standard.campus) ?? .seoul)
+        
         self.indexOfDate = Observable(getIndexOfDate())
         self.dateList = prepareDateList()
         self.pickedDate = Observable(dateList[indexOfDate.value])
