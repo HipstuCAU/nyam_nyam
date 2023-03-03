@@ -56,7 +56,7 @@ final class OptionSelectModuleViewController: UIViewController {
         viewModel.indexOfDate.observe(on: self) { _ in
             
         }
-        viewModel.indexOfCafetera.observe(on: self) { _ in
+        viewModel.indexOfCafeteria.observe(on: self) { _ in
             
         }
     }

@@ -23,7 +23,7 @@ final class HomeViewModel {
     
     // MARK: - cafeteria picker 값
     var cafeteriaList: [Cafeteria]
-    var indexOfCafetera: Observable<Int>
+    var indexOfCafeteria: Observable<Int>
     var pickedCafeteria: Observable<Cafeteria>
     
     
@@ -35,8 +35,8 @@ final class HomeViewModel {
         self.pickedDate = Observable(dateList[indexOfDate.value])
         
         self.cafeteriaList = userCafeterias // TODO: - UserDefault로 수정 필요
-        self.indexOfCafetera = Observable(0)
-        self.pickedCafeteria = Observable(cafeteriaList[indexOfCafetera.value])
+        self.indexOfCafeteria = Observable(0)
+        self.pickedCafeteria = Observable(cafeteriaList[indexOfCafeteria.value])
         
         func getIndexOfDate() -> Int {
             // 오늘 Date를 기준으로 계산 필요 (startDayOfWeek로부터 얼마나 떨어져 있는지)
