@@ -30,18 +30,13 @@ final class HomeViewModel {
     init() {
         self.currentCampus = Observable(Campus(rawValue: UserDefaults.standard.campus) ?? .seoul)
         
-        self.indexOfDate = Observable(getIndexOfDate())
+        self.indexOfDate = Observable(0)
         self.dateList = prepareDateList()
         self.pickedDate = Observable(dateList[indexOfDate.value])
         
         self.cafeteriaList = userCafeterias // TODO: - UserDefault로 수정 필요
         self.indexOfCafeteria = Observable(0)
         self.pickedCafeteria = Observable(cafeteriaList[indexOfCafeteria.value])
-        
-        func getIndexOfDate() -> Int {
-            // 오늘 Date를 기준으로 계산 필요 (startDayOfWeek로부터 얼마나 떨어져 있는지)
-            return 0
-        }
         
         func prepareDateList() -> [Date] {
             // 오늘 날짜의 start day of week를 계산해서 7일 동안의 date 배열
@@ -55,4 +50,10 @@ final class HomeViewModel {
         }
     }
     
+}
+
+extension HomeViewModel {
+    func dateSelected() {
+        
+    }
 }

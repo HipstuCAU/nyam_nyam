@@ -11,6 +11,8 @@ final class OptionSelectModuleViewController: UIViewController {
     let viewModel: HomeViewModel
     
     let campusSelectView = CampusSelectView()
+    let dateSetectView = DateSelectView()
+    
     lazy var optionAlert: UIAlertController = {
         let alert = UIAlertController(title: "캠퍼스를 선택해주세요.",
                                       message: nil,
@@ -40,7 +42,10 @@ final class OptionSelectModuleViewController: UIViewController {
         view.backgroundColor = .yellow
         bind(to: viewModel)
         setCampusSelectViewLayout()
+        setDateSelectViewLayout()
+        
         campusSelectView.delegate = self
+        dateSetectView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,7 +67,7 @@ final class OptionSelectModuleViewController: UIViewController {
     }
 }
 
-// MARK: - OptionSelectModule
+// MARK: - CampusSelectView
 extension OptionSelectModuleViewController: CampusSelectViewDelegate {
     func showActionSheet() {
         self.present(optionAlert, animated: true, completion: nil)
@@ -78,5 +83,19 @@ extension OptionSelectModuleViewController: CampusSelectViewDelegate {
     
     private func setCampusLabelText() {
         campusSelectView.campusNameLabel.text = viewModel.currentCampus.value == Campus.seoul ? "서울캠퍼스" : "안성캠퍼스"
+    }
+}
+
+
+// MARK: - DateSelectView
+extension OptionSelectModuleViewController: DateSelectViewDelegate {
+    
+    private func setDateSelectViewLayout() {
+        view.addSubview(dateSetectView)
+        dateSetectView.snp.makeConstraints { make in
+            make.top.equalTo(campusSelectView.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(71)
+        }
     }
 }
