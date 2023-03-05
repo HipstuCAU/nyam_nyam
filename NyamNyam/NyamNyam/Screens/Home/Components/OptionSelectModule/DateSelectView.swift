@@ -14,6 +14,7 @@ protocol DateSelectViewDelegate: AnyObject {
 final class DateSelectView: UIView {
     weak var delegate: DateSelectViewDelegate?
     var dateButtons: [DateButton] = []
+    private let buttonCount = 7
     
     init() {
         super.init(frame: .zero)
@@ -27,7 +28,7 @@ final class DateSelectView: UIView {
     }
     
     func initDateButtons() {
-        for idx in 0 ..< 7 {
+        for idx in 0 ..< buttonCount {
             dateButtons.append(DateButton(
                 date:Date().convertDay(for: idx))
             )
@@ -37,24 +38,29 @@ final class DateSelectView: UIView {
 
 extension DateSelectView {
     private func setDateButtonsLayout() {
-        let count = 7
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
         var previous: DateButton?
-        var width = UIScreen.main.bounds.width
-        for idx in 0 ..< count {
-            let button = dateButtons[idx]
-            self.addSubview(button)
-            button.snp.makeConstraints { make in
+        let width = windowScene.coordinateSpace.bounds.size.width
+        let endPointMargin: CGFloat = 20
+        let buttonWidth: CGFloat = 27
+        let buttonHeight: CGFloat = 43
+        
+        for idx in 0 ..< buttonCount {
+            let current = dateButtons[idx]
+            self.addSubview(current)
+            current.snp.makeConstraints { make in
                 make.centerY.equalToSuperview()
-                make.width.equalTo(27)
-                make.height.equalTo(43)
+                make.width.equalTo(buttonWidth)
+                make.height.equalTo(buttonHeight)
                 if idx == 0 {
-                    make.leading.equalToSuperview().offset(20)
+                    make.leading.equalToSuperview().offset(endPointMargin)
                 } else {
-                    make.leading.equalTo(previous!.snp.leading).offset((width - 67) / 6
-                    )
+                    let margin: CGFloat = endPointMargin * 2
+                    let buttonSpacing: CGFloat = (width - margin - buttonWidth) / CGFloat(buttonCount - 1)
+                    make.leading.equalTo(previous!.snp.leading).offset(buttonSpacing)
                 }
             }
-            previous = button
+            previous = current
         }
         
     }
