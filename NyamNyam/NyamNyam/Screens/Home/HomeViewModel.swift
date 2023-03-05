@@ -39,14 +39,11 @@ final class HomeViewModel {
         self.pickedCafeteria = Observable(cafeteriaList[indexOfCafeteria.value])
         
         func prepareDateList() -> [Date] {
-            // 오늘 날짜의 start day of week를 계산해서 7일 동안의 date 배열
-            return ["23.02.28".formatStringToDate() ?? Date(),
-                    "23.03.01".formatStringToDate() ?? Date(),
-                    "23.03.02".formatStringToDate() ?? Date(),
-                    "23.03.03".formatStringToDate() ?? Date(),
-                    "23.03.04".formatStringToDate() ?? Date(),
-                    "23.03.05".formatStringToDate() ?? Date(),
-                    "23.03.06".formatStringToDate() ?? Date(),]
+            var dateList = [Date]()
+            for idx in 0 ..< 7 {
+                dateList.append(Date().convertDay(for: idx))
+            }
+            return dateList
         }
     }
     

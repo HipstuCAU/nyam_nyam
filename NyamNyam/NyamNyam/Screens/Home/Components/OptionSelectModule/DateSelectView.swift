@@ -8,7 +8,7 @@
 import UIKit
 
 protocol DateSelectViewDelegate: AnyObject {
-    
+    func setDateIndex(new: Int)
 }
 
 final class DateSelectView: UIView {
@@ -48,10 +48,10 @@ final class DateSelectView: UIView {
         return triangleView
     }()
     
-    init() {
+    init(dateList: [Date]) {
         super.init(frame: .zero)
         self.backgroundColor = Pallete.skyBlue.color
-        initDateButtons()
+        initDateButtons(dateList: dateList)
         setDateButtonsLayout()
         setButtonsByDefault()
         setSelectionStartPoint()
@@ -61,16 +61,16 @@ final class DateSelectView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func initDateButtons() {
-        for idx in 0 ..< buttonCount {
-            let newButton = DateButton(idx, date:Date().convertDay(for: idx))
+    private func initDateButtons(dateList: [Date]) {
+        for idx in 0 ..< dateList.count {
+            let newButton = DateButton(idx, date:dateList[idx])
             newButton.addTarget(self, action: #selector(dateButtonPressed), for: .touchUpInside)
             dateButtons.append(newButton)
         }
     }
     
     @objc func dateButtonPressed(_ sender: DateButton) {
-        setButtonsBySelection(pre: currentButtonIndex, new: sender.buttonIndex)
+        delegate?.setDateIndex(new: sender.buttonIndex)
         currentButtonIndex = sender.buttonIndex
     }
     
@@ -104,11 +104,15 @@ final class DateSelectView: UIView {
         
     }
     
-    public func setButtonsBySelection(pre previousIdx: Int, new selectionIdx: Int) {
-        dateButtons[previousIdx].isUserInteractionEnabled = true
+    public func setButtonsBySelection(new selectionIdx: Int) {
+        for button in dateButtons {
+            button.isUserInteractionEnabled = true
+            button.setLablesColorByDefault()
+        }
+        
+        dateButtons[selectionIdx].setLablesColorBySelection()
         dateButtons[selectionIdx].isUserInteractionEnabled = false
         self.bringSubviewToFront(self.dateButtons[selectionIdx])
-        
         
         self.selectionOverlayView.snp.remakeConstraints { make in
             make.centerX.equalTo(self.dateButtons[selectionIdx].snp.centerX)
@@ -117,9 +121,7 @@ final class DateSelectView: UIView {
             make.height.equalTo(43)
         }
         
-        UIView.animate(withDuration: 0.22) {
-            self.dateButtons[previousIdx].setLablesColorByDefault()
-            self.dateButtons[selectionIdx].setLablesColorBySelection()
+        UIView.animate(withDuration: 0.2) {
             self.selectionOverlayView.superview?.layoutIfNeeded()
         }
     }

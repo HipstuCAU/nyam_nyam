@@ -11,7 +11,7 @@ final class OptionSelectModuleViewController: UIViewController {
     let viewModel: HomeViewModel
     
     let campusSelectView = CampusSelectView()
-    let dateSetectView = DateSelectView()
+    lazy var dateSelectView = DateSelectView(dateList: viewModel.dateList)
     
     lazy var optionAlert: UIAlertController = {
         let alert = UIAlertController(title: "캠퍼스를 선택해주세요.",
@@ -44,7 +44,7 @@ final class OptionSelectModuleViewController: UIViewController {
         setDateSelectViewLayout()
         
         campusSelectView.delegate = self
-        dateSetectView.delegate = self
+        dateSelectView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,8 +57,8 @@ final class OptionSelectModuleViewController: UIViewController {
             self.setCampusLabelText()
         }
         
-        viewModel.indexOfDate.observe(on: self) { _ in
-            
+        viewModel.indexOfDate.observe(on: self) { [weak self] index in
+            self?.dateSelectView.setButtonsBySelection(new: index)
         }
         viewModel.indexOfCafeteria.observe(on: self) { _ in
             
@@ -88,10 +88,14 @@ extension OptionSelectModuleViewController: CampusSelectViewDelegate {
 
 // MARK: - DateSelectView
 extension OptionSelectModuleViewController: DateSelectViewDelegate {
+    func setDateIndex(new: Int) {
+        viewModel.indexOfDate.value = new
+    }
+    
     
     private func setDateSelectViewLayout() {
-        view.addSubview(dateSetectView)
-        dateSetectView.snp.makeConstraints { make in
+        view.addSubview(dateSelectView)
+        dateSelectView.snp.makeConstraints { make in
             make.top.equalTo(campusSelectView.snp.bottom)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(71)
