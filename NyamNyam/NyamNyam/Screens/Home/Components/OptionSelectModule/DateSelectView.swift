@@ -13,7 +13,7 @@ protocol DateSelectViewDelegate: AnyObject {
 
 final class DateSelectView: UIView {
     weak var delegate: DateSelectViewDelegate?
-    var dateButtons: [DateButton] = []
+    public var dateButtons: [DateButton] = []
     private let buttonCount = 7
     private var currentButtonIndex = 0
     
