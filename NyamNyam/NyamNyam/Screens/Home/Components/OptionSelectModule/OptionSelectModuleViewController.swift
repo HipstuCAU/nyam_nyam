@@ -39,7 +39,6 @@ final class OptionSelectModuleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .yellow
         bind(to: viewModel)
         setCampusSelectViewLayout()
         setDateSelectViewLayout()

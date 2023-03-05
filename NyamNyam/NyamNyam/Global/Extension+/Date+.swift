@@ -22,6 +22,7 @@ extension Date {
     
     func toDayOfWeekString() -> String {
         let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "ko_KR")
         dateFormatter.dateFormat = "E"
         return dateFormatter.string(from: self)
     }
