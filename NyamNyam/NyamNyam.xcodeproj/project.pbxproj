@@ -29,6 +29,7 @@
 		ABEAFC1F29AE6769002C3119 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC1E29AE6769002C3119 /* UserDefaults+.swift */; };
 		ABFC439129AFA7C600EB9439 /* Pallete.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFC439029AFA7C600EB9439 /* Pallete.swift */; };
 		ABFC439429B44B1700EB9439 /* DateSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFC439329B44B1700EB9439 /* DateSelectView.swift */; };
+		ABFC439729B4515200EB9439 /* DateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFC439629B4515200EB9439 /* DateButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		ABEAFC1E29AE6769002C3119 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
 		ABFC439029AFA7C600EB9439 /* Pallete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pallete.swift; sourceTree = "<group>"; };
 		ABFC439329B44B1700EB9439 /* DateSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectView.swift; sourceTree = "<group>"; };
+		ABFC439629B4515200EB9439 /* DateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,6 +261,7 @@
 		ABFC439529B44B2500EB9439 /* DateSelectViewComponents */ = {
 			isa = PBXGroup;
 			children = (
+				ABFC439629B4515200EB9439 /* DateButton.swift */,
 			);
 			path = DateSelectViewComponents;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABFC439729B4515200EB9439 /* DateButton.swift in Sources */,
 				ABEAFC0129ACA0E4002C3119 /* MealsForDay.swift in Sources */,
 				ABEAFBCF29AC9ED3002C3119 /* HomeViewController.swift in Sources */,
 				ABEAFC1F29AE6769002C3119 /* UserDefaults+.swift in Sources */,
