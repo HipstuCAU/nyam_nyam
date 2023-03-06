@@ -48,9 +48,3 @@ final class HomeViewModel {
     }
     
 }
-
-extension HomeViewModel {
-    func dateSelected() {
-        
-    }
-}
