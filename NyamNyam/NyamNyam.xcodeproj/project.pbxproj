@@ -28,6 +28,8 @@
 		ABEAFC1D29AE6337002C3119 /* CampusSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC1C29AE6337002C3119 /* CampusSelectView.swift */; };
 		ABEAFC1F29AE6769002C3119 /* UserDefaults+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC1E29AE6769002C3119 /* UserDefaults+.swift */; };
 		ABFC439129AFA7C600EB9439 /* Pallete.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFC439029AFA7C600EB9439 /* Pallete.swift */; };
+		ABFC439429B44B1700EB9439 /* DateSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFC439329B44B1700EB9439 /* DateSelectView.swift */; };
+		ABFC439729B4515200EB9439 /* DateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABFC439629B4515200EB9439 /* DateButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,8 @@
 		ABEAFC1C29AE6337002C3119 /* CampusSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusSelectView.swift; sourceTree = "<group>"; };
 		ABEAFC1E29AE6769002C3119 /* UserDefaults+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+.swift"; sourceTree = "<group>"; };
 		ABFC439029AFA7C600EB9439 /* Pallete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pallete.swift; sourceTree = "<group>"; };
+		ABFC439329B44B1700EB9439 /* DateSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateSelectView.swift; sourceTree = "<group>"; };
+		ABFC439629B4515200EB9439 /* DateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +244,8 @@
 			children = (
 				ABEAFC1729ADC2B0002C3119 /* OptionSelectModuleViewController.swift */,
 				ABEAFC1C29AE6337002C3119 /* CampusSelectView.swift */,
+				ABFC439329B44B1700EB9439 /* DateSelectView.swift */,
+				ABFC439529B44B2500EB9439 /* DateSelectViewComponents */,
 			);
 			path = OptionSelectModule;
 			sourceTree = "<group>";
@@ -250,6 +256,14 @@
 				ABEAFC1A29AE24B2002C3119 /* Observable.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		ABFC439529B44B2500EB9439 /* DateSelectViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				ABFC439629B4515200EB9439 /* DateButton.swift */,
+			);
+			path = DateSelectViewComponents;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -388,6 +402,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABFC439729B4515200EB9439 /* DateButton.swift in Sources */,
 				ABEAFC0129ACA0E4002C3119 /* MealsForDay.swift in Sources */,
 				ABEAFBCF29AC9ED3002C3119 /* HomeViewController.swift in Sources */,
 				ABEAFC1F29AE6769002C3119 /* UserDefaults+.swift in Sources */,
@@ -396,6 +411,7 @@
 				ABEAFC1B29AE24B2002C3119 /* Observable.swift in Sources */,
 				ABEAFC1529AD2F36002C3119 /* Campus.swift in Sources */,
 				ABEAFC1329AD279A002C3119 /* Meal.swift in Sources */,
+				ABFC439429B44B1700EB9439 /* DateSelectView.swift in Sources */,
 				ABEAFC1829ADC2B0002C3119 /* OptionSelectModuleViewController.swift in Sources */,
 				ABEAFBCB29AC9ED3002C3119 /* AppDelegate.swift in Sources */,
 				ABEAFC0A29ACA523002C3119 /* FBManager.swift in Sources */,
@@ -578,6 +594,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -610,6 +627,8 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "학식";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;

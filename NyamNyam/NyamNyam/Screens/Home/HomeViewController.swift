@@ -12,6 +12,14 @@ final class HomeViewController: UIViewController {
     let viewModel = HomeViewModel()
     lazy var OptionSelectModule = OptionSelectModuleViewController(viewModel: viewModel)
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13, *) {
+            return .darkContent
+        } else {
+            return .default
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setOptionsWithFirstLaunch()

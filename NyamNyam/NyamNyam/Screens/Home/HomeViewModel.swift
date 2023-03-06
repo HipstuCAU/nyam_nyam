@@ -23,35 +23,27 @@ final class HomeViewModel {
     
     // MARK: - cafeteria picker 값
     var cafeteriaList: [Cafeteria]
-    var indexOfCafetera: Observable<Int>
+    var indexOfCafeteria: Observable<Int>
     var pickedCafeteria: Observable<Cafeteria>
     
     
     init() {
         self.currentCampus = Observable(Campus(rawValue: UserDefaults.standard.campus) ?? .seoul)
         
-        self.indexOfDate = Observable(getIndexOfDate())
+        self.indexOfDate = Observable(0)
         self.dateList = prepareDateList()
         self.pickedDate = Observable(dateList[indexOfDate.value])
         
         self.cafeteriaList = userCafeterias // TODO: - UserDefault로 수정 필요
-        self.indexOfCafetera = Observable(0)
-        self.pickedCafeteria = Observable(cafeteriaList[indexOfCafetera.value])
-        
-        func getIndexOfDate() -> Int {
-            // 오늘 Date를 기준으로 계산 필요 (startDayOfWeek로부터 얼마나 떨어져 있는지)
-            return 0
-        }
+        self.indexOfCafeteria = Observable(0)
+        self.pickedCafeteria = Observable(cafeteriaList[indexOfCafeteria.value])
         
         func prepareDateList() -> [Date] {
-            // 오늘 날짜의 start day of week를 계산해서 7일 동안의 date 배열
-            return ["23.02.28".formatStringToDate() ?? Date(),
-                    "23.03.01".formatStringToDate() ?? Date(),
-                    "23.03.02".formatStringToDate() ?? Date(),
-                    "23.03.03".formatStringToDate() ?? Date(),
-                    "23.03.04".formatStringToDate() ?? Date(),
-                    "23.03.05".formatStringToDate() ?? Date(),
-                    "23.03.06".formatStringToDate() ?? Date(),]
+            var dateList = [Date]()
+            for idx in 0 ..< 7 {
+                dateList.append(Date().convertDay(for: idx))
+            }
+            return dateList
         }
     }
     
