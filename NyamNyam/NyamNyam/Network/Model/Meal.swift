@@ -22,9 +22,14 @@ enum Cafeteria {
     case staff
 }
 
+enum MealType {
+    case normal
+    case special
+}
+
 struct Meal: Hashable {
     let mealTime: MealTime
-    let type: String
+    let type: MealType
     let cafeteria: Cafeteria
     let price: String
     let menu: String
