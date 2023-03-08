@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AB2D2C0129B8271C0015CB10 /* CafeteriaSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2D2C0029B8271C0015CB10 /* CafeteriaSelectView.swift */; };
 		AB2FDAAE29B84CC7001746DB /* CafeteriaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FDAAD29B84CC7001746DB /* CafeteriaButton.swift */; };
+		AB2FDAB229B8D4B4001746DB /* ContentCarouselModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FDAB129B8D4B4001746DB /* ContentCarouselModuleViewController.swift */; };
 		ABEAFBCB29AC9ED3002C3119 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFBCA29AC9ED3002C3119 /* AppDelegate.swift */; };
 		ABEAFBCD29AC9ED3002C3119 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFBCC29AC9ED3002C3119 /* SceneDelegate.swift */; };
 		ABEAFBCF29AC9ED3002C3119 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFBCE29AC9ED3002C3119 /* HomeViewController.swift */; };
@@ -54,6 +55,7 @@
 /* Begin PBXFileReference section */
 		AB2D2C0029B8271C0015CB10 /* CafeteriaSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaSelectView.swift; sourceTree = "<group>"; };
 		AB2FDAAD29B84CC7001746DB /* CafeteriaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaButton.swift; sourceTree = "<group>"; };
+		AB2FDAB129B8D4B4001746DB /* ContentCarouselModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCarouselModuleViewController.swift; sourceTree = "<group>"; };
 		ABEAFBC729AC9ED3002C3119 /* NyamNyam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NyamNyam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABEAFBCA29AC9ED3002C3119 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ABEAFBCC29AC9ED3002C3119 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +117,15 @@
 				AB2FDAAD29B84CC7001746DB /* CafeteriaButton.swift */,
 			);
 			path = CafeteriaSelectViewComponents;
+			sourceTree = "<group>";
+		};
+		AB2FDAB029B8D478001746DB /* ContentCarouselModule */ = {
+			isa = PBXGroup;
+			children = (
+				AB2FDAB129B8D4B4001746DB /* ContentCarouselModuleViewController.swift */,
+			);
+			name = ContentCarouselModule;
+			path = ../ContentCarouselModule;
 			sourceTree = "<group>";
 		};
 		ABEAFBBE29AC9ED3002C3119 = {
@@ -247,6 +258,7 @@
 			isa = PBXGroup;
 			children = (
 				ABEAFC1629ADC24D002C3119 /* OptionSelectModule */,
+				AB2FDAB029B8D478001746DB /* ContentCarouselModule */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -422,6 +434,7 @@
 				ABEAFC1F29AE6769002C3119 /* UserDefaults+.swift in Sources */,
 				ABEAFC0429ACA4B1002C3119 /* Date+.swift in Sources */,
 				ABEAFC0D29ACA59E002C3119 /* HomeViewModel.swift in Sources */,
+				AB2FDAB229B8D4B4001746DB /* ContentCarouselModuleViewController.swift in Sources */,
 				ABEAFC1B29AE24B2002C3119 /* Observable.swift in Sources */,
 				ABEAFC1529AD2F36002C3119 /* Campus.swift in Sources */,
 				ABEAFC1329AD279A002C3119 /* Meal.swift in Sources */,
