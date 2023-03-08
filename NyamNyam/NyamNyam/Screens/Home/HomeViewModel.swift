@@ -15,13 +15,11 @@ final class HomeViewModel {
     // MARK: - date picker 값
     var dateList: [Date]
     var indexOfDate: Observable<Int>
-    var pickedDate: Observable<Date>
     
     // MARK: - cafeteria picker 값
     var seoulCafeteriaList: [Cafeteria]
     var ansungCafeteriaList: [Cafeteria]
     var indexOfCafeteria: Observable<Int>
-    var pickedCafeteria: Observable<Cafeteria>
     
     
     init() {
@@ -29,7 +27,6 @@ final class HomeViewModel {
         
         self.indexOfDate = Observable(0)
         self.dateList = prepareDateList()
-        self.pickedDate = Observable(dateList[indexOfDate.value])
         
         self.seoulCafeteriaList = UserDefaults.standard.seoulCafeteria.map {
             return Cafeteria(rawValue: $0) ?? Cafeteria.chamseulgi
@@ -40,7 +37,6 @@ final class HomeViewModel {
         }
         
         self.indexOfCafeteria = Observable(0)
-        self.pickedCafeteria = Observable(seoulCafeteriaList[indexOfCafeteria.value])
         
         func prepareDateList() -> [Date] {
             var dateList = [Date]()
