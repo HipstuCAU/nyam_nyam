@@ -12,7 +12,7 @@ final class OptionSelectModuleViewController: UIViewController {
     
     let campusSelectView = CampusSelectView()
     lazy var dateSelectView = DateSelectView(dateList: viewModel.dateList)
-    lazy var cafeteriaSelectView = CafeteriaSelectView(cafeterias: viewModel.seoulCafeteriaList)
+    lazy var cafeteriaSelectView = CafeteriaSelectView(viewModel: viewModel)
     
     lazy var optionAlert: UIAlertController = {
         let alert = UIAlertController(title: "캠퍼스를 선택해주세요.",
@@ -55,8 +55,9 @@ final class OptionSelectModuleViewController: UIViewController {
     }
     
     private func bind(to viewModel: HomeViewModel) {
-        viewModel.currentCampus.observe(on: self) { _ in
-            self.setCampusLabelText()
+        viewModel.currentCampus.observe(on: self) { [weak self] _ in
+            self?.setCampusLabelText()
+            self?.cafeteriaSelectView = CafeteriaSelectView(viewModel: viewModel)
         }
         
         viewModel.indexOfDate.observe(on: self) { [weak self] index in

@@ -10,8 +10,8 @@ import UIKit
 final class CafeteriaSelectView: UIView {
     private let cafeteriaList: [Cafeteria]
     
-    init(cafeterias: [Cafeteria]) {
-        cafeteriaList = cafeterias
+    init(viewModel: HomeViewModel) {
+        cafeteriaList = viewModel.currentCampus.value == .seoul ? viewModel.seoulCafeteriaList : viewModel.ansungCafeteriaList
         super.init(frame: .zero)
         self.backgroundColor = .blue
     }
