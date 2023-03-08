@@ -63,6 +63,7 @@ final class OptionSelectModuleViewController: UIViewController {
             self?.cafeteriaSelectView = CafeteriaSelectView(viewModel: viewModel)
             self?.setCafeteriaSelectViewLayout()
             self?.cafeteriaSelectView.cafeteriaDelegate = self
+            viewModel.indexOfCafeteria.value = 0
         }
         
         viewModel.indexOfDate.observe(on: self) { [weak self] index in
