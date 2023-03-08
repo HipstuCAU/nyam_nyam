@@ -40,8 +40,8 @@ final class HomeViewModel {
         
         func prepareDateList() -> [Date] {
             var dateList = [Date]()
-            for idx in 0 ..< 7 {
-                dateList.append(Date().convertDay(for: idx))
+            (0..<7).forEach {
+                dateList.append(Date().convertDay(for: $0))
             }
             return dateList
         }
