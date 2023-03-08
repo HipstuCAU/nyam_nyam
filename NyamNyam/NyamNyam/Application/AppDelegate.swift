@@ -11,6 +11,28 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        setOptionsWithFirstLaunch()
+        
+        func setOptionsWithFirstLaunch() {
+            let isFirstLaunch = !UserDefaults.standard.isFirstLaunch
+            
+            if isFirstLaunch {
+                #if DEBUG
+                print("First Launch")
+                #endif
+                UserDefaults.standard.campus = Campus.seoul.rawValue
+                UserDefaults.standard.seoulCafeteria = [Cafeteria.chamseulgi.rawValue,
+                                                   Cafeteria.blueMirA.rawValue,
+                                                   Cafeteria.blueMirB.rawValue,
+                                                   Cafeteria.student.rawValue,
+                                                   Cafeteria.staff.rawValue]
+                UserDefaults.standard.ansungCafeteria = [Cafeteria.cauEats.rawValue]
+                // MARK: 이곳에 첫 Launch시 실행할 작업들이 들어갑니다.
+                UserDefaults.standard.isFirstLaunch = true
+            }
+        }
+        
         return true
     }
     

@@ -11,6 +11,8 @@ extension UserDefaults {
     enum Key: String {
         case isFirstLaunch
         case campus
+        case seoulCafeteria
+        case ansungCafeteria
     }
     
     var isFirstLaunch: Bool {
@@ -21,5 +23,15 @@ extension UserDefaults {
     var campus: String {
         get { return string(forKey: Key.campus.rawValue) ?? Campus.seoul.rawValue }
         set { set(newValue, forKey: Key.campus.rawValue) }
+    }
+    
+    var seoulCafeteria: [String] {
+        get { return array(forKey: Key.seoulCafeteria.rawValue) as? [String] ?? [] }
+        set { set(newValue, forKey: Key.seoulCafeteria.rawValue) }
+    }
+    
+    var ansungCafeteria: [String] {
+        get { return array(forKey: Key.ansungCafeteria.rawValue) as? [String] ?? [] }
+        set { set(newValue, forKey: Key.ansungCafeteria.rawValue) }
     }
 }

@@ -12,6 +12,7 @@ final class OptionSelectModuleViewController: UIViewController {
     
     let campusSelectView = CampusSelectView()
     lazy var dateSelectView = DateSelectView(dateList: viewModel.dateList)
+    lazy var cafeteriaSelectView = CafeteriaSelectView(cafeterias: viewModel.seoulCafeteriaList)
     
     lazy var optionAlert: UIAlertController = {
         let alert = UIAlertController(title: "캠퍼스를 선택해주세요.",
@@ -42,6 +43,7 @@ final class OptionSelectModuleViewController: UIViewController {
         bind(to: viewModel)
         setCampusSelectViewLayout()
         setDateSelectViewLayout()
+        setCafeteriaSelectViewLayout()
         
         campusSelectView.delegate = self
         dateSelectView.delegate = self
@@ -99,6 +101,17 @@ extension OptionSelectModuleViewController: DateSelectViewDelegate {
             make.top.equalTo(campusSelectView.snp.bottom)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(71)
+        }
+    }
+}
+
+// MARK: - CafeteriaSelectView
+extension OptionSelectModuleViewController {
+    private func setCafeteriaSelectViewLayout() {
+        view.addSubview(cafeteriaSelectView)
+        cafeteriaSelectView.snp.makeConstraints { make in
+            make.top.equalTo(dateSelectView.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
         }
     }
 }

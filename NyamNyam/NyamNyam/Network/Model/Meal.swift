@@ -14,12 +14,13 @@ enum MealTime {
     case allDay
 }
 
-enum Cafeteria {
+enum Cafeteria: String {
     case chamseulgi
     case blueMirA
     case blueMirB
     case student
     case staff
+    case cauEats
 }
 
 enum MealType {
