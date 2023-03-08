@@ -41,7 +41,7 @@ extension HomeViewController {
             make.top.equalTo(view.snp.top).offset(63)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.height.equalTo(156)
+            make.height.equalTo(160)
         }
     }
 }

@@ -40,13 +40,14 @@ final class OptionSelectModuleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind(to: viewModel)
         setCampusSelectViewLayout()
         setDateSelectViewLayout()
         setCafeteriaSelectViewLayout()
         
         campusSelectView.delegate = self
         dateSelectView.delegate = self
+        
+        bind(to: viewModel)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,7 +58,9 @@ final class OptionSelectModuleViewController: UIViewController {
     private func bind(to viewModel: HomeViewModel) {
         viewModel.currentCampus.observe(on: self) { [weak self] _ in
             self?.setCampusLabelText()
+            self?.cafeteriaSelectView.removeFromSuperview()
             self?.cafeteriaSelectView = CafeteriaSelectView(viewModel: viewModel)
+            self?.setCafeteriaSelectViewLayout()
         }
         
         viewModel.indexOfDate.observe(on: self) { [weak self] index in
