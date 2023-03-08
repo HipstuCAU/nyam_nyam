@@ -59,12 +59,8 @@ final class OptionSelectModuleViewController: UIViewController {
     private func bind(to viewModel: HomeViewModel) {
         viewModel.currentCampus.observe(on: self) { [weak self] _ in
             self?.setCampusLabelText()
-            self?.cafeteriaSelectView.removeFromSuperview()
-            self?.cafeteriaSelectView = CafeteriaSelectView(viewModel: viewModel)
-            self?.setCafeteriaSelectViewLayout()
-            self?.cafeteriaSelectView.cafeteriaDelegate = self
-            viewModel.indexOfDate.value = 0
-            viewModel.indexOfCafeteria.value = 0
+            self?.resetCafeteriaView()
+            self?.initOptionIndex()
         }
         
         viewModel.indexOfDate.observe(on: self) { [weak self] index in
@@ -77,6 +73,18 @@ final class OptionSelectModuleViewController: UIViewController {
                 else { $0.isNotSelected() }
             }
         }
+    }
+    
+    private func resetCafeteriaView() {
+        cafeteriaSelectView.removeFromSuperview()
+        cafeteriaSelectView = CafeteriaSelectView(viewModel: viewModel)
+        setCafeteriaSelectViewLayout()
+        cafeteriaSelectView.cafeteriaDelegate = self
+    }
+    
+    private func initOptionIndex() {
+        viewModel.indexOfDate.value = 0
+        viewModel.indexOfCafeteria.value = 0
     }
 }
 
