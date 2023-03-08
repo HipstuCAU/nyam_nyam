@@ -7,10 +7,6 @@
 
 import Foundation
 
-// TODO: - 해당 배열은 추후 UserDefault에 저장되어야 합니다.
-var userCafeterias: [Cafeteria] = [.chamseulgi, .blueMirA, .blueMirB, .student, .staff]
-
-
 final class HomeViewModel {
     var currentCampus: Observable<Campus>
     let seoulMeals: [MealsForDay] = Campus.seoul.mealsForAllDayByCampus()
@@ -19,12 +15,11 @@ final class HomeViewModel {
     // MARK: - date picker 값
     var dateList: [Date]
     var indexOfDate: Observable<Int>
-    var pickedDate: Observable<Date>
     
     // MARK: - cafeteria picker 값
-    var cafeteriaList: [Cafeteria]
+    var seoulCafeteriaList: [Cafeteria]
+    var ansungCafeteriaList: [Cafeteria]
     var indexOfCafeteria: Observable<Int>
-    var pickedCafeteria: Observable<Cafeteria>
     
     
     init() {
@@ -32,16 +27,23 @@ final class HomeViewModel {
         
         self.indexOfDate = Observable(0)
         self.dateList = prepareDateList()
-        self.pickedDate = Observable(dateList[indexOfDate.value])
         
-        self.cafeteriaList = userCafeterias // TODO: - UserDefault로 수정 필요
+        self.seoulCafeteriaList = UserDefaults.standard.seoulCafeteria.map {
+            guard let cafeteria = Cafeteria(rawValue: $0) else { fatalError() }
+            return cafeteria
+        }
+        
+        self.ansungCafeteriaList = UserDefaults.standard.ansungCafeteria.map {
+            guard let cafeteria = Cafeteria(rawValue: $0) else { fatalError() }
+            return cafeteria
+        }
+        
         self.indexOfCafeteria = Observable(0)
-        self.pickedCafeteria = Observable(cafeteriaList[indexOfCafeteria.value])
         
         func prepareDateList() -> [Date] {
             var dateList = [Date]()
-            for idx in 0 ..< 7 {
-                dateList.append(Date().convertDay(for: idx))
+            (0..<7).forEach {
+                dateList.append(Date().convertDay(for: $0))
             }
             return dateList
         }

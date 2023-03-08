@@ -12,6 +12,7 @@ final class OptionSelectModuleViewController: UIViewController {
     
     let campusSelectView = CampusSelectView()
     lazy var dateSelectView = DateSelectView(dateList: viewModel.dateList)
+    lazy var cafeteriaSelectView = CafeteriaSelectView(viewModel: viewModel)
     
     lazy var optionAlert: UIAlertController = {
         let alert = UIAlertController(title: "캠퍼스를 선택해주세요.",
@@ -39,12 +40,15 @@ final class OptionSelectModuleViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        bind(to: viewModel)
         setCampusSelectViewLayout()
         setDateSelectViewLayout()
+        setCafeteriaSelectViewLayout()
         
         campusSelectView.delegate = self
         dateSelectView.delegate = self
+        cafeteriaSelectView.cafeteriaDelegate = self
+        
+        bind(to: viewModel)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,16 +57,34 @@ final class OptionSelectModuleViewController: UIViewController {
     }
     
     private func bind(to viewModel: HomeViewModel) {
-        viewModel.currentCampus.observe(on: self) { _ in
-            self.setCampusLabelText()
+        viewModel.currentCampus.observe(on: self) { [weak self] _ in
+            self?.setCampusLabelText()
+            self?.resetCafeteriaView()
+            self?.initOptionIndex()
         }
         
         viewModel.indexOfDate.observe(on: self) { [weak self] index in
             self?.dateSelectView.setButtonsBySelection(new: index)
         }
-        viewModel.indexOfCafeteria.observe(on: self) { _ in
-            
+        viewModel.indexOfCafeteria.observe(on: self) { [weak self] index in
+            self?.cafeteriaSelectView.setScrollOffsetBy(buttonIndex: index)
+            self?.cafeteriaSelectView.buttons.forEach {
+                if $0.buttonIndex == index { $0.isSelected() }
+                else { $0.isNotSelected() }
+            }
         }
+    }
+    
+    private func resetCafeteriaView() {
+        cafeteriaSelectView.removeFromSuperview()
+        cafeteriaSelectView = CafeteriaSelectView(viewModel: viewModel)
+        setCafeteriaSelectViewLayout()
+        cafeteriaSelectView.cafeteriaDelegate = self
+    }
+    
+    private func initOptionIndex() {
+        viewModel.indexOfDate.value = 0
+        viewModel.indexOfCafeteria.value = 0
     }
 }
 
@@ -99,6 +121,21 @@ extension OptionSelectModuleViewController: DateSelectViewDelegate {
             make.top.equalTo(campusSelectView.snp.bottom)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(71)
+        }
+    }
+}
+
+// MARK: - CafeteriaSelectView
+extension OptionSelectModuleViewController: CafeteriaSelectViewDelegate {
+    func setCafeteriaIndexBy(buttonIdx: Int) {
+        viewModel.indexOfCafeteria.value = buttonIdx
+    }
+    
+    private func setCafeteriaSelectViewLayout() {
+        view.addSubview(cafeteriaSelectView)
+        cafeteriaSelectView.snp.makeConstraints { make in
+            make.top.equalTo(dateSelectView.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
         }
     }
 }

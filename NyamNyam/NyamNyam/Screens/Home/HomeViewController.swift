@@ -22,7 +22,6 @@ final class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setOptionsWithFirstLaunch()
         navigationController?.setNavigationBarHidden(true, animated: true)
         view.backgroundColor = .white
         setOptionSelectModuleLayout()
@@ -30,18 +29,7 @@ final class HomeViewController: UIViewController {
 }
 
 extension HomeViewController {
-    private func setOptionsWithFirstLaunch() {
-        let isFirstLaunch = !UserDefaults.standard.isFirstLaunch
-        
-        if isFirstLaunch {
-            #if DEBUG
-            print("First Launch")
-            #endif
-            UserDefaults.standard.campus = Campus.seoul.rawValue
-            // MARK: 이곳에 첫 Launch시 실행할 작업들이 들어갑니다.
-            UserDefaults.standard.isFirstLaunch = true
-        }
-    }
+    
 }
 
 extension HomeViewController {
@@ -53,7 +41,7 @@ extension HomeViewController {
             make.top.equalTo(view.snp.top).offset(63)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.height.equalTo(156)
+            make.height.equalTo(160)
         }
     }
 }
