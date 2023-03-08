@@ -9,6 +9,7 @@ import UIKit
 
 final class CafeteriaButton: UIButton {
     public var buttonIndex: Int
+    
     public let cafeteriaLabel: UILabel = {
         let label = UILabel()
         label.textColor = Pallete.gray50.color ?? .black
@@ -48,6 +49,16 @@ final class CafeteriaButton: UIButton {
             make.height.equalTo(cafeteriaLabel.snp.height).offset(11)
         }
         self.sizeToFit()
+    }
+    
+    public func isSelected() {
+        cafeteriaLabel.textColor = .white
+        self.backgroundColor = Pallete.cauBlue.color
+    }
+    
+    public func isNotSelected() {
+        cafeteriaLabel.textColor = Pallete.gray50.color ?? .black
+        self.backgroundColor = .white
     }
 }
 

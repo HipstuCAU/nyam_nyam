@@ -7,9 +7,14 @@
 
 import UIKit
 
+protocol CafeteriaSelectViewDelegate: AnyObject {
+    func setCafeteriaIndexBy(buttonIdx: Int)
+}
+
 final class CafeteriaSelectView: UIScrollView {
     private let cafeteriaList: [Cafeteria]
-    private var buttons: [CafeteriaButton] = []
+    public var buttons: [CafeteriaButton] = []
+    weak var cafeteriaDelegate: CafeteriaSelectViewDelegate?
     
     init(viewModel: HomeViewModel) {
         cafeteriaList = viewModel.currentCampus.value == .seoul ? viewModel.seoulCafeteriaList : viewModel.ansungCafeteriaList
@@ -60,8 +65,14 @@ final class CafeteriaSelectView: UIScrollView {
             case .cauEats:
                 name = "카우이츠"
             }
-            buttons.append(CafeteriaButton(buttonIndex: idx, name: name))
+            let button = CafeteriaButton(buttonIndex: idx, name: name)
+            button.addTarget(self, action: #selector(cafeteriaButtonPressed), for: .touchUpInside)
+            buttons.append(button)
         }
+    }
+    
+    @objc func cafeteriaButtonPressed(_ sender: CafeteriaButton) {
+        cafeteriaDelegate?.setCafeteriaIndexBy(buttonIdx: sender.buttonIndex)
     }
     
     required init?(coder: NSCoder) {

@@ -46,6 +46,7 @@ final class OptionSelectModuleViewController: UIViewController {
         
         campusSelectView.delegate = self
         dateSelectView.delegate = self
+        cafeteriaSelectView.cafeteriaDelegate = self
         
         bind(to: viewModel)
     }
@@ -61,13 +62,17 @@ final class OptionSelectModuleViewController: UIViewController {
             self?.cafeteriaSelectView.removeFromSuperview()
             self?.cafeteriaSelectView = CafeteriaSelectView(viewModel: viewModel)
             self?.setCafeteriaSelectViewLayout()
+            self?.cafeteriaSelectView.cafeteriaDelegate = self
         }
         
         viewModel.indexOfDate.observe(on: self) { [weak self] index in
             self?.dateSelectView.setButtonsBySelection(new: index)
         }
-        viewModel.indexOfCafeteria.observe(on: self) { _ in
-            
+        viewModel.indexOfCafeteria.observe(on: self) { [weak self] index in
+            self?.cafeteriaSelectView.buttons.forEach {
+                if $0.buttonIndex == index { $0.isSelected() }
+                else { $0.isNotSelected() }
+            }
         }
     }
 }
@@ -110,7 +115,11 @@ extension OptionSelectModuleViewController: DateSelectViewDelegate {
 }
 
 // MARK: - CafeteriaSelectView
-extension OptionSelectModuleViewController {
+extension OptionSelectModuleViewController: CafeteriaSelectViewDelegate {
+    func setCafeteriaIndexBy(buttonIdx: Int) {
+        viewModel.indexOfCafeteria.value = buttonIdx
+    }
+    
     private func setCafeteriaSelectViewLayout() {
         view.addSubview(cafeteriaSelectView)
         cafeteriaSelectView.snp.makeConstraints { make in
