@@ -29,11 +29,13 @@ final class HomeViewModel {
         self.dateList = prepareDateList()
         
         self.seoulCafeteriaList = UserDefaults.standard.seoulCafeteria.map {
-            return Cafeteria(rawValue: $0) ?? Cafeteria.chamseulgi
+            guard let cafeteria = Cafeteria(rawValue: $0) else { fatalError() }
+            return cafeteria
         }
         
         self.ansungCafeteriaList = UserDefaults.standard.ansungCafeteria.map {
-            return Cafeteria(rawValue: $0) ?? Cafeteria.cauEats
+            guard let cafeteria = Cafeteria(rawValue: $0) else { fatalError() }
+            return cafeteria
         }
         
         self.indexOfCafeteria = Observable(0)
