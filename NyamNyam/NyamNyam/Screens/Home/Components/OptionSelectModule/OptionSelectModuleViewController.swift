@@ -63,6 +63,7 @@ final class OptionSelectModuleViewController: UIViewController {
             self?.cafeteriaSelectView = CafeteriaSelectView(viewModel: viewModel)
             self?.setCafeteriaSelectViewLayout()
             self?.cafeteriaSelectView.cafeteriaDelegate = self
+            viewModel.indexOfDate.value = 0
             viewModel.indexOfCafeteria.value = 0
         }
         
@@ -70,6 +71,7 @@ final class OptionSelectModuleViewController: UIViewController {
             self?.dateSelectView.setButtonsBySelection(new: index)
         }
         viewModel.indexOfCafeteria.observe(on: self) { [weak self] index in
+            self?.cafeteriaSelectView.setScrollOffsetBy(buttonIndex: index)
             self?.cafeteriaSelectView.buttons.forEach {
                 if $0.buttonIndex == index { $0.isSelected() }
                 else { $0.isNotSelected() }

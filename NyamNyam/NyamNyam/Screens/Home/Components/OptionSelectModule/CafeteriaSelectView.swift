@@ -78,5 +78,17 @@ final class CafeteriaSelectView: UIScrollView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    public func setScrollOffsetBy(buttonIndex: Int) {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+        else { return }
+        let contentWidth = contentSize.width
+        let sceneWidth = windowScene.screen.bounds.width
+        guard contentWidth > sceneWidth else { return }
+        let newOffset = ((contentWidth - sceneWidth) / CGFloat(buttons.count - 1) * CGFloat(buttonIndex))
+        UIView.animate(withDuration: 0.3, delay: 0) {
+            self.contentOffset = CGPoint(x: newOffset, y: 0)
+        }
+    }
 }
 
