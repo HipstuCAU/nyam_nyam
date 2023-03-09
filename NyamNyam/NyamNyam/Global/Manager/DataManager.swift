@@ -8,7 +8,8 @@
 import Foundation
 
 final class DataManager {
-    func stringToDict(_ strData: String) -> [String: Any]? {
+    func stringToDict() -> [String: Any]? {
+        let strData = JsonManager.shared.jsonToString()
         if let strData = strData.data(using: .utf8) {
             do {
                 return try JSONSerialization.jsonObject(with: strData, options: []) as? [String: Any]
@@ -18,8 +19,8 @@ final class DataManager {
         }
         return nil
     }
-    func getMealsForDay(_ strData: String, _ campus: String) -> [Meal] {
-        let dictData = stringToDict(strData)
+    func getMealsForDay(_ campus: String) -> [Meal] {
+        let dictData = stringToDict()
         var meals: [Meal] = []
         if  let dayDict = dictData?[campus] as? [String: Any] {
             for i in 0..<dayDict.count {
@@ -52,9 +53,9 @@ final class DataManager {
         }
         return meals
     }
-    func getMealsForWeeks(_ strData: String, _ campus: String) -> [MealsForDay] {
+    func getMealsForWeeks(_ campus: String) -> [MealsForDay] {
         var mealsForWeek: [MealsForDay] = []
-        let mealsForDay = getMealsForDay(strData, campus)
+        let mealsForDay = getMealsForDay(campus)
         let weeklyDate = Date.prepareDateList()
         for dayIndex in weeklyDate.indices {
             var meals: Set<Meal> = []
