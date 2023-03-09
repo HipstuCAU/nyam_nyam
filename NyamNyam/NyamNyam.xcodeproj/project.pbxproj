@@ -10,6 +10,7 @@
 		2A429D7929B99E460044A3E6 /* JsonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429D7829B99E460044A3E6 /* JsonManager.swift */; };
 		2A429D7B29B9A06F0044A3E6 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429D7A29B9A06F0044A3E6 /* DataManager.swift */; };
 		2A429D7D29B9F2CA0044A3E6 /* DummyString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429D7C29B9F2CA0044A3E6 /* DummyString.swift */; };
+		2A429D8629BA35770044A3E6 /* Dummy.json in Resources */ = {isa = PBXBuildFile; fileRef = ABEAFBFD29ACA00B002C3119 /* Dummy.json */; };
 		AB2D2C0129B8271C0015CB10 /* CafeteriaSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2D2C0029B8271C0015CB10 /* CafeteriaSelectView.swift */; };
 		AB2FDAAE29B84CC7001746DB /* CafeteriaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FDAAD29B84CC7001746DB /* CafeteriaButton.swift */; };
 		ABEAFBCB29AC9ED3002C3119 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFBCA29AC9ED3002C3119 /* AppDelegate.swift */; };
@@ -407,6 +408,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A429D8629BA35770044A3E6 /* Dummy.json in Resources */,
 				ABEAFBD729AC9ED4002C3119 /* LaunchScreen.storyboard in Resources */,
 				ABEAFBD429AC9ED4002C3119 /* Assets.xcassets in Resources */,
 			);
