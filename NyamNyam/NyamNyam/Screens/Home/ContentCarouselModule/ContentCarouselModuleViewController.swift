@@ -37,7 +37,6 @@ final class ContentCarouselModuleViewController: UIViewController {
         view.contentInsetAdjustmentBehavior = .never
         view.contentInset = UIEdgeInsets(top: 0, left: insetX, bottom: 0, right: insetX)
         view.decelerationRate = .fast
-        view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -58,12 +57,12 @@ final class ContentCarouselModuleViewController: UIViewController {
     }
     
     private func bind(to viewModel: HomeViewModel) {
-        viewModel.currentCampus.observe(on: self) { _ in
-            
+        viewModel.currentCampus.observe(on: self) { [weak self] _ in
+            self?.collectionView.reloadData()
         }
         
-        viewModel.indexOfDate.observe(on: self) { _ in
-            
+        viewModel.indexOfDate.observe(on: self) { [weak self] _ in
+            self?.collectionView.reloadData()
         }
         viewModel.indexOfCafeteria.observe(on: self) { [weak self] index in
             self?.scrollViewBy(buttonIndex: index)
