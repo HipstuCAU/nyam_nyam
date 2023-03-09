@@ -57,8 +57,12 @@ private extension DataManager {
             return .staff
         case "카우잇츠(cau eats)":
             return .cauEats
+        case "(안성)카우버거":
+            return .cauBurger
+        case "(안성)라면":
+            return .ramen
         default:
-            return .cauEats
+            return .blueMirA
         }
     }
     
