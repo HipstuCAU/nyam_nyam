@@ -35,6 +35,6 @@ struct Meal: Hashable {
     let type: MealType
     let cafeteria: Cafeteria
     let price: String
-    let menu: String
+    let menu: [String]
     let date: Date
 }

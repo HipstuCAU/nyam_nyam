@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MealsForDay {
+struct MealsForDay: Hashable {
     let date: Date
     let meals: Set<Meal>
 }

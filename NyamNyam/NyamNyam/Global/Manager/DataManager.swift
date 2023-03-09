@@ -18,6 +18,56 @@ final class DataManager {
         }
         return nil
     }
+    func getMealsForDay(_ strData: String, _ campus: String) -> [Meal] {
+        let dictData = stringToDict(strData)
+        var meals: [Meal] = []
+        if  let dayDict = dictData?[campus] as? [String: Any] {
+            for i in 0..<dayDict.count {
+                let dayIndex = dayDict.index(dayDict.startIndex, offsetBy: i)
+                let day = dayDict.keys[dayIndex]
+                if let mealTimeDict = dayDict[day] as? [String: Any] {
+                    for j in 0..<mealTimeDict.count {
+                        let mealTimeIndex = mealTimeDict.index(mealTimeDict.startIndex, offsetBy: j)
+                        let mealTime = mealTimeDict.keys[mealTimeIndex]
+                        if let cafeteriaDict = mealTimeDict[mealTime] as? [String: Any] {
+                            for k in 0..<cafeteriaDict.count {
+                                let cafeteriaIndex = cafeteriaDict.index(cafeteriaDict.startIndex, offsetBy: k)
+                                let cafeteria = cafeteriaDict.keys[cafeteriaIndex]
+                                if let mealTypeDict = cafeteriaDict[cafeteria] as? [String: Any] {
+                                    for l in 0..<mealTypeDict.count {
+                                        let mealTypeIndex = mealTypeDict.index(mealTypeDict.startIndex, offsetBy: l)
+                                        let mealType = mealTypeDict.keys[mealTypeIndex]
+                                        if let menuDict = mealTypeDict[mealType] as? [String: Any],
+                                           let menu = menuDict["menu"] as? String,
+                                           let price = menuDict["price"] as? String {
+                                            meals.append(Meal(mealTime: getMealTime(mealTime), type: getMealType(mealType), cafeteria: getCafeteria(cafeteria), price: getPrice(price), menu: getMenu(menu), date: day.formatStringToDate() ?? Date()))
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return meals
+    }
+    func getMealsForWeeks(_ strData: String, _ campus: String) -> [MealsForDay] {
+        var mealsForWeek: [MealsForDay] = []
+        let mealsForDay = getMealsForDay(strData, campus)
+        let weeklyDate = Date.prepareDateList()
+        for dayIndex in weeklyDate.indices {
+            var meals: Set<Meal> = []
+            for meal in mealsForDay {
+                if weeklyDate[dayIndex] == meal.date {
+                    meals.insert(meal)
+                }
+            }
+            mealsForWeek.append(MealsForDay(date: weeklyDate[dayIndex], meals: meals))
+        }
+        return mealsForWeek
+    }
+
 }
 
 private extension DataManager {
@@ -75,3 +125,4 @@ private extension DataManager {
         return menu.components(separatedBy: "|")
     }
 }
+
