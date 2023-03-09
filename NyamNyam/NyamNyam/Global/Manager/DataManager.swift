@@ -18,7 +18,6 @@ final class DataManager {
         }
         return nil
     }
-    
     func getMealsForDay(_ strData: String, _ campus: String) -> [Meal] {
         let dictData = stringToDict(strData)
         var meals: [Meal] = []
@@ -126,3 +125,4 @@ private extension DataManager {
         return menu.components(separatedBy: "|")
     }
 }
+
