@@ -61,11 +61,13 @@ final class DataManager {
         for dayIndex in weeklyDate.indices {
             var meals: Set<Meal> = []
             for meal in mealsForDay {
-                if weeklyDate[dayIndex] == meal.date {
+                if weeklyDate[dayIndex] == meal.date && meal.menu != [""] {
                     meals.insert(meal)
                 }
             }
-            mealsForWeek.append(MealsForDay(date: weeklyDate[dayIndex], meals: meals))
+            if meals != [] {
+                mealsForWeek.append(MealsForDay(date: weeklyDate[dayIndex], meals: meals))
+            }
         }
         return mealsForWeek
     }
