@@ -25,9 +25,9 @@ private extension DataManager {
         switch mealTime {
         case "0":
             return .breakfast
-        case"1":
+        case "1":
             return .lunch
-        case"2":
+        case "2":
             return .dinner
         default:
             return .allDay
