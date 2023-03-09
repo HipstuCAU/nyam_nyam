@@ -26,8 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                    Cafeteria.blueMirA.rawValue,
                                                    Cafeteria.blueMirB.rawValue,
                                                    Cafeteria.student.rawValue,
-                                                   Cafeteria.staff.rawValue]
-                UserDefaults.standard.ansungCafeteria = [Cafeteria.cauEats.rawValue]
+                                                        Cafeteria.staff.rawValue]
+                UserDefaults.standard.ansungCafeteria = [Cafeteria.cauEats.rawValue,
+                                                         Cafeteria.cauBurger.rawValue,
+                                                         Cafeteria.ramen.rawValue]
                 // MARK: 이곳에 첫 Launch시 실행할 작업들이 들어갑니다.
                 UserDefaults.standard.isFirstLaunch = true
             }
