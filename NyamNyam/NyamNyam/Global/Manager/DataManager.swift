@@ -19,7 +19,7 @@ final class DataManager {
         return nil
     }
     
-    func getMealsOfDay(_ strData: String, _ campus: String) -> [Meal] {
+    func getMealsForDay(_ strData: String, _ campus: String) -> [Meal] {
         let dictData = stringToDict(strData)
         var meals: [Meal] = []
         if  let dayDict = dictData?[campus] as? [String: Any] {
@@ -53,7 +53,6 @@ final class DataManager {
         }
         return meals
     }
-
 }
 
 private extension DataManager {
