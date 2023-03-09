@@ -26,7 +26,7 @@ final class HomeViewModel {
         self.currentCampus = Observable(Campus(rawValue: UserDefaults.standard.campus) ?? .seoul)
         
         self.indexOfDate = Observable(0)
-        self.dateList = prepareDateList()
+        self.dateList = Date.prepareDateList()
         
         self.seoulCafeteriaList = UserDefaults.standard.seoulCafeteria.map {
             guard let cafeteria = Cafeteria(rawValue: $0) else { fatalError() }
@@ -40,13 +40,6 @@ final class HomeViewModel {
         
         self.indexOfCafeteria = Observable(0)
         
-        func prepareDateList() -> [Date] {
-            var dateList = [Date]()
-            (0..<7).forEach {
-                dateList.append(Date().convertDay(for: $0))
-            }
-            return dateList
-        }
     }
     
 }

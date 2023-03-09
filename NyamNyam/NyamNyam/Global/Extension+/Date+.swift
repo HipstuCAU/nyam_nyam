@@ -8,6 +8,14 @@
 import Foundation
 
 extension Date {
+    static func prepareDateList() -> [Date] {
+        var dateList = [Date]()
+        (0..<7).forEach {
+            dateList.append(Date().convertDay(for: $0))
+        }
+        return dateList
+    }
+    
     func toFullString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy.MM.dd"
