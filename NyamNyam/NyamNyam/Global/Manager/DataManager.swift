@@ -42,7 +42,7 @@ final class DataManager {
                                            let menu = menuDict["menu"] as? String,
                                            let price = menuDict["price"] as? String {
                                             //TODO: 따로 status 검사하는 함수 넣어 변경 예정
-                                            meals.append(Meal(mealTime: getMealTime(mealTime), type: getMealType(mealType, campus), cafeteria: getCafeteria(cafeteria), price: getPrice(price), menu: getMenu(menu), date: Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: day.formatStringToDate() ?? Date()) ?? Date(), status: .normal))
+                                            meals.append(Meal(mealTime: getMealTime(mealTime), type: getMealType(mealType, campus), cafeteria: getCafeteria(cafeteria), price: getPrice(price), menu: getMenu(menu), date: Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: day.formatStringToDate() ?? Date()) ?? Date(), status: getStatus(menu)))
                                         }
                                     }
                                 }
@@ -126,6 +126,15 @@ private extension DataManager {
 
     func getMenu(_ menu: String) -> [String] {
         return menu.components(separatedBy: "|")
+    }
+    
+    func getStatus(_ menu: String) -> Status {
+        switch menu {
+        case "주말운영없음":
+            return .CloseOnWeekends
+        default :
+            return .normal
+        }
     }
 }
 
