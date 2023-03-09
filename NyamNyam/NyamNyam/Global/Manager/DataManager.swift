@@ -8,7 +8,8 @@
 import Foundation
 
 final class DataManager {
-    func stringToDict(_ strData: String) -> [String: Any]? {
+    func stringToDict() -> [String: Any]? {
+        let strData = JsonManager.shared.jsonToString()
         if let strData = strData.data(using: .utf8) {
             do {
                 return try JSONSerialization.jsonObject(with: strData, options: []) as? [String: Any]
@@ -18,8 +19,8 @@ final class DataManager {
         }
         return nil
     }
-    func getMealsForDay(_ strData: String, _ campus: String) -> [Meal] {
-        let dictData = stringToDict(strData)
+    func getMealsForDay(_ campus: String) -> [Meal] {
+        let dictData = stringToDict()
         var meals: [Meal] = []
         if  let dayDict = dictData?[campus] as? [String: Any] {
             for i in 0..<dayDict.count {
@@ -40,7 +41,8 @@ final class DataManager {
                                         if let menuDict = mealTypeDict[mealType] as? [String: Any],
                                            let menu = menuDict["menu"] as? String,
                                            let price = menuDict["price"] as? String {
-                                            meals.append(Meal(mealTime: getMealTime(mealTime), type: getMealType(mealType), cafeteria: getCafeteria(cafeteria), price: getPrice(price), menu: getMenu(menu), date: day.formatStringToDate() ?? Date()))
+                                            //TODO: 따로 status 검사하는 함수 넣어 변경 예정
+                                            meals.append(Meal(mealTime: getMealTime(mealTime), type: getMealType(mealType), cafeteria: getCafeteria(cafeteria), price: getPrice(price), menu: getMenu(menu), date: Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: day.formatStringToDate() ?? Date()) ?? Date(), status: .normal))
                                         }
                                     }
                                 }
@@ -52,9 +54,9 @@ final class DataManager {
         }
         return meals
     }
-    func getMealsForWeeks(_ strData: String, _ campus: String) -> [MealsForDay] {
+    func getMealsForWeeks(_ campus: String) -> [MealsForDay] {
         var mealsForWeek: [MealsForDay] = []
-        let mealsForDay = getMealsForDay(strData, campus)
+        let mealsForDay = getMealsForDay(campus)
         let weeklyDate = Date.prepareDateList()
         for dayIndex in weeklyDate.indices {
             var meals: Set<Meal> = []

@@ -11,6 +11,17 @@ final class JsonManager {
     static let shared = JsonManager()
     private init() {}
     
-    //TODO: Json을 String으로 변경하는 메소드
+    func jsonToString() -> String {
+        let url = Bundle.main.url(forResource: "Dummy", withExtension: "json")
+        if let url {
+            do {
+                let stringData = try String(contentsOf: url, encoding: String.Encoding.utf8)
+                return stringData
+            } catch {
+                fatalError("Failed to load \(url) from bundle.")
+            }
+        }
+        return ""
+    }
     //TODO: 받아온 Json을 로컬로 저장하는 메소드
 }

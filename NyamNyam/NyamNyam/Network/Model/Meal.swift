@@ -30,6 +30,11 @@ enum MealType {
     case special
 }
 
+enum Status {
+    case normal
+    case CloseOnWeekends
+}
+
 struct Meal: Hashable {
     let mealTime: MealTime
     let type: MealType
@@ -37,4 +42,5 @@ struct Meal: Hashable {
     let price: String
     let menu: [String]
     let date: Date
+    let status: Status
 }
