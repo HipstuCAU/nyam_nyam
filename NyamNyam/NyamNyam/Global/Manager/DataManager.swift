@@ -56,7 +56,7 @@ final class DataManager {
     func getMealsForWeeks(_ strData: String, _ campus: String) -> [MealsForDay] {
         var mealsForWeek: [MealsForDay] = []
         let mealsForDay = getMealsForDay(strData, campus)
-        let weeklyDate = getWeeklyDate()
+        let weeklyDate = Date.prepareDateList()
         for dayIndex in weeklyDate.indices {
             var meals: Set<Meal> = []
             for meal in mealsForDay {
@@ -124,15 +124,5 @@ private extension DataManager {
 
     func getMenu(_ menu: String) -> [String] {
         return menu.components(separatedBy: "|")
-    }
-    
-    func getWeeklyDate() -> [Date] {
-        let calendar = Calendar.current
-        var weeklyDate: [Date] = []
-        for addDate in 0..<7 {
-            weeklyDate.append(calendar.date(byAdding: .day, value: addDate, to: Date()) ?? Date())
-        }
-
-        return weeklyDate
     }
 }
