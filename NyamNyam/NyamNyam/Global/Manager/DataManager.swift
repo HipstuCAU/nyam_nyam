@@ -42,7 +42,7 @@ final class DataManager {
                                            let menu = menuDict["menu"] as? String,
                                            let price = menuDict["price"] as? String {
                                             //TODO: 따로 status 검사하는 함수 넣어 변경 예정
-                                            meals.append(Meal(mealTime: getMealTime(mealTime), type: getMealType(mealType), cafeteria: getCafeteria(cafeteria), price: getPrice(price), menu: getMenu(menu), date: Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: day.formatStringToDate() ?? Date()) ?? Date(), status: .normal))
+                                            meals.append(Meal(mealTime: getMealTime(mealTime), type: getMealType(mealType, campus), cafeteria: getCafeteria(cafeteria), price: getPrice(price), menu: getMenu(menu), date: Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: day.formatStringToDate() ?? Date()) ?? Date(), status: .normal))
                                         }
                                     }
                                 }
@@ -86,9 +86,10 @@ private extension DataManager {
         }
     }
 
-    func getMealType(_ mealType: String) -> MealType {
-        switch mealType {
-        case "중식(특식)":
+    func getMealType(_ mealType: String, _ campus: String) -> MealType {
+        let mealTypeTuple = (mealType, campus)
+        switch mealTypeTuple {
+        case ("중식(특식)", "0"):
             return .special
         default:
             return .normal
