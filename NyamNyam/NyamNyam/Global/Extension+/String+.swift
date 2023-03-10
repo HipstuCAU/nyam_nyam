@@ -13,4 +13,11 @@ extension String {
         dateFormatter.dateFormat = "yyyy.MM.dd"
         return dateFormatter.date(from: self)
     }
+    
+    func formatStringToFullDate() -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(identifier: "UTC")
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        return dateFormatter.date(from: self)
+    }
 }
