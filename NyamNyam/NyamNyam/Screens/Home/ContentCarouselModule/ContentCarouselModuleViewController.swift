@@ -34,7 +34,6 @@ final class ContentCarouselModuleViewController: UIViewController {
         view.backgroundColor = .clear
         view.clipsToBounds = true
         view.isPagingEnabled = false
-        view.contentInsetAdjustmentBehavior = .never
         view.contentInset = UIEdgeInsets(top: 0, left: insetX, bottom: 0, right: insetX)
         view.decelerationRate = .fast
         return view
@@ -91,9 +90,15 @@ extension ContentCarouselModuleViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselCell.cellId, for: indexPath) as! CarouselCell
-        cell.cafeteriaType = viewModel.currentCampus.value == .seoul ? viewModel.seoulCafeteriaList[indexPath.row] : viewModel.ansungCafeteriaList[indexPath.row]
+        let cafeteria = viewModel.currentCampus.value == .seoul ? viewModel.seoulCafeteriaList[indexPath.row] : viewModel.ansungCafeteriaList[indexPath.row]
+        let date = viewModel.dateList[viewModel.indexOfDate.value]
+        cell.cafeteriaType = cafeteria
         if let cafeteria = cell.cafeteriaType {
             cell.positionLabel.text = getPositionName(of: cafeteria)
+            cell.prepare()
+            cell.mealCards.forEach { card in
+                card.setNameContents(date: date, cafeteria: cafeteria, data: [])
+            }
         }
         return cell
     }
@@ -121,7 +126,9 @@ extension ContentCarouselModuleViewController: UICollectionViewDataSource {
 }
 
 extension ContentCarouselModuleViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width - 60, height: view.frame.height)
+    }
 }
 
 extension ContentCarouselModuleViewController: UICollectionViewDelegateFlowLayout {

@@ -7,10 +7,10 @@
 
 import Foundation
 
-enum MealTime {
-    case breakfast
-    case lunch
-    case dinner
+enum MealTime: String {
+    case breakfast = "조식"
+    case lunch = "중식"
+    case dinner = "석식"
     case allDay
 }
 

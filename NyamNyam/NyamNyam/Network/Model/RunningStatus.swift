@@ -26,72 +26,72 @@ enum RunningStatus {
         if meal.status == .CloseOnWeekends {
             return .empty
         }
-        switch cafeteria {
-        case .chamseulgi:
-            if mealTime == .breakfast {
-                
-            } else if mealTime == .lunch {
-                
-            } else if mealTime == .dinner {
-                
-            } else {
-                return .running
-            }
-        case .blueMirA:
-            if mealTime == .breakfast {
-                
-            } else if mealTime == .lunch {
-                
-            } else if mealTime == .dinner {
-                
-            } else {
-                return .running
-            }
-        case .blueMirB:
-            if mealTime == .breakfast {
-                
-            } else if mealTime == .lunch {
-                
-            } else if mealTime == .dinner {
-                
-            } else {
-                return .running
-            }
-        case .student:
-            if mealTime == .breakfast {
-                
-            } else if mealTime == .lunch {
-                
-            } else if mealTime == .dinner {
-                
-            } else {
-                return .running
-            }
-        case .staff:
-            if mealTime == .breakfast {
-                
-            } else if mealTime == .lunch {
-                
-            } else if mealTime == .dinner {
-                
-            } else {
-                return .running
-            }
-        case .cauEats:
-            if mealTime == .breakfast {
-                
-            } else if mealTime == .lunch {
-                
-            } else if mealTime == .dinner {
-                
-            } else {
-                return .running
-            }
-        case .cauBurger:
-            return .running
-        case .ramen:
-            return .running
-        }
+//        switch cafeteria {
+//        case .chamseulgi:
+//            if mealTime == .breakfast {
+//                
+//            } else if mealTime == .lunch {
+//                
+//            } else if mealTime == .dinner {
+//                
+//            } else {
+//                return .running
+//            }
+//        case .blueMirA:
+//            if mealTime == .breakfast {
+//                
+//            } else if mealTime == .lunch {
+//                
+//            } else if mealTime == .dinner {
+//                
+//            } else {
+//                return .running
+//            }
+//        case .blueMirB:
+//            if mealTime == .breakfast {
+//                
+//            } else if mealTime == .lunch {
+//                
+//            } else if mealTime == .dinner {
+//                
+//            } else {
+//                return .running
+//            }
+//        case .student:
+//            if mealTime == .breakfast {
+//                
+//            } else if mealTime == .lunch {
+//                
+//            } else if mealTime == .dinner {
+//                
+//            } else {
+//                return .running
+//            }
+//        case .staff:
+//            if mealTime == .breakfast {
+//                
+//            } else if mealTime == .lunch {
+//                
+//            } else if mealTime == .dinner {
+//                
+//            } else {
+//                return .running
+//            }
+//        case .cauEats:
+//            if mealTime == .breakfast {
+//                
+//            } else if mealTime == .lunch {
+//                
+//            } else if mealTime == .dinner {
+//                
+//            } else {
+//                return .running
+//            }
+//        case .cauBurger:
+//            return .running
+//        case .ramen:
+//            return .running
+//        }
         return .suspended
     }
 }
