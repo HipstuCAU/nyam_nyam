@@ -18,11 +18,11 @@ final class OptionSelectModuleViewController: UIViewController {
         let alert = UIAlertController(title: "캠퍼스를 선택해주세요.",
                                       message: nil,
                                       preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "서울캠퍼스", style: .default , handler:{ (UIAlertAction)in
+        alert.addAction(UIAlertAction(title: "서울캠퍼스", style: .default , handler:{ (UIAlertAction) in
             self.viewModel.currentCampus.value = .seoul
         }))
         
-        alert.addAction(UIAlertAction(title: "안성캠퍼스", style: .default , handler:{ (UIAlertAction)in
+        alert.addAction(UIAlertAction(title: "안성캠퍼스", style: .default , handler:{ (UIAlertAction) in
             self.viewModel.currentCampus.value = .ansung
         }))
         alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))

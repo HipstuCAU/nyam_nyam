@@ -21,8 +21,6 @@ final class CarouselCell: UICollectionViewCell {
         return label
     }()
     
-    public let testView: ExpandableMealCardView = ExpandableMealCardView(isValid: false)
-    
     private let scrollView = UIScrollView()
     
     override init(frame: CGRect) {
@@ -30,7 +28,6 @@ final class CarouselCell: UICollectionViewCell {
         setContentViewLayout()
         setScrollViewLayout()
         setPositionLabelLayout()
-        setTestViewLayout()
     }
     
     required init?(coder: NSCoder) {
@@ -43,20 +40,9 @@ final class CarouselCell: UICollectionViewCell {
     }
     
     func prepare() {
-        testView.snp.updateConstraints { make in
-            make.height.equalTo(40)
-        }
-        testView.isExpanded = false
+        
     }
     
-    private func setTestViewLayout() {
-        scrollView.addSubview(testView)
-        testView.snp.makeConstraints { make in
-            make.leading.equalTo(contentView.snp.leading)
-            make.trailing.equalTo(contentView.snp.trailing)
-            make.top.equalTo(positionLabel.snp.bottom).offset(7)
-        }
-    }
     
     private func setPositionLabelLayout() {
         scrollView.addSubview(positionLabel)
