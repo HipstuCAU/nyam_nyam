@@ -43,4 +43,6 @@ struct Meal: Hashable {
     let menu: [String]
     let date: Date
     let status: Status
+    let endDate: Date
+    let startDate: Date
 }
