@@ -27,12 +27,12 @@ final class ContentCarouselModuleViewController: UIViewController {
         else { fatalError() }
         let insetX = (scene.screen.bounds.width - collectionViewFlowLayout.itemSize.width) / 2.0
         let view = UICollectionView(frame: .zero, collectionViewLayout: self.collectionViewFlowLayout)
+        view.register(CarouselCell.self, forCellWithReuseIdentifier: CarouselCell.cellId)
         view.isScrollEnabled = true
         view.showsHorizontalScrollIndicator = false
-        view.showsVerticalScrollIndicator = true
+        view.showsVerticalScrollIndicator = false
         view.backgroundColor = .clear
         view.clipsToBounds = true
-        view.register(CarouselCell.self, forCellWithReuseIdentifier: CarouselCell.cellId)
         view.isPagingEnabled = false
         view.contentInsetAdjustmentBehavior = .never
         view.contentInset = UIEdgeInsets(top: 0, left: insetX, bottom: 0, right: insetX)
@@ -68,8 +68,6 @@ final class ContentCarouselModuleViewController: UIViewController {
             self?.scrollViewBy(buttonIndex: index)
         }
     }
-    
-    
 }
 
 extension ContentCarouselModuleViewController {
@@ -79,7 +77,7 @@ extension ContentCarouselModuleViewController {
         collectionView.register(CarouselCell.self, forCellWithReuseIdentifier: CarouselCell.cellId)
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { make in
-            make.leading.trailing.top.bottom.equalToSuperview()
+            make.top.bottom.leading.trailing.equalToSuperview()
         }
     }
 }
@@ -93,7 +91,32 @@ extension ContentCarouselModuleViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselCell.cellId, for: indexPath) as! CarouselCell
+        cell.cafeteriaType = viewModel.currentCampus.value == .seoul ? viewModel.seoulCafeteriaList[indexPath.row] : viewModel.ansungCafeteriaList[indexPath.row]
+        if let cafeteria = cell.cafeteriaType {
+            cell.positionLabel.text = getPositionName(of: cafeteria)
+        }
         return cell
+    }
+    
+    private func getPositionName(of cafeteria: Cafeteria) -> String {
+        switch cafeteria {
+        case .chamseulgi:
+            return "경영경제관(310) B4층"
+        case .blueMirA:
+            return "블루미르관(308)"
+        case .blueMirB:
+            return "블루미르관(309)"
+        case .student:
+            return "법학관(303) B1층"
+        case .staff:
+            return "법학관(303) B1층"
+        case .cauEats:
+            return "707관"
+        case .cauBurger:
+            return "707관"
+        case .ramen:
+            return "707관"
+        }
     }
 }
 

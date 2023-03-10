@@ -38,7 +38,7 @@ final class CampusSelectView: UIView {
     
     init() {
         super.init(frame: .zero)
-        self.backgroundColor = .white
+        self.backgroundColor = .clear
         setCampusNameLabelLayout()
         setOptionIconViewLayout()
         setOverlappedButtonLayout()

@@ -24,13 +24,25 @@ final class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.setNavigationBarHidden(true, animated: true)
-        view.backgroundColor = .white
+        setBackgroundGradient()
         setOptionSelectModuleLayout()
         setContentCarouselModuleLayout()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
 }
 
 extension HomeViewController {
+    private func setBackgroundGradient() {
+        let layer = CAGradientLayer()
+        layer.colors = [UIColor.white.cgColor, Pallete.bgBlue.color!.cgColor]
+        layer.frame.size = view.frame.size
+        layer.locations = [0.0, 1.0]
+        view.layer.insertSublayer(layer, at: 0)
+    }
+    
     private func setContentCarouselModuleLayout() {
         self.addChild(contentCarouselModule)
         self.view.addSubview(contentCarouselModule.view)

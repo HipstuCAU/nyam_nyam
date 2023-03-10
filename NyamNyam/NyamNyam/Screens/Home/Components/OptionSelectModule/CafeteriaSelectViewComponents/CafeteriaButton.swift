@@ -12,7 +12,7 @@ final class CafeteriaButton: UIButton {
     
     public let cafeteriaLabel: UILabel = {
         let label = UILabel()
-        label.textColor = Pallete.gray50.color ?? .black
+        label.textColor = Pallete.gray.color ?? .black
         label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.textAlignment = .center
         return label
@@ -57,7 +57,7 @@ final class CafeteriaButton: UIButton {
     }
     
     public func isNotSelected() {
-        cafeteriaLabel.textColor = Pallete.gray50.color ?? .black
+        cafeteriaLabel.textColor = Pallete.gray.color ?? .black
         self.backgroundColor = .white
     }
 }
