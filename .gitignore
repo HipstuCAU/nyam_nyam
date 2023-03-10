@@ -1,5 +1,6 @@
 # Created by https://www.toptal.com/developers/gitignore/api/xcode,swift,firebase
 # Edit at https://www.toptal.com/developers/gitignore?templates=xcode,swift,firebase
+**/GoogleService-Info.plist
 
 ### Firebase ###
 .idea
