@@ -113,6 +113,15 @@ final class ExpandableMealCardView: UIView {
         }
     }
     
+    public func closeView() {
+        self.isUserInteractionEnabled = false
+        // TODO: mark 달아야 함.
+        isExpanded = false
+        self.snp.updateConstraints { make in
+            make.height.equalTo(40)
+        }
+    }
+    
     private func setExpandButtonLayout() {
         self.addSubview(expandButton)
         expandButton.snp.makeConstraints { make in

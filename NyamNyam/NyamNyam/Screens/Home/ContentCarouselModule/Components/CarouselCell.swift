@@ -13,6 +13,7 @@ final class CarouselCell: UICollectionViewCell {
     public var cafeteriaType: Cafeteria?
     static let cellId = "contentCell"
     var mealCards: [ExpandableMealCardView] = []
+    var mealData: Set<Meal>?
     
     public let positionLabel: UILabel = {
         let label = UILabel()
@@ -61,7 +62,8 @@ final class CarouselCell: UICollectionViewCell {
         if runningStatus == .running || runningStatus == .ready {
             isValid = true
         }
-        [MealTime.breakfast, MealTime.lunch, MealTime.dinner].forEach {
+        let mealTimes = [MealTime.breakfast, MealTime.lunch, MealTime.dinner]
+        mealTimes.forEach {
             let mealCard = ExpandableMealCardView(isValid: isValid, mealTime: $0)
             mealCards.append(mealCard)
         }
@@ -77,6 +79,10 @@ final class CarouselCell: UICollectionViewCell {
                     make.top.equalTo(mealCards[idx - 1].snp.bottom).offset(14)
                 }
             }
+            let meals = mealData?.filter {
+                $0.mealTime == mealTimes[idx] && $0.status != .CloseOnWeekends
+            }
+            if meals == nil || meals?.count == 0 { card.closeView() }
         }
         scrollView.contentSize = CGSize(width: contentView.frame.width, height: 50)
         if let lastCard = mealCards.last {

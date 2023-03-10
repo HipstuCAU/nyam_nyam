@@ -9,6 +9,12 @@ import Foundation
 
 extension Date {
     
+    func convertToStart() -> Date? {
+        guard let today = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: self)
+        else { return nil }
+        return today
+    }
+    
     func isToday() -> Bool {
         guard let today = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: Date()) else { return false }
         guard let date = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: self) else { return false }

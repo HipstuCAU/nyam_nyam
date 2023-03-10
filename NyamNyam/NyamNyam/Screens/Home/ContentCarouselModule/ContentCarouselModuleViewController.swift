@@ -92,6 +92,12 @@ extension ContentCarouselModuleViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselCell.cellId, for: indexPath) as! CarouselCell
         let cafeteria = viewModel.currentCampus.value == .seoul ? viewModel.seoulCafeteriaList[indexPath.row] : viewModel.ansungCafeteriaList[indexPath.row]
         let date = viewModel.dateList[viewModel.indexOfDate.value]
+        let rawData = viewModel.currentCampus.value == .seoul ? viewModel.seoulMeals : viewModel.ansungMeals
+        let mealDataOfDay = rawData.filter { $0.date == date }
+        let mealDataOfCafeteria = mealDataOfDay.first?.meals.filter {
+            $0.cafeteria == cafeteria
+        }
+        cell.mealData = mealDataOfCafeteria
         cell.cafeteriaType = cafeteria
         if let cafeteria = cell.cafeteriaType {
             cell.positionLabel.text = getPositionName(of: cafeteria)
