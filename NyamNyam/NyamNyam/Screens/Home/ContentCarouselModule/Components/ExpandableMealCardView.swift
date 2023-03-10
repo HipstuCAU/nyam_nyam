@@ -17,6 +17,7 @@ final class ExpandableMealCardView: UIView {
         button.addTarget(self, action: #selector(expandButtonPressed), for: .touchUpInside)
         return button
     }()
+    var mealTime: MealTime?
     
     init(isValid: Bool) {
         isExpanded = isValid
@@ -51,6 +52,10 @@ final class ExpandableMealCardView: UIView {
         if !isExpanded {
             self.snp.updateConstraints { make in
                 make.height.equalTo(40)
+            }
+        } else {
+            self.snp.updateConstraints { make in
+                make.height.equalTo(140)
             }
         }
     }

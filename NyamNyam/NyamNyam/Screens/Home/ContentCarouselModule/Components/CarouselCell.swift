@@ -12,6 +12,7 @@ final class CarouselCell: UICollectionViewCell {
     
     public var cafeteriaType: Cafeteria?
     static let cellId = "contentCell"
+    var mealCards: [ExpandableMealCardView] = []
     
     public let positionLabel: UILabel = {
         let label = UILabel()
@@ -40,9 +41,23 @@ final class CarouselCell: UICollectionViewCell {
     }
     
     func prepare() {
-        
+        mealCards.forEach { $0.removeFromSuperview() }
+        mealCards.removeAll()
+        let runningStatus = getRunningStatus()
+        [MealTime.breakfast, MealTime.lunch, MealTime.dinner].forEach {
+            let mealCard = ExpandableMealCardView(isValid: true)
+            mealCard.mealTime = $0
+            mealCards.append(mealCard)
+        }
     }
     
+    private func getRunningStatus() -> RunningStatus {
+        return .running
+    }
+    
+    private func setMealCardsLayout() {
+        
+    }
     
     private func setPositionLabelLayout() {
         scrollView.addSubview(positionLabel)

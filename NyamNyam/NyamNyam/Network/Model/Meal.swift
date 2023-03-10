@@ -35,7 +35,7 @@ enum Status {
     case CloseOnWeekends
 }
 
-struct Meal: Hashable {
+struct Meal: Hashable, Comparable {
     let mealTime: MealTime
     let type: MealType
     let cafeteria: Cafeteria
@@ -43,4 +43,19 @@ struct Meal: Hashable {
     let menu: [String]
     let date: Date
     let status: Status
+    
+    static func < (lhs: Meal, rhs: Meal) -> Bool {
+        if lhs.type == rhs.type {
+            if lhs.price == rhs.price {
+                if lhs.menu.first ?? "" < rhs.menu.first ?? "" { return true }
+                else { return false }
+            } else {
+                if lhs.price < rhs.price { return true }
+                else { return false }
+            }
+        } else {
+            if rhs.type == .special { return true }
+            else { return false }
+        }
+    }
 }
