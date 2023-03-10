@@ -13,10 +13,8 @@ import FirebaseFirestore
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        setOptionsWithFirstLaunch()
         FirebaseApp.configure()
-        let db = Firestore.firestore()
+        setOptionsWithFirstLaunch()
         
         func setOptionsWithFirstLaunch() {
             let isFirstLaunch = !UserDefaults.standard.isFirstLaunch
