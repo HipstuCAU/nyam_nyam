@@ -12,7 +12,7 @@ final class JsonManager {
     private init() {}
     
     func jsonToString() -> String {
-        let filename = getDocumentsDirectory().appendingPathComponent("Dummy.json")
+        let filename = getDocumentsDirectory().appendingPathComponent("CAUMeals.json")
             do {
                 let stringData = try String(contentsOf: filename, encoding: String.Encoding.utf8)
                 return stringData
@@ -21,7 +21,7 @@ final class JsonManager {
             }
     }
     func saveJson(_ strData: String) {
-        let filename = getDocumentsDirectory().appendingPathComponent("Dummy.json")
+        let filename = getDocumentsDirectory().appendingPathComponent("CAUMeals.json")
         do {
             try strData.write(to: filename, atomically: true, encoding: String.Encoding.utf8)
         } catch {

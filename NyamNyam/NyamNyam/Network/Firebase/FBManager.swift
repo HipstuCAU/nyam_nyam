@@ -23,8 +23,8 @@ final class FBManager {
                 guard let dataDescription = document.data() else { return }
                 do {
                     let jsonData = try JSONSerialization.data(withJSONObject: dataDescription, options: .sortedKeys)
-                    guard let decoded = String(data: jsonData, encoding: .utf8) else { return }
-                    JsonManager.shared.saveJson(decoded)
+                    guard let strData = String(data: jsonData, encoding: .utf8) else { return }
+                    JsonManager.shared.saveJson(strData)
                 } catch {
                     print(error.localizedDescription)
                 }
