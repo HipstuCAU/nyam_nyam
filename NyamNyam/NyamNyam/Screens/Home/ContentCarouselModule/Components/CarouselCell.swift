@@ -89,10 +89,6 @@ final class CarouselCell: UICollectionViewCell {
         }
     }
     
-    private func getRunningStatus() -> RunningStatus {
-        return .running
-    }
-    
     private func setPositionLabelLayout() {
         scrollView.addSubview(positionLabel)
         positionLabel.snp.makeConstraints { make in
