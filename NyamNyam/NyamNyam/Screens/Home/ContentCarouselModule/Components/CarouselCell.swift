@@ -129,16 +129,17 @@ final class CarouselCell: UICollectionViewCell {
                     let contentView = ContentStackView()
                     card.addSubview(contentView)
                     card.contentViews.append(contentView)
+                    contentView.backgroundColor = .clear
                     
-                    contentView.backgroundColor = .green
-                    
+                    // StackView 내용 채우기
+                    contentView.setViewContents(data: dataOfCard[contentIdx])
                     
                     // 해당 view layout 설정
                     contentView.snp.makeConstraints { make in
                         if contentIdx == 0 {
                             make.top.equalTo(card.mealTimeIconView.snp.bottom).offset(20)
                         } else {
-                            make.top.equalTo(card.contentViews[contentIdx - 1].snp.bottom).offset(20)
+                            make.top.equalTo(card.contentViews[contentIdx - 1].snp.bottom).offset(40)
                         }
                         make.leading.equalToSuperview().offset(20)
                         make.trailing.equalToSuperview().offset(-20)
@@ -219,16 +220,18 @@ extension CarouselCell: ExpandableMealCardViewDelegate {
                         let contentView = ContentStackView()
                         card.addSubview(contentView)
                         card.contentViews.append(contentView)
+                        contentView.backgroundColor = .clear
                         
-                        contentView.backgroundColor = .green
-                        
+                        // StackView 내용 채우기
+                        contentView.alpha = 0.0
+                        contentView.setViewContents(data: dataOfCard[contentIdx])
                         
                         // 해당 view layout 설정
                         contentView.snp.makeConstraints { make in
                             if contentIdx == 0 {
                                 make.top.equalTo(card.mealTimeIconView.snp.bottom).offset(20)
                             } else {
-                                make.top.equalTo(card.contentViews[contentIdx - 1].snp.bottom).offset(20)
+                                make.top.equalTo(card.contentViews[contentIdx - 1].snp.bottom).offset(40)
                             }
                             make.leading.equalToSuperview().offset(20)
                             make.trailing.equalToSuperview().offset(-20)
@@ -253,6 +256,9 @@ extension CarouselCell: ExpandableMealCardViewDelegate {
                     }
                     UIView.animate(withDuration: 0.5) {
                         self.layoutIfNeeded()
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                        card.contentViews.forEach { $0.alpha = 1.0 }
                     }
                     card.isExpanded = true
                 }
