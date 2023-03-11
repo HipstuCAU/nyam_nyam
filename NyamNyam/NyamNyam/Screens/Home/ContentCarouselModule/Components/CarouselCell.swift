@@ -143,8 +143,6 @@ final class CarouselCell: UICollectionViewCell {
                         }
                         make.leading.equalToSuperview().offset(20)
                         make.trailing.equalToSuperview().offset(-20)
-                        //TODO: 해당 height는 내부에 어떻게 들어가냐에 따라 유동적으로 변환되어야 함
-                        make.height.equalTo(120)
                     }
                     // 마지막 콘텐츠 수정 (bottom을 사용하기 위함)
                     lastContent = contentView
@@ -235,8 +233,6 @@ extension CarouselCell: ExpandableMealCardViewDelegate {
                             }
                             make.leading.equalToSuperview().offset(20)
                             make.trailing.equalToSuperview().offset(-20)
-                            //TODO: 해당 height는 내부에 어떻게 들어가냐에 따라 유동적으로 변환되어야 함
-                            make.height.equalTo(120)
                         }
                         // 마지막 콘텐츠 수정 (bottom을 사용하기 위함)
                         lastContent = contentView

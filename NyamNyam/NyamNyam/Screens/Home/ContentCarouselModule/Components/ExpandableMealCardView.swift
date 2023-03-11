@@ -101,7 +101,7 @@ extension ExpandableMealCardView {
     private func setMealTimeIconViewLayout() {
         self.addSubview(mealTimeIconView)
         mealTimeIconView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(20)
+            make.leading.equalToSuperview().offset(15)
             make.top.equalToSuperview().offset(11)
             make.width.equalTo(23)
             make.height.equalTo(18)
