@@ -12,16 +12,24 @@ final class JsonManager {
     private init() {}
     
     func jsonToString() -> String {
-        let url = Bundle.main.url(forResource: "Dummy", withExtension: "json")
-        if let url {
+        let filename = getDocumentsDirectory().appendingPathComponent("Dummy.json")
             do {
-                let stringData = try String(contentsOf: url, encoding: String.Encoding.utf8)
+                let stringData = try String(contentsOf: filename, encoding: String.Encoding.utf8)
                 return stringData
             } catch {
-                fatalError("Failed to load \(url) from bundle.")
+                fatalError("Failed to load \(filename) from bundle.")
             }
-        }
-        return ""
     }
-    //TODO: 받아온 Json을 로컬로 저장하는 메소드
+    func saveJson(_ strData: String) {
+        let filename = getDocumentsDirectory().appendingPathComponent("Dummy.json")
+        do {
+            try strData.write(to: filename, atomically: true, encoding: String.Encoding.utf8)
+        } catch {
+            fatalError()
+        }
+    }
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: FileManager.SearchPathDirectory.applicationSupportDirectory, in: FileManager.SearchPathDomainMask.userDomainMask)[0]
+        return paths
+    }
 }
