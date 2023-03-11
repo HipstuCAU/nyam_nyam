@@ -14,6 +14,7 @@ final class CarouselCell: UICollectionViewCell {
     static let cellId = "contentCell"
     var mealCards: [ExpandableMealCardView] = []
     var tempViews: [UIView] = []
+    var data: Set<Meal>?
     
     public let positionLabel: UILabel = {
         let label = UILabel()
@@ -23,7 +24,12 @@ final class CarouselCell: UICollectionViewCell {
         return label
     }()
     
-    lazy var scrollView = UIScrollView()
+    lazy var scrollView: UIScrollView = {
+        let view = UIScrollView()
+        view.showsVerticalScrollIndicator = false
+        view.showsHorizontalScrollIndicator = false
+        return view
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,8 +39,8 @@ final class CarouselCell: UICollectionViewCell {
     }
     
     required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-}
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -42,12 +48,14 @@ final class CarouselCell: UICollectionViewCell {
     }
     
     func prepare() {
+        tempViews.forEach { $0.removeFromSuperview() }
         tempViews.removeAll()
         mealCards.forEach { $0.removeFromSuperview() }
         mealCards.removeAll()
     }
     
     public func setDefaultCafeteriaLayout(data: Set<Meal>) {
+        self.data = data
         // MealTime
         let mealTimes = [MealTime.breakfast, MealTime.lunch, MealTime.dinner]
         
@@ -60,7 +68,9 @@ final class CarouselCell: UICollectionViewCell {
             if filteredData.count == 0  { isValid = false }
             
             // 생성
-            let mealCard = ExpandableMealCardView(isValid: isValid, mealTime: mealTime)
+            guard let cafeteriaType = cafeteriaType else { return }
+            let mealCard = ExpandableMealCardView(isValid: isValid, mealTime: mealTime, cafeteria: cafeteriaType)
+            mealCard.delegate = self
             mealCards.append(mealCard)
         }
         
@@ -95,6 +105,8 @@ final class CarouselCell: UICollectionViewCell {
                 make.trailing.equalTo(scrollView.snp.trailing)
                 make.bottom.equalTo(tempViewForMakeBottomConstraints.snp.bottom)
             }
+            
+            
         }
         
         
@@ -103,6 +115,10 @@ final class CarouselCell: UICollectionViewCell {
         (0..<mealCards.count).forEach { idx in
             let card = mealCards[idx]
             if card.isValid {
+                
+                // MARK: Expired되면 여기로 들어올 일이 없어야 한다.
+                card.isExpanded = true
+                
                 // 해당 MealTime에 맞는 data를 순서대로 정렬하여 배열로 생성
                 let dataOfCard = data.filter { $0.mealTime == card.mealTime }.sorted(by: <)
                 
@@ -149,15 +165,6 @@ final class CarouselCell: UICollectionViewCell {
         }
         
         
-        
-        // 터치 동작 설정 설정
-        (0..<mealCards.count).forEach { idx in
-            let card = mealCards[idx]
-//            let tap = UITapGestureRecognizer(target: card, action: #selector())
-//            self.addGestureRecognizer(tap)
-        }
-       
-        
         // ScrollView 전체의 Content Size 결정
         scrollView.contentSize = CGSize(width: contentView.frame.width, height: 50)
         if let lastCard = mealCards.last {
@@ -165,12 +172,97 @@ final class CarouselCell: UICollectionViewCell {
                 make.leading.equalTo(scrollView.snp.leading)
                 make.trailing.equalTo(scrollView.snp.trailing)
                 make.top.equalTo(scrollView.snp.top)
-                make.bottom.equalTo(lastCard.snp.bottom)
+                make.bottom.equalTo(lastCard.snp.bottom).offset(20)
             }
         }
         
     }
 }
+
+extension CarouselCell: ExpandableMealCardViewDelegate {
+    func controlCellHeight(isExpanded: Bool, cafeteria: Cafeteria, mealTime: MealTime) {
+        if isExpanded == true {
+            (0..<mealCards.count).forEach { idx in
+                let card = mealCards[idx]
+                if card.cafeteria == cafeteria && card.mealTime == mealTime {
+                    card.snp.remakeConstraints { make in
+                        if idx == 0 {
+                            make.top.equalTo(positionLabel.snp.bottom).offset(7)
+                        } else {
+                            make.top.equalTo(mealCards[idx - 1].snp.bottom).offset(14)
+                        }
+                        make.leading.equalTo(scrollView.snp.leading)
+                        make.trailing.equalTo(scrollView.snp.trailing)
+                        make.bottom.equalTo(tempViews[idx].snp.bottom)
+                    }
+                    UIView.animate(withDuration: 0.5) {
+                        card.contentViews.forEach { $0.removeFromSuperview() }
+                        self.layoutIfNeeded()
+                    }
+                    card.isExpanded = false
+                    card.contentViews.removeAll()
+                }
+            }
+        } else {
+            (0..<mealCards.count).forEach { idx in
+                let card = mealCards[idx]
+                if card.cafeteria == cafeteria && card.mealTime == mealTime {
+                    
+                    // 해당 MealTime에 맞는 data를 순서대로 정렬하여 배열로 생성
+                    guard let data = data else { return }
+                    let dataOfCard = data.filter { $0.mealTime == card.mealTime }.sorted(by: <)
+                    
+                    var lastContent: ContentStackView?
+                    
+                    (0..<dataOfCard.count).forEach { contentIdx in
+                        // 내용에 따른 StackView 생성
+                        let contentView = ContentStackView()
+                        card.addSubview(contentView)
+                        card.contentViews.append(contentView)
+                        
+                        contentView.backgroundColor = .green
+                        
+                        
+                        // 해당 view layout 설정
+                        contentView.snp.makeConstraints { make in
+                            if contentIdx == 0 {
+                                make.top.equalTo(card.mealTimeIconView.snp.bottom).offset(20)
+                            } else {
+                                make.top.equalTo(card.contentViews[contentIdx - 1].snp.bottom).offset(20)
+                            }
+                            make.leading.equalToSuperview().offset(20)
+                            make.trailing.equalToSuperview().offset(-20)
+                            //TODO: 해당 height는 내부에 어떻게 들어가냐에 따라 유동적으로 변환되어야 함
+                            make.height.equalTo(120)
+                        }
+                        // 마지막 콘텐츠 수정 (bottom을 사용하기 위함)
+                        lastContent = contentView
+                    }
+                    
+                    if let lastContent = lastContent {
+                        card.snp.remakeConstraints { make in
+                            if idx == 0 {
+                                make.top.equalTo(positionLabel.snp.bottom).offset(7)
+                            } else {
+                                make.top.equalTo(mealCards[idx - 1].snp.bottom).offset(14)
+                            }
+                            make.leading.equalTo(scrollView.snp.leading)
+                            make.trailing.equalTo(scrollView.snp.trailing)
+                            make.bottom.equalTo(lastContent.snp.bottom).offset(20)
+                        }
+                    }
+                    UIView.animate(withDuration: 0.5) {
+                        self.layoutIfNeeded()
+                    }
+                    card.isExpanded = true
+                }
+            }
+        }
+    }
+    
+    
+}
+
 
 // subview들 레이아웃 설정
 extension CarouselCell {

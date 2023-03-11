@@ -8,14 +8,20 @@
 import UIKit
 import SnapKit
 
+protocol ExpandableMealCardViewDelegate: AnyObject {
+    func controlCellHeight(isExpanded: Bool, cafeteria: Cafeteria, mealTime: MealTime)
+}
+
 final class ExpandableMealCardView: UIView {
     var isValid: Bool
     var isExpanded: Bool = false
     var mealTime: MealTime
-    var cafeteria: Cafeteria?
+    var cafeteria: Cafeteria
     var date: Date?
     var data: [Meal]?
     var contentColor: UIColor?
+    
+    weak var delegate: ExpandableMealCardViewDelegate?
     
     var contentViews: [ContentStackView] = []
     
@@ -46,9 +52,10 @@ final class ExpandableMealCardView: UIView {
         return button
     }()
     
-    init(isValid: Bool, mealTime: MealTime) {
+    init(isValid: Bool, mealTime: MealTime, cafeteria: Cafeteria) {
         self.isValid = isValid
         self.mealTime = mealTime
+        self.cafeteria = cafeteria
         super.init(frame: .zero)
         
         // UI 설정
@@ -65,10 +72,18 @@ final class ExpandableMealCardView: UIView {
         setMealTimeIconViewLayout()
         setMealTimeLabelViewLayout()
         mealTimeLabel.text = mealTime.rawValue
+        
+        // Tap 설정
+        let tap = UITapGestureRecognizer(target: self, action: #selector(cardPressed))
+        self.addGestureRecognizer(tap)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func cardPressed() {
+        delegate?.controlCellHeight(isExpanded: isExpanded, cafeteria: cafeteria, mealTime: mealTime)
     }
 }
 
