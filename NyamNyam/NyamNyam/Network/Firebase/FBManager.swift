@@ -14,8 +14,6 @@ final class FBManager {
     
     private init() { }
     
-    var dataDescription: String = ""
-    
     func getMealJson() {
         let db = FirebaseFirestore.Firestore.firestore()
         let docRef = db.collection("CAU_Haksik").document("CAU_Cafeteria_Menu")
