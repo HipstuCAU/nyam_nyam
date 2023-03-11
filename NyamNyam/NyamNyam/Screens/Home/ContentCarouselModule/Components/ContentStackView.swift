@@ -7,6 +7,6 @@
 
 import UIKit
 
-final class ContentStackView: UIStackView {
+final class ContentStackView: UIView {
     
 }

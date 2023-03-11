@@ -120,14 +120,6 @@ extension ContentCarouselModuleViewController: UICollectionViewDataSource {
             // TODO: 해당하는 로직 들어가야 함.
         }
         
-        
-        // Card들마다 조중식 태그 올리기
-        cell.mealCards.forEach { card in
-            card.setNameContents(date: date, cafeteria: cafeteria, data: [])
-        }
-        
-     
-        
         return cell
     }
     

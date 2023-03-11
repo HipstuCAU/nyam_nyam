@@ -17,6 +17,8 @@ final class ExpandableMealCardView: UIView {
     var data: [Meal]?
     var contentColor: UIColor?
     
+    var contentViews: [ContentStackView] = []
+    
     lazy var mealTimeIconView: UIImageView = {
         let imageView = UIImageView()
         let mealTimeIconName: String
@@ -49,10 +51,6 @@ final class ExpandableMealCardView: UIView {
         self.mealTime = mealTime
         super.init(frame: .zero)
         
-        // tap gesture 설정
-        let tap = UITapGestureRecognizer(target: self, action: #selector(expandButtonPressed))
-        self.addGestureRecognizer(tap)
-        
         // UI 설정
         self.layer.cornerRadius = 20.0
         backgroundColor = .white
@@ -62,36 +60,16 @@ final class ExpandableMealCardView: UIView {
         if isValid == true { contentColor = .black }
         else { contentColor = Pallete.gray50.color }
         self.isUserInteractionEnabled = isValid ? true : false
-    }
-    
-    public func setNameContents(date: Date, cafeteria: Cafeteria, data: [Meal]) {
+        
+        // name content 생성
         setMealTimeIconViewLayout()
         setMealTimeLabelViewLayout()
         mealTimeLabel.text = mealTime.rawValue
     }
     
-    @objc func expandButtonPressed(_ sender: UIButton) {
-        if !isExpanded {
-            self.snp.updateConstraints { make in
-                make.height.equalTo(340)
-            }
-        } else {
-            self.snp.updateConstraints { make in
-                make.height.equalTo(40)
-            }
-        }
-        isExpanded.toggle()
-        UIView.animate(withDuration: 0.3, delay: 0) {
-            self.superview?.layoutIfNeeded()
-        }
-    }
-    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    
-
 }
 
 // MARK: 내부요소 Layout 설정
