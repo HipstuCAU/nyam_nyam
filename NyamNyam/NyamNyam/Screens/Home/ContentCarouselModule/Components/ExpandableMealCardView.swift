@@ -9,7 +9,8 @@ import UIKit
 import SnapKit
 
 final class ExpandableMealCardView: UIView {
-    var isExpanded: Bool
+    var isValid: Bool
+    var isExpanded: Bool = false
     var mealTime: MealTime
     var cafeteria: Cafeteria?
     var date: Date?
@@ -44,23 +45,64 @@ final class ExpandableMealCardView: UIView {
     }()
     
     init(isValid: Bool, mealTime: MealTime) {
-        self.isExpanded = isValid
+        self.isValid = isValid
         self.mealTime = mealTime
         super.init(frame: .zero)
+        
+        // tap gesture 설정
         let tap = UITapGestureRecognizer(target: self, action: #selector(expandButtonPressed))
         self.addGestureRecognizer(tap)
+        
+        // UI 설정
         self.layer.cornerRadius = 20.0
         backgroundColor = .white
-        setViewHeight()
         setExpandButtonLayout()
-        if isExpanded == true { contentColor = .black }
+        
+        // isValid 에 따른 타입 설정
+        if isValid == true { contentColor = .black }
         else { contentColor = Pallete.gray50.color }
+        self.isUserInteractionEnabled = isValid ? true : false
     }
     
     public func setNameContents(date: Date, cafeteria: Cafeteria, data: [Meal]) {
         setMealTimeIconViewLayout()
         setMealTimeLabelViewLayout()
         mealTimeLabel.text = mealTime.rawValue
+    }
+    
+    @objc func expandButtonPressed(_ sender: UIButton) {
+        if !isExpanded {
+            self.snp.updateConstraints { make in
+                make.height.equalTo(340)
+            }
+        } else {
+            self.snp.updateConstraints { make in
+                make.height.equalTo(40)
+            }
+        }
+        isExpanded.toggle()
+        UIView.animate(withDuration: 0.3, delay: 0) {
+            self.superview?.layoutIfNeeded()
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    
+
+}
+
+// MARK: 내부요소 Layout 설정
+extension ExpandableMealCardView {
+    private func setExpandButtonLayout() {
+        self.addSubview(expandButton)
+        expandButton.snp.makeConstraints { make in
+            make.width.height.equalTo(20)
+            make.top.equalToSuperview().offset(10)
+            make.trailing.equalToSuperview().offset(-10)
+        }
     }
     
     private func setMealTimeIconViewLayout() {
@@ -78,47 +120,6 @@ final class ExpandableMealCardView: UIView {
         mealTimeLabel.snp.makeConstraints { make in
             make.leading.equalTo(mealTimeIconView.snp.trailing).offset(5)
             make.top.equalToSuperview().offset(11)
-        }
-    }
-    
-    @objc func expandButtonPressed(_ sender: UIButton) {
-        if !isExpanded {
-            self.snp.updateConstraints { make in
-                make.height.equalTo(340)
-            }
-        } else {
-            self.snp.updateConstraints { make in
-                make.height.equalTo(40)
-            }
-        }
-        UIView.animate(withDuration: 0.3, delay: 0) {
-            self.superview?.layoutIfNeeded()
-        }
-        isExpanded.toggle()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    private func setViewHeight() {
-        if !isExpanded {
-            self.snp.updateConstraints { make in
-                make.height.equalTo(40)
-            }
-        } else {
-            self.snp.updateConstraints { make in
-                make.height.equalTo(340)
-            }
-        }
-    }
-    
-    private func setExpandButtonLayout() {
-        self.addSubview(expandButton)
-        expandButton.snp.makeConstraints { make in
-            make.width.height.equalTo(20)
-            make.top.equalToSuperview().offset(10)
-            make.trailing.equalToSuperview().offset(-10)
         }
     }
 }

@@ -42,29 +42,26 @@ final class CarouselCell: UICollectionViewCell {
     
     func prepare() {
         scrollView.removeFromSuperview()
-        setScrollViewLayout()
         mealCards.forEach { $0.removeFromSuperview() }
         mealCards.removeAll()
-        guard let cafeteriaType = cafeteriaType else { return }
-        if cafeteriaType != .cauBurger && cafeteriaType != .ramen {
-            setDefaultCafeteriaLayout()
-        } else if cafeteriaType == .cauBurger {
-            // TODO: 해당하는 로직 들어가야 함.
-        } else if cafeteriaType == .ramen {
-            // TODO: 해당하는 로직 들어가야 함.
-        }
     }
     
-    private func setDefaultCafeteriaLayout() {
-        let runningStatus = getRunningStatus()
-        var isValid: Bool = false
-        if runningStatus == .running || runningStatus == .ready {
-            isValid = true
-        }
-        [MealTime.breakfast, MealTime.lunch, MealTime.dinner].forEach {
-            let mealCard = ExpandableMealCardView(isValid: isValid, mealTime: $0)
+    public func setDefaultCafeteriaLayout(data: Set<Meal>) {
+        // MealTime
+        let mealTimes = [MealTime.breakfast, MealTime.lunch, MealTime.dinner]
+        
+        // Card 마다 유효성 확인해서 생성 / 터치 활성 비활성 결정
+        mealTimes.forEach { mealTime in
+            var isValid = true
+            let filteredData = data.filter {
+                $0.mealTime == mealTime && $0.status != .CloseOnWeekends
+            }
+            if filteredData.count == 0  { isValid = false }
+            let mealCard = ExpandableMealCardView(isValid: isValid, mealTime: mealTime)
             mealCards.append(mealCard)
         }
+        
+        // Card 마다 Layout 설정 (Expand 되기 전)
         (0..<mealCards.count).forEach { idx in
             let card = mealCards[idx]
             scrollView.addSubview(card)
@@ -76,8 +73,11 @@ final class CarouselCell: UICollectionViewCell {
                 } else {
                     make.top.equalTo(mealCards[idx - 1].snp.bottom).offset(14)
                 }
+                make.height.equalTo(40)
             }
         }
+        
+        // ScrollView 전체의 Content Size 결정
         scrollView.contentSize = CGSize(width: contentView.frame.width, height: 50)
         if let lastCard = mealCards.last {
             scrollView.contentLayoutGuide.snp.makeConstraints { make in
@@ -107,7 +107,7 @@ final class CarouselCell: UICollectionViewCell {
         }
     }
     
-    private func setScrollViewLayout() {
+    public func setScrollViewLayout() {
         contentView.addSubview(scrollView)
         scrollView.snp.makeConstraints { make in
             make.top.equalTo(contentView.snp.top)
