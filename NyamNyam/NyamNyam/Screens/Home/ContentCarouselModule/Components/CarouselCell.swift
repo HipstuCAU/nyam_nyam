@@ -41,7 +41,6 @@ final class CarouselCell: UICollectionViewCell {
     }
     
     func prepare() {
-        scrollView.removeFromSuperview()
         mealCards.forEach { $0.removeFromSuperview() }
         mealCards.removeAll()
     }

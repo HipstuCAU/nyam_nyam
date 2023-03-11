@@ -98,9 +98,6 @@ extension ContentCarouselModuleViewController: UICollectionViewDataSource {
         // Cell의 Date 결정
         let date = viewModel.dateList[viewModel.indexOfDate.value]
         
-        // ScrollView Layout
-        cell.setScrollViewLayout()
-        
         // ScrollView 위에 Cafeteria Label 올리기
         cell.positionLabel.text = getPositionName(of: cafeteria)
         
