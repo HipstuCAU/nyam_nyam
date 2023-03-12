@@ -11,9 +11,15 @@ import SnapKit
 final class SettingViewController: UIViewController {
     lazy var settingListModule = SettingListTableViewController()
     
+    func setNavigationBarBackButton() {
+        let backBarButtonItem = UIBarButtonItem(title: "설정", style: .plain, target: self, action: nil)
+        backBarButtonItem.tintColor = .black
+        self.navigationItem.backBarButtonItem = backBarButtonItem
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.setNavigationBarHidden(true, animated: true)
+        setNavigationBarBackButton()
         self.view.backgroundColor = Pallete.gray50.color
         self.setSettingListLayout()
     }
