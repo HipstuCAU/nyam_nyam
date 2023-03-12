@@ -10,7 +10,6 @@ import SnapKit
 
 final class SettingViewController: UIViewController {
     lazy var settingListModule = SettingListTableViewController()
-
     
     override func viewDidLoad() {
         super.viewDidLoad()

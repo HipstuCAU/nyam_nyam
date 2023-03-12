@@ -30,7 +30,9 @@ private extension SettingWebViewController {
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
         let AppInfoURL = URL(string: webURL)
         let AppInfoRequest = URLRequest(url: AppInfoURL!)
-        webView.load(AppInfoRequest)
+        DispatchQueue.main.async {
+            self.webView.load(AppInfoRequest)
+        }
     }
     
     func setWebViewLayout() {
