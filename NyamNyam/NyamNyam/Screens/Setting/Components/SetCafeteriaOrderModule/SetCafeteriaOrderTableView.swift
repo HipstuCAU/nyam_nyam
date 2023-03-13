@@ -13,6 +13,7 @@ final class SetCafeteriaOrderTableView: UIViewController {
     var seoulCafeteriaList: [String] = UserDefaults.standard.seoulCafeteria
     var ansungCafeteriaList: [String] = UserDefaults.standard.ansungCafeteria
     
+    let titleLabel: UIView = SetCafeteriaOrderTitleView()
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.rowHeight = 40
@@ -30,6 +31,8 @@ final class SetCafeteriaOrderTableView: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print(seoulCafeteriaList)
+        view.backgroundColor = .white
+        setTitleLayout()
         setTableViewLayout()
     }
 }
@@ -45,7 +48,16 @@ private extension SetCafeteriaOrderTableView {
         tableView.dragInteractionEnabled = true
         tableView.separatorInset = UIEdgeInsets(top: 0, left: 50, bottom: 0, right: 0)
         tableView.snp.makeConstraints { make in
-            make.top.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(titleLabel.snp.bottom).offset(25)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+    
+    func setTitleLayout() {
+        view.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(14)
+            make.leading.equalToSuperview()
         }
     }
 }
