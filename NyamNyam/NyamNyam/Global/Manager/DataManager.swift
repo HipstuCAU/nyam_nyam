@@ -44,7 +44,7 @@ final class DataManager {
                                            let time = menuDict["time"] as? String {
                                             //TODO: 따로 status 검사하는 함수 넣어 변경 예정
                                             let times = getTime(time, day)
-                                            meals.append(Meal(mealTime: getMealTime(mealTime), type: getMealType(mealType, campus), cafeteria: getCafeteria(cafeteria), price: getPrice(price), menu: getMenu(menu), date: Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: day.formatStringToDate() ?? Date()) ?? Date(), status: getStatus(menu), startDate: times[0], endDate: times[1]))
+                                            meals.append(Meal(mealTime: getMealTime(mealTime), type: getMealType(mealType, campus), cafeteria: getCafeteria(cafeteria), price: getPrice(price), menu: getMenu(menu), date: Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: day.formatStringToDate() ?? Date()) ?? Date(), status: getStatus(menu), startDate: times?[0], endDate: times?[1]))
                                         }
                                     }
                                 }
@@ -141,8 +141,11 @@ private extension DataManager {
         }
     }
     
-    func getTime(_ time: String, _ date: String) -> [Date] {
+    func getTime(_ time: String, _ date: String) -> [Date]? {
         let strTimes = time.components(separatedBy: "~")
+        if strTimes.count < 2 {
+            return nil
+        }
         var times: [Date] = []
         for time in strTimes {
             times.append(String("\(date) \(time):00").formatStringToFullDate() ?? Date())
