@@ -42,16 +42,18 @@ final class ContentStackView: UIView {
     
     private func setStackViewContents() {
         guard let data = data else { return }
-        for row in 0..<(data.menu.count / 2) {
+        var colCount = 2
+        if data.cafeteria == .blueMirB { colCount = 1 }
+        for row in 0..<(data.menu.count / colCount) {
             let rowStackView = UIStackView()
             rowStackView.axis = .horizontal
             rowStackView.alignment = .fill
             rowStackView.distribution = .fillEqually
             rowStackView.spacing = 8
             
-            for col in 0..<2 {
+            for col in 0..<colCount {
                 let label = UILabel()
-                label.text = "\(data.menu[row * 2 + col])"
+                label.text = "\(data.menu[row * colCount + col])"
                 label.textAlignment = .left
                 label.textColor = .black
                 label.font = .systemFont(ofSize: 16, weight: .semibold)
