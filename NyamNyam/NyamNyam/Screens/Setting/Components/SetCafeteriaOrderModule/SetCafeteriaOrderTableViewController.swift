@@ -10,39 +10,51 @@ import SnapKit
 
 final class SetCafeteriaOrderTableViewController: UIViewController {
     
-    var seoulCafeteriaList: [Cafeteria] = [.chamseulgi, .blueMirA, .blueMirB, .student, .staff]
-    var ansungCafeteriaList: [Cafeteria] = [.cauEats, .cauBurger, .ramen]
+    private var cafeteriaList: [String]
+    private var seoulCafeteriaList: [String] = UserDefaults.standard.seoulCafeteria
+    private var ansungCafeteriaList: [String] = UserDefaults.standard.ansungCafeteria
+    private var isSeoulCafeteria: Bool = true
     
-    func getCafeteriaName(_ cafeteria: Cafeteria) -> String {
+    private func getCafeteriaName(_ cafeteria: String) -> String {
         switch cafeteria {
-        case .chamseulgi:
+        case "cafeteria":
             return "참슬기"
-        case .blueMirA:
+        case "blueMirA":
             return "생활관A"
-        case .blueMirB:
+        case "blueMirB":
             return "생활관B"
-        case .student:
+        case "student":
             return "학생식당"
-        case .staff:
+        case "staff":
             return "교직원"
-        case .cauEats:
+        case "cauEats":
             return "카우이츠"
-        case .cauBurger:
+        case "cauBurger":
             return "카우버거"
-        case .ramen:
+        case "ramen":
             return "라면"
+        default:
+            return "참슬기"
         }
     }
-
     
-    let titleLabel: UIView = SetCafeteriaOrderTitleView()
+    private let titleLabel: UIView = SetCafeteriaOrderTitleView()
+    
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.rowHeight = 40
+        tableView.isScrollEnabled = false
         return tableView
     }()
     
-    init() {
+    init(viewModel: SettingViewModel) {
+        if viewModel.currentCampus.value == .seoul {
+            cafeteriaList = seoulCafeteriaList
+            isSeoulCafeteria = true
+        } else {
+            cafeteriaList = ansungCafeteriaList
+            isSeoulCafeteria = false
+        }
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -52,7 +64,6 @@ final class SetCafeteriaOrderTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(seoulCafeteriaList)
         view.backgroundColor = .white
         setTitleLayout()
         setTableViewLayout()
@@ -85,29 +96,33 @@ private extension SetCafeteriaOrderTableViewController {
 }
 
 extension SetCafeteriaOrderTableViewController: UITableViewDelegate {
+
 }
 
 extension SetCafeteriaOrderTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return seoulCafeteriaList.count
+        return cafeteriaList.count
     }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SetCafeteriaOrderTableViewCell.setCafeteriaOrderCellId) as? SetCafeteriaOrderTableViewCell else { return UITableViewCell() }
-        cell.configureUI(getCafeteriaName(seoulCafeteriaList[indexPath.row]), String(indexPath.row+1))
+        cell.configureUI(getCafeteriaName(cafeteriaList[indexPath.row]), String(indexPath.row + 1))
         cell.backgroundColor = .white
+        cell.selectionStyle = .none
         return cell
     }
+    
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
+    
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let cell = seoulCafeteriaList[sourceIndexPath.row]
-        seoulCafeteriaList.remove(at: sourceIndexPath.row)
-        seoulCafeteriaList.insert(cell, at: destinationIndexPath.row)
-        UserDefaults.standard.seoulCafeteria = seoulCafeteriaList.map({
-            guard let cafeteria = Cafeteria(rawValue: $0.rawValue) else { fatalError() }
-            return cafeteria.rawValue
-        })
+        let cell = cafeteriaList[sourceIndexPath.row]
+        cafeteriaList.remove(at: sourceIndexPath.row)
+        cafeteriaList.insert(cell, at: destinationIndexPath.row)
+        if isSeoulCafeteria {
+            UserDefaults.standard.seoulCafeteria = cafeteriaList
+        } else { UserDefaults.standard.ansungCafeteria = cafeteriaList }
         tableView.reloadData()
     }
 }
@@ -125,6 +140,7 @@ extension SetCafeteriaOrderTableViewController: UITableViewDropDelegate {
         }
         return UITableViewDropProposal(operation: .cancel, intent: .unspecified)
     }
+    
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
     }
 }
