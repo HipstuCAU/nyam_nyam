@@ -70,6 +70,7 @@ final class CarouselCell: UICollectionViewCell {
             // 생성
             guard let cafeteriaType = cafeteriaType else { return }
             let mealCard = ExpandableMealCardView(isValid: isValid, mealTime: mealTime, cafeteria: cafeteriaType)
+            mealCard.clipsToBounds = true
             mealCard.delegate = self
             mealCards.append(mealCard)
         }
@@ -127,6 +128,7 @@ final class CarouselCell: UICollectionViewCell {
                 (0..<dataOfCard.count).forEach { contentIdx in
                     // 내용에 따른 StackView 생성
                     let contentView = ContentStackView()
+                    contentView.clipsToBounds = true
                     card.addSubview(contentView)
                     card.contentViews.append(contentView)
                     contentView.backgroundColor = .clear
@@ -139,7 +141,13 @@ final class CarouselCell: UICollectionViewCell {
                         if contentIdx == 0 {
                             make.top.equalTo(card.mealTimeIconView.snp.bottom).offset(20)
                         } else {
-                            make.top.equalTo(card.contentViews[contentIdx - 1].snp.bottom).offset(40)
+                            if let contentData = contentView.data {
+                                if contentData.cafeteria == .student {
+                                    make.top.equalTo(card.contentViews[contentIdx - 1].snp.bottom).offset(5)
+                                } else {
+                                    make.top.equalTo(card.contentViews[contentIdx - 1].snp.bottom).offset(40)
+                                }
+                            }
                         }
                         make.leading.equalToSuperview().offset(20)
                         make.trailing.equalToSuperview().offset(-20)
@@ -195,11 +203,9 @@ extension CarouselCell: ExpandableMealCardViewDelegate {
                         make.bottom.equalTo(tempViews[idx].snp.bottom)
                     }
                     UIView.animate(withDuration: 0.5) {
-                        card.contentViews.forEach { $0.removeFromSuperview() }
                         self.layoutIfNeeded()
                     }
                     card.isExpanded = false
-                    card.contentViews.removeAll()
                 }
             }
         } else {
@@ -207,36 +213,7 @@ extension CarouselCell: ExpandableMealCardViewDelegate {
                 let card = mealCards[idx]
                 if card.cafeteria == cafeteria && card.mealTime == mealTime {
                     
-                    // 해당 MealTime에 맞는 data를 순서대로 정렬하여 배열로 생성
-                    guard let data = data else { return }
-                    let dataOfCard = data.filter { $0.mealTime == card.mealTime }.sorted(by: <)
-                    
-                    var lastContent: ContentStackView?
-                    
-                    (0..<dataOfCard.count).forEach { contentIdx in
-                        // 내용에 따른 StackView 생성
-                        let contentView = ContentStackView()
-                        card.addSubview(contentView)
-                        card.contentViews.append(contentView)
-                        contentView.backgroundColor = .clear
-                        
-                        // StackView 내용 채우기
-                        contentView.alpha = 0.0
-                        contentView.setViewContents(data: dataOfCard[contentIdx])
-                        
-                        // 해당 view layout 설정
-                        contentView.snp.makeConstraints { make in
-                            if contentIdx == 0 {
-                                make.top.equalTo(card.mealTimeIconView.snp.bottom).offset(20)
-                            } else {
-                                make.top.equalTo(card.contentViews[contentIdx - 1].snp.bottom).offset(40)
-                            }
-                            make.leading.equalToSuperview().offset(20)
-                            make.trailing.equalToSuperview().offset(-20)
-                        }
-                        // 마지막 콘텐츠 수정 (bottom을 사용하기 위함)
-                        lastContent = contentView
-                    }
+                    let lastContent = card.contentViews.last
                     
                     if let lastContent = lastContent {
                         card.snp.remakeConstraints { make in
@@ -253,16 +230,12 @@ extension CarouselCell: ExpandableMealCardViewDelegate {
                     UIView.animate(withDuration: 0.5) {
                         self.layoutIfNeeded()
                     }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                        card.contentViews.forEach { $0.alpha = 1.0 }
-                    }
                     card.isExpanded = true
                 }
             }
+            
         }
     }
-    
-    
 }
 
 
