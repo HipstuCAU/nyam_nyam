@@ -7,91 +7,39 @@
 
 import Foundation
 
-enum RunningStatus {
-    case expired
-    case running
-    case ready
-    case empty
-    case suspended
+enum RunningStatus: String {
+    case expired = "운영종료"
+    case running = "운영중"
+    case ready = "준비중"
+    case notInOperation = "미운영"
     
-    func getRunningStatus(of meal: Meal) -> RunningStatus {
-        let now = Date()
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: now)
-        let minute = calendar.component(.minute, from: now)
-
-        let cafeteria = meal.cafeteria
-        let mealTime = meal.mealTime
-    
-        if meal.status == .CloseOnWeekends {
-            return .empty
+    func getRunningStatus(of meals: [Meal], at cafeteria: Cafeteria) -> RunningStatus? {
+        let currentDate = Date()
+        
+        if cafeteria != .cauBurger && cafeteria != .ramen {
+            guard let firstMeal = meals.sorted(by: <).first, let start = firstMeal.startDate, let end = firstMeal.endDate else { return nil }
+            
+            if currentDate >= start && currentDate < end { return .running }
+            else if currentDate < start { return .ready }
+            else { return .expired }
+            
+        } else if cafeteria == .cauBurger {
+            let start = Date.SetTodayDateOf(hour: 9, minutes: 30)
+            let end = Date.SetTodayDateOf(hour: 18, minutes: 30)
+            
+            if currentDate >= start && currentDate < end { return .running }
+            else if currentDate < start { return .ready }
+            else { return .expired }
+            
+        } else {
+            
+            let start = Date.SetTodayDateOf(hour: 6, minutes: 0)
+            let end = Date.SetTodayDateOf(hour: 23, minutes: 0)
+            
+            if currentDate >= start && currentDate < end { return .running }
+            else if currentDate < start { return .ready }
+            else { return .expired }
+            
         }
-//        switch cafeteria {
-//        case .chamseulgi:
-//            if mealTime == .breakfast {
-//                
-//            } else if mealTime == .lunch {
-//                
-//            } else if mealTime == .dinner {
-//                
-//            } else {
-//                return .running
-//            }
-//        case .blueMirA:
-//            if mealTime == .breakfast {
-//                
-//            } else if mealTime == .lunch {
-//                
-//            } else if mealTime == .dinner {
-//                
-//            } else {
-//                return .running
-//            }
-//        case .blueMirB:
-//            if mealTime == .breakfast {
-//                
-//            } else if mealTime == .lunch {
-//                
-//            } else if mealTime == .dinner {
-//                
-//            } else {
-//                return .running
-//            }
-//        case .student:
-//            if mealTime == .breakfast {
-//                
-//            } else if mealTime == .lunch {
-//                
-//            } else if mealTime == .dinner {
-//                
-//            } else {
-//                return .running
-//            }
-//        case .staff:
-//            if mealTime == .breakfast {
-//                
-//            } else if mealTime == .lunch {
-//                
-//            } else if mealTime == .dinner {
-//                
-//            } else {
-//                return .running
-//            }
-//        case .cauEats:
-//            if mealTime == .breakfast {
-//                
-//            } else if mealTime == .lunch {
-//                
-//            } else if mealTime == .dinner {
-//                
-//            } else {
-//                return .running
-//            }
-//        case .cauBurger:
-//            return .running
-//        case .ramen:
-//            return .running
-//        }
-        return .suspended
     }
 }

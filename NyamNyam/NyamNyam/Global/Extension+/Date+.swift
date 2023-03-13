@@ -48,4 +48,9 @@ extension Date {
         let ret = Calendar.current.date(byAdding: .day, value: day, to: currentDate)
         return ret ?? Date()
     }
+    
+    static func SetTodayDateOf(hour: Int, minutes: Int) -> Date {
+        var ret: Date { Calendar.current.date(bySettingHour: hour, minute: minutes, second: 0, of: Date()) ?? Date() }
+        return ret
+    }
 }
