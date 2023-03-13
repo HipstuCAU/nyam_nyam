@@ -64,7 +64,6 @@ final class SettingViewController: UIViewController {
         viewModel.currentCampus.observe(on: self) { [weak self] _ in
             self?.setCampusLabelText()
             self?.resetSetCafeteriaOrderModule()
-//            self?.setCafeteriaOrderModule.tableView.reloadData()
         }
     }
     
@@ -72,9 +71,6 @@ final class SettingViewController: UIViewController {
         setCafeteriaOrderModule.removeFromParent()
         setCafeteriaOrderModule = SetCafeteriaOrderTableViewController(viewModel: viewModel)
         setCafeteriaOrderLayout()
-        settingListModule.removeFromParent()
-        settingListModule = SettingListTableViewController()
-        setSettingListLayout()
     }
 }
 
