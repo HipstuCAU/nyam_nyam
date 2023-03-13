@@ -143,7 +143,7 @@ private extension DataManager {
         }
     }
     
-    func getTime(_ time: String, _ date: String) -> [Date]? {
+    static func getTime(_ time: String, _ date: String) -> [Date]? {
         let strTimes = time.components(separatedBy: "~")
         if strTimes.count < 2 {
             return nil
