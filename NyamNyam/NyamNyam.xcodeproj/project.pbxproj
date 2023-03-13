@@ -18,6 +18,7 @@
 		2A429DA029BEBE1B0044A3E6 /* SetCafeteriaOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429D9F29BEBE1B0044A3E6 /* SetCafeteriaOrderTableViewCell.swift */; };
 		2A429DA329BF36C50044A3E6 /* SetCafeteriaOrderTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429DA229BF36C50044A3E6 /* SetCafeteriaOrderTitleView.swift */; };
 		2A429DA829BF62E80044A3E6 /* SetDefaultCampusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429DA729BF62E80044A3E6 /* SetDefaultCampusView.swift */; };
+		2A429DAA29BF6B170044A3E6 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429DA929BF6B170044A3E6 /* SettingViewModel.swift */; };
 		AB2D2C0129B8271C0015CB10 /* CafeteriaSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2D2C0029B8271C0015CB10 /* CafeteriaSelectView.swift */; };
 		AB2FDAAE29B84CC7001746DB /* CafeteriaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FDAAD29B84CC7001746DB /* CafeteriaButton.swift */; };
 		AB2FDAB229B8D4B4001746DB /* ContentCarouselModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FDAB129B8D4B4001746DB /* ContentCarouselModuleViewController.swift */; };
@@ -78,6 +79,7 @@
 		2A429D9F29BEBE1B0044A3E6 /* SetCafeteriaOrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCafeteriaOrderTableViewCell.swift; sourceTree = "<group>"; };
 		2A429DA229BF36C50044A3E6 /* SetCafeteriaOrderTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCafeteriaOrderTitleView.swift; sourceTree = "<group>"; };
 		2A429DA729BF62E80044A3E6 /* SetDefaultCampusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDefaultCampusView.swift; sourceTree = "<group>"; };
+		2A429DA929BF6B170044A3E6 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		AB2D2C0029B8271C0015CB10 /* CafeteriaSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaSelectView.swift; sourceTree = "<group>"; };
 		AB2FDAAD29B84CC7001746DB /* CafeteriaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaButton.swift; sourceTree = "<group>"; };
 		AB2FDAB129B8D4B4001746DB /* ContentCarouselModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCarouselModuleViewController.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 			children = (
 				2A429D9329BDDA480044A3E6 /* Components */,
 				2A429D9129BDDA0B0044A3E6 /* SettingViewController.swift */,
+				2A429DA929BF6B170044A3E6 /* SettingViewModel.swift */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -559,6 +562,7 @@
 				AB2FDAB229B8D4B4001746DB /* ContentCarouselModuleViewController.swift in Sources */,
 				ABEAFC1B29AE24B2002C3119 /* Observable.swift in Sources */,
 				ABEAFC1529AD2F36002C3119 /* Campus.swift in Sources */,
+				2A429DAA29BF6B170044A3E6 /* SettingViewModel.swift in Sources */,
 				ABEAFC1329AD279A002C3119 /* Meal.swift in Sources */,
 				AB2D2C0129B8271C0015CB10 /* CafeteriaSelectView.swift in Sources */,
 				2A429D9B29BE12F50044A3E6 /* SettingWebViewController.swift in Sources */,
