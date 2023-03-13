@@ -33,7 +33,7 @@ final class SetDefaultCampusView: UIView {
     
     let campusButtonImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "chevron.forward")
+        image.image = UIImage(systemName: "chevron.forward")
         image.tintColor = Pallete.gray50.color
         return image
     }()
@@ -47,7 +47,7 @@ final class SetDefaultCampusView: UIView {
     
     init() {
         super.init(frame: .zero)
-        self.backgroundColor = .clear
+        self.backgroundColor = .white
         setTitleLayout()
         setCampusLabelLayout()
         setCampusButtonImageLayout()
@@ -61,12 +61,6 @@ final class SetDefaultCampusView: UIView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-}
-
-extension SetDefaultCampusView {
-    func configureUI(_ campus: String) {
-        titleLabel.text = campus
     }
 }
 
@@ -92,9 +86,7 @@ private extension SetDefaultCampusView {
         self.addSubview(campusButtonImage)
         campusButtonImage.snp.makeConstraints { make in
             make.leading.equalTo(campusLabel.snp.trailing).offset(7)
-            make.top.bottom.equalToSuperview()
-            make.height.equalTo(13.49)
-            make.width.equalTo(7.87)
+            make.centerY.equalTo(campusLabel.snp.centerY)
         }
         campusButtonImage.isUserInteractionEnabled = false
     }
@@ -102,8 +94,9 @@ private extension SetDefaultCampusView {
         self.addSubview(campusButton)
         campusButton.snp.makeConstraints { make in
             make.leading.equalTo(campusLabel.snp.leading)
-            make.trailing.equalTo(campusLabel.snp.trailing)
+            make.trailing.equalTo(campusButtonImage.snp.trailing)
             make.top.bottom.equalToSuperview()
         }
+        campusButton.backgroundColor = .clear
     }
 }
