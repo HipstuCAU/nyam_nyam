@@ -18,6 +18,7 @@ enum Pallete: String {
     case skyBlue
     case textBlack
     case bgBlue
+    case divideGray
 }
 
 extension Pallete {
