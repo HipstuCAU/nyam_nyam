@@ -65,10 +65,9 @@ final class CarouselCell: UICollectionViewCell {
         mealTimes.forEach { mealTime in
             var isValid = true
             let filteredData = data.filter {
-                $0.mealTime == mealTime && $0.status != .CloseOnWeekends
+                return $0.mealTime == mealTime && $0.status != .CloseOnWeekends
             }
             if filteredData.count == 0  { isValid = false }
-            
             // 생성
             guard let cafeteriaType = cafeteriaType else { return }
             let mealCard = ExpandableMealCardView(isValid: isValid, mealTime: mealTime, cafeteria: cafeteriaType)
