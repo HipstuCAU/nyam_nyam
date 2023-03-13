@@ -43,6 +43,8 @@ struct Meal: Hashable, Comparable {
     let menu: [String]
     let date: Date
     let status: Status
+    let startDate: Date?
+    let endDate: Date?
     
     static func < (lhs: Meal, rhs: Meal) -> Bool {
         if lhs.type == rhs.type {
