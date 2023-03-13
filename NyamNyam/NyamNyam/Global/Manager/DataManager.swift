@@ -44,7 +44,7 @@ final class DataManager {
                                            let time = menuDict["time"] as? String {
                                             //TODO: 따로 status 검사하는 함수 넣어 변경 예정
                                             let times = getTime(time, day)
-                                            meals.append(Meal(mealTime: getMealTime(mealTime), type: getMealType(mealType, campus), cafeteria: getCafeteria(cafeteria), price: getPrice(price), menu: getMenu(menu), date: Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: day.formatStringToDate() ?? Date()) ?? Date(), status: getStatus(menu), startDate: times?[0], endDate: times?[1]))
+                                            meals.append(Meal(mealTime: getMealTime(mealTime, cafeteria), type: getMealType(mealType, campus), cafeteria: getCafeteria(cafeteria), price: getPrice(price), menu: getMenu(menu), date: Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: day.formatStringToDate() ?? Date()) ?? Date(), status: getStatus(menu), startDate: times?[0], endDate: times?[1]))
                                         }
                                     }
                                 }
@@ -79,16 +79,22 @@ final class DataManager {
 }
 
 private extension DataManager {
-    static func getMealTime(_ mealTime: String) -> MealTime  {
-        switch mealTime {
-        case "0":
-            return .breakfast
-        case "1":
-            return .lunch
-        case "2":
-            return .dinner
-        default:
-            return .breakfast
+    static func getMealTime(_ mealTime: String, _ cafeteria: String) -> MealTime  {
+        if cafeteria == "(안성)카우버거" {
+            return .cauburger
+        } else if cafeteria == "(안성)라면" {
+            return .ramen
+        } else {
+            switch mealTime {
+            case "0":
+                return .breakfast
+            case "1":
+                return .lunch
+            case "2":
+                return .dinner
+            default:
+                return .breakfast
+            }
         }
     }
     
@@ -101,7 +107,7 @@ private extension DataManager {
             return .normal
         }
     }
-
+    
     static func getCafeteria(_ cafeteria: String) -> Cafeteria {
         switch cafeteria {
         case "생활관식당(블루미르308관)":
