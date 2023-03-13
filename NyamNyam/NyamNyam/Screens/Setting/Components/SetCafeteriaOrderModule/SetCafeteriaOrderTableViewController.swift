@@ -10,8 +10,30 @@ import SnapKit
 
 final class SetCafeteriaOrderTableViewController: UIViewController {
     
-    var seoulCafeteriaList: [String] = UserDefaults.standard.seoulCafeteria
-    var ansungCafeteriaList: [String] = UserDefaults.standard.ansungCafeteria
+    var seoulCafeteriaList: [Cafeteria] = [.chamseulgi, .blueMirA, .blueMirB, .student, .staff]
+    var ansungCafeteriaList: [Cafeteria] = [.cauEats, .cauBurger, .ramen]
+    
+    func getCafeteriaName(_ cafeteria: Cafeteria) -> String {
+        switch cafeteria {
+        case .chamseulgi:
+            return "참슬기"
+        case .blueMirA:
+            return "생활관A"
+        case .blueMirB:
+            return "생활관B"
+        case .student:
+            return "학생식당"
+        case .staff:
+            return "교직원"
+        case .cauEats:
+            return "카우이츠"
+        case .cauBurger:
+            return "카우버거"
+        case .ramen:
+            return "라면"
+        }
+    }
+
     
     let titleLabel: UIView = SetCafeteriaOrderTitleView()
     lazy var tableView: UITableView = {
@@ -71,18 +93,22 @@ extension SetCafeteriaOrderTableViewController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SetCafeteriaOrderTableViewCell.setCafeteriaOrderCellId) as? SetCafeteriaOrderTableViewCell else { return UITableViewCell() }
-        cell.configureUI(seoulCafeteriaList[indexPath.row], String(indexPath.row+1))
+        cell.configureUI(getCafeteriaName(seoulCafeteriaList[indexPath.row]), String(indexPath.row+1))
         cell.backgroundColor = .white
         return cell
     }
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    internal func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let moveCell = seoulCafeteriaList[sourceIndexPath.row]
         seoulCafeteriaList.remove(at: sourceIndexPath.row)
         seoulCafeteriaList.insert(moveCell, at: destinationIndexPath.row)
-        UserDefaults.standard.seoulCafeteria = seoulCafeteriaList
+        UserDefaults.standard.seoulCafeteria = seoulCafeteriaList.map({
+            guard let cafeteria = Cafeteria(rawValue: $0.rawValue) else { fatalError() }
+            return cafeteria.rawValue
+        })
+        print(UserDefaults.standard.seoulCafeteria)
         tableView.reloadData()
     }
 }
