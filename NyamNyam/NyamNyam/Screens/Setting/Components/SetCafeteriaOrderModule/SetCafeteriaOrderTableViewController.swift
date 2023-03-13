@@ -1,5 +1,5 @@
 //
-//  SetCafeteriaOrderTableView.swift
+//  SetCafeteriaOrderTableViewController.swift
 //  NyamNyam
 //
 //  Created by 한택환 on 2023/03/13.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-final class SetCafeteriaOrderTableView: UIViewController {
+final class SetCafeteriaOrderTableViewController: UIViewController {
     
     var seoulCafeteriaList: [String] = UserDefaults.standard.seoulCafeteria
     var ansungCafeteriaList: [String] = UserDefaults.standard.ansungCafeteria
@@ -37,7 +37,7 @@ final class SetCafeteriaOrderTableView: UIViewController {
     }
 }
 
-private extension SetCafeteriaOrderTableView {
+private extension SetCafeteriaOrderTableViewController {
     func setTableViewLayout() {
         tableView.register(SetCafeteriaOrderTableViewCell.self, forCellReuseIdentifier: SetCafeteriaOrderTableViewCell.setCafeteriaOrderCellId)
         view.addSubview(tableView)
@@ -62,10 +62,10 @@ private extension SetCafeteriaOrderTableView {
     }
 }
 
-extension SetCafeteriaOrderTableView: UITableViewDelegate {
+extension SetCafeteriaOrderTableViewController: UITableViewDelegate {
 }
 
-extension SetCafeteriaOrderTableView: UITableViewDataSource {
+extension SetCafeteriaOrderTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return seoulCafeteriaList.count
     }
@@ -88,14 +88,14 @@ extension SetCafeteriaOrderTableView: UITableViewDataSource {
     }
 }
 
-extension SetCafeteriaOrderTableView: UITableViewDragDelegate {
+extension SetCafeteriaOrderTableViewController: UITableViewDragDelegate {
     func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
         return [UIDragItem(itemProvider: NSItemProvider())]
     }
 }
 
 // MARK:- UITableView UITableViewDropDelegate
-extension SetCafeteriaOrderTableView: UITableViewDropDelegate {
+extension SetCafeteriaOrderTableViewController: UITableViewDropDelegate {
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
         if session.localDragSession != nil {
             return UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
