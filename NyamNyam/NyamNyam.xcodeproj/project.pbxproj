@@ -13,6 +13,8 @@
 		AB2D2C0129B8271C0015CB10 /* CafeteriaSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2D2C0029B8271C0015CB10 /* CafeteriaSelectView.swift */; };
 		AB2FDAAE29B84CC7001746DB /* CafeteriaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FDAAD29B84CC7001746DB /* CafeteriaButton.swift */; };
 		AB2FDAB229B8D4B4001746DB /* ContentCarouselModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FDAB129B8D4B4001746DB /* ContentCarouselModuleViewController.swift */; };
+		AB9B399C29BB199F00249C61 /* RunningStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9B399B29BB199F00249C61 /* RunningStatus.swift */; };
+		AB9B399E29BB6A2600249C61 /* ContentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9B399D29BB6A2600249C61 /* ContentStackView.swift */; };
 		ABBDF69129B9C53C00E9347A /* CarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBDF69029B9C53C00E9347A /* CarouselCell.swift */; };
 		ABBDF69329BA328A00E9347A /* ExpandableMealCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBDF69229BA328900E9347A /* ExpandableMealCardView.swift */; };
 		ABEAFBCB29AC9ED3002C3119 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFBCA29AC9ED3002C3119 /* AppDelegate.swift */; };
@@ -63,6 +65,8 @@
 		AB2D2C0029B8271C0015CB10 /* CafeteriaSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaSelectView.swift; sourceTree = "<group>"; };
 		AB2FDAAD29B84CC7001746DB /* CafeteriaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaButton.swift; sourceTree = "<group>"; };
 		AB2FDAB129B8D4B4001746DB /* ContentCarouselModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCarouselModuleViewController.swift; sourceTree = "<group>"; };
+		AB9B399B29BB199F00249C61 /* RunningStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatus.swift; sourceTree = "<group>"; };
+		AB9B399D29BB6A2600249C61 /* ContentStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentStackView.swift; sourceTree = "<group>"; };
 		ABBDF69029B9C53C00E9347A /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
 		ABBDF69229BA328900E9347A /* ExpandableMealCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableMealCardView.swift; sourceTree = "<group>"; };
 		ABEAFBC729AC9ED3002C3119 /* NyamNyam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NyamNyam.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -152,6 +156,7 @@
 			children = (
 				ABBDF69029B9C53C00E9347A /* CarouselCell.swift */,
 				ABBDF69229BA328900E9347A /* ExpandableMealCardView.swift */,
+				AB9B399D29BB6A2600249C61 /* ContentStackView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -251,6 +256,7 @@
 				ABEAFC1429AD2F36002C3119 /* Campus.swift */,
 				ABEAFC0029ACA0E4002C3119 /* MealsForDay.swift */,
 				ABEAFC1229AD279A002C3119 /* Meal.swift */,
+				AB9B399B29BB199F00249C61 /* RunningStatus.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -470,10 +476,12 @@
 				ABEAFC1529AD2F36002C3119 /* Campus.swift in Sources */,
 				ABEAFC1329AD279A002C3119 /* Meal.swift in Sources */,
 				AB2D2C0129B8271C0015CB10 /* CafeteriaSelectView.swift in Sources */,
+				AB9B399E29BB6A2600249C61 /* ContentStackView.swift in Sources */,
 				2A429D7B29B9A06F0044A3E6 /* DataManager.swift in Sources */,
 				ABFC439429B44B1700EB9439 /* DateSelectView.swift in Sources */,
 				ABEAFC1829ADC2B0002C3119 /* OptionSelectModuleViewController.swift in Sources */,
 				ABEAFBCB29AC9ED3002C3119 /* AppDelegate.swift in Sources */,
+				AB9B399C29BB199F00249C61 /* RunningStatus.swift in Sources */,
 				ABEAFC0A29ACA523002C3119 /* FBManager.swift in Sources */,
 				ABEAFC0729ACA4E5002C3119 /* String+.swift in Sources */,
 				AB2FDAAE29B84CC7001746DB /* CafeteriaButton.swift in Sources */,
