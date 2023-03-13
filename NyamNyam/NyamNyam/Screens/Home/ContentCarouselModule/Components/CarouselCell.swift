@@ -52,6 +52,8 @@ final class CarouselCell: UICollectionViewCell {
         tempViews.removeAll()
         mealCards.forEach { $0.removeFromSuperview() }
         mealCards.removeAll()
+        cafeteriaType = nil
+        data = nil
     }
     
     public func setDefaultCafeteriaLayout(data: Set<Meal>) {
@@ -136,18 +138,31 @@ final class CarouselCell: UICollectionViewCell {
                     // StackView 내용 채우기
                     contentView.setViewContents(data: dataOfCard[contentIdx])
                     
+                    // Divider 생성
+                    let divider = DividerView()
+                    if contentIdx > 0 {
+                        card.addSubview(divider)
+                        divider.snp.makeConstraints { make in
+                            make.leading.trailing.equalToSuperview()
+                            make.top.equalTo(card.contentViews[contentIdx - 1].snp.bottom)
+                            if let contentData = contentView.data {
+                                if contentData.cafeteria == .student {
+                                    make.height.equalTo(5)
+                                } else {
+                                    make.height.equalTo(40)
+                                }
+                            }
+                        }
+                    }
+                    
+                    
+                    
                     // 해당 view layout 설정
                     contentView.snp.makeConstraints { make in
                         if contentIdx == 0 {
                             make.top.equalTo(card.mealTimeIconView.snp.bottom).offset(20)
                         } else {
-                            if let contentData = contentView.data {
-                                if contentData.cafeteria == .student {
-                                    make.top.equalTo(card.contentViews[contentIdx - 1].snp.bottom).offset(5)
-                                } else {
-                                    make.top.equalTo(card.contentViews[contentIdx - 1].snp.bottom).offset(40)
-                                }
-                            }
+                            make.top.equalTo(divider.snp.bottom)
                         }
                         make.leading.equalToSuperview().offset(20)
                         make.trailing.equalToSuperview().offset(-20)
@@ -170,10 +185,9 @@ final class CarouselCell: UICollectionViewCell {
                 }
             }
         }
-        
-        
+    
         // ScrollView 전체의 Content Size 결정
-        scrollView.contentSize = CGSize(width: contentView.frame.width, height: 50)
+        scrollView.contentSize = CGSize(width: contentView.frame.width, height: 700)
         if let lastCard = mealCards.last {
             scrollView.contentLayoutGuide.snp.makeConstraints { make in
                 make.leading.equalTo(scrollView.snp.leading)
@@ -182,6 +196,7 @@ final class CarouselCell: UICollectionViewCell {
                 make.bottom.equalTo(lastCard.snp.bottom).offset(20)
             }
         }
+        layoutIfNeeded()
         
     }
 }
