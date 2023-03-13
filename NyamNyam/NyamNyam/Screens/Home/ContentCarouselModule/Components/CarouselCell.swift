@@ -122,7 +122,31 @@ final class CarouselCell: UICollectionViewCell {
                 card.isExpanded = true
                 
                 // 해당 MealTime에 맞는 data를 순서대로 정렬하여 배열로 생성
-                let dataOfCard = data.filter { $0.mealTime == card.mealTime }.sorted(by: <)
+                var dataOfCard = data.filter { $0.mealTime == card.mealTime }.sorted(by: <)
+                
+                if self.cafeteriaType == .cauBurger {
+                    dataOfCard.removeAll()
+                    dataOfCard.append(Meal(mealTime: .cauburger,
+                                           type: .normal,
+                                           cafeteria: .cauBurger,
+                                           price: "햄버거 판매시간 11:00~18:00",
+                                           menu: [],
+                                           date: Date(),
+                                           status: .normal,
+                                           startDate: nil,
+                                           endDate: nil))
+                } else if self.cafeteriaType == .ramen {
+                    dataOfCard.removeAll()
+                    dataOfCard.append(Meal(mealTime: .ramen,
+                                           type: .normal,
+                                           cafeteria: .ramen,
+                                           price: "2000",
+                                           menu: ["신라면", "너구리", "진라면", "틈새라면"],
+                                           date: Date(),
+                                           status: .normal,
+                                           startDate: nil,
+                                           endDate: nil))
+                }
                 
                 var lastContent: ContentStackView?
                 
@@ -159,7 +183,7 @@ final class CarouselCell: UICollectionViewCell {
                     // 해당 view layout 설정
                     contentView.snp.makeConstraints { make in
                         if contentIdx == 0 {
-                            make.top.equalTo(card.mealTimeIconView.snp.bottom).offset(20)
+                            make.top.equalTo(card.mealTimeLabel.snp.bottom).offset(20)
                         } else {
                             make.top.equalTo(divider.snp.bottom)
                         }

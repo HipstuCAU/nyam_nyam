@@ -115,7 +115,6 @@ extension ContentCarouselModuleViewController: UICollectionViewDataSource {
         if cafeteria != .cauBurger && cafeteria != .ramen {
             cell.setDefaultCafeteriaLayout(data: dataOfCafeteria ?? [], mealTimes: [.breakfast, .lunch, .dinner])
         } else if cafeteria == .cauBurger {
-            print(dataOfCafeteria)
             cell.setDefaultCafeteriaLayout(data: dataOfCafeteria ?? [], mealTimes: [.cauburger])
         } else if cafeteria == .ramen {
             cell.setDefaultCafeteriaLayout(data: dataOfCafeteria ?? [], mealTimes: [.ramen])

@@ -35,8 +35,10 @@ final class ContentStackView: UIView {
     
     public func setViewContents(data: Meal) {
         self.data = data
-        if data.cafeteria != .student {
+        if data.cafeteria != .student && data.cafeteria != .cauBurger {
             priceLabel.text = data.price + "원"
+        } else if data.cafeteria == .cauBurger {
+            priceLabel.text = data.price
         }
         setStackViewContents()
         setStackViewLayout()
