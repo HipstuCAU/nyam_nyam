@@ -78,7 +78,6 @@ extension SetCafeteriaOrderTableViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    // Move Row Instance Method
     internal func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
         let moveCell = seoulCafeteriaList[sourceIndexPath.row]
         seoulCafeteriaList.remove(at: sourceIndexPath.row)
@@ -94,7 +93,6 @@ extension SetCafeteriaOrderTableViewController: UITableViewDragDelegate {
     }
 }
 
-// MARK:- UITableView UITableViewDropDelegate
 extension SetCafeteriaOrderTableViewController: UITableViewDropDelegate {
     func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
         if session.localDragSession != nil {
