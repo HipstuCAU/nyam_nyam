@@ -10,6 +10,8 @@ import SnapKit
 
 final class SetCafeteriaOrderTableViewCell: UITableViewCell {
     
+    static let setCafeteriaOrderCellId = "setCafeteriaOrderCell"
+    
     private let cafeteriaLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .semibold)
@@ -23,7 +25,7 @@ final class SetCafeteriaOrderTableViewCell: UITableViewCell {
         return image
     }()
     
-    private let cafeteriaNumberImageView: UIImageView = {
+    let cafeteriaNumberImageView: UIImageView = {
         let image = UIImageView()
         image.tintColor = Pallete.gray.color
         return image
@@ -68,6 +70,6 @@ private extension SetCafeteriaOrderTableViewCell {
 extension SetCafeteriaOrderTableViewCell {
     func configureUI(_ title: String, _ num: String) {
         cafeteriaLabel.text = title
-        cafeteriaNumberImageView.image = UIImage(systemName: num)
+        cafeteriaNumberImageView.image = UIImage(systemName: "\(num).circle.fill")
     }
 }
