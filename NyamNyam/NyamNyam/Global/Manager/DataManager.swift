@@ -88,7 +88,7 @@ private extension DataManager {
         case "2":
             return .dinner
         default:
-            return .allDay
+            return .breakfast
         }
     }
     

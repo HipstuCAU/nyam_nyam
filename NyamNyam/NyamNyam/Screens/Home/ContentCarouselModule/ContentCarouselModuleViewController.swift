@@ -113,11 +113,11 @@ extension ContentCarouselModuleViewController: UICollectionViewDataSource {
         
         // ScrollView 위에 Card들 올리기
         if cafeteria != .cauBurger && cafeteria != .ramen {
-            cell.setDefaultCafeteriaLayout(data: dataOfCafeteria ?? [])
+            cell.setDefaultCafeteriaLayout(data: dataOfCafeteria ?? [], mealTimes: [.breakfast, .lunch, .dinner])
         } else if cafeteria == .cauBurger {
-            // TODO: 해당하는 로직 들어가야 함.
+            cell.setDefaultCafeteriaLayout(data: dataOfCafeteria ?? [], mealTimes: [.cauburger])
         } else if cafeteria == .ramen {
-            // TODO: 해당하는 로직 들어가야 함.
+            cell.setDefaultCafeteriaLayout(data: dataOfCafeteria ?? [], mealTimes: [.ramen])
         }
         
         return cell

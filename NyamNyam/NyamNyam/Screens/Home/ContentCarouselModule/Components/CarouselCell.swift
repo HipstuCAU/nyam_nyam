@@ -56,10 +56,10 @@ final class CarouselCell: UICollectionViewCell {
         data = nil
     }
     
-    public func setDefaultCafeteriaLayout(data: Set<Meal>) {
+    public func setDefaultCafeteriaLayout(data: Set<Meal>, mealTimes: [MealTime]) {
         self.data = data
         // MealTime
-        let mealTimes = [MealTime.breakfast, MealTime.lunch, MealTime.dinner]
+        let mealTimes = mealTimes
         
         // Card 마다 유효성 확인해서 생성 / 터치 활성 비활성 결정
         mealTimes.forEach { mealTime in

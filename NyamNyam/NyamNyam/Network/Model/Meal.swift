@@ -11,7 +11,8 @@ enum MealTime: String {
     case breakfast = "조식"
     case lunch = "중식"
     case dinner = "석식"
-    case allDay
+    case cauburger = "카우버거"
+    case ramen = "라면"
 }
 
 enum Cafeteria: String {
