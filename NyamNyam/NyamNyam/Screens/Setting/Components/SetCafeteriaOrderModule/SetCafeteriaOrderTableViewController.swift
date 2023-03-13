@@ -101,14 +101,13 @@ extension SetCafeteriaOrderTableViewController: UITableViewDataSource {
         return true
     }
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let moveCell = seoulCafeteriaList[sourceIndexPath.row]
+        let cell = seoulCafeteriaList[sourceIndexPath.row]
         seoulCafeteriaList.remove(at: sourceIndexPath.row)
-        seoulCafeteriaList.insert(moveCell, at: destinationIndexPath.row)
+        seoulCafeteriaList.insert(cell, at: destinationIndexPath.row)
         UserDefaults.standard.seoulCafeteria = seoulCafeteriaList.map({
             guard let cafeteria = Cafeteria(rawValue: $0.rawValue) else { fatalError() }
             return cafeteria.rawValue
         })
-        print(UserDefaults.standard.seoulCafeteria)
         tableView.reloadData()
     }
 }
