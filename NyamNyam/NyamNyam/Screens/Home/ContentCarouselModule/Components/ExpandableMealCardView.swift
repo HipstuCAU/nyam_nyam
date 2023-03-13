@@ -30,7 +30,8 @@ final class ExpandableMealCardView: UIView {
         let mealTimeIconName: String
         if mealTime == .breakfast { mealTimeIconName = "sun.and.horizon.fill" }
         else if mealTime == .lunch { mealTimeIconName = "sun.max.fill" }
-        else { mealTimeIconName = "moon.fill" }
+        else if mealTime == .dinner { mealTimeIconName = "moon.fill" }
+        else { mealTimeIconName = "" }
         imageView.image = .init(systemName: mealTimeIconName)
         imageView.contentMode = .scaleAspectFit
         imageView.tintColor = contentColor
@@ -103,8 +104,13 @@ extension ExpandableMealCardView {
         mealTimeIconView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(15)
             make.top.equalToSuperview().offset(11)
-            make.width.equalTo(23)
-            make.height.equalTo(18)
+            if mealTime != .cauburger && mealTime != .ramen {
+                make.width.equalTo(23)
+                make.height.equalTo(18)
+            } else {
+                make.width.equalTo(0)
+                make.height.equalTo(0)
+            }
         }
     }
     

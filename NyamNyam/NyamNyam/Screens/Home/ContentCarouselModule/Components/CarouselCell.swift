@@ -56,19 +56,18 @@ final class CarouselCell: UICollectionViewCell {
         data = nil
     }
     
-    public func setDefaultCafeteriaLayout(data: Set<Meal>) {
+    public func setDefaultCafeteriaLayout(data: Set<Meal>, mealTimes: [MealTime]) {
         self.data = data
         // MealTime
-        let mealTimes = [MealTime.breakfast, MealTime.lunch, MealTime.dinner]
+        let mealTimes = mealTimes
         
         // Card 마다 유효성 확인해서 생성 / 터치 활성 비활성 결정
         mealTimes.forEach { mealTime in
             var isValid = true
             let filteredData = data.filter {
-                $0.mealTime == mealTime && $0.status != .CloseOnWeekends
+                return $0.mealTime == mealTime && $0.status != .CloseOnWeekends
             }
             if filteredData.count == 0  { isValid = false }
-            
             // 생성
             guard let cafeteriaType = cafeteriaType else { return }
             let mealCard = ExpandableMealCardView(isValid: isValid, mealTime: mealTime, cafeteria: cafeteriaType)
@@ -123,7 +122,31 @@ final class CarouselCell: UICollectionViewCell {
                 card.isExpanded = true
                 
                 // 해당 MealTime에 맞는 data를 순서대로 정렬하여 배열로 생성
-                let dataOfCard = data.filter { $0.mealTime == card.mealTime }.sorted(by: <)
+                var dataOfCard = data.filter { $0.mealTime == card.mealTime }.sorted(by: <)
+                let date = data.first?.date
+                if self.cafeteriaType == .cauBurger {
+                    dataOfCard.removeAll()
+                    dataOfCard.append(Meal(mealTime: .cauburger,
+                                           type: .normal,
+                                           cafeteria: .cauBurger,
+                                           price: "햄버거 판매시간 11:00~18:00",
+                                           menu: [],
+                                           date: date ?? Date(),
+                                           status: .normal,
+                                           startDate: nil,
+                                           endDate: nil))
+                } else if self.cafeteriaType == .ramen {
+                    dataOfCard.removeAll()
+                    dataOfCard.append(Meal(mealTime: .ramen,
+                                           type: .normal,
+                                           cafeteria: .ramen,
+                                           price: "2000",
+                                           menu: ["신라면", "너구리", "진라면", "틈새라면"],
+                                           date: date ?? Date(),
+                                           status: .normal,
+                                           startDate: nil,
+                                           endDate: nil))
+                }
                 
                 var lastContent: ContentStackView?
                 
@@ -160,7 +183,7 @@ final class CarouselCell: UICollectionViewCell {
                     // 해당 view layout 설정
                     contentView.snp.makeConstraints { make in
                         if contentIdx == 0 {
-                            make.top.equalTo(card.mealTimeIconView.snp.bottom).offset(20)
+                            make.top.equalTo(card.mealTimeLabel.snp.bottom).offset(20)
                         } else {
                             make.top.equalTo(divider.snp.bottom)
                         }

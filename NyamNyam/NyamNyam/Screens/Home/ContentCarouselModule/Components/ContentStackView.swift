@@ -35,8 +35,10 @@ final class ContentStackView: UIView {
     
     public func setViewContents(data: Meal) {
         self.data = data
-        if data.cafeteria != .student {
+        if data.cafeteria != .student && data.cafeteria != .cauBurger {
             priceLabel.text = data.price + "원"
+        } else if data.cafeteria == .cauBurger {
+            priceLabel.text = data.price
         }
         setStackViewContents()
         setStackViewLayout()
@@ -58,10 +60,14 @@ final class ContentStackView: UIView {
                 label.textAlignment = .left
                 label.textColor = .black
                 label.font = .systemFont(ofSize: 16, weight: .semibold)
+                label.snp.makeConstraints { make in
+                    make.height.equalTo(28)
+                }
                 if (row * colCount + col) < data.menu.count || data.cafeteria == .student {
                     if data.cafeteria != .student {
                         label.text =  "\(data.menu[row * colCount + col])"
                     } else {
+                        if col != 0 { label.font = .systemFont(ofSize: 14, weight: .medium) }
                         label.text = col == 0 ? "\(data.menu[row])" : "\(data.price)원"
                         label.textAlignment = col != 0 ? .right : .left
                     }
