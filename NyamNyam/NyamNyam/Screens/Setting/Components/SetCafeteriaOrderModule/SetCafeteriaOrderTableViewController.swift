@@ -74,7 +74,6 @@ private extension SetCafeteriaOrderTableViewController {
     func setTableViewLayout() {
         tableView.register(SetCafeteriaOrderTableViewCell.self, forCellReuseIdentifier: SetCafeteriaOrderTableViewCell.setCafeteriaOrderCellId)
         view.addSubview(tableView)
-        tableView.delegate = self
         tableView.dataSource = self
         tableView.dragDelegate = self
         tableView.dropDelegate = self
@@ -93,10 +92,6 @@ private extension SetCafeteriaOrderTableViewController {
             make.leading.equalToSuperview()
         }
     }
-}
-
-extension SetCafeteriaOrderTableViewController: UITableViewDelegate {
-
 }
 
 extension SetCafeteriaOrderTableViewController: UITableViewDataSource {
