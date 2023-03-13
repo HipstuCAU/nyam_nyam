@@ -231,7 +231,7 @@ final class CarouselCell: UICollectionViewCell {
             } else {
                 runningStatus = .notInOperation
             }
-            card.setTimeLabel(status: runningStatus ?? .notInOperation)
+            card.setTimeLabel(status: runningStatus ?? .notInOperation, data: card.data?.first)
         }
         layoutIfNeeded()
     }

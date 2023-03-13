@@ -8,6 +8,60 @@
 import UIKit
 import SnapKit
 
+final class TimeLabelView: UIView {
+    
+    private let statusTextLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 12, weight: .bold)
+        return label
+    }()
+    
+    init(status: RunningStatus, data: Meal?) {
+        super.init(frame: .zero)
+        self.layer.cornerRadius = 11.5
+        
+        switch status {
+        case .running:
+            statusTextLabel.text = status.rawValue
+            statusTextLabel.textColor = Pallete.blue.color
+            statusTextLabel.textAlignment = .center
+            self.backgroundColor = Pallete.blueBackground.color
+        case .expired:
+            statusTextLabel.text = status.rawValue
+            statusTextLabel.textColor = Pallete.red.color
+            statusTextLabel.textAlignment = .center
+            self.backgroundColor = Pallete.redBackground.color
+        case .ready:
+            statusTextLabel.text = status.rawValue
+            statusTextLabel.textColor = Pallete.yellow.color
+            statusTextLabel.textAlignment = .center
+            self.backgroundColor = Pallete.yellowBackGround.color
+        case .notInOperation:
+            statusTextLabel.text = status.rawValue
+            statusTextLabel.textColor = Pallete.gray.color
+            statusTextLabel.textAlignment = .center
+            self.backgroundColor = Pallete.grayBackground.color
+        }
+        
+        self.addSubview(statusTextLabel)
+        
+        statusTextLabel.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+        }
+        
+        self.snp.makeConstraints { make in
+            make.leading.equalTo(statusTextLabel).inset(-8)
+            make.top.equalTo(statusTextLabel).inset(-4)
+            make.trailing.equalTo(statusTextLabel).inset(-8)
+            make.bottom.equalTo(statusTextLabel).inset(-4)
+        }
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
 protocol ExpandableMealCardViewDelegate: AnyObject {
     func controlCellHeight(isExpanded: Bool, cafeteria: Cafeteria, mealTime: MealTime)
 }
@@ -79,10 +133,15 @@ final class ExpandableMealCardView: UIView {
         self.addGestureRecognizer(tap)
     }
     
-    public func setTimeLabel(status: RunningStatus) {
+    public func setTimeLabel(status: RunningStatus, data: Meal?) {
+        let timeLabelView = TimeLabelView(status: status, data: data)
         
+        self.addSubview(timeLabelView)
+        timeLabelView.snp.makeConstraints { make in
+            make.leading.equalTo(mealTimeLabel.snp.trailing).offset(7)
+            make.centerY.equalTo(mealTimeLabel.snp.centerY)
+        }
     }
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
