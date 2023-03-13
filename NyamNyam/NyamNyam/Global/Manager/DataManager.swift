@@ -8,7 +8,7 @@
 import Foundation
 
 final class DataManager {
-    func stringToDict() -> [String: Any]? {
+    static func stringToDict() -> [String: Any]? {
         let strData = JsonManager.shared.jsonToString()
         if let strData = strData.data(using: .utf8) {
             do {
@@ -19,7 +19,7 @@ final class DataManager {
         }
         return nil
     }
-    func getMealsForDay(_ campus: String) -> [Meal] {
+    static func getMealsForDay(_ campus: String) -> [Meal] {
         let dictData = stringToDict()
         var meals: [Meal] = []
         if  let dayDict = dictData?[campus] as? [String: Any] {
@@ -40,9 +40,11 @@ final class DataManager {
                                         let mealType = mealTypeDict.keys[mealTypeIndex]
                                         if let menuDict = mealTypeDict[mealType] as? [String: Any],
                                            let menu = menuDict["menu"] as? String,
-                                           let price = menuDict["price"] as? String {
+                                           let price = menuDict["price"] as? String,
+                                           let time = menuDict["time"] as? String {
                                             //TODO: 따로 status 검사하는 함수 넣어 변경 예정
-                                            meals.append(Meal(mealTime: getMealTime(mealTime), type: getMealType(mealType, campus), cafeteria: getCafeteria(cafeteria), price: getPrice(price), menu: getMenu(menu), date: Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: day.formatStringToDate() ?? Date()) ?? Date(), status: getStatus(menu)))
+                                            let times = getTime(time, day)
+                                            meals.append(Meal(mealTime: getMealTime(mealTime), type: getMealType(mealType, campus), cafeteria: getCafeteria(cafeteria), price: getPrice(price), menu: getMenu(menu), date: Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: day.formatStringToDate() ?? Date()) ?? Date(), status: getStatus(menu), startDate: times?[0], endDate: times?[1]))
                                         }
                                     }
                                 }
@@ -54,9 +56,11 @@ final class DataManager {
         }
         return meals
     }
-    func getMealsForWeeks(_ campus: String) -> [MealsForDay] {
+    static func getMealsForWeeks(_ campus: Campus) -> [MealsForDay] {
+        let campusString: String
+        campusString = campus == .seoul ? "0" : "1"
         var mealsForWeek: [MealsForDay] = []
-        let mealsForDay = getMealsForDay(campus)
+        let mealsForDay = getMealsForDay(campusString)
         let weeklyDate = Date.prepareDateList()
         for dayIndex in weeklyDate.indices {
             var meals: Set<Meal> = []
@@ -71,11 +75,11 @@ final class DataManager {
         }
         return mealsForWeek
     }
-
+    
 }
 
 private extension DataManager {
-    func getMealTime(_ mealTime: String) -> MealTime  {
+    static func getMealTime(_ mealTime: String) -> MealTime  {
         switch mealTime {
         case "0":
             return .breakfast
@@ -87,8 +91,8 @@ private extension DataManager {
             return .allDay
         }
     }
-
-    func getMealType(_ mealType: String, _ campus: String) -> MealType {
+    
+    static func getMealType(_ mealType: String, _ campus: String) -> MealType {
         let mealTypeTuple = (mealType, campus)
         switch mealTypeTuple {
         case ("중식(특식)", "0"):
@@ -98,7 +102,7 @@ private extension DataManager {
         }
     }
 
-    func getCafeteria(_ cafeteria: String) -> Cafeteria {
+    static func getCafeteria(_ cafeteria: String) -> Cafeteria {
         switch cafeteria {
         case "생활관식당(블루미르308관)":
             return .blueMirA
@@ -121,22 +125,34 @@ private extension DataManager {
         }
     }
     
-    func getPrice(_ price: String) -> String {
+    static func getPrice(_ price: String) -> String {
         return price.components(separatedBy: [","," ","원"]).joined()
         
     }
-
-    func getMenu(_ menu: String) -> [String] {
+    
+    static func getMenu(_ menu: String) -> [String] {
         return menu.components(separatedBy: "|")
     }
     
-    func getStatus(_ menu: String) -> Status {
+    static func getStatus(_ menu: String) -> Status {
         switch menu {
         case "주말운영없음":
             return .CloseOnWeekends
         default :
             return .normal
         }
+    }
+    
+    static func getTime(_ time: String, _ date: String) -> [Date]? {
+        let strTimes = time.components(separatedBy: "~")
+        if strTimes.count < 2 {
+            return nil
+        }
+        var times: [Date] = []
+        for time in strTimes {
+            times.append(String("\(date) \(time):00").formatStringToFullDate() ?? Date())
+        }
+        return times
     }
 }
 

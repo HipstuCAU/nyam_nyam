@@ -8,6 +8,14 @@
 import Foundation
 
 extension Date {
+    
+    func isToday() -> Bool {
+        guard let today = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: Date()) else { return false }
+        guard let date = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: self) else { return false }
+        if today == date { return true }
+        return false
+    }
+    
     static func prepareDateList() -> [Date] {
         var dateList = [Date]()
         (0..<7).forEach {

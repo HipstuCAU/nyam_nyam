@@ -34,7 +34,6 @@ final class ContentCarouselModuleViewController: UIViewController {
         view.backgroundColor = .clear
         view.clipsToBounds = true
         view.isPagingEnabled = false
-        view.contentInsetAdjustmentBehavior = .never
         view.contentInset = UIEdgeInsets(top: 0, left: insetX, bottom: 0, right: insetX)
         view.decelerationRate = .fast
         return view
@@ -91,10 +90,36 @@ extension ContentCarouselModuleViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CarouselCell.cellId, for: indexPath) as! CarouselCell
-        cell.cafeteriaType = viewModel.currentCampus.value == .seoul ? viewModel.seoulCafeteriaList[indexPath.row] : viewModel.ansungCafeteriaList[indexPath.row]
-        if let cafeteria = cell.cafeteriaType {
-            cell.positionLabel.text = getPositionName(of: cafeteria)
+        
+        // Cell의 Cafeteria 결정
+        let cafeteria = viewModel.currentCampus.value == .seoul ? viewModel.seoulCafeteriaList[indexPath.row] : viewModel.ansungCafeteriaList[indexPath.row]
+        cell.cafeteriaType = cafeteria
+        
+        // Cell의 Date 결정
+        let date = viewModel.dateList[viewModel.indexOfDate.value]
+        
+        // ScrollView 위에 Cafeteria Label 올리기
+        cell.positionLabel.text = getPositionName(of: cafeteria)
+        
+        
+        // 해당 Cell의 데이터 정보: Date와 Cafeteria와 별로 filtering
+        var dataOfCafeteria: Set<Meal>? = nil
+        let campusData = viewModel.currentCampus.value == .seoul ? viewModel.seoulMeals : viewModel.ansungMeals
+        guard let dataOfDate = campusData.filter({ $0.date == date }).first else {
+            // TODO: 아직 Data가 들어오지 않았다는 작업 필요
+            return cell
         }
+        dataOfCafeteria = dataOfDate.meals.filter { $0.cafeteria == cafeteria }
+        
+        // ScrollView 위에 Card들 올리기
+        if cafeteria != .cauBurger && cafeteria != .ramen {
+            cell.setDefaultCafeteriaLayout(data: dataOfCafeteria ?? [])
+        } else if cafeteria == .cauBurger {
+            // TODO: 해당하는 로직 들어가야 함.
+        } else if cafeteria == .ramen {
+            // TODO: 해당하는 로직 들어가야 함.
+        }
+        
         return cell
     }
     
@@ -121,7 +146,9 @@ extension ContentCarouselModuleViewController: UICollectionViewDataSource {
 }
 
 extension ContentCarouselModuleViewController: UICollectionViewDelegate {
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width - 60, height: view.frame.height)
+    }
 }
 
 extension ContentCarouselModuleViewController: UICollectionViewDelegateFlowLayout {

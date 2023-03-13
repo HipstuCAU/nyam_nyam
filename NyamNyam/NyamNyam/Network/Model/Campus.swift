@@ -13,10 +13,9 @@ enum Campus: String {
     
     func mealsForAllDayByCampus() -> [MealsForDay] {
         if self == .seoul {
-            return []
-            // getMealsForWeeks(campus: Campus) -> [MealsForDate] 가 필요합니다.
+            return DataManager.getMealsForWeeks(.seoul)
         } else {
-            return []
+            return DataManager.getMealsForWeeks(.ansung)
         }
     }
 }
