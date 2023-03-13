@@ -81,6 +81,8 @@ final class CarouselCell: UICollectionViewCell {
             let card = mealCards[idx]
             scrollView.addSubview(card)
             
+            
+            
             // view의 높이를 Height가 아닌 Bottom을 기준으로 설정하기 위한 임시 뷰
             // make.bottom.equalTo(tempViewForMakeBottomConstraints.snp.bottom)으로 바꿔주면 view가 줄어든다.
             let tempViewForMakeBottomConstraints: UIView = {
@@ -107,8 +109,6 @@ final class CarouselCell: UICollectionViewCell {
                 make.trailing.equalTo(scrollView.snp.trailing)
                 make.bottom.equalTo(tempViewForMakeBottomConstraints.snp.bottom)
             }
-            
-            
         }
         
         
@@ -120,7 +120,7 @@ final class CarouselCell: UICollectionViewCell {
                 
                 // MARK: Expired되면 여기로 들어올 일이 없어야 한다.
                 card.isExpanded = true
-                
+                card.data = data.sorted(by: <)
                 // 해당 MealTime에 맞는 data를 순서대로 정렬하여 배열로 생성
                 var dataOfCard = data.filter { $0.mealTime == card.mealTime }.sorted(by: <)
                 let date = data.first?.date
@@ -219,8 +219,21 @@ final class CarouselCell: UICollectionViewCell {
                 make.bottom.equalTo(lastCard.snp.bottom).offset(20)
             }
         }
-        layoutIfNeeded()
         
+        (0..<mealCards.count).forEach { idx in
+            let card = mealCards[idx]
+            let runningStatus: RunningStatus?
+            if card.isValid {
+                runningStatus = RunningStatus.getRunningStatus(of: card.data ?? [], at: card.cafeteria)
+                if runningStatus == .expired {
+                    controlCellHeight(isExpanded: true, cafeteria: card.cafeteria, mealTime: card.mealTime)
+                }
+            } else {
+                runningStatus = .notInOperation
+            }
+            card.setTimeLabel(status: runningStatus ?? .notInOperation)
+        }
+        layoutIfNeeded()
     }
 }
 

@@ -13,7 +13,7 @@ enum RunningStatus: String {
     case ready = "준비중"
     case notInOperation = "미운영"
     
-    func getRunningStatus(of meals: [Meal], at cafeteria: Cafeteria) -> RunningStatus? {
+    static func getRunningStatus(of meals: [Meal], at cafeteria: Cafeteria) -> RunningStatus? {
         let currentDate = Date()
         
         if cafeteria != .cauBurger && cafeteria != .ramen {
