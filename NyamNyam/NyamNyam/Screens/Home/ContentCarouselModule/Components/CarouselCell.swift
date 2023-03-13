@@ -123,7 +123,7 @@ final class CarouselCell: UICollectionViewCell {
                 
                 // 해당 MealTime에 맞는 data를 순서대로 정렬하여 배열로 생성
                 var dataOfCard = data.filter { $0.mealTime == card.mealTime }.sorted(by: <)
-                
+                let date = data.first?.date
                 if self.cafeteriaType == .cauBurger {
                     dataOfCard.removeAll()
                     dataOfCard.append(Meal(mealTime: .cauburger,
@@ -131,7 +131,7 @@ final class CarouselCell: UICollectionViewCell {
                                            cafeteria: .cauBurger,
                                            price: "햄버거 판매시간 11:00~18:00",
                                            menu: [],
-                                           date: Date(),
+                                           date: date ?? Date(),
                                            status: .normal,
                                            startDate: nil,
                                            endDate: nil))
@@ -142,7 +142,7 @@ final class CarouselCell: UICollectionViewCell {
                                            cafeteria: .ramen,
                                            price: "2000",
                                            menu: ["신라면", "너구리", "진라면", "틈새라면"],
-                                           date: Date(),
+                                           date: date ?? Date(),
                                            status: .normal,
                                            startDate: nil,
                                            endDate: nil))
