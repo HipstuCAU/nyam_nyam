@@ -42,6 +42,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
+        
+        //MARK: 임시 테스트 구문 추후 FireStore 업로드 로직 변경예정
+        if Reachability.networkConnected() {
+            UserDefaults.standard.lastUploadDate = Date().toFullTimeString()
+            print(UserDefaults.standard.lastUploadDate)
+        } else {
+            print("네트워크 연결 오류")
+        }
     }
 
     func sceneDidEnterBackground(_ scene: UIScene) {
