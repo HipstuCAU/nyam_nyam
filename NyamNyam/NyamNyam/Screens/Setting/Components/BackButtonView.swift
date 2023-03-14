@@ -33,6 +33,7 @@ final class BackButtonView: UIView {
     private let buttonImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(systemName: "chevron.left")
+        image.sizeToFit()
         image.tintColor = Pallete.gray.color
         return image
     }()
@@ -63,7 +64,7 @@ private extension BackButtonView {
         self.addSubview(buttonImage)
         buttonImage.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(7.29)
-            make.top.equalToSuperview().offset(safeAreaTopInset() ?? 63)
+            make.top.equalToSuperview().offset((safeAreaTopInset() ?? 50) + 13)
             make.bottom.equalToSuperview()
             make.height.equalTo(24)
         }
@@ -75,7 +76,7 @@ private extension BackButtonView {
         buttonLabel.snp.makeConstraints { make in
             make.leading.equalTo(buttonImage.snp.trailing).offset(14)
             make.centerY.equalTo(buttonImage.snp.centerY)
-            make.top.equalToSuperview().offset(safeAreaTopInset() ?? 63)
+            make.top.equalToSuperview().offset((safeAreaTopInset() ?? 50) + 13)
             make.bottom.equalToSuperview()
         }
         buttonLabel.isUserInteractionEnabled = false
@@ -87,7 +88,7 @@ private extension BackButtonView {
         backButton.snp.makeConstraints { make in
             make.leading.equalTo(buttonImage.snp.leading)
             make.trailing.equalTo(buttonLabel.snp.trailing)
-            make.top.equalToSuperview().offset(safeAreaTopInset() ?? 63)
+            make.top.equalToSuperview().offset((safeAreaTopInset() ?? 50) + 13)
             make.bottom.equalToSuperview()
         }
         backButton.backgroundColor = .clear
