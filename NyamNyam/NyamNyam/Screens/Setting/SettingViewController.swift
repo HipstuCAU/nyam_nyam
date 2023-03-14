@@ -24,13 +24,11 @@ final class SettingViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "서울캠퍼스", style: .default , handler:{ (UIAlertAction) in
             self.viewModel.currentCampus.value = .seoul
             UserDefaults.standard.campus = Campus.seoul.rawValue
-            print(UserDefaults.standard.campus)
         }))
         
         alert.addAction(UIAlertAction(title: "안성캠퍼스", style: .default , handler:{ (UIAlertAction) in
             self.viewModel.currentCampus.value = .ansung
             UserDefaults.standard.campus = Campus.ansung.rawValue
-            print(UserDefaults.standard.campus)
         }))
         alert.addAction(UIAlertAction(title: "취소", style: .cancel, handler: nil))
         return alert
