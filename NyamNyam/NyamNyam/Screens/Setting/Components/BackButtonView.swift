@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 final class BackButtonView: UIView {
+    
     private let buttonLabel: UILabel = {
         let label = UILabel()
         label.text = "설정"
@@ -27,7 +28,6 @@ final class BackButtonView: UIView {
     lazy var backButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .clear
-        button.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -37,10 +37,6 @@ final class BackButtonView: UIView {
         setBackButtonImageLayout()
         setBackButtonLabelLayout()
         setBackButtonLayout()
-        
-    }
-    
-    @objc func backButtonPressed(_ sender: UIButton) {
         
     }
     
@@ -55,7 +51,9 @@ private extension BackButtonView {
         self.addSubview(buttonImage)
         buttonImage.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(7.29)
-            make.top.bottom.equalToSuperview()
+            make.top.equalToSuperview().offset(63)
+            make.bottom.equalToSuperview()
+            make.height.equalTo(24)
         }
         buttonImage.isUserInteractionEnabled = false
     }
@@ -65,7 +63,8 @@ private extension BackButtonView {
         buttonLabel.snp.makeConstraints { make in
             make.leading.equalTo(buttonImage.snp.trailing).offset(14)
             make.centerY.equalTo(buttonImage.snp.centerY)
-            make.top.bottom.equalToSuperview()
+            make.top.equalToSuperview().offset(63)
+            make.bottom.equalToSuperview()
         }
         buttonLabel.isUserInteractionEnabled = false
     }
@@ -76,7 +75,8 @@ private extension BackButtonView {
         backButton.snp.makeConstraints { make in
             make.leading.equalTo(buttonImage.snp.leading)
             make.trailing.equalTo(buttonLabel.snp.trailing)
-            make.top.bottom.equalToSuperview()
+            make.top.equalToSuperview().offset(63)
+            make.bottom.equalToSuperview()
         }
         backButton.backgroundColor = .clear
     }

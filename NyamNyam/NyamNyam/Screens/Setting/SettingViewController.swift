@@ -15,6 +15,7 @@ final class SettingViewController: UIViewController {
     lazy var settingListModule = SettingListTableViewController()
     lazy var setCafeteriaOrderModule = SetCafeteriaOrderTableViewController(viewModel: viewModel)
     lazy var setDefaultCampusModule = SetDefaultCampusView()
+    lazy var backButton = BackButtonView()
     
     lazy var optionAlert: UIAlertController = {
         let alert = UIAlertController(title: "캠퍼스를 선택해주세요.",
@@ -35,12 +36,6 @@ final class SettingViewController: UIViewController {
         return alert
     }()
     
-    func setNavigationBarBackButton() {
-        let backBarButtonItem = UIBarButtonItem(title: "설정", style: .plain, target: self, action: nil)
-        backBarButtonItem.tintColor = .black
-        self.navigationItem.backBarButtonItem = backBarButtonItem
-    }
-    
     init() {
         super.init(nibName: nil, bundle: nil)
     }
@@ -51,8 +46,11 @@ final class SettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDefaultNavigationBar()
         setNavigationBarBackButton()
-        self.view.backgroundColor = Pallete.gray50.color
+        self.setBackButtonLayout()
+        backButton.backButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+        self.view.backgroundColor = Pallete.bgGray.color
         self.setDefaultCampusLayout()
         self.setCafeteriaOrderLayout()
         self.setSettingListLayout()
@@ -72,6 +70,21 @@ final class SettingViewController: UIViewController {
         setCafeteriaOrderModule = SetCafeteriaOrderTableViewController(viewModel: viewModel)
         setCafeteriaOrderLayout()
     }
+    
+    private func setDefaultNavigationBar() {
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
+    }
+    
+    private func setNavigationBarBackButton() {
+        let backBarButtonItem = UIBarButtonItem(title: "설정", style: .plain, target: self, action: nil)
+        backBarButtonItem.tintColor = .black
+        self.navigationItem.backBarButtonItem = backBarButtonItem
+    }
+    
+    @objc func backButtonPressed(_ sender: UIButton) {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
 extension SettingViewController: SetDefaultCampusViewDelegate {
@@ -86,16 +99,16 @@ extension SettingViewController: SetDefaultCampusViewDelegate {
 
 private extension SettingViewController {
     
-    private func setDefaultCampusLayout() {
+    func setDefaultCampusLayout() {
         view.addSubview(setDefaultCampusModule)
         setDefaultCampusModule.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(112)
+            make.top.equalTo(backButton.snp.bottom)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(50)
         }
     }
     
-    private func setCafeteriaOrderLayout() {
+    func setCafeteriaOrderLayout() {
         self.addChild(setCafeteriaOrderModule)
         self.view.addSubview(setCafeteriaOrderModule.view)
         setCafeteriaOrderModule.didMove(toParent: self)
@@ -106,14 +119,21 @@ private extension SettingViewController {
         }
     }
     
-    private func setSettingListLayout() {
+    func setSettingListLayout() {
         self.addChild(settingListModule)
         self.view.addSubview(settingListModule.view)
         settingListModule.didMove(toParent: self)
         settingListModule.view.snp.makeConstraints { make in
             make.top.equalTo(setCafeteriaOrderModule.view.snp.bottom).offset(16)
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(151)
+            make.leading.trailing.bottom.equalToSuperview()
+            
+        }
+    }
+    
+    func setBackButtonLayout() {
+        view.addSubview(backButton)
+        backButton.snp.makeConstraints { make in
+            make.top.leading.trailing.equalToSuperview()
         }
     }
 }

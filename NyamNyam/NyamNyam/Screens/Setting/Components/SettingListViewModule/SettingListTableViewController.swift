@@ -22,7 +22,9 @@ final class SettingListTableViewController: UIViewController {
     
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.isScrollEnabled = false
         tableView.rowHeight = 47
+        tableView.backgroundColor = Pallete.bgGray.color
         return tableView
     }()
     
@@ -42,6 +44,7 @@ final class SettingListTableViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = Pallete.bgGray.color
         setTableViewLayout()
     }
     
@@ -82,7 +85,6 @@ private extension SettingListTableViewController {
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(SettingListTableViewCell.self, forCellReuseIdentifier: SettingListTableViewCell.settingListCellId)
-        tableView.backgroundColor = Pallete.gray50.color
         tableView.snp.makeConstraints { make in
             make.top.bottom.leading.trailing.equalToSuperview()
         }
