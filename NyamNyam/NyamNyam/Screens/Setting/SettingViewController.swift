@@ -44,8 +44,8 @@ final class SettingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setDefaultNavigationBar()
         setNavigationBarBackButton()
+        setDefaultNavigationBar()
         self.setBackButtonLayout()
         backButton.backButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         self.view.backgroundColor = Pallete.bgGray.color
@@ -72,12 +72,6 @@ final class SettingViewController: UIViewController {
     private func setDefaultNavigationBar() {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
-    }
-    
-    private func setNavigationBarBackButton() {
-        let backBarButtonItem = UIBarButtonItem(title: "설정", style: .plain, target: self, action: nil)
-        backBarButtonItem.tintColor = .black
-        self.navigationItem.backBarButtonItem = backBarButtonItem
     }
     
     @objc func backButtonPressed(_ sender: UIButton) {
