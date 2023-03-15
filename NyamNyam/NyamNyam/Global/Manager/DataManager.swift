@@ -10,7 +10,7 @@ import Foundation
 final class DataManager {
     static func stringToDict() -> [String: Any]? {
         let strData = JsonManager.shared.jsonToString()
-        if let strData = strData.data(using: .utf8) {
+        if let strData = strData?.data(using: .utf8) {
             do {
                 return try JSONSerialization.jsonObject(with: strData, options: []) as? [String: Any]
             } catch {
