@@ -11,8 +11,6 @@ import SnapKit
 final class SetCafeteriaOrderTableViewController: UIViewController {
     
     private var cafeteriaList: [String]
-    private var seoulCafeteriaList: [String] = UserDefaults.standard.seoulCafeteria
-    private var ansungCafeteriaList: [String] = UserDefaults.standard.ansungCafeteria
     private var isSeoulCafeteria: Bool = true
     
     private func getCafeteriaName(_ cafeteria: String) -> String {
@@ -49,10 +47,10 @@ final class SetCafeteriaOrderTableViewController: UIViewController {
     
     init(viewModel: SettingViewModel) {
         if viewModel.currentCampus.value == .seoul {
-            cafeteriaList = seoulCafeteriaList
+            cafeteriaList = UserDefaults.standard.seoulCafeteria
             isSeoulCafeteria = true
         } else {
-            cafeteriaList = ansungCafeteriaList
+            cafeteriaList = UserDefaults.standard.ansungCafeteria
             isSeoulCafeteria = false
         }
         super.init(nibName: nil, bundle: nil)
