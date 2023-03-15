@@ -83,7 +83,7 @@ final class ExpandableMealCardView: UIView {
     }
     
     public func setTimeLabel(status: RunningStatus, data: Meal?) {
-        let timeLabelView = TimeLabelView(status: status, data: data)
+        let timeLabelView = TimeLabelView(status: status, mealData: data)
         
         self.addSubview(timeLabelView)
         timeLabelView.snp.makeConstraints { make in

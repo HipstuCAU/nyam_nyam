@@ -10,8 +10,8 @@ import Foundation
 extension Date {
     
     func makeKoreanDate() -> Date {
-        let ret = Calendar.current.date(byAdding: .hour, value: 9, to: self)
-        return ret ?? Date()
+        let ret = self.addingTimeInterval(TimeInterval(TimeZone.autoupdatingCurrent.secondsFromGMT(for: self)))
+        return ret
     }
     
     func makeKoreanDateReverse() -> Date {

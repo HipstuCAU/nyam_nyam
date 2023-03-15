@@ -16,7 +16,7 @@ final class TimeLabelView: UIView {
         return label
     }()
     
-    init(status: RunningStatus, data: Meal?) {
+    init(status: RunningStatus, mealData: Meal?) {
         super.init(frame: .zero)
         self.layer.cornerRadius = 11.5
         var labelText: String
@@ -43,7 +43,7 @@ final class TimeLabelView: UIView {
             self.backgroundColor = Pallete.grayBackground.color
         }
         
-        if let data = data, let start = data.startDate?.makeKoreanDateReverse().toTimeString(), let end = data.endDate?.makeKoreanDateReverse().toTimeString() {
+        if let data = mealData, let start = data.startDate?.makeKoreanDateReverse().toTimeString(), let end = data.endDate?.makeKoreanDateReverse().toTimeString() {
             if data.cafeteria == .cauBurger { labelText += " 09:30~18:30" }
             else if data.cafeteria == .ramen { labelText += " 06:00~23:00" }
             else { labelText += " \(start)~\(end)" }
