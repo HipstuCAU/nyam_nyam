@@ -19,29 +19,37 @@ final class TimeLabelView: UIView {
     init(status: RunningStatus, data: Meal?) {
         super.init(frame: .zero)
         self.layer.cornerRadius = 11.5
-        
+        var labelText: String
         switch status {
         case .running:
-            statusTextLabel.text = status.rawValue
+            labelText = status.rawValue
             statusTextLabel.textColor = Pallete.blue.color
             statusTextLabel.textAlignment = .center
             self.backgroundColor = Pallete.blueBackground.color
         case .expired:
-            statusTextLabel.text = status.rawValue
+            labelText = status.rawValue
             statusTextLabel.textColor = Pallete.red.color
             statusTextLabel.textAlignment = .center
             self.backgroundColor = Pallete.redBackground.color
         case .ready:
-            statusTextLabel.text = status.rawValue
+            labelText = status.rawValue
             statusTextLabel.textColor = Pallete.yellow.color
             statusTextLabel.textAlignment = .center
             self.backgroundColor = Pallete.yellowBackGround.color
         case .notInOperation:
-            statusTextLabel.text = status.rawValue
+            labelText = status.rawValue
             statusTextLabel.textColor = Pallete.gray.color
             statusTextLabel.textAlignment = .center
             self.backgroundColor = Pallete.grayBackground.color
         }
+        
+        if let data = data, let start = data.startDate?.makeKoreanDateReverse().toTimeString(), let end = data.endDate?.makeKoreanDateReverse().toTimeString() {
+            if data.cafeteria == .cauBurger { labelText += " 09:30~18:30" }
+            else if data.cafeteria == .ramen { labelText += " 06:00~23:00" }
+            else { labelText += " \(start)~\(end)" }
+        }
+        
+        statusTextLabel.text = labelText
         
         self.addSubview(statusTextLabel)
         
@@ -63,7 +71,7 @@ final class TimeLabelView: UIView {
 }
 
 protocol ExpandableMealCardViewDelegate: AnyObject {
-    func controlCellHeight(isExpanded: Bool, cafeteria: Cafeteria, mealTime: MealTime)
+    func controlCellHeight(isExpanded: Bool, cafeteria: Cafeteria, mealTime: MealTime, needAnimation: Bool)
 }
 
 final class ExpandableMealCardView: UIView {
@@ -107,10 +115,11 @@ final class ExpandableMealCardView: UIView {
         return button
     }()
     
-    init(isValid: Bool, mealTime: MealTime, cafeteria: Cafeteria) {
+    init(isValid: Bool, mealTime: MealTime, cafeteria: Cafeteria, data: [Meal]?) {
         self.isValid = isValid
         self.mealTime = mealTime
         self.cafeteria = cafeteria
+        self.data = data
         super.init(frame: .zero)
         
         // UI 설정
@@ -126,6 +135,8 @@ final class ExpandableMealCardView: UIView {
         // name content 생성
         setMealTimeIconViewLayout()
         setMealTimeLabelViewLayout()
+        
+        // mealTimeLabel text
         mealTimeLabel.text = mealTime.rawValue
         
         // Tap 설정
@@ -148,7 +159,7 @@ final class ExpandableMealCardView: UIView {
     }
     
     @objc func cardPressed() {
-        delegate?.controlCellHeight(isExpanded: isExpanded, cafeteria: cafeteria, mealTime: mealTime)
+        delegate?.controlCellHeight(isExpanded: isExpanded, cafeteria: cafeteria, mealTime: mealTime, needAnimation: true)
     }
 }
 

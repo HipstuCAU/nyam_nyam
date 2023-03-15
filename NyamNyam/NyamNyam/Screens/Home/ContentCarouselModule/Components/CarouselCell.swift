@@ -26,10 +26,21 @@ final class CarouselCell: UICollectionViewCell {
     
     lazy var scrollView: UIScrollView = {
         let view = UIScrollView()
+        let refresher = UIRefreshControl()
+        refresher.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        view.refreshControl = refresher
         view.showsVerticalScrollIndicator = false
         view.showsHorizontalScrollIndicator = false
         return view
     }()
+    
+    @objc func refresh() {
+        self.scrollView.refreshControl?.beginRefreshing()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            (self.superview as? UICollectionView)?.reloadData()
+        }
+        self.scrollView.refreshControl?.endRefreshing()
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -56,7 +67,7 @@ final class CarouselCell: UICollectionViewCell {
         data = nil
     }
     
-    public func setDefaultCafeteriaLayout(data: Set<Meal>, mealTimes: [MealTime]) {
+    public func setDefaultCafeteriaLayout(data: Set<Meal>, mealTimes: [MealTime], date: Date) {
         self.data = data
         // MealTime
         let mealTimes = mealTimes
@@ -70,7 +81,8 @@ final class CarouselCell: UICollectionViewCell {
             if filteredData.count == 0  { isValid = false }
             // 생성
             guard let cafeteriaType = cafeteriaType else { return }
-            let mealCard = ExpandableMealCardView(isValid: isValid, mealTime: mealTime, cafeteria: cafeteriaType)
+            let mealCard = ExpandableMealCardView(isValid: isValid, mealTime: mealTime, cafeteria: cafeteriaType, data: filteredData.sorted(by: <))
+            mealCard.date = date
             mealCard.clipsToBounds = true
             mealCard.delegate = self
             mealCards.append(mealCard)
@@ -116,8 +128,8 @@ final class CarouselCell: UICollectionViewCell {
         // 이곳에서 Card의 Expired상태를 검사해야 합니다.
         (0..<mealCards.count).forEach { idx in
             let card = mealCards[idx]
+            
             if card.isValid {
-                
                 // MARK: Expired되면 여기로 들어올 일이 없어야 한다.
                 card.isExpanded = true
                 card.data = data.sorted(by: <)
@@ -210,7 +222,7 @@ final class CarouselCell: UICollectionViewCell {
         }
     
         // ScrollView 전체의 Content Size 결정
-        scrollView.contentSize = CGSize(width: contentView.frame.width, height: 700)
+        scrollView.contentSize = CGSize(width: contentView.frame.width, height: contentView.frame.height)
         if let lastCard = mealCards.last {
             scrollView.contentLayoutGuide.snp.makeConstraints { make in
                 make.leading.equalTo(scrollView.snp.leading)
@@ -223,22 +235,29 @@ final class CarouselCell: UICollectionViewCell {
         (0..<mealCards.count).forEach { idx in
             let card = mealCards[idx]
             let runningStatus: RunningStatus?
+            
             if card.isValid {
-                runningStatus = RunningStatus.getRunningStatus(of: card.data ?? [], at: card.cafeteria)
-                if runningStatus == .expired {
-                    controlCellHeight(isExpanded: true, cafeteria: card.cafeteria, mealTime: card.mealTime)
+                guard let date = card.date else { return }
+                if date.isToday() {
+                    runningStatus = RunningStatus.getRunningStatus(of: card.data?.filter({$0.mealTime == card.mealTime}) ?? [], at: card.cafeteria)
+                } else {
+                    runningStatus = .ready
                 }
+                if runningStatus == .expired {
+                    controlCellHeight(isExpanded: true, cafeteria: card.cafeteria, mealTime: card.mealTime, needAnimation: false)
+                }
+                    
             } else {
                 runningStatus = .notInOperation
             }
-            card.setTimeLabel(status: runningStatus ?? .notInOperation, data: card.data?.first)
+            card.setTimeLabel(status: runningStatus ?? .notInOperation, data: card.data?.filter({$0.mealTime == card.mealTime}).first)
         }
         layoutIfNeeded()
     }
 }
 
 extension CarouselCell: ExpandableMealCardViewDelegate {
-    func controlCellHeight(isExpanded: Bool, cafeteria: Cafeteria, mealTime: MealTime) {
+    func controlCellHeight(isExpanded: Bool, cafeteria: Cafeteria, mealTime: MealTime, needAnimation: Bool) {
         if isExpanded == true {
             (0..<mealCards.count).forEach { idx in
                 let card = mealCards[idx]
@@ -253,7 +272,11 @@ extension CarouselCell: ExpandableMealCardViewDelegate {
                         make.trailing.equalTo(scrollView.snp.trailing)
                         make.bottom.equalTo(tempViews[idx].snp.bottom)
                     }
-                    UIView.animate(withDuration: 0.5) {
+                    if needAnimation == true {
+                        UIView.animate(withDuration: 0.5) {
+                            self.layoutIfNeeded()
+                        }
+                    } else {
                         self.layoutIfNeeded()
                     }
                     card.isExpanded = false
@@ -278,7 +301,11 @@ extension CarouselCell: ExpandableMealCardViewDelegate {
                             make.bottom.equalTo(lastContent.snp.bottom).offset(20)
                         }
                     }
-                    UIView.animate(withDuration: 0.5) {
+                    if needAnimation == true {
+                        UIView.animate(withDuration: 0.5) {
+                            self.layoutIfNeeded()
+                        }
+                    } else {
                         self.layoutIfNeeded()
                     }
                     card.isExpanded = true

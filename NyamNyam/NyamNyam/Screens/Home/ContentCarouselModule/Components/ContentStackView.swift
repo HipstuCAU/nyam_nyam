@@ -39,6 +39,8 @@ final class ContentStackView: UIView {
             priceLabel.text = data.price + "원"
         } else if data.cafeteria == .cauBurger {
             priceLabel.text = data.price
+        } else if data.cafeteria == .student && data.menu.count > 1 {
+            priceLabel.text = data.price + "원"
         }
         setStackViewContents()
         setStackViewLayout()
@@ -63,8 +65,8 @@ final class ContentStackView: UIView {
                 label.snp.makeConstraints { make in
                     make.height.equalTo(28)
                 }
-                if (row * colCount + col) < data.menu.count || data.cafeteria == .student {
-                    if data.cafeteria != .student {
+                if (row * colCount + col) < data.menu.count || (data.cafeteria == .student && data.menu.count == 1) {
+                    if data.cafeteria != .student || (data.cafeteria == .student && data.menu.count > 1) {
                         label.text =  "\(data.menu[row * colCount + col])"
                     } else {
                         if col != 0 { label.font = .systemFont(ofSize: 14, weight: .medium) }
