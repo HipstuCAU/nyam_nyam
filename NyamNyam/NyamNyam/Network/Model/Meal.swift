@@ -48,6 +48,9 @@ struct Meal: Hashable, Comparable {
     let endDate: Date?
     
     static func < (lhs: Meal, rhs: Meal) -> Bool {
+        if lhs.menu.count > 1 && rhs.menu.count == 1 {
+            return true
+        }
         if lhs.type == rhs.type {
             if lhs.price == rhs.price {
                 if lhs.menu.first ?? "" < rhs.menu.first ?? "" { return true }
