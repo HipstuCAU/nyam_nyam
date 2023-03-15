@@ -7,11 +7,12 @@
 
 import Foundation
 
-enum MealTime {
-    case breakfast
-    case lunch
-    case dinner
-    case allDay
+enum MealTime: String {
+    case breakfast = "조식"
+    case lunch = "중식"
+    case dinner = "석식"
+    case cauburger = "카우버거"
+    case ramen = "라면"
 }
 
 enum Cafeteria: String {
@@ -35,7 +36,7 @@ enum Status {
     case CloseOnWeekends
 }
 
-struct Meal: Hashable {
+struct Meal: Hashable, Comparable {
     let mealTime: MealTime
     let type: MealType
     let cafeteria: Cafeteria
@@ -43,4 +44,24 @@ struct Meal: Hashable {
     let menu: [String]
     let date: Date
     let status: Status
+    let startDate: Date?
+    let endDate: Date?
+    
+    static func < (lhs: Meal, rhs: Meal) -> Bool {
+        if lhs.menu.count > 1 && rhs.menu.count == 1 {
+            return true
+        }
+        if lhs.type == rhs.type {
+            if lhs.price == rhs.price {
+                if lhs.menu.first ?? "" < rhs.menu.first ?? "" { return true }
+                else { return false }
+            } else {
+                if lhs.price < rhs.price { return true }
+                else { return false }
+            }
+        } else {
+            if rhs.type == .special { return true }
+            else { return false }
+        }
+    }
 }
