@@ -46,6 +46,12 @@ extension Date {
         return dateFormatter.string(from: self)
     }
     
+    func toFullTimeString() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy.MM.dd HH:mm"
+        return dateFormatter.string(from: self)
+    }
+    
     func toDayString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd"

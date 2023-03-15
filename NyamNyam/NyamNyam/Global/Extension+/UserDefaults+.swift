@@ -13,6 +13,7 @@ extension UserDefaults {
         case campus
         case seoulCafeteria
         case ansungCafeteria
+        case lastUploadDate
     }
     
     var isFirstLaunch: Bool {
@@ -33,5 +34,10 @@ extension UserDefaults {
     var ansungCafeteria: [String] {
         get { return array(forKey: Key.ansungCafeteria.rawValue) as? [String] ?? [] }
         set { set(newValue, forKey: Key.ansungCafeteria.rawValue) }
+    }
+    
+    var lastUploadDate: String {
+        get { return string(forKey: Key.isFirstLaunch.rawValue) ?? Date().toFullTimeString() }
+        set { set(newValue, forKey: Key.isFirstLaunch.rawValue)}
     }
 }
