@@ -11,7 +11,8 @@ enum MealTime: String {
     case breakfast = "조식"
     case lunch = "중식"
     case dinner = "석식"
-    case allDay
+    case cauburger = "카우버거"
+    case ramen = "라면"
 }
 
 enum Cafeteria: String {
@@ -47,6 +48,9 @@ struct Meal: Hashable, Comparable {
     let endDate: Date?
     
     static func < (lhs: Meal, rhs: Meal) -> Bool {
+        if lhs.menu.count > 1 && rhs.menu.count == 1 {
+            return true
+        }
         if lhs.type == rhs.type {
             if lhs.price == rhs.price {
                 if lhs.menu.first ?? "" < rhs.menu.first ?? "" { return true }
