@@ -45,7 +45,6 @@ final class SettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setDefaultNavigationBar()
-        setNavigationBarBackButton()
         self.setBackButtonLayout()
         backButton.backButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
         self.view.backgroundColor = Pallete.bgGray.color
@@ -60,24 +59,29 @@ final class SettingViewController: UIViewController {
         viewModel.currentCampus.observe(on: self) { [weak self] _ in
             self?.setCampusLabelText()
             self?.resetSetCafeteriaOrderModule()
+            self?.resetSettingListModule()
         }
     }
     
     private func resetSetCafeteriaOrderModule() {
+        setCafeteriaOrderModule.willMove(toParent: nil)
+        setCafeteriaOrderModule.view.removeFromSuperview()
         setCafeteriaOrderModule.removeFromParent()
         setCafeteriaOrderModule = SetCafeteriaOrderTableViewController(viewModel: viewModel)
         setCafeteriaOrderLayout()
     }
     
+    private func resetSettingListModule() {
+        settingListModule.willMove(toParent: nil)
+        settingListModule.view.removeFromSuperview()
+        settingListModule.removeFromParent()
+        settingListModule = SettingListTableViewController()
+        setSettingListLayout()
+    }
+    
     private func setDefaultNavigationBar() {
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         self.navigationController?.interactivePopGestureRecognizer?.delegate = nil
-    }
-    
-    private func setNavigationBarBackButton() {
-        let backBarButtonItem = UIBarButtonItem(title: "설정", style: .plain, target: self, action: nil)
-        backBarButtonItem.tintColor = .black
-        self.navigationItem.backBarButtonItem = backBarButtonItem
     }
     
     @objc func backButtonPressed(_ sender: UIButton) {
@@ -102,7 +106,7 @@ private extension SettingViewController {
         setDefaultCampusModule.snp.makeConstraints { make in
             make.top.equalTo(backButton.snp.bottom)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(50)
+            make.height.equalTo(55)
         }
     }
     
@@ -113,7 +117,7 @@ private extension SettingViewController {
         setCafeteriaOrderModule.view.snp.makeConstraints { make in
             make.top.equalTo(setDefaultCampusModule.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(270)
+            make.height.equalTo(viewModel.currentCampus.value == .seoul ?  UserDefaults.standard.seoulCafeteria.count * 40 + 58 : UserDefaults.standard.ansungCafeteria.count * 40 + 58)
         }
     }
     
@@ -124,7 +128,6 @@ private extension SettingViewController {
         settingListModule.view.snp.makeConstraints { make in
             make.top.equalTo(setCafeteriaOrderModule.view.snp.bottom).offset(16)
             make.leading.trailing.bottom.equalToSuperview()
-            
         }
     }
     
