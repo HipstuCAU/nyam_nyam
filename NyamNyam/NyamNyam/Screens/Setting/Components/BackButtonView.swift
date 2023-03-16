@@ -11,15 +11,9 @@ import SnapKit
 final class BackButtonView: UIView {
     
     func safeAreaTopInset() -> CGFloat? {
-        if #available(iOS 13.0, *) {
-            let window = UIApplication.shared.windows.first
-            guard let topArea = window?.safeAreaInsets.top else { return nil }
-            return topArea
-        } else {
-            let window = UIApplication.shared.keyWindow
-            guard let topArea = window?.safeAreaInsets.top else { return nil }
-            return topArea
-        }
+        let window = UIApplication.shared.windows.first
+        guard let topArea = window?.safeAreaInsets.top else { return nil }
+        return topArea
     }
     
     private let buttonLabel: UILabel = {
@@ -59,7 +53,7 @@ final class BackButtonView: UIView {
 }
 
 private extension BackButtonView {
-
+    
     private func setBackButtonImageLayout() {
         self.addSubview(buttonImage)
         buttonImage.snp.makeConstraints { make in
@@ -82,7 +76,7 @@ private extension BackButtonView {
         buttonLabel.isUserInteractionEnabled = false
     }
     
-
+    
     private func setBackButtonLayout() {
         self.addSubview(backButton)
         backButton.snp.makeConstraints { make in
