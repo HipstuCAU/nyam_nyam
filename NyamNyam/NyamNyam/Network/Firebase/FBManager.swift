@@ -14,7 +14,7 @@ final class FBManager {
     
     private init() { }
     
-    func getMealJson() {
+    func getMealJson(completion: @escaping () -> Void ) {
         let db = FirebaseFirestore.Firestore.firestore()
         let docRef = db.collection("CAU_Haksik").document("CAU_Cafeteria_Menu")
         docRef.getDocument() { (document, error) in
@@ -25,7 +25,7 @@ final class FBManager {
                     guard let strData = String(data: jsonData, encoding: .utf8) else { return }
                     guard strData == JsonManager.shared.jsonToString() else {
                         JsonManager.shared.saveJson(strData)
-                        return
+                        completion()
                     }
                 } catch {
                     print(error.localizedDescription)
