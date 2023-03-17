@@ -13,12 +13,12 @@ final class JsonManager {
     
     func jsonToString() -> String? {
         guard let filename = getDocumentsDirectory()?.appendingPathComponent("CAUMeals.json") else { return nil }
-            do {
-                let stringData = try String(contentsOf: filename, encoding: String.Encoding.utf8)
-                return stringData
-            } catch {
-                fatalError("Failed to load \(filename) from bundle.")
-            }
+        do {
+            let stringData = try String(contentsOf: filename, encoding: String.Encoding.utf8)
+            return stringData
+        } catch {
+            fatalError("Failed to load \(filename) from bundle.")
+        }
     }
     func saveJson(_ strData: String) {
         guard let filename = getDocumentsDirectory()?.appendingPathComponent("CAUMeals.json") else { return }

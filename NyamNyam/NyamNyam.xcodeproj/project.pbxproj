@@ -13,7 +13,6 @@
 		2A429D8929BB95BA0044A3E6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2A429D8829BB95BA0044A3E6 /* FirebaseAnalytics */; };
 		2A429D8B29BB95BA0044A3E6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2A429D8A29BB95BA0044A3E6 /* FirebaseFirestore */; };
 		2A429D8D29BB95BA0044A3E6 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2A429D8C29BB95BA0044A3E6 /* FirebaseFirestoreSwift */; };
-		2A429D8F29BB98A40044A3E6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2A429D8E29BB98A40044A3E6 /* GoogleService-Info.plist */; };
 		2A429D9229BDDA0B0044A3E6 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429D9129BDDA0B0044A3E6 /* SettingViewController.swift */; };
 		2A429D9529BDDB370044A3E6 /* SettingListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429D9429BDDB370044A3E6 /* SettingListTableViewController.swift */; };
 		2A429D9929BDE2A40044A3E6 /* SettingListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429D9829BDE2A40044A3E6 /* SettingListTableViewCell.swift */; };
@@ -21,13 +20,14 @@
 		2A429D9E29BEBE030044A3E6 /* SetCafeteriaOrderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429D9D29BEBE030044A3E6 /* SetCafeteriaOrderTableViewController.swift */; };
 		2A429DA029BEBE1B0044A3E6 /* SetCafeteriaOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429D9F29BEBE1B0044A3E6 /* SetCafeteriaOrderTableViewCell.swift */; };
 		2A429DA329BF36C50044A3E6 /* SetCafeteriaOrderTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429DA229BF36C50044A3E6 /* SetCafeteriaOrderTitleView.swift */; };
-		2A429DAE29C040D20044A3E6 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429DAD29C040D20044A3E6 /* Reachability.swift */; };
 		2A429DA829BF62E80044A3E6 /* SetDefaultCampusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429DA729BF62E80044A3E6 /* SetDefaultCampusView.swift */; };
 		2A429DAA29BF6B170044A3E6 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429DA929BF6B170044A3E6 /* SettingViewModel.swift */; };
 		2A429DAC29BF93BD0044A3E6 /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429DAB29BF93BD0044A3E6 /* BackButtonView.swift */; };
+		2A429DAE29C040D20044A3E6 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429DAD29C040D20044A3E6 /* Reachability.swift */; };
 		AB2D2C0129B8271C0015CB10 /* CafeteriaSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2D2C0029B8271C0015CB10 /* CafeteriaSelectView.swift */; };
 		AB2FDAAE29B84CC7001746DB /* CafeteriaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FDAAD29B84CC7001746DB /* CafeteriaButton.swift */; };
 		AB2FDAB229B8D4B4001746DB /* ContentCarouselModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FDAB129B8D4B4001746DB /* ContentCarouselModuleViewController.swift */; };
+		AB62D60729C48F8A003A8DF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB62D60629C48F8A003A8DF8 /* GoogleService-Info.plist */; };
 		AB9B399C29BB199F00249C61 /* RunningStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9B399B29BB199F00249C61 /* RunningStatus.swift */; };
 		AB9B399E29BB6A2600249C61 /* ContentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9B399D29BB6A2600249C61 /* ContentStackView.swift */; };
 		AB9B39A029BF535000249C61 /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9B399F29BF534F00249C61 /* DividerView.swift */; };
@@ -79,8 +79,6 @@
 /* Begin PBXFileReference section */
 		2A429D7829B99E460044A3E6 /* JsonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonManager.swift; sourceTree = "<group>"; };
 		2A429D7A29B9A06F0044A3E6 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
-		2A429D7C29B9F2CA0044A3E6 /* DummyString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyString.swift; sourceTree = "<group>"; };
-		2A429D8E29BB98A40044A3E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2A429D9129BDDA0B0044A3E6 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		2A429D9429BDDB370044A3E6 /* SettingListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListTableViewController.swift; sourceTree = "<group>"; };
 		2A429D9829BDE2A40044A3E6 /* SettingListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListTableViewCell.swift; sourceTree = "<group>"; };
@@ -88,13 +86,14 @@
 		2A429D9D29BEBE030044A3E6 /* SetCafeteriaOrderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCafeteriaOrderTableViewController.swift; sourceTree = "<group>"; };
 		2A429D9F29BEBE1B0044A3E6 /* SetCafeteriaOrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCafeteriaOrderTableViewCell.swift; sourceTree = "<group>"; };
 		2A429DA229BF36C50044A3E6 /* SetCafeteriaOrderTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetCafeteriaOrderTitleView.swift; sourceTree = "<group>"; };
-		2A429DAD29C040D20044A3E6 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		2A429DA729BF62E80044A3E6 /* SetDefaultCampusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDefaultCampusView.swift; sourceTree = "<group>"; };
 		2A429DA929BF6B170044A3E6 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		2A429DAB29BF93BD0044A3E6 /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
+		2A429DAD29C040D20044A3E6 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		AB2D2C0029B8271C0015CB10 /* CafeteriaSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaSelectView.swift; sourceTree = "<group>"; };
 		AB2FDAAD29B84CC7001746DB /* CafeteriaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaButton.swift; sourceTree = "<group>"; };
 		AB2FDAB129B8D4B4001746DB /* ContentCarouselModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCarouselModuleViewController.swift; sourceTree = "<group>"; };
+		AB62D60629C48F8A003A8DF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AB9B399B29BB199F00249C61 /* RunningStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatus.swift; sourceTree = "<group>"; };
 		AB9B399D29BB6A2600249C61 /* ContentStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentStackView.swift; sourceTree = "<group>"; };
 		AB9B399F29BF534F00249C61 /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
@@ -378,7 +377,7 @@
 		ABEAFC0829ACA50A002C3119 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
-				2A429D8E29BB98A40044A3E6 /* GoogleService-Info.plist */,
+				AB62D60629C48F8A003A8DF8 /* GoogleService-Info.plist */,
 				ABEAFC0929ACA523002C3119 /* FBManager.swift */,
 			);
 			path = Firebase;
@@ -547,7 +546,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2A429D8629BA35770044A3E6 /* Dummy.json in Resources */,
-				2A429D8F29BB98A40044A3E6 /* GoogleService-Info.plist in Resources */,
+				AB62D60729C48F8A003A8DF8 /* GoogleService-Info.plist in Resources */,
 				ABEAFBD729AC9ED4002C3119 /* LaunchScreen.storyboard in Resources */,
 				ABEAFBD429AC9ED4002C3119 /* Assets.xcassets in Resources */,
 			);
