@@ -17,14 +17,16 @@ final class FBManager {
     func getMealJson() {
         let db = FirebaseFirestore.Firestore.firestore()
         let docRef = db.collection("CAU_Haksik").document("CAU_Cafeteria_Menu")
-        
-        docRef.getDocument(source: .cache) { (document, error) in
-            if let document = document {
+        docRef.getDocument() { (document, error) in
+            if let document = document, document.exists {
                 guard let dataDescription = document.data() else { return }
                 do {
                     let jsonData = try JSONSerialization.data(withJSONObject: dataDescription, options: .sortedKeys)
                     guard let strData = String(data: jsonData, encoding: .utf8) else { return }
-                    JsonManager.shared.saveJson(strData)
+                    guard strData == JsonManager.shared.jsonToString() else {
+                        JsonManager.shared.saveJson(strData)
+                        return
+                    }
                 } catch {
                     print(error.localizedDescription)
                 }
@@ -33,5 +35,4 @@ final class FBManager {
             }
         }
     }
-    
 }
