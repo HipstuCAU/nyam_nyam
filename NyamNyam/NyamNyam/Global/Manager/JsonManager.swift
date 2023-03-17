@@ -17,7 +17,7 @@ final class JsonManager {
             let stringData = try String(contentsOf: filename, encoding: String.Encoding.utf8)
             return stringData
         } catch {
-            fatalError("Failed to load \(filename) from bundle.")
+            return nil
         }
     }
     func saveJson(_ strData: String) {
