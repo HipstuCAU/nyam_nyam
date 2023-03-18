@@ -37,7 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UserDefaults.standard.isFirstLaunch = true
             }
         }
-        
         return true
     }
     
