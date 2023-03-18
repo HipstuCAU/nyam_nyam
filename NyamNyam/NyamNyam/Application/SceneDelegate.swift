@@ -49,8 +49,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         //MARK: 네트워크 검사 후 FireStore 내려받기
         if Reachability.networkConnected() {
-            FBManager.shared.getMealJson()
-            UserDefaults.standard.lastUploadDate = Date().toFullTimeString()
+            FBManager.shared.getMealJson() {
+                UserDefaults.standard.lastUploadDate = Date().toFullTimeString()
+            }
         } else {
             //TODO: 테스트구문 추후 UI 이벤트 처리 예정
             print("네트워크 연결안됨")
