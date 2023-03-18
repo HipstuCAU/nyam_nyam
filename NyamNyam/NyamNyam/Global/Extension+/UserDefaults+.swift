@@ -9,16 +9,16 @@ import Foundation
 
 extension UserDefaults {
     enum Key: String {
-        case isFirstLaunch
+        case isNotFirstLaunch
         case campus
         case seoulCafeteria
         case ansungCafeteria
         case lastUploadDate
     }
     
-    var isFirstLaunch: Bool {
-        get { return bool(forKey: Key.isFirstLaunch.rawValue) }
-        set { set(newValue, forKey: Key.isFirstLaunch.rawValue) }
+    var isNotFirstLaunch: Bool {
+        get { return bool(forKey: Key.isNotFirstLaunch.rawValue) }
+        set { set(newValue, forKey: Key.isNotFirstLaunch.rawValue) }
     }
     
     var campus: String {
@@ -34,10 +34,5 @@ extension UserDefaults {
     var ansungCafeteria: [String] {
         get { return array(forKey: Key.ansungCafeteria.rawValue) as? [String] ?? [] }
         set { set(newValue, forKey: Key.ansungCafeteria.rawValue) }
-    }
-    
-    var lastUploadDate: String {
-        get { return string(forKey: Key.isFirstLaunch.rawValue) ?? Date().toFullTimeString() }
-        set { set(newValue, forKey: Key.isFirstLaunch.rawValue)}
     }
 }

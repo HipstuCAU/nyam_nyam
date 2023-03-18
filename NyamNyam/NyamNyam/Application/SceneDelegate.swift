@@ -82,7 +82,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if Reachability.networkConnected() {
             FBManager.shared.getMealJson() {
                 isUpdated = true
-                UserDefaults.standard.lastUploadDate = Date().toFullTimeString()
             }
             DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                 if !isUpdated {

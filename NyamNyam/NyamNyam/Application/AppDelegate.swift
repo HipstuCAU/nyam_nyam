@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setOptionsWithFirstLaunch()
         
         func setOptionsWithFirstLaunch() {
-            let isFirstLaunch = !UserDefaults.standard.isFirstLaunch
+            let isFirstLaunch = !UserDefaults.standard.isNotFirstLaunch
             
             if isFirstLaunch {
 #if DEBUG
@@ -32,9 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UserDefaults.standard.ansungCafeteria = [Cafeteria.cauEats.rawValue,
                                                          Cafeteria.cauBurger.rawValue,
                                                          Cafeteria.ramen.rawValue]
-                UserDefaults.standard.lastUploadDate = Date().toFullTimeString()
                 // MARK: 이곳에 첫 Launch시 실행할 작업들이 들어갑니다.
-                UserDefaults.standard.isFirstLaunch = true
+                UserDefaults.standard.isNotFirstLaunch = true
             }
         }
         sleep(1)
