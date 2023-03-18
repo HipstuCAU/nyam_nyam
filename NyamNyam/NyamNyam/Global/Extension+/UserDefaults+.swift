@@ -35,9 +35,4 @@ extension UserDefaults {
         get { return array(forKey: Key.ansungCafeteria.rawValue) as? [String] ?? [] }
         set { set(newValue, forKey: Key.ansungCafeteria.rawValue) }
     }
-    
-    var lastUploadDate: String {
-        get { return string(forKey: Key.isNotFirstLaunch.rawValue) ?? Date().toFullTimeString() }
-        set { set(newValue, forKey: Key.isNotFirstLaunch.rawValue)}
-    }
 }
