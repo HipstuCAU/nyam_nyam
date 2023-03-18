@@ -11,7 +11,7 @@ final class DateButton: UIButton {
     public var buttonIndex: Int
     private let dayLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 14, weight: .semibold)
+        label.font = UIFont(name: "Pretendard-SemiBold", size: 14)
         label.textColor = Pallete.textBlack.color
         label.textAlignment = .center
         return label
@@ -19,7 +19,7 @@ final class DateButton: UIButton {
     
     private let dayOfWeekLable: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 10, weight: .bold)
+        label.font = UIFont(name: "Pretendard-Bold", size: 10)
         label.textColor = Pallete.textBlack.color
         label.textAlignment = .center
         return label
