@@ -40,6 +40,7 @@ final class SetCafeteriaOrderTableViewController: UIViewController {
     
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.backgroundColor = .white
         tableView.rowHeight = 40
         tableView.isScrollEnabled = false
         return tableView
