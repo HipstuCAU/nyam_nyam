@@ -26,8 +26,7 @@ final class BackButtonView: UIView {
     
     private let buttonImage: UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(systemName: "chevron.left")
-        image.sizeToFit()
+        image.image = UIImage(named: "chevron.right")
         image.tintColor = Pallete.gray.color
         return image
     }()
@@ -41,8 +40,8 @@ final class BackButtonView: UIView {
     init() {
         super.init(frame: .zero)
         self.backgroundColor = .white
-        setBackButtonImageLayout()
         setBackButtonLabelLayout()
+        setBackButtonImageLayout()
         setBackButtonLayout()
         
     }
@@ -54,28 +53,23 @@ final class BackButtonView: UIView {
 
 private extension BackButtonView {
     
-    private func setBackButtonImageLayout() {
-        self.addSubview(buttonImage)
-        buttonImage.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(7.29)
-            make.top.equalToSuperview().offset((safeAreaTopInset() ?? 50) + 13)
-            make.bottom.equalToSuperview()
-            make.height.equalTo(24)
-        }
-        buttonImage.isUserInteractionEnabled = false
-    }
-    
     private func setBackButtonLabelLayout() {
         self.addSubview(buttonLabel)
         buttonLabel.snp.makeConstraints { make in
-            make.leading.equalTo(buttonImage.snp.trailing).offset(14)
-            make.centerY.equalTo(buttonImage.snp.centerY)
+            make.leading.equalToSuperview().offset(31)
             make.top.equalToSuperview().offset((safeAreaTopInset() ?? 50) + 13)
-            make.bottom.equalToSuperview()
         }
         buttonLabel.isUserInteractionEnabled = false
     }
     
+    private func setBackButtonImageLayout() {
+        self.addSubview(buttonImage)
+        buttonImage.snp.makeConstraints { make in
+            make.trailing.equalTo(buttonLabel.snp.leading).offset(-7)
+            make.centerY.equalTo(buttonLabel.snp.centerY)
+        }
+        buttonImage.isUserInteractionEnabled = false
+    }
     
     private func setBackButtonLayout() {
         self.addSubview(backButton)
