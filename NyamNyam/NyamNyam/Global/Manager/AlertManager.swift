@@ -7,9 +7,7 @@
 
 import UIKit
 
-final class AlertManager {
-    
-    private init() {}
+enum AlertManager {
     
     static func addAlert(_ target: UIViewController, key: String, title: String, message: String, perform: @escaping () -> Void) {
         NotificationCenter.default.addObserver(forName: NSNotification.Name(key), object: nil, queue: nil) { [weak target] _ in
