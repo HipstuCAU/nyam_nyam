@@ -13,6 +13,7 @@ final class SettingListTableViewCell: UITableViewCell {
     private let settingTitleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.textColor = .black
         return label
     }()
     

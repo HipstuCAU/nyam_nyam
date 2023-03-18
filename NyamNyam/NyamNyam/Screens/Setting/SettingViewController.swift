@@ -17,6 +17,14 @@ final class SettingViewController: UIViewController {
     lazy var setDefaultCampusModule = SetDefaultCampusView()
     lazy var backButton = BackButtonView()
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        if #available(iOS 13, *) {
+            return .darkContent
+        } else {
+            return .default
+        }
+    }
+    
     lazy var optionAlert: UIAlertController = {
         let alert = UIAlertController(title: "캠퍼스를 선택해주세요.",
                                       message: nil,
