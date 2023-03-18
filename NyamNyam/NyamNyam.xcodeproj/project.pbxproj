@@ -819,7 +819,7 @@
 				DEVELOPMENT_TEAM = 8QSTXVD8H9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NyamNyam/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "학식";
+				INFOPLIST_KEY_CFBundleDisplayName = "중대한학식";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -853,7 +853,7 @@
 				DEVELOPMENT_TEAM = 8QSTXVD8H9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NyamNyam/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "학식";
+				INFOPLIST_KEY_CFBundleDisplayName = "중대한학식";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
