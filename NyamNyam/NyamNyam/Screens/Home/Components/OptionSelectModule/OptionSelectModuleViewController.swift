@@ -8,7 +8,7 @@
 import UIKit
 
 final class OptionSelectModuleViewController: UIViewController {
-    let viewModel: HomeViewModel
+    var viewModel: HomeViewModel
     
     let campusSelectView = CampusSelectView()
     lazy var dateSelectView = DateSelectView(dateList: viewModel.dateList)
