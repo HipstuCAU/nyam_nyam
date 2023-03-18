@@ -15,6 +15,9 @@ final class OptionSelectModuleViewController: UIViewController {
     lazy var cafeteriaSelectView = CafeteriaSelectView(viewModel: viewModel)
     
     public func resetModule() {
+        viewModel.indexOfDate.value = 0
+        viewModel.indexOfCafeteria.value = 0
+        
         campusSelectView.removeFromSuperview()
         dateSelectView.removeFromSuperview()
         cafeteriaSelectView.removeFromSuperview()
@@ -32,6 +35,13 @@ final class OptionSelectModuleViewController: UIViewController {
         cafeteriaSelectView.cafeteriaDelegate = self
         
         setCampusLabelText()
+        
+        let index = viewModel.indexOfCafeteria.value
+        cafeteriaSelectView.setScrollOffsetBy(buttonIndex: index)
+        cafeteriaSelectView.buttons.forEach {
+            if $0.buttonIndex == index { $0.isSelected() }
+            else { $0.isNotSelected() }
+        }
     }
     
     lazy var optionAlert: UIAlertController = {

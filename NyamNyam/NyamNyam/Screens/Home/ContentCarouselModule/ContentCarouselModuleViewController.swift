@@ -10,7 +10,7 @@ import SnapKit
 
 final class ContentCarouselModuleViewController: UIViewController {
     
-    var viewModel: HomeViewModel
+    let viewModel: HomeViewModel
     
     private lazy var collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
