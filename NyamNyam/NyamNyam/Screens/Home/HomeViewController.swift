@@ -44,6 +44,12 @@ final class HomeViewController: UIViewController {
     @objc func settingButtonPressed(_ sender: UIButton) {
         self.navigationController?.pushViewController(SettingViewController(), animated: true)
     }
+    
+    func safeAreaTopInset() -> CGFloat {
+        let window = UIApplication.shared.windows.first
+        guard let topArea = window?.safeAreaInsets.top else { return 50 }
+        return topArea
+    }
 }
 
 extension HomeViewController {
@@ -73,7 +79,7 @@ extension HomeViewController {
         self.view.addSubview(optionSelectModule.view)
         optionSelectModule.didMove(toParent: self)
         optionSelectModule.view.snp.makeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(63)
+            make.top.equalTo(view.snp.top).offset(safeAreaTopInset() + 13)
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
             make.height.equalTo(160)
@@ -83,7 +89,7 @@ extension HomeViewController {
     private func setSettingButtonLayout() {
         view.addSubview(settingButton)
         settingButton.snp.makeConstraints { make in
-            make.top.equalTo(view.snp.top).offset(63)
+            make.top.equalTo(view.snp.top).offset(safeAreaTopInset() + 13)
             make.trailing.equalToSuperview().offset(-19)
         }
         
