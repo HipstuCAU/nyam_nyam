@@ -23,10 +23,10 @@ final class FBManager {
                 do {
                     let jsonData = try JSONSerialization.data(withJSONObject: dataDescription, options: .sortedKeys)
                     guard let strData = String(data: jsonData, encoding: .utf8) else { return }
-                    guard strData == JsonManager.shared.jsonToString() else {
+                    if strData != JsonManager.shared.jsonToString() {
                         JsonManager.shared.saveJson(strData)
                         completion()
-                    }
+                    } else { completion() }
                 } catch {
                     print(error.localizedDescription)
                 }
