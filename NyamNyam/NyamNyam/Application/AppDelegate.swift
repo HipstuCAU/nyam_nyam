@@ -37,6 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UserDefaults.standard.isFirstLaunch = true
             }
         }
+        sleep(1)
         return true
     }
     
