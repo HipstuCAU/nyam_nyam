@@ -40,12 +40,18 @@ final class HomeViewModel {
         
         self.indexOfCafeteria = Observable(0)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(handleCampusChanged), name: UserDefaults.didChangeNotification, object: UserDefaults.standard)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(handleSeoulCafeteriaChanged), name: UserDefaults.didChangeNotification, object: UserDefaults.standard)
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleAnsungCafeteriaChanged), name: UserDefaults.didChangeNotification, object: UserDefaults.standard)
         
     }
     
+    
+    @objc func handleCampusChanged() {
+        self.currentCampus = Observable(Campus(rawValue: UserDefaults.standard.campus) ?? .seoul)
+    }
     
     @objc func handleSeoulCafeteriaChanged() {
         self.seoulCafeteriaList = UserDefaults.standard.seoulCafeteria.map {
