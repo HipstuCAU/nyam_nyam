@@ -18,6 +18,8 @@ final class OptionSelectModuleViewController: UIViewController {
         viewModel.indexOfDate.value = 0
         viewModel.indexOfCafeteria.value = 0
         
+        viewModel.currentCampus.remove(observer: self)
+        
         campusSelectView.removeFromSuperview()
         dateSelectView.removeFromSuperview()
         cafeteriaSelectView.removeFromSuperview()
@@ -35,6 +37,12 @@ final class OptionSelectModuleViewController: UIViewController {
         cafeteriaSelectView.cafeteriaDelegate = self
         
         setCampusLabelText()
+        
+        viewModel.currentCampus.observe(on: self) { [weak self] _ in
+            self?.setCampusLabelText()
+            self?.resetCafeteriaView()
+            self?.initOptionIndex()
+        }
         
         let index = viewModel.indexOfCafeteria.value
         cafeteriaSelectView.setScrollOffsetBy(buttonIndex: index)
