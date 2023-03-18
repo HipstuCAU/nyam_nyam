@@ -11,18 +11,40 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
-    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        var isUpdated = false
         guard let windowScene = (scene as? UIWindowScene) else { return }
+        
+        self.window = UIWindow(windowScene: windowScene)
+        
+        let defaultWindow = UIViewController()
+        self.window?.makeKeyAndVisible()
+        self.window?.rootViewController = defaultWindow
+        AlertManager.addAlert(defaultWindow,
+                              key: "netWorkNotConnectedInLaunching",
+                              title: "식단을 받아오는 도중 문제가 발생했어요",
+                              message: "인터넷 연결을 확인해주세요") { }
+        
         FBManager.shared.getMealJson() {
-            #if DEBUG
-            print("meal Json getted")
-            #endif
+            isUpdated = true
             let viewController = HomeViewController()
             let navigationController = UINavigationController(rootViewController: viewController)
-            self.window = UIWindow(windowScene: windowScene)
+            AlertManager.addAlert(viewController,
+                                  key: "netWorkNotConnectedInHome",
+                                  title: "인터넷이 연결되지 않았어요",
+                                  message: "인터넷이 연결되어야 식단을 최신화 할 수 있어요") {
+            }
+            AlertManager.addAlert(viewController,
+                                  key: "netWorkDelayedInHome",
+                                  title: "식단을 받아오는 도중 문제가 발생했어요",
+                                  message: "인터넷 연결을 확인해주세요") {
+            }
             self.window?.rootViewController = navigationController
-            self.window?.makeKeyAndVisible()
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            if !isUpdated {
+                AlertManager.performAlertAction(of: "netWorkNotConnectedInLaunching")
+            }
         }
     }
     
@@ -46,15 +68,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
+        var isUpdated = false
         
-        //MARK: 네트워크 검사 후 FireStore 내려받기
         if Reachability.networkConnected() {
             FBManager.shared.getMealJson() {
+                isUpdated = true
                 UserDefaults.standard.lastUploadDate = Date().toFullTimeString()
             }
         } else {
-            //TODO: 테스트구문 추후 UI 이벤트 처리 예정
-            print("네트워크 연결안됨")
+            AlertManager.performAlertAction(of: "netWorkNotConnectedInHome")
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            if !isUpdated {
+                AlertManager.performAlertAction(of: "netWorkNotConnectedInLaunching")
+            }
         }
     }
     
