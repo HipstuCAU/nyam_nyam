@@ -22,6 +22,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window?.rootViewController = defaultWindow
         AlertManager.addAlert(defaultWindow,
                               key: "netWorkNotConnectedInLaunching",
+                              title: "인터넷이 연결되지 않았어요",
+                              message: "인터넷이 연결되어야 식단을 최신화 할 수 있어요") { }
+        
+        AlertManager.addAlert(defaultWindow,
+                              key: "networkDelayedInLaunching",
                               title: "식단을 받아오는 도중 문제가 발생했어요",
                               message: "인터넷 연결을 확인해주세요") { }
         
@@ -41,10 +46,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             }
             self.window?.rootViewController = navigationController
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            if !isUpdated {
-                AlertManager.performAlertAction(of: "netWorkNotConnectedInLaunching")
+        if Reachability.networkConnected() {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                if !isUpdated {
+                    AlertManager.performAlertAction(of: "networkDelayedInLaunching")
+                }
             }
+        } else {
+            AlertManager.performAlertAction(of: "netWorkNotConnectedInLaunching")
         }
     }
     
@@ -75,13 +84,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 isUpdated = true
                 UserDefaults.standard.lastUploadDate = Date().toFullTimeString()
             }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                if !isUpdated {
+                    AlertManager.performAlertAction(of: "netWorkDelayedInHome")
+                }
+            }
         } else {
             AlertManager.performAlertAction(of: "netWorkNotConnectedInHome")
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            if !isUpdated {
-                AlertManager.performAlertAction(of: "netWorkNotConnectedInLaunching")
-            }
         }
     }
     
