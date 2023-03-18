@@ -13,6 +13,12 @@ final class HomeViewController: UIViewController {
     lazy var optionSelectModule = OptionSelectModuleViewController(viewModel: viewModel)
     lazy var contentCarouselModule = ContentCarouselModuleViewController(viewModel: viewModel)
     
+    lazy var settingButton: UIButton = {
+        let button = UIButton()
+        button.setImage(.init(named: "setting"), for: .normal)
+        return button
+    }()
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13, *) {
             return .darkContent
@@ -27,6 +33,7 @@ final class HomeViewController: UIViewController {
         setBackgroundGradient()
         setOptionSelectModuleLayout()
         setContentCarouselModuleLayout()
+        setSettingButtonLayout()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -66,6 +73,15 @@ extension HomeViewController {
             make.trailing.equalToSuperview()
             make.height.equalTo(160)
         }
+    }
+    
+    private func setSettingButtonLayout() {
+        view.addSubview(settingButton)
+        settingButton.snp.makeConstraints { make in
+            make.top.equalTo(view.snp.top).offset(63)
+            make.trailing.equalToSuperview().offset(-19)
+        }
+        
     }
 }
 
