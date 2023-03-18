@@ -17,7 +17,7 @@ final class CampusSelectView: UIView {
     
     let campusNameLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 26, weight: .bold)
+        label.font = UIFont(name: "Pretendard-Bold", size: 26)
         label.textColor = .black
         return label
     }()

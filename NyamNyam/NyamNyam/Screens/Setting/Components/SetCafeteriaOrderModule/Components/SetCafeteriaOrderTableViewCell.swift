@@ -14,7 +14,7 @@ final class SetCafeteriaOrderTableViewCell: UITableViewCell {
     
     private let cafeteriaLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         label.textColor = Pallete.gray.color
         return label
     }()
