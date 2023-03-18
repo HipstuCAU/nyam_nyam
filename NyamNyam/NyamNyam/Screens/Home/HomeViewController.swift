@@ -16,6 +16,7 @@ final class HomeViewController: UIViewController {
     lazy var settingButton: UIButton = {
         let button = UIButton()
         button.setImage(.init(named: "setting"), for: .normal)
+        button.addTarget(self, action: #selector(settingButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -38,6 +39,10 @@ final class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    @objc func settingButtonPressed(_ sender: UIButton) {
+        self.navigationController?.pushViewController(SettingViewController(), animated: true)
     }
 }
 
