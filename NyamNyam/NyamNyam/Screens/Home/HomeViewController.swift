@@ -40,6 +40,7 @@ final class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        optionSelectModule.resetModule()
     }
     
     private func setNetworkAlert() {
