@@ -16,8 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         self.window = UIWindow(windowScene: windowScene)
-        
-        let defaultWindow = UIViewController()
+        let storyboard = UIStoryboard(name: "LaunchScreen", bundle: nil)
+        let defaultWindow = storyboard.instantiateViewController(withIdentifier: "LaunchScreenViewController")
         self.window?.makeKeyAndVisible()
         self.window?.rootViewController = defaultWindow
         AlertManager.addAlert(defaultWindow,
