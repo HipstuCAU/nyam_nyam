@@ -12,7 +12,7 @@ final class SetCafeteriaOrderTitleView: UIView {
     private let title: UILabel = {
         let label = UILabel()
         label.text = "식당 순서 설정"
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         label.textColor = .black
         return label
     }()
@@ -20,7 +20,7 @@ final class SetCafeteriaOrderTitleView: UIView {
     private let subTitle: UILabel = {
         let label = UILabel()
         label.text = "설정한 순서는 자동으로 저장돼요"
-        label.font = .systemFont(ofSize: 12, weight: .semibold)
+        label.font = UIFont(name: "Pretendard-SemiBold", size: 12)
         label.textColor = Pallete.gray50.color
         return label
     }()

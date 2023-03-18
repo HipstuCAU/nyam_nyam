@@ -22,7 +22,7 @@ final class ContentStackView: UIView {
     let priceLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.font = .systemFont(ofSize: 14, weight: .medium)
+        label.font = UIFont(name: "Pretendard-Regular", size: 14)
         label.textAlignment = .center
         return label
     }()
@@ -61,7 +61,7 @@ final class ContentStackView: UIView {
                 let label = UILabel()
                 label.textAlignment = .left
                 label.textColor = .black
-                label.font = .systemFont(ofSize: 16, weight: .semibold)
+                label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
                 label.snp.makeConstraints { make in
                     make.height.equalTo(28)
                 }
@@ -69,7 +69,7 @@ final class ContentStackView: UIView {
                     if data.cafeteria != .student || (data.cafeteria == .student && data.menu.count > 1) {
                         label.text =  "\(data.menu[row * colCount + col])"
                     } else {
-                        if col != 0 { label.font = .systemFont(ofSize: 14, weight: .medium) }
+                        if col != 0 { label.font = UIFont(name: "Pretendard-Regular", size: 14) }
                         label.text = col == 0 ? "\(data.menu[row])" : "\(data.price)원"
                         label.textAlignment = col != 0 ? .right : .left
                     }

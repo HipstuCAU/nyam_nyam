@@ -12,8 +12,8 @@ final class SettingListTableViewCell: UITableViewCell {
     static let settingListCellId = "settingListCell"
     private let settingTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
         label.textColor = .black
+        label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         return label
     }()
     

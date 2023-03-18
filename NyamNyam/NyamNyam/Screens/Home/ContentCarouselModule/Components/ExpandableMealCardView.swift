@@ -41,7 +41,7 @@ final class ExpandableMealCardView: UIView {
     lazy var mealTimeLabel: UILabel = {
         let label = UILabel()
         label.textColor = contentColor
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         label.textAlignment = .center
         return label
     }()
