@@ -12,7 +12,7 @@ final class TimeLabelView: UIView {
     
     private let statusTextLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 12, weight: .bold)
+        label.font = UIFont(name: "Pretendard-Bold", size: 12)
         return label
     }()
     

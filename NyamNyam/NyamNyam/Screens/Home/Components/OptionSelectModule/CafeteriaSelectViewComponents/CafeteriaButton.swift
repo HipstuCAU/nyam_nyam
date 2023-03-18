@@ -13,7 +13,7 @@ final class CafeteriaButton: UIButton {
     public let cafeteriaLabel: UILabel = {
         let label = UILabel()
         label.textColor = Pallete.gray.color ?? .black
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         label.textAlignment = .center
         return label
     }()

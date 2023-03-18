@@ -19,7 +19,7 @@ final class BackButtonView: UIView {
     private let buttonLabel: UILabel = {
         let label = UILabel()
         label.text = "설정"
-        label.font = .systemFont(ofSize: 28, weight: .bold)
+        label.font = UIFont(name: "Pretendard-Bold", size: 28)
         label.textColor = .black
         return label
     }()

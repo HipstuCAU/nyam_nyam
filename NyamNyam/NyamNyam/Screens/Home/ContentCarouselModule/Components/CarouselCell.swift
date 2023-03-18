@@ -19,7 +19,7 @@ final class CarouselCell: UICollectionViewCell {
     public let positionLabel: UILabel = {
         let label = UILabel()
         label.textColor = Pallete.gray50.color
-        label.font = .systemFont(ofSize: 12, weight: .semibold)
+        label.font = UIFont(name: "Pretendard-SemiBold", size: 12)
         label.textAlignment = .center
         return label
     }()

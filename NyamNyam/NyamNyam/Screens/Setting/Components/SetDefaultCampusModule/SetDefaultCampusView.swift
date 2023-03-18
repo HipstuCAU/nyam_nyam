@@ -19,14 +19,14 @@ final class SetDefaultCampusView: UIView {
     let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "기본 캠퍼스 설정"
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         label.textColor = .black
         return label
     }()
     
     let campusLabel: UILabel = {
         let label = UILabel()
-        label.font = .systemFont(ofSize: 16, weight: .semibold)
+        label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         label.textColor = .black
         return label
     }()
