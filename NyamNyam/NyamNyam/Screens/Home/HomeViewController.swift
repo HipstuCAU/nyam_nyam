@@ -35,10 +35,17 @@ final class HomeViewController: UIViewController {
         setOptionSelectModuleLayout()
         setContentCarouselModuleLayout()
         setSettingButtonLayout()
+        setNetworkAlert()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    private func setNetworkAlert() {
+        if !Reachability.networkConnected() {
+            AlertManager.performAlertAction(of: "netWorkNotConnectedInHome")
+        }
     }
     
     @objc func settingButtonPressed(_ sender: UIButton) {
