@@ -11,7 +11,7 @@ final class OptionSelectModuleViewController: UIViewController {
     let viewModel: HomeViewModel
     
     var campusSelectView = CampusSelectView()
-    lazy var dateSelectView = DateSelectView(dateList: viewModel.dateList)
+    lazy var dateSelectView = DateSelectView(viewModel: viewModel)
     lazy var cafeteriaSelectView = CafeteriaSelectView(viewModel: viewModel)
     
     public func resetModule() {

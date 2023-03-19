@@ -48,10 +48,10 @@ final class DateSelectView: UIView {
         return triangleView
     }()
     
-    init(dateList: [Date]) {
+    init(viewModel: HomeViewModel) {
         super.init(frame: .zero)
         self.backgroundColor = Pallete.skyBlue.color
-        initDateButtons(dateList: dateList)
+        initDateButtons(dateList: viewModel.dateList)
         setDateButtonsLayout()
         setButtonsByDefault()
         setSelectionStartPoint()
