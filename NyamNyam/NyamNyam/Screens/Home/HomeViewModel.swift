@@ -5,7 +5,7 @@
 //  Created by Noah Park on 2023/02/27.
 //
 
-import Foundation
+import UIKit
 
 final class HomeViewModel {
     var currentCampus: Observable<Campus>
@@ -40,6 +40,31 @@ final class HomeViewModel {
         
         self.indexOfCafeteria = Observable(0)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(handleCampusChanged), name: UserDefaults.didChangeNotification, object: UserDefaults.standard)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleSeoulCafeteriaChanged), name: UserDefaults.didChangeNotification, object: UserDefaults.standard)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleAnsungCafeteriaChanged), name: UserDefaults.didChangeNotification, object: UserDefaults.standard)
+        
+    }
+    
+    
+    @objc func handleCampusChanged() {
+        self.currentCampus = Observable(Campus(rawValue: UserDefaults.standard.campus) ?? .seoul)
+    }
+    
+    @objc func handleSeoulCafeteriaChanged() {
+        self.seoulCafeteriaList = UserDefaults.standard.seoulCafeteria.map {
+            guard let cafeteria = Cafeteria(rawValue: $0) else { fatalError() }
+            return cafeteria
+        }
+    }
+    
+    @objc func handleAnsungCafeteriaChanged() {
+        self.ansungCafeteriaList = UserDefaults.standard.ansungCafeteria.map {
+            guard let cafeteria = Cafeteria(rawValue: $0) else { fatalError() }
+            return cafeteria
+        }
     }
     
 }
