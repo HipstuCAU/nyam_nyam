@@ -14,44 +14,6 @@ final class OptionSelectModuleViewController: UIViewController {
     lazy var dateSelectView = DateSelectView(viewModel: viewModel)
     lazy var cafeteriaSelectView = CafeteriaSelectView(viewModel: viewModel)
     
-    public func resetModule() {
-        viewModel.indexOfDate.value = 0
-        viewModel.indexOfCafeteria.value = 0
-        
-        viewModel.currentCampus.remove(observer: self)
-        
-        campusSelectView.removeFromSuperview()
-        dateSelectView.removeFromSuperview()
-        cafeteriaSelectView.removeFromSuperview()
-        
-        campusSelectView = CampusSelectView()
-        dateSelectView = DateSelectView(dateList: viewModel.dateList)
-        cafeteriaSelectView = CafeteriaSelectView(viewModel: viewModel)
-        
-        setCampusSelectViewLayout()
-        setDateSelectViewLayout()
-        setCafeteriaSelectViewLayout()
-        
-        campusSelectView.delegate = self
-        dateSelectView.delegate = self
-        cafeteriaSelectView.cafeteriaDelegate = self
-        
-        setCampusLabelText()
-        
-        viewModel.currentCampus.observe(on: self) { [weak self] _ in
-            self?.setCampusLabelText()
-            self?.resetCafeteriaView()
-            self?.initOptionIndex()
-        }
-        
-        let index = viewModel.indexOfCafeteria.value
-        cafeteriaSelectView.setScrollOffsetBy(buttonIndex: index)
-        cafeteriaSelectView.buttons.forEach {
-            if $0.buttonIndex == index { $0.isSelected() }
-            else { $0.isNotSelected() }
-        }
-    }
-    
     lazy var optionAlert: UIAlertController = {
         let alert = UIAlertController(title: "캠퍼스를 선택해주세요.",
                                       message: nil,
@@ -110,6 +72,44 @@ final class OptionSelectModuleViewController: UIViewController {
                 if $0.buttonIndex == index { $0.isSelected() }
                 else { $0.isNotSelected() }
             }
+        }
+    }
+    
+    public func resetModule() {
+        viewModel.indexOfDate.value = 0
+        viewModel.indexOfCafeteria.value = 0
+        
+        viewModel.currentCampus.remove(observer: self)
+        
+        campusSelectView.removeFromSuperview()
+        dateSelectView.removeFromSuperview()
+        cafeteriaSelectView.removeFromSuperview()
+        
+        campusSelectView = CampusSelectView()
+        dateSelectView = DateSelectView(viewModel: viewModel)
+        cafeteriaSelectView = CafeteriaSelectView(viewModel: viewModel)
+        
+        setCampusSelectViewLayout()
+        setDateSelectViewLayout()
+        setCafeteriaSelectViewLayout()
+        
+        campusSelectView.delegate = self
+        dateSelectView.delegate = self
+        cafeteriaSelectView.cafeteriaDelegate = self
+        
+        setCampusLabelText()
+        
+        viewModel.currentCampus.observe(on: self) { [weak self] _ in
+            self?.setCampusLabelText()
+            self?.resetCafeteriaView()
+            self?.initOptionIndex()
+        }
+        
+        let index = viewModel.indexOfCafeteria.value
+        cafeteriaSelectView.setScrollOffsetBy(buttonIndex: index)
+        cafeteriaSelectView.buttons.forEach {
+            if $0.buttonIndex == index { $0.isSelected() }
+            else { $0.isNotSelected() }
         }
     }
     
