@@ -59,6 +59,7 @@ final class OptionSelectModuleViewController: UIViewController {
     private func bind(to viewModel: HomeViewModel) {
         viewModel.currentCampus.observe(on: self) { [weak self] _ in
             self?.setCampusLabelText()
+            self?.resetDateSelectView()
             self?.resetCafeteriaView()
             self?.initOptionIndex()
         }
@@ -120,6 +121,13 @@ final class OptionSelectModuleViewController: UIViewController {
         cafeteriaSelectView.cafeteriaDelegate = self
     }
     
+    private func resetDateSelectView() {
+        dateSelectView.removeFromSuperview()
+        dateSelectView = DateSelectView(viewModel: viewModel)
+        setDateSelectViewLayout()
+        dateSelectView.delegate = self
+    }
+    
     private func initOptionIndex() {
         viewModel.indexOfDate.value = 0
         viewModel.indexOfCafeteria.value = 0
@@ -148,6 +156,10 @@ extension OptionSelectModuleViewController: CampusSelectViewDelegate {
 
 // MARK: - DateSelectView
 extension OptionSelectModuleViewController: DateSelectViewDelegate {
+    func showToastMessage() {
+        print("hello")
+    }
+    
     func setDateIndex(new: Int) {
         viewModel.indexOfDate.value = new
     }

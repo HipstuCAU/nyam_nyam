@@ -9,6 +9,7 @@ import UIKit
 
 protocol DateSelectViewDelegate: AnyObject {
     func setDateIndex(new: Int)
+    func showToastMessage()
 }
 
 final class DateSelectView: UIView {
@@ -77,14 +78,22 @@ final class DateSelectView: UIView {
                 valid = false
             }
             let newButton = DateButton(idx, date:dateList[idx], isValid: valid)
-            newButton.addTarget(self, action: #selector(dateButtonPressed), for: .touchUpInside)
+            if newButton.isValid == true {
+                newButton.addTarget(self, action: #selector(validDateButtonPressed), for: .touchUpInside)
+            } else {
+                newButton.addTarget(self, action: #selector(invalidDateButtonPressed), for: .touchUpInside)
+            }
             dateButtons.append(newButton)
         }
     }
     
-    @objc func dateButtonPressed(_ sender: DateButton) {
+    @objc func validDateButtonPressed(_ sender: DateButton) {
         delegate?.setDateIndex(new: sender.buttonIndex)
         currentButtonIndex = sender.buttonIndex
+    }
+    
+    @objc func invalidDateButtonPressed(_ sender: DateButton) {
+        delegate?.showToastMessage()
     }
     
     private func setButtonsByDefault() {
