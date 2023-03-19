@@ -9,6 +9,8 @@ import UIKit
 
 final class DateButton: UIButton {
     public var buttonIndex: Int
+    public var isValid: Bool
+    
     private let dayLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Pretendard-SemiBold", size: 14)
@@ -35,8 +37,9 @@ final class DateButton: UIButton {
         return view
     }()
     
-    init(_ idx: Int, date: Date) {
-        buttonIndex = idx
+    init(_ idx: Int, date: Date, isValid: Bool) {
+        self.buttonIndex = idx
+        self.isValid = isValid
         super.init(frame: .zero)
         setLabelsLayout()
         dayLabel.text = date.toDayString()

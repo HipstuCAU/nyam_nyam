@@ -12,6 +12,7 @@ protocol DateSelectViewDelegate: AnyObject {
 }
 
 final class DateSelectView: UIView {
+    let viewModel: HomeViewModel
     weak var delegate: DateSelectViewDelegate?
     public var dateButtons: [DateButton] = []
     private let buttonCount = 7
@@ -49,6 +50,7 @@ final class DateSelectView: UIView {
     }()
     
     init(viewModel: HomeViewModel) {
+        self.viewModel = viewModel
         super.init(frame: .zero)
         self.backgroundColor = Pallete.skyBlue.color
         initDateButtons(dateList: viewModel.dateList)
@@ -62,8 +64,19 @@ final class DateSelectView: UIView {
     }
     
     private func initDateButtons(dateList: [Date]) {
+        let rawDatas = viewModel.currentCampus.value == .seoul ? viewModel.seoulMeals : viewModel.ansungMeals
         for idx in 0 ..< dateList.count {
-            let newButton = DateButton(idx, date:dateList[idx])
+            var valid: Bool
+            if let dataOfDate = rawDatas.filter({ $0.date == dateList[idx] }).first {
+                if dataOfDate.meals.filter({ $0.status != .CloseOnWeekends }).count > 0 {
+                    valid = true
+                } else {
+                    valid = false
+                }
+            } else {
+                valid = false
+            }
+            let newButton = DateButton(idx, date:dateList[idx], isValid: valid)
             newButton.addTarget(self, action: #selector(dateButtonPressed), for: .touchUpInside)
             dateButtons.append(newButton)
         }
