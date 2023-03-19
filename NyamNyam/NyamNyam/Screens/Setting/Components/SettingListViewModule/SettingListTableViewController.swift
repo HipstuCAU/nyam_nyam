@@ -72,7 +72,7 @@ extension SettingListTableViewController: UITableViewDelegate {
         case .linkCAUPortal:
             webViewCellPressed(webURL: "https://mportal.cau.ac.kr/main.do")
         case .privacyPolicy:
-            webViewCellPressed(webURL: "https://github.com/HipstuCAU/nyam_nyam/wiki/PrivacyPolicy")
+            webViewCellPressed(webURL: "https://drive.google.com/file/d/1ybbnitToIJmFlgmyDz1_4--yovchRBKs/view?usp=share_link")
         case .question:
             touchUpInsideToMailToQuestionPage()
         }
