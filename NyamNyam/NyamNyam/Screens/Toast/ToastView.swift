@@ -27,6 +27,9 @@ final class ToastView: UIView {
     init() {
         super.init(frame: .zero)
         self.layer.cornerRadius = 20.0
+        self.backgroundColor = Pallete.textBlack.color
+        self.layer.opacity = 0.98
+        setMessageLayout()
     }
     
     required init?(coder: NSCoder) {

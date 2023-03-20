@@ -13,6 +13,8 @@ final class OptionSelectModuleViewController: UIViewController {
     var campusSelectView = CampusSelectView()
     lazy var dateSelectView = DateSelectView(viewModel: viewModel)
     lazy var cafeteriaSelectView = CafeteriaSelectView(viewModel: viewModel)
+    lazy var toastMessage = ToastView()
+    var isToastShowing = false
     
     lazy var optionAlert: UIAlertController = {
         let alert = UIAlertController(title: "캠퍼스를 선택해주세요.",
@@ -157,7 +159,29 @@ extension OptionSelectModuleViewController: CampusSelectViewDelegate {
 // MARK: - DateSelectView
 extension OptionSelectModuleViewController: DateSelectViewDelegate {
     func showToastMessage() {
-        print("hello")
+        if !isToastShowing {
+            isToastShowing = true
+            toastMessage.alpha = 0.0
+            self.view.addSubview(toastMessage)
+            toastMessage.snp.remakeConstraints { make in
+                make.leading.equalToSuperview().offset(20)
+                make.top.equalToSuperview().offset(-80)
+                make.width.equalTo(295)
+                make.height.equalTo(40)
+            }
+            self.view.layoutIfNeeded()
+            UIView.animate(withDuration: 1.0) { [weak self] in
+                self?.toastMessage.alpha = 0.98
+                self?.toastMessage.snp.updateConstraints { make in
+                    make.top.equalToSuperview().offset(5)
+                }
+                self?.view.layoutIfNeeded()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
+                    self?.toastMessage.removeFromSuperview()
+                    self?.isToastShowing = false
+                }
+            }
+        }
     }
     
     func setDateIndex(new: Int) {
