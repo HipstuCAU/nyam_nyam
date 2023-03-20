@@ -164,17 +164,26 @@ extension OptionSelectModuleViewController: DateSelectViewDelegate {
                 make.height.equalTo(40)
             }
             self.view.layoutIfNeeded()
-            UIView.animate(withDuration: 1.0) { [weak self] in
+            UIView.animate(withDuration: 0.8, animations: { [weak self] in
                 self?.toastMessage.alpha = 0.98
                 self?.toastMessage.snp.updateConstraints { make in
                     make.top.equalToSuperview().offset(5)
                 }
                 self?.view.layoutIfNeeded()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { [weak self] in
-                    self?.toastMessage.removeFromSuperview()
-                    self?.isToastShowing = false
+            }, completion: { [weak self] _ in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                    UIView.animate(withDuration: 0.6, animations: {
+                        self?.toastMessage.alpha = 0.0
+                        self?.toastMessage.snp.updateConstraints { make in
+                            make.top.equalToSuperview().offset(-80)
+                        }
+                        self?.view.layoutIfNeeded()
+                    }, completion: { _ in
+                        self?.toastMessage.removeFromSuperview()
+                        self?.isToastShowing = false
+                    })
                 }
-            }
+            })
         }
     }
     
