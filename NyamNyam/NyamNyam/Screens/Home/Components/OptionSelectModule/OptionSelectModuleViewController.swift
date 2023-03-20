@@ -59,13 +59,6 @@ final class OptionSelectModuleViewController: UIViewController {
     }
     
     private func bind(to viewModel: HomeViewModel) {
-        viewModel.currentCampus.observe(on: self) { [weak self] _ in
-            self?.setCampusLabelText()
-            self?.resetDateSelectView()
-            self?.resetCafeteriaView()
-            self?.initOptionIndex()
-        }
-        
         viewModel.indexOfDate.observe(on: self) { [weak self] index in
             self?.dateSelectView.setButtonsBySelection(new: index)
         }
@@ -104,6 +97,7 @@ final class OptionSelectModuleViewController: UIViewController {
         
         viewModel.currentCampus.observe(on: self) { [weak self] _ in
             self?.setCampusLabelText()
+            self?.resetDateSelectView()
             self?.resetCafeteriaView()
             self?.initOptionIndex()
         }
