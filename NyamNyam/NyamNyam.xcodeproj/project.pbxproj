@@ -38,6 +38,7 @@
 		AB62D61329C63ACC003A8DF8 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB62D61229C63ACC003A8DF8 /* Pretendard-Light.otf */; };
 		AB62D61429C63ACC003A8DF8 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB62D61229C63ACC003A8DF8 /* Pretendard-Light.otf */; };
 		AB62D61529C63ACC003A8DF8 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB62D61229C63ACC003A8DF8 /* Pretendard-Light.otf */; };
+		AB62D61829C74C8C003A8DF8 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB62D61729C74C8C003A8DF8 /* ToastView.swift */; };
 		AB9B399C29BB199F00249C61 /* RunningStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9B399B29BB199F00249C61 /* RunningStatus.swift */; };
 		AB9B399E29BB6A2600249C61 /* ContentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9B399D29BB6A2600249C61 /* ContentStackView.swift */; };
 		AB9B39A029BF535000249C61 /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9B399F29BF534F00249C61 /* DividerView.swift */; };
@@ -108,6 +109,7 @@
 		AB62D60A29C63A94003A8DF8 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		AB62D60E29C63AB7003A8DF8 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		AB62D61229C63ACC003A8DF8 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
+		AB62D61729C74C8C003A8DF8 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		AB9B399B29BB199F00249C61 /* RunningStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatus.swift; sourceTree = "<group>"; };
 		AB9B399D29BB6A2600249C61 /* ContentStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentStackView.swift; sourceTree = "<group>"; };
 		AB9B399F29BF534F00249C61 /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
@@ -275,6 +277,14 @@
 			path = ../ContentCarouselModule;
 			sourceTree = "<group>";
 		};
+		AB62D61629C74C7E003A8DF8 /* Toast */ = {
+			isa = PBXGroup;
+			children = (
+				AB62D61729C74C8C003A8DF8 /* ToastView.swift */,
+			);
+			path = Toast;
+			sourceTree = "<group>";
+		};
 		ABBDF68F29B9C52000E9347A /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -360,6 +370,7 @@
 		ABEAFBFC29AC9F03002C3119 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				AB62D61629C74C7E003A8DF8 /* Toast */,
 				2A429D9029BDD9F80044A3E6 /* Setting */,
 				ABEAFC1929AE24A4002C3119 /* Base */,
 				ABEAFC0B29ACA58A002C3119 /* Home */,
@@ -625,6 +636,7 @@
 				ABEAFC1B29AE24B2002C3119 /* Observable.swift in Sources */,
 				ABEAFC1529AD2F36002C3119 /* Campus.swift in Sources */,
 				2A429DAA29BF6B170044A3E6 /* SettingViewModel.swift in Sources */,
+				AB62D61829C74C8C003A8DF8 /* ToastView.swift in Sources */,
 				ABEAFC1329AD279A002C3119 /* Meal.swift in Sources */,
 				AB2D2C0129B8271C0015CB10 /* CafeteriaSelectView.swift in Sources */,
 				2A429D9B29BE12F50044A3E6 /* SettingWebViewController.swift in Sources */,
@@ -831,7 +843,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = hipstu.NyamNyam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -865,7 +877,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = hipstu.NyamNyam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

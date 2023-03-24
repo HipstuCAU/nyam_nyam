@@ -9,18 +9,28 @@ import UIKit
 
 final class DateButton: UIButton {
     public var buttonIndex: Int
-    private let dayLabel: UILabel = {
+    public var isValid: Bool
+    
+    private lazy var dayLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Pretendard-SemiBold", size: 14)
-        label.textColor = Pallete.textBlack.color
+        if isValid {
+            label.textColor = Pallete.textBlack.color
+        } else {
+            label.textColor = Pallete.invalidButton.color
+        }
         label.textAlignment = .center
         return label
     }()
     
-    private let dayOfWeekLable: UILabel = {
+    private lazy var dayOfWeekLable: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Pretendard-Bold", size: 10)
-        label.textColor = Pallete.textBlack.color
+        if isValid {
+            label.textColor = Pallete.textBlack.color
+        } else {
+            label.textColor = Pallete.invalidButton.color
+        }
         label.textAlignment = .center
         return label
     }()
@@ -35,8 +45,9 @@ final class DateButton: UIButton {
         return view
     }()
     
-    init(_ idx: Int, date: Date) {
-        buttonIndex = idx
+    init(_ idx: Int, date: Date, isValid: Bool) {
+        self.buttonIndex = idx
+        self.isValid = isValid
         super.init(frame: .zero)
         setLabelsLayout()
         dayLabel.text = date.toDayString()
@@ -63,8 +74,13 @@ final class DateButton: UIButton {
     }
     
     public func setLablesColorByDefault() {
-        dayLabel.textColor = Pallete.textBlack.color
-        dayOfWeekLable.textColor = Pallete.textBlack.color
+        if isValid {
+            dayLabel.textColor = Pallete.textBlack.color
+            dayOfWeekLable.textColor = Pallete.textBlack.color
+        } else {
+            dayLabel.textColor = Pallete.invalidButton.color
+            dayOfWeekLable.textColor = Pallete.invalidButton.color
+        }
     }
 }
 

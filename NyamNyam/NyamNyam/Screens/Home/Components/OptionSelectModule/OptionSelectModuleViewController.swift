@@ -11,46 +11,10 @@ final class OptionSelectModuleViewController: UIViewController {
     let viewModel: HomeViewModel
     
     var campusSelectView = CampusSelectView()
-    lazy var dateSelectView = DateSelectView(dateList: viewModel.dateList)
+    lazy var dateSelectView = DateSelectView(viewModel: viewModel)
     lazy var cafeteriaSelectView = CafeteriaSelectView(viewModel: viewModel)
-    
-    public func resetModule() {
-        viewModel.indexOfDate.value = 0
-        viewModel.indexOfCafeteria.value = 0
-        
-        viewModel.currentCampus.remove(observer: self)
-        
-        campusSelectView.removeFromSuperview()
-        dateSelectView.removeFromSuperview()
-        cafeteriaSelectView.removeFromSuperview()
-        
-        campusSelectView = CampusSelectView()
-        dateSelectView = DateSelectView(dateList: viewModel.dateList)
-        cafeteriaSelectView = CafeteriaSelectView(viewModel: viewModel)
-        
-        setCampusSelectViewLayout()
-        setDateSelectViewLayout()
-        setCafeteriaSelectViewLayout()
-        
-        campusSelectView.delegate = self
-        dateSelectView.delegate = self
-        cafeteriaSelectView.cafeteriaDelegate = self
-        
-        setCampusLabelText()
-        
-        viewModel.currentCampus.observe(on: self) { [weak self] _ in
-            self?.setCampusLabelText()
-            self?.resetCafeteriaView()
-            self?.initOptionIndex()
-        }
-        
-        let index = viewModel.indexOfCafeteria.value
-        cafeteriaSelectView.setScrollOffsetBy(buttonIndex: index)
-        cafeteriaSelectView.buttons.forEach {
-            if $0.buttonIndex == index { $0.isSelected() }
-            else { $0.isNotSelected() }
-        }
-    }
+    lazy var toastMessage = ToastView()
+    var isToastShowing = false
     
     lazy var optionAlert: UIAlertController = {
         let alert = UIAlertController(title: "캠퍼스를 선택해주세요.",
@@ -95,12 +59,6 @@ final class OptionSelectModuleViewController: UIViewController {
     }
     
     private func bind(to viewModel: HomeViewModel) {
-        viewModel.currentCampus.observe(on: self) { [weak self] _ in
-            self?.setCampusLabelText()
-            self?.resetCafeteriaView()
-            self?.initOptionIndex()
-        }
-        
         viewModel.indexOfDate.observe(on: self) { [weak self] index in
             self?.dateSelectView.setButtonsBySelection(new: index)
         }
@@ -113,11 +71,57 @@ final class OptionSelectModuleViewController: UIViewController {
         }
     }
     
+    public func resetModule() {
+        viewModel.indexOfDate.value = 0
+        viewModel.indexOfCafeteria.value = 0
+        
+        viewModel.currentCampus.remove(observer: self)
+        
+        campusSelectView.removeFromSuperview()
+        dateSelectView.removeFromSuperview()
+        cafeteriaSelectView.removeFromSuperview()
+        
+        campusSelectView = CampusSelectView()
+        dateSelectView = DateSelectView(viewModel: viewModel)
+        cafeteriaSelectView = CafeteriaSelectView(viewModel: viewModel)
+        
+        setCampusSelectViewLayout()
+        setDateSelectViewLayout()
+        setCafeteriaSelectViewLayout()
+        
+        campusSelectView.delegate = self
+        dateSelectView.delegate = self
+        cafeteriaSelectView.cafeteriaDelegate = self
+        
+        setCampusLabelText()
+        
+        viewModel.currentCampus.observe(on: self) { [weak self] _ in
+            self?.setCampusLabelText()
+            self?.resetDateSelectView()
+            self?.resetCafeteriaView()
+            self?.initOptionIndex()
+        }
+        
+        let index = viewModel.indexOfCafeteria.value
+        cafeteriaSelectView.setScrollOffsetBy(buttonIndex: index)
+        cafeteriaSelectView.buttons.forEach {
+            if $0.buttonIndex == index { $0.isSelected() }
+            else { $0.isNotSelected() }
+        }
+    }
+    
     private func resetCafeteriaView() {
         cafeteriaSelectView.removeFromSuperview()
         cafeteriaSelectView = CafeteriaSelectView(viewModel: viewModel)
         setCafeteriaSelectViewLayout()
         cafeteriaSelectView.cafeteriaDelegate = self
+    }
+    
+    private func resetDateSelectView() {
+        dateSelectView.removeFromSuperview()
+        dateSelectView = DateSelectView(viewModel: viewModel)
+        setDateSelectViewLayout()
+        dateSelectView.delegate = self
     }
     
     private func initOptionIndex() {
@@ -148,6 +152,41 @@ extension OptionSelectModuleViewController: CampusSelectViewDelegate {
 
 // MARK: - DateSelectView
 extension OptionSelectModuleViewController: DateSelectViewDelegate {
+    func showToastMessage() {
+        if !isToastShowing {
+            isToastShowing = true
+            toastMessage.alpha = 0.0
+            self.view.addSubview(toastMessage)
+            toastMessage.snp.remakeConstraints { make in
+                make.leading.equalToSuperview().offset(20)
+                make.top.equalToSuperview().offset(-80)
+                make.width.equalTo(295)
+                make.height.equalTo(40)
+            }
+            self.view.layoutIfNeeded()
+            UIView.animate(withDuration: 0.8, animations: { [weak self] in
+                self?.toastMessage.alpha = 0.98
+                self?.toastMessage.snp.updateConstraints { make in
+                    make.top.equalToSuperview().offset(5)
+                }
+                self?.view.layoutIfNeeded()
+            }, completion: { [weak self] _ in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                    UIView.animate(withDuration: 0.6, animations: {
+                        self?.toastMessage.alpha = 0.0
+                        self?.toastMessage.snp.updateConstraints { make in
+                            make.top.equalToSuperview().offset(-80)
+                        }
+                        self?.view.layoutIfNeeded()
+                    }, completion: { _ in
+                        self?.toastMessage.removeFromSuperview()
+                        self?.isToastShowing = false
+                    })
+                }
+            })
+        }
+    }
+    
     func setDateIndex(new: Int) {
         viewModel.indexOfDate.value = new
     }
