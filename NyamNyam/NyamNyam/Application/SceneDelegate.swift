@@ -77,20 +77,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
-        var isUpdated = false
-        
-        if Reachability.networkConnected() {
-            FBManager.shared.getMealJson() {
-                isUpdated = true
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                if !isUpdated {
-                    AlertManager.performAlertAction(of: "netWorkDelayedInHome")
-                }
-            }
-        } else {
-            AlertManager.performAlertAction(of: "netWorkNotConnectedInHome")
-        }
     }
     
     func sceneDidEnterBackground(_ scene: UIScene) {
