@@ -152,7 +152,7 @@ final class CarouselCell: UICollectionViewCell {
                     dataOfCard.append(Meal(mealTime: .ramen,
                                            type: .normal,
                                            cafeteria: .ramen,
-                                           price: "2000",
+                                           price: "2500",
                                            menu: ["신라면", "너구리", "진라면", "틈새라면"],
                                            date: date ?? Date(),
                                            status: .normal,
