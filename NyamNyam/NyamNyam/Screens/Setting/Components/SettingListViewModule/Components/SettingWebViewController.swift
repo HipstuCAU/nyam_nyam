@@ -12,6 +12,7 @@ import WebKit
 final class SettingWebViewController: UIViewController {
     var webView: WKWebView!
     var webURL: String = ""
+    private var observation: NSKeyValueObservation?
     
     lazy var backButton = BackButtonView()
     
@@ -51,6 +52,9 @@ final class SettingWebViewController: UIViewController {
             return
         }
     }
+    deinit {
+        observation = nil
+    }
 }
 
 private extension SettingWebViewController {
@@ -78,6 +82,10 @@ private extension SettingWebViewController {
         let AppInfoRequest = URLRequest(url: AppInfoURL!)
         DispatchQueue.main.async {
             self.webView.load(AppInfoRequest)
+        }
+        observation = webView.observe(\WKWebView.estimatedProgress, options: .new) { _, change in
+            self.progressView.progress = Float(self.webView.estimatedProgress)
+            if self.progressView.progress == 1 { self.progressView.progressTintColor = .white }
         }
     }
     
