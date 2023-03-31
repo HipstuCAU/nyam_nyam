@@ -13,12 +13,12 @@ import MessageUI
 final class SettingListTableViewController: UIViewController {
     
     enum SettingTitle: String {
-//        case linkCAUPortal = "학교 포털 연결"
+        case linkCAUPortal = "학교 포털 연결"
         case privacyPolicy = "개인정보 정책"
         case question = "문의하기"
     }
     
-    private let settingTitle: [SettingTitle] = [.privacyPolicy, .question]
+    private let settingTitle: [SettingTitle] = [.linkCAUPortal, .privacyPolicy, .question]
     
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
@@ -69,8 +69,8 @@ extension SettingListTableViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         switch settingTitle[indexPath.row] {
-//        case .linkCAUPortal:
-//            webViewCellPressed(webURL: "https://mportal.cau.ac.kr/main.do")
+        case .linkCAUPortal:
+            webViewCellPressed(webURL: "https://mportal.cau.ac.kr/main.do")
         case .privacyPolicy:
             webViewCellPressed(webURL: "https://haksik.notion.site/df3546c909294e73af4570b55655514e")
         case .question:
