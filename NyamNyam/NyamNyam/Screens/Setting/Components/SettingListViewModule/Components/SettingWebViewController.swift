@@ -15,6 +15,14 @@ final class SettingWebViewController: UIViewController {
     
     lazy var backButton = BackButtonView()
     
+    lazy var progressView: UIProgressView = {
+        let progress = UIProgressView(progressViewStyle: .bar)
+        progress.progressTintColor = Pallete.cauBlue.color
+        progress.backgroundColor = Pallete.gray50.color
+        progress.progress = 0.0
+        return progress
+    }()
+    
     @objc func backButtonPressed(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
@@ -24,6 +32,7 @@ final class SettingWebViewController: UIViewController {
         view.backgroundColor = .white
         setBackButtonLayout()
         backButton.backButton.addTarget(self, action: #selector(backButtonPressed), for: .touchUpInside)
+        setProgressViewLayout()
         setWebView()
         setWebViewLayout()
         view.insetsLayoutMarginsFromSafeArea = true
@@ -53,6 +62,15 @@ private extension SettingWebViewController {
         }
     }
     
+    func setProgressViewLayout() {
+        view.addSubview(progressView)
+        progressView.snp.makeConstraints { make in
+            make.top.equalTo(backButton.snp.bottom).offset(10)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(2.5)
+        }
+    }
+    
     func setWebView() {
         let webConfiguration = WKWebViewConfiguration()
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
@@ -66,7 +84,7 @@ private extension SettingWebViewController {
     func setWebViewLayout() {
         view.addSubview(webView)
         webView.snp.makeConstraints { make in
-            make.top.equalTo(backButton.snp.bottom).offset(10)
+            make.top.equalTo(progressView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
     }
