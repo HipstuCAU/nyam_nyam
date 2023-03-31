@@ -10,8 +10,9 @@ import SnapKit
 import WebKit
 
 final class SettingWebViewController: UIViewController {
-    var webView: WKWebView!
+    
     var webURL: String = ""
+    private var webView: WKWebView!
     private var observation: NSKeyValueObservation?
     
     lazy var backButton = BackButtonView()
@@ -52,9 +53,11 @@ final class SettingWebViewController: UIViewController {
             return
         }
     }
+    
     deinit {
         observation = nil
     }
+    
 }
 
 private extension SettingWebViewController {
