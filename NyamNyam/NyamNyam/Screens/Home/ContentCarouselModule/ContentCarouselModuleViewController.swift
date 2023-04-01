@@ -128,9 +128,9 @@ extension ContentCarouselModuleViewController: UICollectionViewDataSource {
         case .chamseulgi:
             return "경영경제관(310) B4층"
         case .blueMirA:
-            return "블루미르관(308)"
+            return "블루미르홀(308)"
         case .blueMirB:
-            return "블루미르관(309)"
+            return "블루미르홀(309)"
         case .student:
             return "법학관(303) B1층"
         case .staff:
