@@ -26,6 +26,13 @@ extension Date {
         return false
     }
     
+    func isPastDay() -> Bool {
+        guard let today = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: Date()) else { return false }
+        guard let date = Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: self) else { return false }
+        if today > date { return true }
+        return false
+    }
+    
     func toTimeString() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm"
