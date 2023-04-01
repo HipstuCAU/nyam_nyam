@@ -240,6 +240,8 @@ final class CarouselCell: UICollectionViewCell {
                 guard let date = card.date else { return }
                 if date.isToday() {
                     runningStatus = RunningStatus.getRunningStatus(of: card.data?.filter({$0.mealTime == card.mealTime}) ?? [], at: card.cafeteria)
+                } else if date.isPastDay() {
+                    runningStatus = .expired
                 } else {
                     runningStatus = .ready
                 }
