@@ -80,9 +80,9 @@ final class DataManager {
 
 private extension DataManager {
     static func getMealTime(_ mealTime: String, _ cafeteria: String) -> MealTime  {
-        if cafeteria == "(안성)카우버거" {
+        if cafeteria == "(다빈치)카우버거" {
             return .cauburger
-        } else if cafeteria == "(안성)라면" {
+        } else if cafeteria == "(다빈치)라면" {
             return .ramen
         } else {
             switch mealTime {
@@ -122,9 +122,9 @@ private extension DataManager {
             return .staff
         case "카우잇츠(cau eats)":
             return .cauEats
-        case "(안성)카우버거":
+        case "(다빈치)카우버거":
             return .cauBurger
-        case "(안성)라면":
+        case "(다빈치)라면":
             return .ramen
         default:
             return .blueMirA
