@@ -62,6 +62,8 @@ final class CafeteriaSelectView: UIScrollView {
                 name = "학생식당"
             case .staff:
                 name = "교직원"
+            case .universityClub:
+                name = "University Club"
             case .cauEats:
                 name = "카우이츠"
             case .cauBurger:

@@ -21,6 +21,7 @@ enum Cafeteria: String {
     case blueMirB
     case student
     case staff
+    case universityClub
     case cauEats
     case cauBurger
     case ramen

@@ -28,7 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                                         Cafeteria.blueMirA.rawValue,
                                                         Cafeteria.blueMirB.rawValue,
                                                         Cafeteria.student.rawValue,
-                                                        Cafeteria.staff.rawValue]
+                                                        Cafeteria.staff.rawValue,
+                                                        Cafeteria.universityClub.rawValue]
                 UserDefaults.standard.ansungCafeteria = [Cafeteria.cauEats.rawValue,
                                                          Cafeteria.cauBurger.rawValue,
                                                          Cafeteria.ramen.rawValue]

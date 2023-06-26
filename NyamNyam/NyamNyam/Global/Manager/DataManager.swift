@@ -120,6 +120,8 @@ private extension DataManager {
             return .student
         case "교직원식당(303관B1층)":
             return .staff
+        case "University Club(102관11층)":
+            return .universityClub
         case "카우잇츠(cau eats)":
             return .cauEats
         case "(안성)카우버거":
