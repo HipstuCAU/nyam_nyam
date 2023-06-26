@@ -49,7 +49,7 @@ final class ContentStackView: UIView {
     private func setStackViewContents() {
         guard let data = data else { return }
         var colCount = 2
-        if data.cafeteria == .blueMirB { colCount = 1 }
+        if data.cafeteria == .blueMirB || data.cafeteria == .universityClub { colCount = 1 }
         for row in 0..<Int(round(Double(Double(data.menu.count) / Double(colCount)))) {
             let rowStackView = UIStackView()
             rowStackView.axis = .horizontal
