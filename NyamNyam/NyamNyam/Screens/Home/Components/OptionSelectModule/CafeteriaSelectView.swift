@@ -70,6 +70,8 @@ final class CafeteriaSelectView: UIScrollView {
                 name = "카우버거"
             case .ramen:
                 name = "라면"
+            case .none:
+                name = ""
             }
             let button = CafeteriaButton(buttonIndex: idx, name: name)
             button.addTarget(self, action: #selector(cafeteriaButtonPressed), for: .touchUpInside)

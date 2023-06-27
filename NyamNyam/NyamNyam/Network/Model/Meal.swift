@@ -25,6 +25,7 @@ enum Cafeteria: String {
     case cauEats
     case cauBurger
     case ramen
+    case none
 }
 
 enum MealType {

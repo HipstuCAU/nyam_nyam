@@ -129,7 +129,7 @@ private extension DataManager {
         case "(안성)라면":
             return .ramen
         default:
-            return .blueMirA
+            return .none
         }
     }
     

@@ -143,6 +143,8 @@ extension ContentCarouselModuleViewController: UICollectionViewDataSource {
             return "707관"
         case .ramen:
             return "707관"
+        case .none:
+            return ""
         }
     }
 }
