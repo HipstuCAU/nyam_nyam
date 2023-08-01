@@ -25,6 +25,8 @@ final class SetCafeteriaOrderTableViewController: UIViewController {
             return "학생식당"
         case "staff":
             return "교직원"
+        case "universityClub":
+            return "University Club"
         case "cauEats":
             return "카우이츠"
         case "cauBurger":

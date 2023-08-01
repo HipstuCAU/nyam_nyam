@@ -135,12 +135,16 @@ extension ContentCarouselModuleViewController: UICollectionViewDataSource {
             return "법학관(303) B1층"
         case .staff:
             return "법학관(303) B1층"
+        case .universityClub:
+            return "R&D센터(102) 11층"
         case .cauEats:
             return "707관"
         case .cauBurger:
             return "707관"
         case .ramen:
             return "707관"
+        case .none:
+            return ""
         }
     }
 }
