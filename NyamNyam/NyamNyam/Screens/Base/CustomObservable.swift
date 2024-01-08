@@ -7,7 +7,7 @@
 
 import UIKit
 
-public final class Observable<Value> {
+public final class CustomObservable<Value> {
     
     struct Observer<Value> {
         weak var observer: AnyObject?

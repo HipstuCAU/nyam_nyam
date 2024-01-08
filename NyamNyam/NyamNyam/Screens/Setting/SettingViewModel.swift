@@ -8,9 +8,9 @@
 import Foundation
 
 final class SettingViewModel {
-    var currentCampus: Observable<Campus>
+    var currentCampus: CustomObservable<Campus>
     
     init() {
-        self.currentCampus = Observable(Campus(rawValue: UserDefaults.standard.campus) ?? .seoul)
+        self.currentCampus = CustomObservable(Campus(rawValue: UserDefaults.standard.campus) ?? .seoul)
     }
 }

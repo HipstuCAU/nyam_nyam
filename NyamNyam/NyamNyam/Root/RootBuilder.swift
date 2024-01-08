@@ -7,14 +7,21 @@
 
 import RIBs
 
-protocol RootDependency: Dependency {
-    // TODO: Declare the set of dependencies required by this RIB, but cannot be
-    // created by this RIB.
+protocol RootDependency: EmptyDependency {
+    
 }
 
 final class RootComponent: Component<RootDependency> {
-
-    // TODO: Declare 'fileprivate' dependencies that are only used by this RIB.
+    
+    let rootViewController: RootViewController
+    
+    init(
+        dependency: RootDependency,
+        rootViewController: RootViewController
+    ) {
+        self.rootViewController = rootViewController
+        super.init(dependency: dependency)
+    }
 }
 
 // MARK: - Builder
@@ -30,10 +37,18 @@ final class RootBuilder: Builder<RootDependency>, RootBuildable {
     }
     
     func build() -> LaunchRouting {
-        _ = RootComponent(dependency: dependency)
         let viewController = RootViewController()
+        
+        let component = RootComponent(
+            dependency: dependency,
+            rootViewController: viewController
+        )
+        
         let interactor = RootInteractor(presenter: viewController)
         
-        return RootRouter(interactor: interactor, viewController: viewController)
+        return RootRouter(
+            interactor: interactor,
+            viewController: viewController
+        )
     }
 }

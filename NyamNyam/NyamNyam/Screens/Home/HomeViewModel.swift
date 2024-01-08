@@ -8,24 +8,24 @@
 import UIKit
 
 final class HomeViewModel {
-    var currentCampus: Observable<Campus>
+    var currentCampus: CustomObservable<Campus>
     let seoulMeals: [MealsForDay] = Campus.seoul.mealsForAllDayByCampus()
     let ansungMeals: [MealsForDay] = Campus.ansung.mealsForAllDayByCampus()
     
     // MARK: - date picker 값
     var dateList: [Date]
-    var indexOfDate: Observable<Int>
+    var indexOfDate: CustomObservable<Int>
     
     // MARK: - cafeteria picker 값
     var seoulCafeteriaList: [Cafeteria]
     var ansungCafeteriaList: [Cafeteria]
-    var indexOfCafeteria: Observable<Int>
+    var indexOfCafeteria: CustomObservable<Int>
     
     
     init() {
-        self.currentCampus = Observable(Campus(rawValue: UserDefaults.standard.campus) ?? .seoul)
+        self.currentCampus = CustomObservable(Campus(rawValue: UserDefaults.standard.campus) ?? .seoul)
         
-        self.indexOfDate = Observable(0)
+        self.indexOfDate = CustomObservable(0)
         self.dateList = Date.prepareDateList()
         
         self.seoulCafeteriaList = UserDefaults.standard.seoulCafeteria.map {
@@ -38,7 +38,7 @@ final class HomeViewModel {
             return cafeteria
         }
         
-        self.indexOfCafeteria = Observable(0)
+        self.indexOfCafeteria = CustomObservable(0)
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleCampusChanged), name: UserDefaults.didChangeNotification, object: UserDefaults.standard)
         
@@ -50,7 +50,7 @@ final class HomeViewModel {
     
     
     @objc func handleCampusChanged() {
-        self.currentCampus = Observable(Campus(rawValue: UserDefaults.standard.campus) ?? .seoul)
+        self.currentCampus = CustomObservable(Campus(rawValue: UserDefaults.standard.campus) ?? .seoul)
     }
     
     @objc func handleSeoulCafeteriaChanged() {
