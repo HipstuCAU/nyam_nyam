@@ -24,6 +24,7 @@
 		2A429DAA29BF6B170044A3E6 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429DA929BF6B170044A3E6 /* SettingViewModel.swift */; };
 		2A429DAC29BF93BD0044A3E6 /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429DAB29BF93BD0044A3E6 /* BackButtonView.swift */; };
 		2A429DAE29C040D20044A3E6 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429DAD29C040D20044A3E6 /* Reachability.swift */; };
+		2A7489B22B4D981A00297CC7 /* MealPlanDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7489B12B4D981A00297CC7 /* MealPlanDTO.swift */; };
 		7A8405472B4BB9DD00830F77 /* RIBs in Frameworks */ = {isa = PBXBuildFile; productRef = 7A8405462B4BB9DD00830F77 /* RIBs */; };
 		7A84054A2B4BBA0C00830F77 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 7A8405492B4BBA0C00830F77 /* RxCocoa */; };
 		7A84054C2B4BBA0C00830F77 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7A84054B2B4BBA0C00830F77 /* RxSwift */; };
@@ -44,7 +45,6 @@
 		7A8405792B4D14A700830F77 /* HaksikService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405782B4D14A700830F77 /* HaksikService.swift */; };
 		7A84057F2B4D254400830F77 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A84057E2B4D254400830F77 /* NetworkError.swift */; };
 		7A8405812B4D440500830F77 /* MealPlanLocalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405802B4D440500830F77 /* MealPlanLocalRepository.swift */; };
-		7A8405842B4D5BE500830F77 /* DailyMealDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405832B4D5BE500830F77 /* DailyMealDTO.swift */; };
 		7A8405872B4D657300830F77 /* FileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405862B4D657300830F77 /* FileError.swift */; };
 		AB2D2C0129B8271C0015CB10 /* CafeteriaSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2D2C0029B8271C0015CB10 /* CafeteriaSelectView.swift */; };
 		AB2FDAAE29B84CC7001746DB /* CafeteriaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FDAAD29B84CC7001746DB /* CafeteriaButton.swift */; };
@@ -123,6 +123,7 @@
 		2A429DA929BF6B170044A3E6 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		2A429DAB29BF93BD0044A3E6 /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
 		2A429DAD29C040D20044A3E6 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		2A7489B12B4D981A00297CC7 /* MealPlanDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlanDTO.swift; sourceTree = "<group>"; };
 		7A84055D2B4BBAF900830F77 /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
 		7A84055E2B4BBAF900830F77 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		7A84055F2B4BBAF900830F77 /* RootBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootBuilder.swift; sourceTree = "<group>"; };
@@ -134,7 +135,6 @@
 		7A8405782B4D14A700830F77 /* HaksikService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaksikService.swift; sourceTree = "<group>"; };
 		7A84057E2B4D254400830F77 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		7A8405802B4D440500830F77 /* MealPlanLocalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlanLocalRepository.swift; sourceTree = "<group>"; };
-		7A8405832B4D5BE500830F77 /* DailyMealDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyMealDTO.swift; sourceTree = "<group>"; };
 		7A8405862B4D657300830F77 /* FileError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileError.swift; sourceTree = "<group>"; };
 		AB2D2C0029B8271C0015CB10 /* CafeteriaSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaSelectView.swift; sourceTree = "<group>"; };
 		AB2FDAAD29B84CC7001746DB /* CafeteriaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaButton.swift; sourceTree = "<group>"; };
@@ -373,7 +373,7 @@
 		7A8405822B4D5BCF00830F77 /* Entites */ = {
 			isa = PBXGroup;
 			children = (
-				7A8405832B4D5BE500830F77 /* DailyMealDTO.swift */,
+				2A7489B12B4D981A00297CC7 /* MealPlanDTO.swift */,
 			);
 			path = Entites;
 			sourceTree = "<group>";
@@ -748,6 +748,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A84057F2B4D254400830F77 /* NetworkError.swift in Sources */,
+				2A7489B22B4D981A00297CC7 /* MealPlanDTO.swift in Sources */,
 				ABFC439729B4515200EB9439 /* DateButton.swift in Sources */,
 				ABEAFC0129ACA0E4002C3119 /* MealsForDay.swift in Sources */,
 				ABBDF69329BA328A00E9347A /* ExpandableMealCardView.swift in Sources */,
@@ -776,7 +777,6 @@
 				ABEAFC1329AD279A002C3119 /* Meal.swift in Sources */,
 				AB2D2C0129B8271C0015CB10 /* CafeteriaSelectView.swift in Sources */,
 				2A429D9B29BE12F50044A3E6 /* SettingWebViewController.swift in Sources */,
-				7A8405842B4D5BE500830F77 /* DailyMealDTO.swift in Sources */,
 				7A8405622B4BBAF900830F77 /* RootViewController.swift in Sources */,
 				7A8405642B4BBAF900830F77 /* RootInteractor.swift in Sources */,
 				AB9B399E29BB6A2600249C61 /* ContentStackView.swift in Sources */,
