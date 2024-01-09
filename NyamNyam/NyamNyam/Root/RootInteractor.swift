@@ -18,6 +18,10 @@ protocol RootPresentable: Presentable {
     
 }
 
+protocol RootInteractorDependency {
+    var haksikDataService: HaksikService { get }
+}
+
 protocol RootListener: AnyObject {
     
 }
@@ -26,6 +30,7 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
                             RootInteractable,
                             RootPresentableListener,
                             Reactor {
+    private let dependency: RootInteractorDependency
     
     typealias Action = RootPresentableAction
     
@@ -41,8 +46,9 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
         case setLoading(Bool)
     }
     
-    override init(presenter: RootPresentable) {
+    init(presenter: RootPresentable, dependency: RootInteractorDependency) {
         self.initialState = State()
+        self.dependency = dependency
         super.init(presenter: presenter)
         presenter.listener = self
     }
@@ -65,7 +71,7 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
         switch action {
         case .loadData:
             return .concat([
-                .just(.setLoading(true))
+                .just(.setLoading(true)),
             ])
         }
     }

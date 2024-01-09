@@ -11,15 +11,22 @@ protocol RootDependency: EmptyDependency {
     
 }
 
-final class RootComponent: Component<RootDependency> {
+final class RootComponent: Component<RootDependency>,
+                           RootInteractorDependency {
     
     let rootViewController: RootViewController
     
+    let haksikDataService: HaksikService
+    
     init(
         dependency: RootDependency,
-        rootViewController: RootViewController
+        rootViewController: RootViewController,
+        remoteRepository: MealPlanRemoteRepository
     ) {
         self.rootViewController = rootViewController
+        self.haksikDataService = HaksikService(
+            remoteRepository: remoteRepository
+        )
         super.init(dependency: dependency)
     }
 }
@@ -30,7 +37,8 @@ protocol RootBuildable: Buildable {
     func build() -> LaunchRouting
 }
 
-final class RootBuilder: Builder<RootDependency>, RootBuildable {
+final class RootBuilder: Builder<RootDependency>,
+                         RootBuildable {
 
     override init(dependency: RootDependency) {
         super.init(dependency: dependency)
@@ -41,10 +49,14 @@ final class RootBuilder: Builder<RootDependency>, RootBuildable {
         
         let component = RootComponent(
             dependency: dependency,
-            rootViewController: viewController
+            rootViewController: viewController,
+            remoteRepository: MealPlanRemoteRepositoryImpl()
         )
         
-        let interactor = RootInteractor(presenter: viewController)
+        let interactor = RootInteractor(
+            presenter: viewController,
+            dependency: component
+        )
         
         return RootRouter(
             interactor: interactor,

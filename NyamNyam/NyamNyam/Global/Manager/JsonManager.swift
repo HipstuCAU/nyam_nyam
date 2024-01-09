@@ -12,7 +12,9 @@ final class JsonManager {
     private init() {}
     
     func jsonToString() -> String? {
-        guard let filename = getDocumentsDirectory()?.appendingPathComponent("CAUMeals.json") else { return nil }
+        guard let filename = getDocumentsDirectory()?.appendingPathComponent("CAUMeals.json")
+        else { return nil }
+        
         do {
             let stringData = try String(contentsOf: filename, encoding: String.Encoding.utf8)
             return stringData
@@ -20,16 +22,29 @@ final class JsonManager {
             return nil
         }
     }
+    
     func saveJson(_ strData: String) {
-        guard let filename = getDocumentsDirectory()?.appendingPathComponent("CAUMeals.json") else { return }
+        guard let filename = getDocumentsDirectory()?
+            .appendingPathComponent("CAUMeals.json")
+        else { return }
+        
         do {
-            try strData.write(to: filename, atomically: true, encoding: String.Encoding.utf8)
+            try strData.write(
+                to: filename,
+                atomically: true,
+                encoding: String.Encoding.utf8
+            )
         } catch {
             fatalError()
         }
     }
-    func getDocumentsDirectory() -> URL? {
-        guard let paths = FileManager.default.urls(for: FileManager.SearchPathDirectory.applicationSupportDirectory, in: FileManager.SearchPathDomainMask.userDomainMask).first else { return nil }
+    
+    private func getDocumentsDirectory() -> URL? {
+        guard let paths = FileManager.default.urls(
+            for: FileManager.SearchPathDirectory.applicationSupportDirectory,
+            in: FileManager.SearchPathDomainMask.userDomainMask
+        ).first
+        else { return nil }
         return paths
     }
 }
