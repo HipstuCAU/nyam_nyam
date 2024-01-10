@@ -21,10 +21,27 @@ struct CafeteriaDTO: Codable {
 
 struct DailyMenuDTO: Codable {
     let date: String
-    let breakfast: CafeteriaDTO?
-    let lunch: CafeteriaDTO?
-    let dinner: CafeteriaDTO?
-    let all: CafeteriaDTO?
+    var breakfast: [CafeteriaDTO]
+    var lunch: [CafeteriaDTO]
+    var dinner: [CafeteriaDTO]
+    var all: [CafeteriaDTO]
+
+    enum CodingKeys: String, CodingKey {
+        case date
+        case breakfast
+        case lunch
+        case dinner
+        case all
+    }
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        date = try container.decode(String.self, forKey: .date)
+        breakfast = (try? container.decode([CafeteriaDTO].self, forKey: .breakfast)) ?? []
+        lunch = (try? container.decode([CafeteriaDTO].self, forKey: .lunch)) ?? []
+        dinner = (try? container.decode([CafeteriaDTO].self, forKey: .dinner)) ?? []
+        all = (try? container.decode([CafeteriaDTO].self, forKey: .all)) ?? []
+    }
 }
 
 struct WeeklyMenuDTO: Codable {
