@@ -10,31 +10,29 @@ import RxSwift
 import Firebase
 
 protocol MealPlanJsonLocalRepository {
-    func fetchMealPlanJsonString() -> Single<String>
-    func createMealPlanJsonFileWith(jsonString: String)
+    func fetchMealPlanJsonString(fileName: String) -> Single<String>
+    func createMealPlanJsonFileWith(jsonString: String, fileName name: String) throws
 }
 
 final class MealPlanJsonLocalRepositoryImpl: MealPlanJsonLocalRepository {
-    
-    func fetchMealPlanJsonString() -> Single<String> {
+    func fetchMealPlanJsonString(fileName: String) -> Single<String> {
         return Single<String>.create { single in
-            guard let path = Bundle.main.path(
-                forResource: "CAUMeals",
-                ofType: "json"
-            ) else {
+            
+            guard let filename = self.getDocumentsDirectory()?
+                .appendingPathComponent(
+                    fileName + ".json"
+                )
+            else {
                 single(.failure(FileError.fileNotFound))
                 return Disposables.create()
             }
             
             do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path))
-                guard let jsonString = String(data: data, encoding: .utf8)
-                else {
-                    single(.failure(FileError.fileNotFound))
-                    return Disposables.create()
-                }
+                let jsonString = try String(
+                    contentsOf: filename,
+                    encoding: String.Encoding.utf8
+                )
                 
-                // MARK: Success
                 single(.success(jsonString))
                 
             } catch {
@@ -45,7 +43,35 @@ final class MealPlanJsonLocalRepositoryImpl: MealPlanJsonLocalRepository {
         }
     }
     
-    func createMealPlanJsonFileWith(jsonString: String) {
+    func createMealPlanJsonFileWith(
+        jsonString: String,
+        fileName name: String
+    ) throws {
         
+        guard let filename = getDocumentsDirectory()?
+            .appendingPathComponent(
+                name + ".json"
+            )
+        else {
+            throw FileError.fileNotFound
+        }
+        
+        try jsonString.write(
+            to: filename,
+            atomically: true,
+            encoding: String.Encoding.utf8
+        )
+    }
+}
+
+extension MealPlanJsonLocalRepositoryImpl {
+    private func getDocumentsDirectory() -> URL? {
+        guard let paths = FileManager.default.urls(
+            for: FileManager.SearchPathDirectory.applicationSupportDirectory,
+            in: FileManager.SearchPathDomainMask.userDomainMask
+        ).first
+        else { return nil }
+        
+        return paths
     }
 }

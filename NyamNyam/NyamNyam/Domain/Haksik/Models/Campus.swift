@@ -7,15 +7,15 @@
 
 import Foundation
 
-enum Campus: String {
-    case seoul
-    case ansung
-    
-    func mealsForAllDayByCampus() -> [MealsForDay] {
-        if self == .seoul {
-            return DataManager.getMealsForWeeks(.seoul)
-        } else {
-            return DataManager.getMealsForWeeks(.ansung)
-        }
-    }
-}
+//enum Campus: String {
+//    case seoul
+//    case ansung
+//    
+//    func mealsForAllDayByCampus() -> [MealsForDay] {
+//        if self == .seoul {
+//            return DataManager.getMealsForWeeks(.seoul)
+//        } else {
+//            return DataManager.getMealsForWeeks(.ansung)
+//        }
+//    }
+//}

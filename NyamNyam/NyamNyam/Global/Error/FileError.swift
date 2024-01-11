@@ -18,6 +18,8 @@ enum FileError: Error {
     
     case parsingError(Error)
     
+    case fileSaveError(Error)
+    
     var localizedDescription: String {
         switch self {
         case .noData:
@@ -30,6 +32,8 @@ enum FileError: Error {
             return "File not found"
         case let .parsingError(error):
             return "Parsing error: \(error.localizedDescription)"
+        case let .fileSaveError(error):
+            return "file save error: \(error.localizedDescription)"
         }
     }
 }

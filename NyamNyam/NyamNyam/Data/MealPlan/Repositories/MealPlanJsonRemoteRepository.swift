@@ -10,16 +10,17 @@ import RxSwift
 import Firebase
 
 protocol MealPlanJsonRemoteRepository {
-    func fetchMealPlanJsonString() -> Single<String>
+    func fetchMealPlanJsonString(collection: String, document: String) -> Single<String>
 }
 
 final class MealPlanJsonRemoteRepositoryImpl: MealPlanJsonRemoteRepository {
     
-    func fetchMealPlanJsonString() -> Single<String> {
+    func fetchMealPlanJsonString(
+        collection: String,
+        document: String
+    ) -> Single<String> {
+        
         return Single<String>.create { single in
-            let collection = "CAU_Haksik"
-            let document = "CAU_Cafeteria_Menu"
-
             let db = Firestore.firestore()
             let docRef = db.collection(collection).document(document)
 
@@ -29,7 +30,8 @@ final class MealPlanJsonRemoteRepositoryImpl: MealPlanJsonRemoteRepository {
                     return
                 }
 
-                guard let dataDescription = document?.data(), document?.exists == true
+                guard let dataDescription = document?.data(),
+                      document?.exists == true
                 else {
                     single(.failure(NetworkError.noData))
                     return

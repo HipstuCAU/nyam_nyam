@@ -408,6 +408,15 @@
 			path = Repositories;
 			sourceTree = "<group>";
 		};
+		7A8405902B4FC39800830F77 /* Presentaion */ = {
+			isa = PBXGroup;
+			children = (
+				7A8405652B4BBBA600830F77 /* AppStart */,
+				7A84055C2B4BBAC800830F77 /* Root */,
+			);
+			path = Presentaion;
+			sourceTree = "<group>";
+		};
 		AB2FDAAC29B84CA8001746DB /* CafeteriaSelectViewComponents */ = {
 			isa = PBXGroup;
 			children = (
@@ -469,11 +478,10 @@
 		ABEAFBC929AC9ED3002C3119 /* NyamNyam */ = {
 			isa = PBXGroup;
 			children = (
+				ABEAFBFE29ACA051002C3119 /* Global */,
 				7A84057A2B4D152500830F77 /* Data */,
 				7A84056D2B4BCB8B00830F77 /* Domain */,
-				7A8405652B4BBBA600830F77 /* AppStart */,
-				7A84055C2B4BBAC800830F77 /* Root */,
-				ABEAFBFE29ACA051002C3119 /* Global */,
+				7A8405902B4FC39800830F77 /* Presentaion */,
 				ABEAFBFA29AC9EDC002C3119 /* TempApplication */,
 				ABEAFBFC29AC9F03002C3119 /* TempScreens */,
 				ABEAFBD329AC9ED4002C3119 /* Assets.xcassets */,
