@@ -11,6 +11,7 @@ import Firebase
 
 protocol MealPlanLocalRepository {
     func fetchMealPlanJsonString() -> Single<String>
+    func createMealPlanJsonFile()
 }
 
 final class MealPlanLocalRepositoryImpl: MealPlanLocalRepository {
