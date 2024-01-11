@@ -19,7 +19,7 @@ protocol RootPresentable: Presentable {
 }
 
 protocol RootInteractorDependency {
-    var haksikDataService: HaksikService { get }
+    var haksikService: HaksikService { get }
 }
 
 protocol RootListener: AnyObject {

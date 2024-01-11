@@ -15,25 +15,25 @@ final class HaksikService {
     
     private let disposeBag: DisposeBag = .init()
     
-    init(repository: MealPlanRepository) {
-        self.repository = repository
+    init() {
+        let remoteRepository = MealPlanJsonRemoteRepositoryImpl()
+        
+        let localRepository = MealPlanJsonLocalRepositoryImpl()
+        
+        self.repository = MealPlanRepositoryImpl(
+            remoteRepository: remoteRepository,
+            localRepository: localRepository
+        )
     }
 }
 
-// MARK: - Logic with Remote repository
+// MARK: - Meal plan repository
 extension HaksikService {
     
-    func getMealPlan() -> Single<MealPlan> {
-        repository.fetchMealPlan()
+    func fetchMealPlan() -> Single<MealPlan> {
+        repository.fetchMealPlanData()
             .map { _ in
                 MealPlan()
             }
     }
-    
-}
-
-// MARK: - Logic with Local repository
-extension HaksikService {
-    
-    
 }

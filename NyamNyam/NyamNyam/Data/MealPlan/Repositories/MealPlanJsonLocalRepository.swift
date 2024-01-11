@@ -11,7 +11,7 @@ import Firebase
 
 protocol MealPlanJsonLocalRepository {
     func fetchMealPlanJsonString() -> Single<String>
-    func createMealPlanJsonFile()
+    func createMealPlanJsonFileWith(jsonString: String)
 }
 
 final class MealPlanJsonLocalRepositoryImpl: MealPlanJsonLocalRepository {
@@ -28,12 +28,16 @@ final class MealPlanJsonLocalRepositoryImpl: MealPlanJsonLocalRepository {
             
             do {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path))
+                guard let jsonString = String(data: data, encoding: .utf8)
+                else {
+                    single(.failure(FileError.fileNotFound))
+                    return Disposables.create()
+                }
                 
-                let jsonString = String(data: data, encoding: .utf8) ?? ""
-                
+                // MARK: Success
                 single(.success(jsonString))
-            } catch {
                 
+            } catch {
                 single(.failure(FileError.parsingError(error)))
             }
             
@@ -41,7 +45,7 @@ final class MealPlanJsonLocalRepositoryImpl: MealPlanJsonLocalRepository {
         }
     }
     
-    func createMealPlanJsonFile() {
+    func createMealPlanJsonFileWith(jsonString: String) {
         
     }
 }

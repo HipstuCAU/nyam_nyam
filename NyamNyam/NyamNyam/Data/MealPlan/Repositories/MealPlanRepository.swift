@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 protocol MealPlanRepository {
-    func fetchMealPlan() -> Single<MealPlanDTO>
+    func fetchMealPlanData() -> Single<MealPlanDTO>
 }
 
 final class MealPlanRepositoryImpl: MealPlanRepository {
@@ -26,8 +26,11 @@ final class MealPlanRepositoryImpl: MealPlanRepository {
         self.localRepository = localRepository
     }
     
-    func fetchMealPlan() -> Single<MealPlanDTO> {
+    func fetchMealPlanData() -> Single<MealPlanDTO> {
         return Single.create { single in
+            
+//            if UserDefaults.
+            
             Disposables.create()
         }
     }

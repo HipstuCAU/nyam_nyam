@@ -16,17 +16,14 @@ final class RootComponent: Component<RootDependency>,
     
     let rootViewController: RootViewController
     
-    let haksikDataService: HaksikService
+    let haksikService: HaksikService
     
     init(
         dependency: RootDependency,
-        rootViewController: RootViewController,
-        repository: MealPlanRepository
+        rootViewController: RootViewController
     ) {
         self.rootViewController = rootViewController
-        self.haksikDataService = HaksikService(
-            repository: repository
-        )
+        self.haksikService = HaksikService()
         super.init(dependency: dependency)
     }
 }
@@ -47,15 +44,9 @@ final class RootBuilder: Builder<RootDependency>,
     func build() -> LaunchRouting {
         let viewController = RootViewController()
         
-        let repository = MealPlanRepositoryImpl(
-            remoteRepository: MealPlanJsonRemoteRepositoryImpl(),
-            localRepository: MealPlanJsonLocalRepositoryImpl()
-        )
-        
         let component = RootComponent(
             dependency: dependency,
-            rootViewController: viewController,
-            repository: repository
+            rootViewController: viewController
         )
         
         let interactor = RootInteractor(
