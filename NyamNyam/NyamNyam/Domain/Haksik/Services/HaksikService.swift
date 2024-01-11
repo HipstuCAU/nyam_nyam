@@ -11,20 +11,23 @@ import RxCocoa
 
 final class HaksikService {
     
-    private let remoteRepository: MealPlanRemoteRepository
+    private let repository: MealPlanRepository
     
     private let disposeBag: DisposeBag = .init()
     
-    init(remoteRepository: MealPlanRemoteRepository) {
-        self.remoteRepository = remoteRepository
+    init(repository: MealPlanRepository) {
+        self.repository = repository
     }
 }
 
 // MARK: - Logic with Remote repository
 extension HaksikService {
     
-    func getMealPlan() -> Single<String> {
-        remoteRepository.fetchMealPlanJsonString()
+    func getMealPlan() -> Single<MealPlan> {
+        repository.fetchMealPlan()
+            .map { _ in
+                MealPlan()
+            }
     }
     
 }

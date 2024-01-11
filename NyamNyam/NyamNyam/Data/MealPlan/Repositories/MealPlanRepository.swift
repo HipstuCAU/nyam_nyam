@@ -14,13 +14,13 @@ protocol MealPlanRepository {
 
 final class MealPlanRepositoryImpl: MealPlanRepository {
     
-    private let remoteRepository: MealPlanRemoteRepository
+    private let remoteRepository: MealPlanJsonRemoteRepository
     
-    private let localRepository: MealPlanLocalRepository
+    private let localRepository: MealPlanJsonLocalRepository
     
     init(
-        remoteRepository: MealPlanRemoteRepository,
-        localRepository: MealPlanLocalRepository
+        remoteRepository: MealPlanJsonRemoteRepository,
+        localRepository: MealPlanJsonLocalRepository
     ) {
         self.remoteRepository = remoteRepository
         self.localRepository = localRepository

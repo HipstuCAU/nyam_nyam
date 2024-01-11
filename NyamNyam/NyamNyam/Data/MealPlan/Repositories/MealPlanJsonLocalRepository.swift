@@ -9,12 +9,12 @@ import Foundation
 import RxSwift
 import Firebase
 
-protocol MealPlanLocalRepository {
+protocol MealPlanJsonLocalRepository {
     func fetchMealPlanJsonString() -> Single<String>
     func createMealPlanJsonFile()
 }
 
-final class MealPlanLocalRepositoryImpl: MealPlanLocalRepository {
+final class MealPlanJsonLocalRepositoryImpl: MealPlanJsonLocalRepository {
     
     func fetchMealPlanJsonString() -> Single<String> {
         return Single<String>.create { single in
