@@ -9,9 +9,10 @@ import UIKit
 import RIBs
 import RxSwift
 import RxCocoa
+import Then
 
 enum RootPresentableAction {
-    case loadData
+    case retryLoad
 }
 
 protocol RootPresentableListener: AnyObject {
@@ -26,12 +27,20 @@ protocol RootPresentableListener: AnyObject {
 
 final class RootViewController: UIViewController,
                                 RootPresentable,
-                                RootViewControllable {
+                                 RootViewControllable {
 
     weak var listener: RootPresentableListener?
     
+    private let disposeBag: DisposeBag = .init()
+    
+    private let actionRelay: PublishRelay<RootPresentableListener.Action> = .init()
+    
     init() {
         super.init(nibName: nil, bundle: nil)
+    }
+    
+    override func viewDidLoad() {
+        configureUI()
         bindUI()
         bind(listener: listener)
     }
@@ -49,17 +58,16 @@ final class RootViewController: UIViewController,
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    // MARK: - Private
-    private let actionRelay: PublishRelay<RootPresentableListener.Action> = .init()
-    
-    private let disposeBag: DisposeBag = .init()
 }
 
 // MARK: - Bind UI
 private extension RootViewController {
     func bindLoadingIndicator() {
-        
+        listener?.state.map(\.isLoading)
+            .bind(with: self, onNext: { owner, isLoading in
+                print(isLoading)
+            })
+            .disposed(by: disposeBag)
     }
 }
 
@@ -77,13 +85,12 @@ private extension RootViewController {
 // MARK: - Bind Actions
 private extension RootViewController {
     func bindActions() {
-        bindViewDidLoadAction()
+        
     }
-    
-    func bindViewDidLoadAction() {
-        rx.viewDidLoad
-            .map { .loadData }
-            .bind(to: actionRelay)
-            .disposed(by: disposeBag)
+}
+
+private extension RootViewController {
+    func configureUI() {
+        view.backgroundColor = Pallete.cauBlue.color
     }
 }

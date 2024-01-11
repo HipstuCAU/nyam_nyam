@@ -6,8 +6,11 @@
 //
 
 import RIBs
+import RxCocoa
 
-class AppComponent: Component<EmptyDependency>, RootDependency {
+final class AppComponent: Component<EmptyDependency>, RootDependency {
+    
+    let applicationDidBecomeActiveRelay: PublishRelay<Void> = .init()
     
     init() {
         super.init(dependency: EmptyComponent())

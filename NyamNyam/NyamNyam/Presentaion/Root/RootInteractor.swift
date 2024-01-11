@@ -8,6 +8,7 @@
 import RIBs
 import ReactorKit
 import RxSwift
+import RxCocoa
 
 protocol RootRouting: ViewableRouting {
     
@@ -15,11 +16,11 @@ protocol RootRouting: ViewableRouting {
 
 protocol RootPresentable: Presentable {
     var listener: RootPresentableListener? { get set }
-    
 }
 
 protocol RootInteractorDependency {
     var haksikService: HaksikService { get }
+    var applicationDidBecomeActiveRelay: PublishRelay<Void> { get }
 }
 
 protocol RootListener: AnyObject {
@@ -42,48 +43,80 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
     
     weak var listener: RootListener?
     
-    enum Mutation {
-        case setLoading(Bool)
-    }
-    
-    init(presenter: RootPresentable, dependency: RootInteractorDependency) {
+    init(
+        presenter: RootPresentable,
+        dependency: RootInteractorDependency
+    ) {
         self.initialState = State()
         self.dependency = dependency
         super.init(presenter: presenter)
         presenter.listener = self
     }
-
+    
     override func didBecomeActive() {
         super.didBecomeActive()
     }
-
+    
     override func willResignActive() {
         super.willResignActive()
     }
     
-    // MARK: - RootPresentableListener
+    enum Mutation {
+        case fetchMealPlan
+        case setLoading(Bool)
+    }
     
+    // MARK: - RootPresentableListener
     func sendAction(_ action: Action) {
         self.action.onNext(action)
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
-        case .loadData:
-            return .concat([
-                .just(.setLoading(true)),
-            ])
+        case .retryLoad:
+            return .just(.fetchMealPlan)
         }
     }
     
+    func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
+        let applicationDidBecomeActive = dependency.applicationDidBecomeActiveRelay
+            .withUnretained(self)
+            .flatMap { owner, mutation -> Observable<Mutation> in
+                Observable.concat([
+                    .just(.setLoading(true)),
+                    owner.fetchMealPlanTransform(),
+                    .just(.setLoading(false))
+                ])
+            }
+
+        return .merge(mutation, applicationDidBecomeActive)
+    }
+    
     func reduce(state: State, mutation: Mutation) -> State {
-        var newState = state
+        var state = state
         
         switch mutation {
-        case let .setLoading(isLoading):
-            newState.isLoading = isLoading
+        case .fetchMealPlan:
+            break
+        case let .setLoading(status):
+            state.isLoading = status
         }
         
-        return newState
+        return state
+    }
+    
+    private func fetchMealPlanTransform() -> Observable<Mutation> {
+        self.dependency.haksikService.fetchMealPlan()
+            .subscribe(
+                with: self,
+                onSuccess: { owner, mealPlan in
+                    print(mealPlan)
+                },
+                onFailure: { owner, error in
+                    print(error.localizedDescription)
+                }
+            )
+            .disposeOnDeactivate(interactor: self)
+        return .empty()
     }
 }

@@ -6,15 +6,18 @@
 //
 
 import RIBs
+import RxCocoa
 
-protocol RootDependency: EmptyDependency {
-    
+protocol RootDependency: Dependency {
+    var applicationDidBecomeActiveRelay: PublishRelay<Void> { get }
 }
 
 final class RootComponent: Component<RootDependency>,
                            RootInteractorDependency {
     
     let rootViewController: RootViewController
+    
+    let applicationDidBecomeActiveRelay: PublishRelay<Void>
     
     let haksikService: HaksikService
     
@@ -23,7 +26,9 @@ final class RootComponent: Component<RootDependency>,
         rootViewController: RootViewController
     ) {
         self.rootViewController = rootViewController
+        // TODO: repository를 presentation layer에서 주입할 것인지 고민
         self.haksikService = HaksikService()
+        self.applicationDidBecomeActiveRelay = dependency.applicationDidBecomeActiveRelay
         super.init(dependency: dependency)
     }
 }
