@@ -61,17 +61,17 @@ final class MealPlanJsonLocalRepositoryImpl: MealPlanJsonLocalRepository {
             atomically: true,
             encoding: String.Encoding.utf8
         )
+        
+        UserDefaults().lastUpdate = Date().toStringWithTime()
     }
 }
 
 extension MealPlanJsonLocalRepositoryImpl {
     private func getDocumentsDirectory() -> URL? {
-        guard let paths = FileManager.default.urls(
-            for: FileManager.SearchPathDirectory.applicationSupportDirectory,
-            in: FileManager.SearchPathDomainMask.userDomainMask
-        ).first
-        else { return nil }
-        
-        return paths
+        let paths = FileManager.default.urls(
+            for: .documentDirectory,
+            in: .userDomainMask
+        )
+        return paths.first
     }
 }

@@ -110,10 +110,12 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
             .subscribe(
                 with: self,
                 onSuccess: { owner, mealPlan in
-                    print(mealPlan)
+                    // TODO: HaksikRIB 데이터 연동
+                    print("success")
                 },
                 onFailure: { owner, error in
-                    print(error.localizedDescription)
+                    // TODO: alert
+                    print("error: \(error.localizedDescription)")
                 }
             )
             .disposeOnDeactivate(interactor: self)

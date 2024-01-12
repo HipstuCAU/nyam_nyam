@@ -14,7 +14,7 @@ extension String {
         return dateFormatter.date(from: self)
     }
     
-    func convertToDateWithTime() -> Date? {
+    func toDateWithTime() -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(identifier: "UTC")
         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"

@@ -26,8 +26,14 @@ final class RootComponent: Component<RootDependency>,
         rootViewController: RootViewController
     ) {
         self.rootViewController = rootViewController
-        // TODO: repository를 presentation layer에서 주입할 것인지 고민
-        self.haksikService = HaksikService()
+        
+        let remoteRepository = MockMealPlanJsonRemoteRepositoryImpl()
+        let localRepository = MealPlanJsonLocalRepositoryImpl()
+        
+        self.haksikService = HaksikService(
+            remoteRepository: remoteRepository,
+            localRepository: localRepository
+        )
         self.applicationDidBecomeActiveRelay = dependency.applicationDidBecomeActiveRelay
         super.init(dependency: dependency)
     }

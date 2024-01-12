@@ -65,7 +65,7 @@ private extension RootViewController {
     func bindLoadingIndicator() {
         listener?.state.map(\.isLoading)
             .bind(with: self, onNext: { owner, isLoading in
-                print(isLoading)
+                
             })
             .disposed(by: disposeBag)
     }

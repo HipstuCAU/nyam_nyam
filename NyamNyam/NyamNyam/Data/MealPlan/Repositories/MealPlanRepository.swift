@@ -40,15 +40,17 @@ final class MealPlanRepositoryImpl: MealPlanRepository {
         let fetchedJsonString: Single<String>
         
         // 업데이트가 된 적 있고, 업데이트가 아직 유효한 경우
-        if let lastUpdateTime = UserDefaults().lastUpdate?.convertToDateWithTime(),
+        if let lastUpdateTime = UserDefaults().lastUpdate?.toDateWithTime(),
            lastUpdateTime >= updateValidityTime {
             // local
+            print("📁 start local fetch")
             fetchedJsonString = self.localRepository
                 .fetchMealPlanJsonString(
                     fileName: localFileName
                 )
         } else {
             // remote + create file to local
+            print("📡 start remote fetch")
             fetchedJsonString = self.remoteRepository
                 .fetchMealPlanJsonString(
                     collection: remoteCollectionName,

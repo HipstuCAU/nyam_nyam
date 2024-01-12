@@ -38,7 +38,9 @@ struct MealDTO: Codable {
 }
 
 struct MenuDTO: Codable {
-    let price, startTime, endTime: String
+    let price: String
+    let startTime: String
+    let endTime: String
     let menu: [String]
 }
 
