@@ -8,11 +8,15 @@
 import RIBs
 import RxCocoa
 
-final class AppComponent: Component<EmptyDependency>, RootDependency {
+final class AppComponent: Component<EmptyDependency>,
+                          RootDependency {
+    let alertService: AlertService
     
     let applicationDidBecomeActiveRelay: PublishRelay<Void> = .init()
     
-    init() {
+    
+    init(alertService: AlertService) {
+        self.alertService = alertService
         super.init(dependency: EmptyComponent())
     }
 }

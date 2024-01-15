@@ -24,8 +24,8 @@ final class MealPlanRepositoryImpl: MealPlanRepository {
     
     private let remoteDocumentName = "CAU_Cafeteria_Menu"
     
-    private var updateValidityTime: Date {
-        self.getValidityTime(hour: 2, minute: 30) ?? Date()
+    private var updateValidityTime: Date? {
+        self.getValidityTime(hour: 2, minute: 30)
     }
     
     init(
@@ -41,21 +41,22 @@ final class MealPlanRepositoryImpl: MealPlanRepository {
         
         // 업데이트가 된 적 있고, 업데이트가 아직 유효한 경우
         if let lastUpdateTime = UserDefaults().lastUpdate?.toDateWithTime(),
+           let updateValidityTime = updateValidityTime,
            lastUpdateTime >= updateValidityTime {
             // local
-            print("📁 start local fetch")
             fetchedJsonString = self.localRepository
                 .fetchMealPlanJsonString(
                     fileName: localFileName
                 )
+                .debug("📁 local fetch Json")
         } else {
             // remote + create file to local
-            print("📡 start remote fetch")
             fetchedJsonString = self.remoteRepository
                 .fetchMealPlanJsonString(
                     collection: remoteCollectionName,
                     document: remoteDocumentName
                 )
+                .debug("📡 remote fetch Json")
                 .do(onSuccess: { [weak self] jsonStr in
                     guard let self else { return }
                     do {

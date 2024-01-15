@@ -20,6 +20,7 @@ protocol RootPresentable: Presentable {
 
 protocol RootInteractorDependency {
     var haksikService: HaksikService { get }
+    var alertService: AlertService { get }
     var applicationDidBecomeActiveRelay: PublishRelay<Void> { get }
 }
 
@@ -64,7 +65,7 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
     enum Mutation {
         case setMealPlan(MealPlan)
         case setLoading(Bool)
-        case setRetryAlert(String)
+        case setRetryAlert(AlertInfo)
     }
     
     // MARK: - RootPresentableListener
@@ -103,8 +104,10 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
         switch mutation {
         case let .setMealPlan(mealPlan):
             print(mealPlan)
-        case let .setRetryAlert(message):
-            print(message)
+        case let .setRetryAlert(alertInfo):
+            dependency.alertService.showAlert(
+                alertInfo: alertInfo
+            )
         case let .setLoading(status):
             state.isLoading = status
         }
@@ -119,7 +122,13 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
                 .setMealPlan(mealPlan)
             }
             .catchAndReturn(
-                .setRetryAlert("인터넷 연결을 확인해주세요")
+                .setRetryAlert(
+                    AlertInfo(
+                        type: .errorWithRetry,
+                        title: "식단 로딩 중 문제가 발생했어요",
+                        message: "인터넷 연결을 확인해주세요"
+                    )
+                )
             )
     }
 }

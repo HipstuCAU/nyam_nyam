@@ -27,7 +27,7 @@ protocol RootPresentableListener: AnyObject {
 
 final class RootViewController: UIViewController,
                                 RootPresentable,
-                                 RootViewControllable {
+                                RootViewControllable {
 
     weak var listener: RootPresentableListener?
     
@@ -70,14 +70,7 @@ private extension RootViewController {
     func bindLoadingIndicator() {
         listener?.state.map(\.isLoading)
             .distinctUntilChanged()
-            .debug()
-            .bind(with: self, onNext: { owner, isLoading in
-                if isLoading {
-                    owner.loadingIndicator.startAnimating()
-                } else {
-                    owner.loadingIndicator.stopAnimating()
-                }
-            })
+            .bind(to: self.loadingIndicator.rx.isAnimating)
             .disposed(by: disposeBag)
     }
 }

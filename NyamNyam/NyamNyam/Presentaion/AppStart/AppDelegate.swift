@@ -13,13 +13,11 @@ import Firebase
 final class AppDelegate: UIResponder, UIApplicationDelegate {
 
     private var launchRouter: LaunchRouting?
-    
-    private let appComponent = AppComponent()
+
+    var appComponent: AppComponent?
     
     var window: UIWindow?
     
-    weak var appLifecycleListener: AppLifecycleListener?
-
     func application(
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
@@ -29,6 +27,11 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let window = UIWindow(frame: UIScreen.main.bounds)
         self.window = window
+        
+        let appComponent = AppComponent(
+            alertService: AlertServiceImpl(window: window)
+        )
+        self.appComponent = appComponent
 
         let launchRouter = RootBuilder(
             dependency: appComponent
@@ -43,6 +46,6 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         print("AppDelegate: applicationDidBecomeActive")
-        appComponent.applicationDidBecomeActiveRelay.accept(())
+        appComponent?.applicationDidBecomeActiveRelay.accept(())
     }
 }

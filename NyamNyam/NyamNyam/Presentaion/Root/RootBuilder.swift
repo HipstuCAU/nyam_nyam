@@ -9,6 +9,7 @@ import RIBs
 import RxCocoa
 
 protocol RootDependency: Dependency {
+    var alertService: AlertService { get }
     var applicationDidBecomeActiveRelay: PublishRelay<Void> { get }
 }
 
@@ -22,11 +23,14 @@ final class RootComponent: Component<RootDependency>,
     
     let haksikService: HaksikService
     
+    let alertService: AlertService
+    
     init(
         dependency: RootDependency,
         rootViewController: RootViewController
     ) {
         self.rootViewController = rootViewController
+        self.alertService = dependency.alertService
         
         let remoteRepository = MockMealPlanJsonRemoteRepositoryImpl()
         let localRepository = MealPlanJsonLocalRepositoryImpl()
@@ -37,7 +41,9 @@ final class RootComponent: Component<RootDependency>,
                 localRepository: localRepository
             )
         )
+        
         self.applicationDidBecomeActiveRelay = dependency.applicationDidBecomeActiveRelay
+        
         super.init(dependency: dependency)
     }
 }
