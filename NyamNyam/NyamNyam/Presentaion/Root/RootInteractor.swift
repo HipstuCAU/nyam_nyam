@@ -62,8 +62,9 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
     }
     
     enum Mutation {
-        case fetchMealPlan
+        case setMealPlan(MealPlan)
         case setLoading(Bool)
+        case setRetryAlert(String)
     }
     
     // MARK: - RootPresentableListener
@@ -74,7 +75,11 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
         case .retryLoad:
-            return .just(.fetchMealPlan)
+            return .concat([
+                .just(.setLoading(true)),
+                self.fetchMealPlanTransform(),
+                .just(.setLoading(false))
+            ])
         }
     }
     
@@ -82,7 +87,7 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
         let applicationDidBecomeActive = dependency.applicationDidBecomeActiveRelay
             .withUnretained(self)
             .flatMap { owner, mutation -> Observable<Mutation> in
-                Observable.concat([
+                return Observable.concat([
                     .just(.setLoading(true)),
                     owner.fetchMealPlanTransform(),
                     .just(.setLoading(false))
@@ -96,8 +101,10 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
         var state = state
         
         switch mutation {
-        case .fetchMealPlan:
-            break
+        case let .setMealPlan(mealPlan):
+            print(mealPlan)
+        case let .setRetryAlert(message):
+            print(message)
         case let .setLoading(status):
             state.isLoading = status
         }
@@ -107,18 +114,12 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
     
     private func fetchMealPlanTransform() -> Observable<Mutation> {
         self.dependency.haksikService.fetchMealPlan()
-            .subscribe(
-                with: self,
-                onSuccess: { owner, mealPlan in
-                    // TODO: HaksikRIB 데이터 연동
-                    print("success")
-                },
-                onFailure: { owner, error in
-                    // TODO: alert
-                    print("error: \(error.localizedDescription)")
-                }
+            .asObservable()
+            .map { mealPlan -> Mutation in
+                .setMealPlan(mealPlan)
+            }
+            .catchAndReturn(
+                .setRetryAlert("인터넷 연결을 확인해주세요")
             )
-            .disposeOnDeactivate(interactor: self)
-        return .empty()
     }
 }

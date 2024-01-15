@@ -35,6 +35,11 @@ final class RootViewController: UIViewController,
     
     private let actionRelay: PublishRelay<RootPresentableListener.Action> = .init()
     
+    private let loadingIndicator = UIActivityIndicatorView().then {
+        $0.style = .medium
+        $0.color = .white
+    }
+    
     init() {
         super.init(nibName: nil, bundle: nil)
     }
@@ -59,13 +64,19 @@ final class RootViewController: UIViewController,
         fatalError("init(coder:) has not been implemented")
     }
 }
-
+import ReactorKit
 // MARK: - Bind UI
 private extension RootViewController {
     func bindLoadingIndicator() {
         listener?.state.map(\.isLoading)
+            .distinctUntilChanged()
+            .debug()
             .bind(with: self, onNext: { owner, isLoading in
-                
+                if isLoading {
+                    owner.loadingIndicator.startAnimating()
+                } else {
+                    owner.loadingIndicator.stopAnimating()
+                }
             })
             .disposed(by: disposeBag)
     }
@@ -92,5 +103,11 @@ private extension RootViewController {
 private extension RootViewController {
     func configureUI() {
         view.backgroundColor = Pallete.cauBlue.color
+        
+        view.addSubview(loadingIndicator)
+        self.loadingIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.width.height.equalTo(100)
+        }
     }
 }

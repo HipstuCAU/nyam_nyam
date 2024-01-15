@@ -13,7 +13,8 @@ protocol RootDependency: Dependency {
 }
 
 final class RootComponent: Component<RootDependency>,
-                           RootInteractorDependency {
+                           RootInteractorDependency,
+                           HaksikDependency {
     
     let rootViewController: RootViewController
     
@@ -31,8 +32,10 @@ final class RootComponent: Component<RootDependency>,
         let localRepository = MealPlanJsonLocalRepositoryImpl()
         
         self.haksikService = HaksikService(
-            remoteRepository: remoteRepository,
-            localRepository: localRepository
+            repository: MealPlanRepositoryImpl(
+                remoteRepository: remoteRepository,
+                localRepository: localRepository
+            )
         )
         self.applicationDidBecomeActiveRelay = dependency.applicationDidBecomeActiveRelay
         super.init(dependency: dependency)

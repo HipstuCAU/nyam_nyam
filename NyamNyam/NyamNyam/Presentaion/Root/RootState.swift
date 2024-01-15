@@ -6,9 +6,7 @@
 //
 
 import Foundation
-import ReactorKit
 
 struct RootPresentableState {
-    @Pulse var isLoading = false
-    @Pulse var alertMessage: String = ""
+    var isLoading = false
 }

@@ -50,6 +50,11 @@
 		7A84058E2B4F8B4600830F77 /* MealPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A84058D2B4F8B4600830F77 /* MealPlan.swift */; };
 		7A8405932B4FC9B100830F77 /* MockMealPlanJsonRemoteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405922B4FC9B100830F77 /* MockMealPlanJsonRemoteRepository.swift */; };
 		7A8405952B4FD31E00830F77 /* AppLifeCycleListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405942B4FD31E00830F77 /* AppLifeCycleListener.swift */; };
+		7A84059B2B54B7F300830F77 /* HaksikRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405972B54B7F300830F77 /* HaksikRouter.swift */; };
+		7A84059C2B54B7F300830F77 /* HaksikViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405982B54B7F300830F77 /* HaksikViewController.swift */; };
+		7A84059D2B54B7F300830F77 /* HaksikBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405992B54B7F300830F77 /* HaksikBuilder.swift */; };
+		7A84059E2B54B7F300830F77 /* HaksikInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A84059A2B54B7F300830F77 /* HaksikInteractor.swift */; };
+		7A8405A12B54D91B00830F77 /* HaksikPresentableState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405A02B54D91B00830F77 /* HaksikPresentableState.swift */; };
 		AB2D2C0129B8271C0015CB10 /* CafeteriaSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2D2C0029B8271C0015CB10 /* CafeteriaSelectView.swift */; };
 		AB2FDAAE29B84CC7001746DB /* CafeteriaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FDAAD29B84CC7001746DB /* CafeteriaButton.swift */; };
 		AB2FDAB229B8D4B4001746DB /* ContentCarouselModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FDAB129B8D4B4001746DB /* ContentCarouselModuleViewController.swift */; };
@@ -145,6 +150,11 @@
 		7A84058D2B4F8B4600830F77 /* MealPlan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlan.swift; sourceTree = "<group>"; };
 		7A8405922B4FC9B100830F77 /* MockMealPlanJsonRemoteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockMealPlanJsonRemoteRepository.swift; sourceTree = "<group>"; };
 		7A8405942B4FD31E00830F77 /* AppLifeCycleListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppLifeCycleListener.swift; sourceTree = "<group>"; };
+		7A8405972B54B7F300830F77 /* HaksikRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaksikRouter.swift; sourceTree = "<group>"; };
+		7A8405982B54B7F300830F77 /* HaksikViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaksikViewController.swift; sourceTree = "<group>"; };
+		7A8405992B54B7F300830F77 /* HaksikBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaksikBuilder.swift; sourceTree = "<group>"; };
+		7A84059A2B54B7F300830F77 /* HaksikInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaksikInteractor.swift; sourceTree = "<group>"; };
+		7A8405A02B54D91B00830F77 /* HaksikPresentableState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaksikPresentableState.swift; sourceTree = "<group>"; };
 		AB2D2C0029B8271C0015CB10 /* CafeteriaSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaSelectView.swift; sourceTree = "<group>"; };
 		AB2FDAAD29B84CC7001746DB /* CafeteriaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaButton.swift; sourceTree = "<group>"; };
 		AB2FDAB129B8D4B4001746DB /* ContentCarouselModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCarouselModuleViewController.swift; sourceTree = "<group>"; };
@@ -337,6 +347,7 @@
 		7A84056D2B4BCB8B00830F77 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				7A84059F2B54B81D00830F77 /* Alert */,
 				7A8405712B4BD68D00830F77 /* Haksik */,
 			);
 			path = Domain;
@@ -419,6 +430,7 @@
 			children = (
 				7A8405652B4BBBA600830F77 /* AppStart */,
 				7A84055C2B4BBAC800830F77 /* Root */,
+				7A8405962B54B7DE00830F77 /* Haksik */,
 			);
 			path = Presentaion;
 			sourceTree = "<group>";
@@ -429,6 +441,25 @@
 				7A8405922B4FC9B100830F77 /* MockMealPlanJsonRemoteRepository.swift */,
 			);
 			path = Mock;
+			sourceTree = "<group>";
+		};
+		7A8405962B54B7DE00830F77 /* Haksik */ = {
+			isa = PBXGroup;
+			children = (
+				7A8405972B54B7F300830F77 /* HaksikRouter.swift */,
+				7A8405982B54B7F300830F77 /* HaksikViewController.swift */,
+				7A8405992B54B7F300830F77 /* HaksikBuilder.swift */,
+				7A84059A2B54B7F300830F77 /* HaksikInteractor.swift */,
+				7A8405A02B54D91B00830F77 /* HaksikPresentableState.swift */,
+			);
+			path = Haksik;
+			sourceTree = "<group>";
+		};
+		7A84059F2B54B81D00830F77 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Alert;
 			sourceTree = "<group>";
 		};
 		AB2FDAAC29B84CA8001746DB /* CafeteriaSelectViewComponents */ = {
@@ -791,6 +822,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A84059B2B54B7F300830F77 /* HaksikRouter.swift in Sources */,
 				7A84057F2B4D254400830F77 /* NetworkError.swift in Sources */,
 				2A7489B22B4D981A00297CC7 /* MealPlanDTO.swift in Sources */,
 				ABFC439729B4515200EB9439 /* DateButton.swift in Sources */,
@@ -803,12 +835,14 @@
 				2A429DA329BF36C50044A3E6 /* SetCafeteriaOrderTitleView.swift in Sources */,
 				7A8405872B4D657300830F77 /* FileError.swift in Sources */,
 				ABEAFBCF29AC9ED3002C3119 /* HomeViewController.swift in Sources */,
+				7A84059E2B54B7F300830F77 /* HaksikInteractor.swift in Sources */,
 				7A84056C2B4BC81400830F77 /* Reactive+.swift in Sources */,
 				ABEAFC1F29AE6769002C3119 /* UserDefaults+.swift in Sources */,
 				2A429D9E29BEBE030044A3E6 /* SetCafeteriaOrderTableViewController.swift in Sources */,
 				7A8405932B4FC9B100830F77 /* MockMealPlanJsonRemoteRepository.swift in Sources */,
 				7A8405732B4BDA6800830F77 /* RootState.swift in Sources */,
 				2A429D9929BDE2A40044A3E6 /* SettingListTableViewCell.swift in Sources */,
+				7A84059D2B54B7F300830F77 /* HaksikBuilder.swift in Sources */,
 				7A8405632B4BBAF900830F77 /* RootBuilder.swift in Sources */,
 				7A8405692B4BBC1300830F77 /* AppDelegate.swift in Sources */,
 				ABEAFC0429ACA4B1002C3119 /* Date+.swift in Sources */,
@@ -825,6 +859,7 @@
 				2A429D9B29BE12F50044A3E6 /* SettingWebViewController.swift in Sources */,
 				7A8405622B4BBAF900830F77 /* RootViewController.swift in Sources */,
 				7A8405642B4BBAF900830F77 /* RootInteractor.swift in Sources */,
+				7A84059C2B54B7F300830F77 /* HaksikViewController.swift in Sources */,
 				AB9B399E29BB6A2600249C61 /* ContentStackView.swift in Sources */,
 				2A429D7B29B9A06F0044A3E6 /* DataManager.swift in Sources */,
 				ABFC439429B44B1700EB9439 /* DateSelectView.swift in Sources */,
@@ -843,6 +878,7 @@
 				2A429DAE29C040D20044A3E6 /* Reachability.swift in Sources */,
 				AB62D60929C5AF26003A8DF8 /* AlertManager.swift in Sources */,
 				AB2FDAAE29B84CC7001746DB /* CafeteriaButton.swift in Sources */,
+				7A8405A12B54D91B00830F77 /* HaksikPresentableState.swift in Sources */,
 				ABEAFC1D29AE6337002C3119 /* CampusSelectView.swift in Sources */,
 				ABBDF69129B9C53C00E9347A /* CarouselCell.swift in Sources */,
 				ABA5FFDF29C15D400029C81C /* TimeLabelView.swift in Sources */,
