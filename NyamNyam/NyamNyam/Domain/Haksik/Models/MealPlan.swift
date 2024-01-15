@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct MealPlan {
+struct MealPlan: Equatable {
     
 }

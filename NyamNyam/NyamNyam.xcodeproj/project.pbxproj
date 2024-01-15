@@ -41,7 +41,7 @@
 		7A84056C2B4BC81400830F77 /* Reactive+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A84056B2B4BC81400830F77 /* Reactive+.swift */; };
 		7A8405732B4BDA6800830F77 /* RootState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405722B4BDA6800830F77 /* RootState.swift */; };
 		7A8405762B4BDC2400830F77 /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7A8405752B4BDC2400830F77 /* ReactorKit */; };
-		7A8405792B4D14A700830F77 /* HaksikService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405782B4D14A700830F77 /* HaksikService.swift */; };
+		7A8405792B4D14A700830F77 /* HaksikServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405782B4D14A700830F77 /* HaksikServiceImpl.swift */; };
 		7A84057F2B4D254400830F77 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A84057E2B4D254400830F77 /* NetworkError.swift */; };
 		7A8405812B4D440500830F77 /* MealPlanJsonLocalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405802B4D440500830F77 /* MealPlanJsonLocalRepository.swift */; };
 		7A8405872B4D657300830F77 /* FileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405862B4D657300830F77 /* FileError.swift */; };
@@ -55,6 +55,8 @@
 		7A84059D2B54B7F300830F77 /* HaksikBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405992B54B7F300830F77 /* HaksikBuilder.swift */; };
 		7A84059E2B54B7F300830F77 /* HaksikInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A84059A2B54B7F300830F77 /* HaksikInteractor.swift */; };
 		7A8405A12B54D91B00830F77 /* HaksikPresentableState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405A02B54D91B00830F77 /* HaksikPresentableState.swift */; };
+		7A8405A32B54DE9400830F77 /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405A22B54DE9400830F77 /* AlertService.swift */; };
+		7A8405A52B54FCF500830F77 /* MutableMealPlanStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405A42B54FCF500830F77 /* MutableMealPlanStream.swift */; };
 		AB2D2C0129B8271C0015CB10 /* CafeteriaSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2D2C0029B8271C0015CB10 /* CafeteriaSelectView.swift */; };
 		AB2FDAAE29B84CC7001746DB /* CafeteriaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FDAAD29B84CC7001746DB /* CafeteriaButton.swift */; };
 		AB2FDAB229B8D4B4001746DB /* ContentCarouselModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FDAB129B8D4B4001746DB /* ContentCarouselModuleViewController.swift */; };
@@ -70,7 +72,6 @@
 		AB62D61429C63ACC003A8DF8 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB62D61229C63ACC003A8DF8 /* Pretendard-Light.otf */; };
 		AB62D61529C63ACC003A8DF8 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB62D61229C63ACC003A8DF8 /* Pretendard-Light.otf */; };
 		AB62D61829C74C8C003A8DF8 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB62D61729C74C8C003A8DF8 /* ToastView.swift */; };
-		AB9B399C29BB199F00249C61 /* RunningStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9B399B29BB199F00249C61 /* RunningStatus.swift */; };
 		AB9B399E29BB6A2600249C61 /* ContentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9B399D29BB6A2600249C61 /* ContentStackView.swift */; };
 		AB9B39A029BF535000249C61 /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9B399F29BF534F00249C61 /* DividerView.swift */; };
 		ABA5FFDF29C15D400029C81C /* TimeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA5FFDE29C15D400029C81C /* TimeLabelView.swift */; };
@@ -84,14 +85,11 @@
 		ABEAFBE229AC9ED4002C3119 /* NyamNyamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFBE129AC9ED4002C3119 /* NyamNyamTests.swift */; };
 		ABEAFBEC29AC9ED4002C3119 /* NyamNyamUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFBEB29AC9ED4002C3119 /* NyamNyamUITests.swift */; };
 		ABEAFBEE29AC9ED4002C3119 /* NyamNyamUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFBED29AC9ED4002C3119 /* NyamNyamUITestsLaunchTests.swift */; };
-		ABEAFC0129ACA0E4002C3119 /* MealsForDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC0029ACA0E4002C3119 /* MealsForDay.swift */; };
 		ABEAFC0429ACA4B1002C3119 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC0329ACA4B1002C3119 /* Date+.swift */; };
 		ABEAFC0729ACA4E5002C3119 /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC0629ACA4E5002C3119 /* String+.swift */; };
 		ABEAFC0A29ACA523002C3119 /* MealPlanJsonRemoteRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC0929ACA523002C3119 /* MealPlanJsonRemoteRepository.swift */; };
 		ABEAFC0D29ACA59E002C3119 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC0C29ACA59E002C3119 /* HomeViewModel.swift */; };
 		ABEAFC1029ACB1FF002C3119 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = ABEAFC0F29ACB1FF002C3119 /* SnapKit */; };
-		ABEAFC1329AD279A002C3119 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC1229AD279A002C3119 /* Meal.swift */; };
-		ABEAFC1529AD2F36002C3119 /* Campus.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC1429AD2F36002C3119 /* Campus.swift */; };
 		ABEAFC1829ADC2B0002C3119 /* OptionSelectModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC1729ADC2B0002C3119 /* OptionSelectModuleViewController.swift */; };
 		ABEAFC1B29AE24B2002C3119 /* CustomObservable.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC1A29AE24B2002C3119 /* CustomObservable.swift */; };
 		ABEAFC1D29AE6337002C3119 /* CampusSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFC1C29AE6337002C3119 /* CampusSelectView.swift */; };
@@ -141,7 +139,7 @@
 		7A8405682B4BBC1300830F77 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A84056B2B4BC81400830F77 /* Reactive+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+.swift"; sourceTree = "<group>"; };
 		7A8405722B4BDA6800830F77 /* RootState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootState.swift; sourceTree = "<group>"; };
-		7A8405782B4D14A700830F77 /* HaksikService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaksikService.swift; sourceTree = "<group>"; };
+		7A8405782B4D14A700830F77 /* HaksikServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaksikServiceImpl.swift; sourceTree = "<group>"; };
 		7A84057E2B4D254400830F77 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
 		7A8405802B4D440500830F77 /* MealPlanJsonLocalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlanJsonLocalRepository.swift; sourceTree = "<group>"; };
 		7A8405862B4D657300830F77 /* FileError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileError.swift; sourceTree = "<group>"; };
@@ -155,6 +153,8 @@
 		7A8405992B54B7F300830F77 /* HaksikBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaksikBuilder.swift; sourceTree = "<group>"; };
 		7A84059A2B54B7F300830F77 /* HaksikInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaksikInteractor.swift; sourceTree = "<group>"; };
 		7A8405A02B54D91B00830F77 /* HaksikPresentableState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaksikPresentableState.swift; sourceTree = "<group>"; };
+		7A8405A22B54DE9400830F77 /* AlertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
+		7A8405A42B54FCF500830F77 /* MutableMealPlanStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutableMealPlanStream.swift; sourceTree = "<group>"; };
 		AB2D2C0029B8271C0015CB10 /* CafeteriaSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaSelectView.swift; sourceTree = "<group>"; };
 		AB2FDAAD29B84CC7001746DB /* CafeteriaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaButton.swift; sourceTree = "<group>"; };
 		AB2FDAB129B8D4B4001746DB /* ContentCarouselModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCarouselModuleViewController.swift; sourceTree = "<group>"; };
@@ -164,7 +164,6 @@
 		AB62D60E29C63AB7003A8DF8 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		AB62D61229C63ACC003A8DF8 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
 		AB62D61729C74C8C003A8DF8 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
-		AB9B399B29BB199F00249C61 /* RunningStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunningStatus.swift; sourceTree = "<group>"; };
 		AB9B399D29BB6A2600249C61 /* ContentStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentStackView.swift; sourceTree = "<group>"; };
 		AB9B399F29BF534F00249C61 /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
 		ABA5FFDE29C15D400029C81C /* TimeLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLabelView.swift; sourceTree = "<group>"; };
@@ -182,13 +181,10 @@
 		ABEAFBE729AC9ED4002C3119 /* NyamNyamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NyamNyamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABEAFBEB29AC9ED4002C3119 /* NyamNyamUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NyamNyamUITests.swift; sourceTree = "<group>"; };
 		ABEAFBED29AC9ED4002C3119 /* NyamNyamUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NyamNyamUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		ABEAFC0029ACA0E4002C3119 /* MealsForDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealsForDay.swift; sourceTree = "<group>"; };
 		ABEAFC0329ACA4B1002C3119 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
 		ABEAFC0629ACA4E5002C3119 /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		ABEAFC0929ACA523002C3119 /* MealPlanJsonRemoteRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlanJsonRemoteRepository.swift; sourceTree = "<group>"; };
 		ABEAFC0C29ACA59E002C3119 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		ABEAFC1229AD279A002C3119 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
-		ABEAFC1429AD2F36002C3119 /* Campus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Campus.swift; sourceTree = "<group>"; };
 		ABEAFC1729ADC2B0002C3119 /* OptionSelectModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionSelectModuleViewController.swift; sourceTree = "<group>"; };
 		ABEAFC1A29AE24B2002C3119 /* CustomObservable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomObservable.swift; sourceTree = "<group>"; };
 		ABEAFC1C29AE6337002C3119 /* CampusSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusSelectView.swift; sourceTree = "<group>"; };
@@ -356,7 +352,7 @@
 		7A8405702B4BCC6600830F77 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				7A8405782B4D14A700830F77 /* HaksikService.swift */,
+				7A8405782B4D14A700830F77 /* HaksikServiceImpl.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -458,6 +454,7 @@
 		7A84059F2B54B81D00830F77 /* Alert */ = {
 			isa = PBXGroup;
 			children = (
+				7A8405A22B54DE9400830F77 /* AlertService.swift */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -589,10 +586,7 @@
 			isa = PBXGroup;
 			children = (
 				7A84058D2B4F8B4600830F77 /* MealPlan.swift */,
-				ABEAFC1429AD2F36002C3119 /* Campus.swift */,
-				ABEAFC0029ACA0E4002C3119 /* MealsForDay.swift */,
-				ABEAFC1229AD279A002C3119 /* Meal.swift */,
-				AB9B399B29BB199F00249C61 /* RunningStatus.swift */,
+				7A8405A42B54FCF500830F77 /* MutableMealPlanStream.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -826,7 +820,6 @@
 				7A84057F2B4D254400830F77 /* NetworkError.swift in Sources */,
 				2A7489B22B4D981A00297CC7 /* MealPlanDTO.swift in Sources */,
 				ABFC439729B4515200EB9439 /* DateButton.swift in Sources */,
-				ABEAFC0129ACA0E4002C3119 /* MealsForDay.swift in Sources */,
 				ABBDF69329BA328A00E9347A /* ExpandableMealCardView.swift in Sources */,
 				2A429D9229BDDA0B0044A3E6 /* SettingViewController.swift in Sources */,
 				7A8405612B4BBAF900830F77 /* RootRouter.swift in Sources */,
@@ -851,10 +844,8 @@
 				7A8405672B4BBBD100830F77 /* AppComponent.swift in Sources */,
 				AB2FDAB229B8D4B4001746DB /* ContentCarouselModuleViewController.swift in Sources */,
 				ABEAFC1B29AE24B2002C3119 /* CustomObservable.swift in Sources */,
-				ABEAFC1529AD2F36002C3119 /* Campus.swift in Sources */,
 				2A429DAA29BF6B170044A3E6 /* SettingViewModel.swift in Sources */,
 				AB62D61829C74C8C003A8DF8 /* ToastView.swift in Sources */,
-				ABEAFC1329AD279A002C3119 /* Meal.swift in Sources */,
 				AB2D2C0129B8271C0015CB10 /* CafeteriaSelectView.swift in Sources */,
 				2A429D9B29BE12F50044A3E6 /* SettingWebViewController.swift in Sources */,
 				7A8405622B4BBAF900830F77 /* RootViewController.swift in Sources */,
@@ -863,19 +854,20 @@
 				AB9B399E29BB6A2600249C61 /* ContentStackView.swift in Sources */,
 				2A429D7B29B9A06F0044A3E6 /* DataManager.swift in Sources */,
 				ABFC439429B44B1700EB9439 /* DateSelectView.swift in Sources */,
+				7A8405A52B54FCF500830F77 /* MutableMealPlanStream.swift in Sources */,
 				7A8405812B4D440500830F77 /* MealPlanJsonLocalRepository.swift in Sources */,
 				7A84058E2B4F8B4600830F77 /* MealPlan.swift in Sources */,
 				2A429D9529BDDB370044A3E6 /* SettingListTableViewController.swift in Sources */,
 				ABEAFC1829ADC2B0002C3119 /* OptionSelectModuleViewController.swift in Sources */,
-				7A8405792B4D14A700830F77 /* HaksikService.swift in Sources */,
+				7A8405792B4D14A700830F77 /* HaksikServiceImpl.swift in Sources */,
 				ABEAFBCB29AC9ED3002C3119 /* TempAppDelegate.swift in Sources */,
-				AB9B399C29BB199F00249C61 /* RunningStatus.swift in Sources */,
 				ABEAFC0A29ACA523002C3119 /* MealPlanJsonRemoteRepository.swift in Sources */,
 				2A429DA829BF62E80044A3E6 /* SetDefaultCampusView.swift in Sources */,
 				AB9B39A029BF535000249C61 /* DividerView.swift in Sources */,
 				ABEAFC0729ACA4E5002C3119 /* String+.swift in Sources */,
 				7A8405952B4FD31E00830F77 /* AppLifeCycleListener.swift in Sources */,
 				2A429DAE29C040D20044A3E6 /* Reachability.swift in Sources */,
+				7A8405A32B54DE9400830F77 /* AlertService.swift in Sources */,
 				AB62D60929C5AF26003A8DF8 /* AlertManager.swift in Sources */,
 				AB2FDAAE29B84CC7001746DB /* CafeteriaButton.swift in Sources */,
 				7A8405A12B54D91B00830F77 /* HaksikPresentableState.swift in Sources */,

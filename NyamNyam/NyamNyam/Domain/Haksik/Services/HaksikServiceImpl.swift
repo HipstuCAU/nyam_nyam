@@ -9,6 +9,10 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+protocol HaksikService {
+    func fetchMealPlan() -> Single<MealPlan>
+}
+
 final class HaksikServiceImpl {
     
     private let repository: MealPlanRepository
@@ -21,7 +25,7 @@ final class HaksikServiceImpl {
 }
 
 // MARK: - Meal plan repository
-extension HaksikServiceImpl {
+extension HaksikServiceImpl: HaksikService {
     
     func fetchMealPlan() -> Single<MealPlan> {
         repository.fetchMealPlanData()
