@@ -29,8 +29,8 @@ extension HaksikServiceImpl: HaksikService {
     
     func fetchMealPlan() -> Single<MealPlan> {
         repository.fetchMealPlanData()
-            .map { _ in
-                MealPlan() // TODO: 내려온 데이터로 MealPlan 생성
+            .map { mealPlan in
+                return MealPlan() // TODO: 내려온 데이터로 MealPlan 생성
             }
     }
 }

@@ -9,5 +9,5 @@ import Foundation
 
 struct RootPresentableState {
     var isLoading: Bool = false
-    var alertMessage: AlertInfo? = nil
+    var alertInfo: AlertInfo? = nil
 }

@@ -53,6 +53,7 @@ final class RootViewController: UIViewController,
     
     private func bindUI() {
         bindLoadingIndicator()
+        bindAlert()
     }
     
     private func bind(listener: RootPresentableListener?) {
@@ -75,8 +76,8 @@ private extension RootViewController {
             .disposed(by: disposeBag)
     }
     
-    func bindAlertMessage() {
-        listener?.state.map(\.alertMessage)
+    func bindAlert() {
+        listener?.state.map(\.alertInfo)
             .compactMap({ $0 })
             .distinctUntilChanged()
             .observe(on: MainScheduler.instance)

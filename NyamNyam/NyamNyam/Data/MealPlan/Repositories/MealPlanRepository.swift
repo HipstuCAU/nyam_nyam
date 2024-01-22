@@ -87,6 +87,7 @@ final class MealPlanRepositoryImpl: MealPlanRepository {
                     throw FileError.parsingError(error)
                 }
             }
+            .debug("fetch result")
     }
 }
 

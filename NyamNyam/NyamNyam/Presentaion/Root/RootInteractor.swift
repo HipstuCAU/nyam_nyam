@@ -102,9 +102,11 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
         
         switch mutation {
         case let .setMealPlan(mealPlan):
-            print(mealPlan)
-        case let .setRetryAlert(alertInfo):
             break
+            
+        case let .setRetryAlert(alertInfo):
+            state.alertInfo = alertInfo
+            
         case let .setLoading(status):
             state.isLoading = status
         }
