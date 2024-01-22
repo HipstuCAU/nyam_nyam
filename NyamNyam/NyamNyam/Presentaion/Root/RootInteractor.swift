@@ -20,7 +20,6 @@ protocol RootPresentable: Presentable {
 
 protocol RootInteractorDependency {
     var haksikService: HaksikService { get }
-    var alertService: AlertService { get }
     var applicationDidBecomeActiveRelay: PublishRelay<Void> { get }
 }
 
@@ -105,9 +104,7 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
         case let .setMealPlan(mealPlan):
             print(mealPlan)
         case let .setRetryAlert(alertInfo):
-            dependency.alertService.showAlert(
-                alertInfo: alertInfo
-            )
+            break
         case let .setLoading(status):
             state.isLoading = status
         }

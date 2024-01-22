@@ -10,13 +10,9 @@ import RxCocoa
 
 final class AppComponent: Component<EmptyDependency>,
                           RootDependency {
-    let alertService: AlertService
-    
     let applicationDidBecomeActiveRelay: PublishRelay<Void> = .init()
     
-    
-    init(alertService: AlertService) {
-        self.alertService = alertService
+    init() {
         super.init(dependency: EmptyComponent())
     }
 }

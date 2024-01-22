@@ -72,7 +72,8 @@
 		AB62D61429C63ACC003A8DF8 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB62D61229C63ACC003A8DF8 /* Pretendard-Light.otf */; };
 		AB62D61529C63ACC003A8DF8 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB62D61229C63ACC003A8DF8 /* Pretendard-Light.otf */; };
 		AB62D61829C74C8C003A8DF8 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB62D61729C74C8C003A8DF8 /* ToastView.swift */; };
-		AB934C432B57A31900B14810 /* hasAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB934C422B57A31900B14810 /* hasAlert.swift */; };
+		AB934C432B57A31900B14810 /* AlertPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB934C422B57A31900B14810 /* AlertPresentable.swift */; };
+		AB934C522B5E4B9F00B14810 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB934C512B5E4B9F00B14810 /* UIViewController+.swift */; };
 		AB9B399E29BB6A2600249C61 /* ContentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9B399D29BB6A2600249C61 /* ContentStackView.swift */; };
 		AB9B39A029BF535000249C61 /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9B399F29BF534F00249C61 /* DividerView.swift */; };
 		ABA5FFDF29C15D400029C81C /* TimeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA5FFDE29C15D400029C81C /* TimeLabelView.swift */; };
@@ -165,7 +166,8 @@
 		AB62D60E29C63AB7003A8DF8 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		AB62D61229C63ACC003A8DF8 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
 		AB62D61729C74C8C003A8DF8 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
-		AB934C422B57A31900B14810 /* hasAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hasAlert.swift; sourceTree = "<group>"; };
+		AB934C422B57A31900B14810 /* AlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresentable.swift; sourceTree = "<group>"; };
+		AB934C512B5E4B9F00B14810 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		AB9B399D29BB6A2600249C61 /* ContentStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentStackView.swift; sourceTree = "<group>"; };
 		AB9B399F29BF534F00249C61 /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
 		ABA5FFDE29C15D400029C81C /* TimeLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLabelView.swift; sourceTree = "<group>"; };
@@ -487,19 +489,19 @@
 			path = Toast;
 			sourceTree = "<group>";
 		};
-		AB934C412B57A30C00B14810 /* Alert */ = {
+		AB934C412B57A30C00B14810 /* AlertPresentable */ = {
 			isa = PBXGroup;
 			children = (
 				7A8405A62B5513C600830F77 /* Models */,
-				AB934C422B57A31900B14810 /* hasAlert.swift */,
+				AB934C422B57A31900B14810 /* AlertPresentable.swift */,
 			);
-			path = Alert;
+			path = AlertPresentable;
 			sourceTree = "<group>";
 		};
 		AB934C442B57A3E700B14810 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				AB934C412B57A30C00B14810 /* Alert */,
+				AB934C412B57A30C00B14810 /* AlertPresentable */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -617,6 +619,7 @@
 				ABEAFC0629ACA4E5002C3119 /* String+.swift */,
 				ABEAFC1E29AE6769002C3119 /* UserDefaults+.swift */,
 				7A84056B2B4BC81400830F77 /* Reactive+.swift */,
+				AB934C512B5E4B9F00B14810 /* UIViewController+.swift */,
 			);
 			path = "Extension+";
 			sourceTree = "<group>";
@@ -849,6 +852,7 @@
 				7A8405872B4D657300830F77 /* FileError.swift in Sources */,
 				ABEAFBCF29AC9ED3002C3119 /* HomeViewController.swift in Sources */,
 				7A84059E2B54B7F300830F77 /* HaksikInteractor.swift in Sources */,
+				AB934C522B5E4B9F00B14810 /* UIViewController+.swift in Sources */,
 				7A84056C2B4BC81400830F77 /* Reactive+.swift in Sources */,
 				ABEAFC1F29AE6769002C3119 /* UserDefaults+.swift in Sources */,
 				2A429D9E29BEBE030044A3E6 /* SetCafeteriaOrderTableViewController.swift in Sources */,
@@ -873,7 +877,7 @@
 				7A8405AB2B5513FB00830F77 /* AlertInfo.swift in Sources */,
 				7A84059C2B54B7F300830F77 /* HaksikViewController.swift in Sources */,
 				AB9B399E29BB6A2600249C61 /* ContentStackView.swift in Sources */,
-				AB934C432B57A31900B14810 /* hasAlert.swift in Sources */,
+				AB934C432B57A31900B14810 /* AlertPresentable.swift in Sources */,
 				2A429D7B29B9A06F0044A3E6 /* DataManager.swift in Sources */,
 				ABFC439429B44B1700EB9439 /* DateSelectView.swift in Sources */,
 				7A8405A52B54FCF500830F77 /* MutableMealPlanStream.swift in Sources */,

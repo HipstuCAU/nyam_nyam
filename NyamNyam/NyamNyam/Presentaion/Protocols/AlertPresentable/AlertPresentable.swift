@@ -7,12 +7,12 @@
 
 import UIKit
 
-protocol hasAlert where Self: UIViewController {
-    func showAlert(alertInfo: AlertInfo, actions: [UIAlertAction])
+protocol AlertPresentable where Self: UIViewController {
+    func showAlertOnWindow(alertInfo: AlertInfo, actions: [UIAlertAction])
 }
 
-extension hasAlert {
-    func showAlert(alertInfo: AlertInfo, actions: [UIAlertAction]) {
+extension AlertPresentable {
+    func showAlertOnWindow(alertInfo: AlertInfo, actions: [UIAlertAction]) {
         let alert = UIAlertController(
             title: alertInfo.title,
             message: alertInfo.message,
@@ -21,6 +21,6 @@ extension hasAlert {
         actions.forEach {
             alert.addAction($0)
         }
-        self.present(alert, animated: true)
+        self.activateViewContoller?.present(alert, animated: true)
     }
 }

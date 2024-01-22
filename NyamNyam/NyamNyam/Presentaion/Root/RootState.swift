@@ -8,5 +8,6 @@
 import Foundation
 
 struct RootPresentableState {
-    var isLoading = false
+    var isLoading: Bool = false
+    var alertMessage: AlertInfo? = nil
 }

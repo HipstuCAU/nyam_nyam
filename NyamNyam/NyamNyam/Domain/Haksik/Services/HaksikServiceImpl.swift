@@ -30,7 +30,7 @@ extension HaksikServiceImpl: HaksikService {
     func fetchMealPlan() -> Single<MealPlan> {
         repository.fetchMealPlanData()
             .map { _ in
-                MealPlan()
+                MealPlan() // TODO: 내려온 데이터로 MealPlan 생성
             }
     }
 }

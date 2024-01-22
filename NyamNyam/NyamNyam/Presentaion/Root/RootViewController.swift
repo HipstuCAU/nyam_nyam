@@ -27,7 +27,8 @@ protocol RootPresentableListener: AnyObject {
 
 final class RootViewController: UIViewController,
                                 RootPresentable,
-                                RootViewControllable {
+                                RootViewControllable,
+                                AlertPresentable {
 
     weak var listener: RootPresentableListener?
     
@@ -72,6 +73,26 @@ private extension RootViewController {
             .distinctUntilChanged()
             .bind(to: self.loadingIndicator.rx.isAnimating)
             .disposed(by: disposeBag)
+    }
+    
+    func bindAlertMessage() {
+        listener?.state.map(\.alertMessage)
+            .compactMap({ $0 })
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
+            .bind(with: self, onNext: { owner, alertInfo in
+                owner.showAlertOnWindow(
+                    alertInfo: alertInfo,
+                    actions: [UIAlertAction(
+                        title: "재시도",
+                        style: .default
+                    ) { [weak self] _ in
+                        self?.actionRelay.accept(.retryLoad)
+                    }]
+                )
+            })
+            .disposed(by: disposeBag)
+            
     }
 }
 
