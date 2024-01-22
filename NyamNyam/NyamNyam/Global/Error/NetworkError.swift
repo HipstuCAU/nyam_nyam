@@ -2,7 +2,7 @@
 //  NetworkError.swift
 //  NyamNyam
 //
-//  Created by Sdaq on 2024/01/09.
+//  Created by 박준홍 on 2024/01/09.
 //
 
 import Foundation

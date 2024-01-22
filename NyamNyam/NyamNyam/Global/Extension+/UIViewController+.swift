@@ -2,7 +2,7 @@
 //  UIViewController+.swift
 //  NyamNyam
 //
-//  Created by Noah Park on 1/22/24.
+//  Created by 박준홍 on 1/22/24.
 //
 
 import UIKit

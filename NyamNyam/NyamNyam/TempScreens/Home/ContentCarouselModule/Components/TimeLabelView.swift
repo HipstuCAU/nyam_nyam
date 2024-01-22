@@ -2,7 +2,7 @@
 //  TimeLabelView.swift
 //  NyamNyam
 //
-//  Created by Noah Park on 2023/03/15.
+//  Created by 박준홍 on 2023/03/15.
 //
 
 import UIKit

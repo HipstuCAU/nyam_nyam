@@ -2,7 +2,7 @@
 //  HaksikBuilder.swift
 //  NyamNyam
 //
-//  Created by Sdaq on 2024/01/15.
+//  Created by 박준홍 on 2024/01/15.
 //
 
 import RIBs

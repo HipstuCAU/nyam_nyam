@@ -2,7 +2,7 @@
 //  hasAlert.swift
 //  NyamNyam
 //
-//  Created by Noah Park on 1/17/24.
+//  Created by 박준홍 on 1/17/24.
 //
 
 import UIKit

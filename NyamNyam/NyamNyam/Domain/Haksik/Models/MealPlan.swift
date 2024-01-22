@@ -2,7 +2,7 @@
 //  File.swift
 //  NyamNyam
 //
-//  Created by Sdaq on 2024/01/11.
+//  Created by 박준홍 on 2024/01/11.
 //
 
 import Foundation
