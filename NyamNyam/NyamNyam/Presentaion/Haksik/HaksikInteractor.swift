@@ -22,10 +22,17 @@ protocol HaksikListener: AnyObject {
     
 }
 
+protocol HaksikInteractorDependency {
+    var mealPlan: MealPlan { get }
+    var haksikService: HaksikService { get }
+}
+
 final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
                               HaksikInteractable,
                               HaksikPresentableListener,
                               Reactor {
+    private let dependency: HaksikInteractorDependency
+    
     typealias Action = HaksikPresentableAction
     
     typealias State = HaksikPresentableState
@@ -36,8 +43,12 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
     
     weak var listener: HaksikListener?
 
-    override init(presenter: HaksikPresentable) {
+    init(
+        presenter: HaksikPresentable,
+        dependency: HaksikInteractorDependency
+    ) {
         self.initialState = State()
+        self.dependency = dependency
         super.init(presenter: presenter)
         presenter.listener = self
     }

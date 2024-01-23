@@ -11,11 +11,18 @@ protocol HaksikDependency: Dependency {
     var haksikService: HaksikService { get }
 }
 
-final class HaksikComponent: Component<HaksikDependency> {
+final class HaksikComponent: Component<HaksikDependency>,
+                             HaksikInteractorDependency {
+    var mealPlan: MealPlan
+    
     let haksikService: HaksikService
     
-    override init(dependency: HaksikDependency) {
+    init(
+        dependency: HaksikDependency,
+        mealPlan: MealPlan
+    ) {
         self.haksikService = dependency.haksikService
+        self.mealPlan = mealPlan
         super.init(dependency: dependency)
     }
 }
@@ -23,7 +30,7 @@ final class HaksikComponent: Component<HaksikDependency> {
 // MARK: - Builder
 
 protocol HaksikBuildable: Buildable {
-    func build(withListener listener: HaksikListener) -> HaksikRouting
+    func build(withListener listener: HaksikListener, mealPlan: MealPlan) -> HaksikRouting
 }
 
 final class HaksikBuilder: Builder<HaksikDependency>,
@@ -33,11 +40,22 @@ final class HaksikBuilder: Builder<HaksikDependency>,
         super.init(dependency: dependency)
     }
 
-    func build(withListener listener: HaksikListener) -> HaksikRouting {
-        let component = HaksikComponent(dependency: dependency)
+    func build(
+        withListener listener: HaksikListener,
+        mealPlan: MealPlan
+    ) -> HaksikRouting {
+        
+        let component = HaksikComponent(
+            dependency: dependency,
+            mealPlan: mealPlan
+        )
         let viewController = HaksikViewController()
-        let interactor = HaksikInteractor(presenter: viewController)
+        let interactor = HaksikInteractor(
+            presenter: viewController,
+            dependency: component
+        )
         interactor.listener = listener
+        
         return HaksikRouter(
             interactor: interactor,
             viewController: viewController

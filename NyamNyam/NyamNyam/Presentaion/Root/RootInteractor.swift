@@ -11,7 +11,8 @@ import RxSwift
 import RxCocoa
 
 protocol RootRouting: ViewableRouting {
-    
+    func attachHaksik(mealPlan: MealPlan)
+    func detachHaksik()
 }
 
 protocol RootPresentable: Presentable {
@@ -102,7 +103,7 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
         
         switch mutation {
         case let .setMealPlan(mealPlan):
-            break
+            router?.attachHaksik(mealPlan: mealPlan)
             
         case let .setRetryAlert(alertInfo):
             state.alertInfo = alertInfo

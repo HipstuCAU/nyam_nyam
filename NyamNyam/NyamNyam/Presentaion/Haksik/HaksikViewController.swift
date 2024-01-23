@@ -25,11 +25,13 @@ protocol HaksikPresentableListener: AnyObject {
 
 final class HaksikViewController: UIViewController,
                                   HaksikPresentable,
-                                  HaksikViewControllable {
+                                  HaksikViewControllable,
+                                  NavigationConfigurable {
 
     weak var listener: HaksikPresentableListener?
     
     override func viewDidLoad() {
-        view.backgroundColor = .brown
+        view.backgroundColor = .white
+        deactivateNavigation()
     }
 }

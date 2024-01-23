@@ -16,17 +16,11 @@ final class RootComponent: Component<RootDependency>,
                            RootInteractorDependency,
                            HaksikDependency {
     
-    let rootViewController: RootViewController
-    
     let applicationDidBecomeActiveRelay: PublishRelay<Void>
     
     let haksikService: HaksikService
     
-    init(
-        dependency: RootDependency,
-        rootViewController: RootViewController
-    ) {
-        self.rootViewController = rootViewController
+    override init(dependency: RootDependency) {
         
         let remoteRepository = MockMealPlanJsonRemoteRepositoryImpl()
         let localRepository = MealPlanJsonLocalRepositoryImpl()
@@ -59,10 +53,12 @@ final class RootBuilder: Builder<RootDependency>,
     
     func build() -> LaunchRouting {
         let viewController = RootViewController()
+        let navigationController = RootNavigationControllerable(
+            root: viewController
+        )
         
         let component = RootComponent(
-            dependency: dependency,
-            rootViewController: viewController
+            dependency: dependency
         )
         
         let interactor = RootInteractor(
@@ -70,9 +66,14 @@ final class RootBuilder: Builder<RootDependency>,
             dependency: component
         )
         
+        let haksikBuilder = HaksikBuilder(
+            dependency: component
+        )
+        
         return RootRouter(
             interactor: interactor,
-            viewController: viewController
+            viewController: navigationController,
+            haksikBuilder: haksikBuilder
         )
     }
 }
