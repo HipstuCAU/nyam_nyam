@@ -41,6 +41,8 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>,
         guard attachedRouter == nil
         else { return }
         
+        detachHaksik()
+        
         let haksikRouter = haksikBuilder.build(
             withListener: self.interactor,
             mealPlan: mealPlan
@@ -55,7 +57,12 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>,
     }
     
     func detachHaksik() {
-        guard attachedRouter != nil 
+        guard let attachedRouter
         else { return }
+        
+        self.viewControllable.popToRoot(animated: false)
+        
+        self.detachChild(attachedRouter)
+        self.attachedRouter = nil
     }
 }
