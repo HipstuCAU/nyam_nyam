@@ -40,7 +40,7 @@
 		7A8405732B4BDA6800830F77 /* RootState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405722B4BDA6800830F77 /* RootState.swift */; };
 		7A8405762B4BDC2400830F77 /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7A8405752B4BDC2400830F77 /* ReactorKit */; };
 		7A8405792B4D14A700830F77 /* HaksikServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405782B4D14A700830F77 /* HaksikServiceImpl.swift */; };
-		7A84057F2B4D254400830F77 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A84057E2B4D254400830F77 /* NetworkError.swift */; };
+		7A84057F2B4D254400830F77 /* FirebaseDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A84057E2B4D254400830F77 /* FirebaseDataError.swift */; };
 		7A8405812B4D440500830F77 /* MealPlanJsonLocalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405802B4D440500830F77 /* MealPlanJsonLocalRepository.swift */; };
 		7A8405872B4D657300830F77 /* FileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405862B4D657300830F77 /* FileError.swift */; };
 		7A8405892B4F770200830F77 /* MealPlanMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A8405882B4F770200830F77 /* MealPlanMockData.json */; };
@@ -140,7 +140,7 @@
 		7A84056B2B4BC81400830F77 /* Reactive+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+.swift"; sourceTree = "<group>"; };
 		7A8405722B4BDA6800830F77 /* RootState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootState.swift; sourceTree = "<group>"; };
 		7A8405782B4D14A700830F77 /* HaksikServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaksikServiceImpl.swift; sourceTree = "<group>"; };
-		7A84057E2B4D254400830F77 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		7A84057E2B4D254400830F77 /* FirebaseDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDataError.swift; sourceTree = "<group>"; };
 		7A8405802B4D440500830F77 /* MealPlanJsonLocalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlanJsonLocalRepository.swift; sourceTree = "<group>"; };
 		7A8405862B4D657300830F77 /* FileError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileError.swift; sourceTree = "<group>"; };
 		7A8405882B4F770200830F77 /* MealPlanMockData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MealPlanMockData.json; sourceTree = "<group>"; };
@@ -389,7 +389,7 @@
 		7A8405852B4D656000830F77 /* Error */ = {
 			isa = PBXGroup;
 			children = (
-				7A84057E2B4D254400830F77 /* NetworkError.swift */,
+				7A84057E2B4D254400830F77 /* FirebaseDataError.swift */,
 				7A8405862B4D657300830F77 /* FileError.swift */,
 			);
 			path = Error;
@@ -839,7 +839,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A84059B2B54B7F300830F77 /* HaksikRouter.swift in Sources */,
-				7A84057F2B4D254400830F77 /* NetworkError.swift in Sources */,
+				7A84057F2B4D254400830F77 /* FirebaseDataError.swift in Sources */,
 				2A7489B22B4D981A00297CC7 /* MealPlanDTO.swift in Sources */,
 				ABFC439729B4515200EB9439 /* DateButton.swift in Sources */,
 				ABBDF69329BA328A00E9347A /* ExpandableMealCardView.swift in Sources */,

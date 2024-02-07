@@ -26,14 +26,14 @@ final class MealPlanJsonRemoteRepositoryImpl: MealPlanJsonRemoteRepository {
 
             docRef.getDocument { (document, error) in
                 if let error = error {
-                    single(.failure(NetworkError.firestoreError(error)))
+                    single(.failure(FirebaseDataError.firestoreError(error)))
                     return
                 }
 
                 guard let dataDescription = document?.data(),
                       document?.exists == true
                 else {
-                    single(.failure(NetworkError.noData))
+                    single(.failure(FirebaseDataError.noData))
                     return
                 }
 
@@ -49,10 +49,10 @@ final class MealPlanJsonRemoteRepositoryImpl: MealPlanJsonRemoteRepository {
                     ) {
                         single(.success(jsonString))
                     } else {
-                        single(.failure(NetworkError.invalidData))
+                        single(.failure(FirebaseDataError.invalidData))
                     }
                 } catch {
-                    single(.failure(NetworkError.parsingError(error)))
+                    single(.failure(FirebaseDataError.parsingError(error)))
                 }
             }
 
