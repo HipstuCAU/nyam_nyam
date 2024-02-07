@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A429D7929B99E460044A3E6 /* JsonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429D7829B99E460044A3E6 /* JsonManager.swift */; };
-		2A429D7B29B9A06F0044A3E6 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429D7A29B9A06F0044A3E6 /* DataManager.swift */; };
 		2A429D8929BB95BA0044A3E6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2A429D8829BB95BA0044A3E6 /* FirebaseAnalytics */; };
 		2A429D8B29BB95BA0044A3E6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2A429D8A29BB95BA0044A3E6 /* FirebaseFirestore */; };
 		2A429D8D29BB95BA0044A3E6 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2A429D8C29BB95BA0044A3E6 /* FirebaseFirestoreSwift */; };
@@ -61,7 +59,6 @@
 		AB2FDAAE29B84CC7001746DB /* CafeteriaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FDAAD29B84CC7001746DB /* CafeteriaButton.swift */; };
 		AB2FDAB229B8D4B4001746DB /* ContentCarouselModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FDAB129B8D4B4001746DB /* ContentCarouselModuleViewController.swift */; };
 		AB62D60729C48F8A003A8DF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB62D60629C48F8A003A8DF8 /* GoogleService-Info.plist */; };
-		AB62D60929C5AF26003A8DF8 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB62D60829C5AF26003A8DF8 /* AlertManager.swift */; };
 		AB62D60B29C63A94003A8DF8 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB62D60A29C63A94003A8DF8 /* Pretendard-SemiBold.otf */; };
 		AB62D60C29C63A94003A8DF8 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB62D60A29C63A94003A8DF8 /* Pretendard-SemiBold.otf */; };
 		AB62D60D29C63A94003A8DF8 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB62D60A29C63A94003A8DF8 /* Pretendard-SemiBold.otf */; };
@@ -122,8 +119,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2A429D7829B99E460044A3E6 /* JsonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonManager.swift; sourceTree = "<group>"; };
-		2A429D7A29B9A06F0044A3E6 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		2A429D9129BDDA0B0044A3E6 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		2A429D9429BDDB370044A3E6 /* SettingListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListTableViewController.swift; sourceTree = "<group>"; };
 		2A429D9829BDE2A40044A3E6 /* SettingListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListTableViewCell.swift; sourceTree = "<group>"; };
@@ -164,7 +159,6 @@
 		AB2FDAAD29B84CC7001746DB /* CafeteriaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaButton.swift; sourceTree = "<group>"; };
 		AB2FDAB129B8D4B4001746DB /* ContentCarouselModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCarouselModuleViewController.swift; sourceTree = "<group>"; };
 		AB62D60629C48F8A003A8DF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		AB62D60829C5AF26003A8DF8 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		AB62D60A29C63A94003A8DF8 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		AB62D60E29C63AB7003A8DF8 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		AB62D61229C63ACC003A8DF8 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
@@ -242,16 +236,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2A429D7729B99E350044A3E6 /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-				2A429D7829B99E460044A3E6 /* JsonManager.swift */,
-				2A429D7A29B9A06F0044A3E6 /* DataManager.swift */,
-				AB62D60829C5AF26003A8DF8 /* AlertManager.swift */,
-			);
-			path = Manager;
-			sourceTree = "<group>";
-		};
 		2A429D9029BDD9F80044A3E6 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -611,7 +595,6 @@
 			children = (
 				7A8405852B4D656000830F77 /* Error */,
 				2AD5A1E229C62C3B00DCAF5D /* Font */,
-				2A429D7729B99E350044A3E6 /* Manager */,
 				ABFC439029AFA7C600EB9439 /* Pallete.swift */,
 				ABEAFC0229ACA40E002C3119 /* Extension+ */,
 				2A429DAD29C040D20044A3E6 /* Reachability.swift */,
@@ -898,7 +881,6 @@
 				AB934C5B2B5F9DD400B14810 /* NavigationConfigurable.swift in Sources */,
 				AB934C582B5E950300B14810 /* RootNavigationController.swift in Sources */,
 				AB934C432B57A31900B14810 /* AlertPresentable.swift in Sources */,
-				2A429D7B29B9A06F0044A3E6 /* DataManager.swift in Sources */,
 				ABFC439429B44B1700EB9439 /* DateSelectView.swift in Sources */,
 				7A8405A52B54FCF500830F77 /* MutableMealPlanStream.swift in Sources */,
 				7A8405812B4D440500830F77 /* MealPlanJsonLocalRepository.swift in Sources */,
@@ -912,13 +894,11 @@
 				AB9B39A029BF535000249C61 /* DividerView.swift in Sources */,
 				ABEAFC0729ACA4E5002C3119 /* String+.swift in Sources */,
 				2A429DAE29C040D20044A3E6 /* Reachability.swift in Sources */,
-				AB62D60929C5AF26003A8DF8 /* AlertManager.swift in Sources */,
 				AB2FDAAE29B84CC7001746DB /* CafeteriaButton.swift in Sources */,
 				7A8405A12B54D91B00830F77 /* HaksikPresentableState.swift in Sources */,
 				ABEAFC1D29AE6337002C3119 /* CampusSelectView.swift in Sources */,
 				ABBDF69129B9C53C00E9347A /* CarouselCell.swift in Sources */,
 				ABA5FFDF29C15D400029C81C /* TimeLabelView.swift in Sources */,
-				2A429D7929B99E460044A3E6 /* JsonManager.swift in Sources */,
 				ABFC439129AFA7C600EB9439 /* Pallete.swift in Sources */,
 				ABEAFBCD29AC9ED3002C3119 /* TempSceneDelegate.swift in Sources */,
 			);
