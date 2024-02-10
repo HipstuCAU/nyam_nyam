@@ -65,8 +65,16 @@ final class RootViewController: UIViewController,
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func presentFullScreen(_ viewControllable: ViewControllable) {
+        let viewController = viewControllable.uiviewController
+        let navigationController = UINavigationController(
+            rootViewController: viewController
+        )
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: false, completion: nil)
+    }
 }
-import ReactorKit
 // MARK: - Bind UI
 private extension RootViewController {
     func bindLoadingIndicator() {
@@ -117,8 +125,6 @@ private extension RootViewController {
 
 private extension RootViewController {
     func configureUI() {
-        view.backgroundColor = Pallete.cauBlue.color
-        
         view.addSubview(loadingIndicator)
         self.loadingIndicator.snp.makeConstraints { make in
             make.center.equalToSuperview()

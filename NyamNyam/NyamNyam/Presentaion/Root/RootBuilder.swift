@@ -53,9 +53,6 @@ final class RootBuilder: Builder<RootDependency>,
     
     func build() -> LaunchRouting {
         let viewController = RootViewController()
-        let navigationController = RootNavigationControllerable(
-            root: viewController
-        )
         
         let component = RootComponent(
             dependency: dependency
@@ -72,7 +69,7 @@ final class RootBuilder: Builder<RootDependency>,
         
         return RootRouter(
             interactor: interactor,
-            viewController: navigationController,
+            viewController: viewController,
             haksikBuilder: haksikBuilder
         )
     }

@@ -72,7 +72,6 @@
 		AB934C432B57A31900B14810 /* AlertPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB934C422B57A31900B14810 /* AlertPresentable.swift */; };
 		AB934C522B5E4B9F00B14810 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB934C512B5E4B9F00B14810 /* UIViewController+.swift */; };
 		AB934C562B5E8F9B00B14810 /* RIBs+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB934C552B5E8F9B00B14810 /* RIBs+.swift */; };
-		AB934C582B5E950300B14810 /* RootNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB934C572B5E950300B14810 /* RootNavigationController.swift */; };
 		AB934C5B2B5F9DD400B14810 /* NavigationConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB934C5A2B5F9DD400B14810 /* NavigationConfigurable.swift */; };
 		AB9B399E29BB6A2600249C61 /* ContentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9B399D29BB6A2600249C61 /* ContentStackView.swift */; };
 		AB9B39A029BF535000249C61 /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9B399F29BF534F00249C61 /* DividerView.swift */; };
@@ -166,7 +165,6 @@
 		AB934C422B57A31900B14810 /* AlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresentable.swift; sourceTree = "<group>"; };
 		AB934C512B5E4B9F00B14810 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		AB934C552B5E8F9B00B14810 /* RIBs+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RIBs+.swift"; sourceTree = "<group>"; };
-		AB934C572B5E950300B14810 /* RootNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavigationController.swift; sourceTree = "<group>"; };
 		AB934C5A2B5F9DD400B14810 /* NavigationConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfigurable.swift; sourceTree = "<group>"; };
 		AB9B399D29BB6A2600249C61 /* ContentStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentStackView.swift; sourceTree = "<group>"; };
 		AB9B399F29BF534F00249C61 /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
@@ -315,7 +313,6 @@
 			isa = PBXGroup;
 			children = (
 				7A84055D2B4BBAF900830F77 /* RootRouter.swift */,
-				AB934C572B5E950300B14810 /* RootNavigationController.swift */,
 				7A84055E2B4BBAF900830F77 /* RootViewController.swift */,
 				7A84055F2B4BBAF900830F77 /* RootBuilder.swift */,
 				7A8405602B4BBAF900830F77 /* RootInteractor.swift */,
@@ -879,7 +876,6 @@
 				7A84059C2B54B7F300830F77 /* HaksikViewController.swift in Sources */,
 				AB9B399E29BB6A2600249C61 /* ContentStackView.swift in Sources */,
 				AB934C5B2B5F9DD400B14810 /* NavigationConfigurable.swift in Sources */,
-				AB934C582B5E950300B14810 /* RootNavigationController.swift in Sources */,
 				AB934C432B57A31900B14810 /* AlertPresentable.swift in Sources */,
 				ABFC439429B44B1700EB9439 /* DateSelectView.swift in Sources */,
 				7A8405A52B54FCF500830F77 /* MutableMealPlanStream.swift in Sources */,

@@ -14,7 +14,7 @@ protocol RootInteractable: Interactable,
 }
 
 protocol RootViewControllable: ViewControllable {
-    
+    func presentFullScreen(_: ViewControllable)
 }
 
 final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>,
@@ -50,9 +50,8 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>,
         self.attachChild(haksikRouter)
         self.attachedRouter = haksikRouter
         
-        self.viewControllable.pushViewController(
-            haksikRouter.viewControllable,
-            animated: false
+        self.viewController.presentFullScreen(
+            haksikRouter.viewControllable
         )
     }
     

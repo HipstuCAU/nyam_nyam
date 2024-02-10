@@ -31,7 +31,7 @@ final class HaksikViewController: UIViewController,
     weak var listener: HaksikPresentableListener?
     
     override func viewDidLoad() {
-        view.backgroundColor = .white
+        view.backgroundColor = Pallete.cauBlue.color
         deactivateNavigation()
     }
 }
