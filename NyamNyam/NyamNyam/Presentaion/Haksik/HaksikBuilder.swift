@@ -8,21 +8,26 @@
 import RIBs
 
 protocol HaksikDependency: Dependency {
-    var haksikService: HaksikService { get }
+    
 }
 
 final class HaksikComponent: Component<HaksikDependency>,
                              HaksikInteractorDependency {
-    var mealPlan: MealPlan
     
     let haksikService: HaksikService
     
-    init(
-        dependency: HaksikDependency,
-        mealPlan: MealPlan
-    ) {
-        self.haksikService = dependency.haksikService
-        self.mealPlan = mealPlan
+    override init(dependency: HaksikDependency) {
+        
+        let remoteRepository = MockMealPlanJsonRemoteRepositoryImpl()
+        let localRepository = MealPlanJsonLocalRepositoryImpl()
+        
+        self.haksikService = HaksikServiceImpl(
+            repository: MealPlanCompositeRepositoryImpl(
+                remoteRepository: remoteRepository,
+                localRepository: localRepository
+            )
+        )
+        
         super.init(dependency: dependency)
     }
 }
@@ -30,7 +35,7 @@ final class HaksikComponent: Component<HaksikDependency>,
 // MARK: - Builder
 
 protocol HaksikBuildable: Buildable {
-    func build(withListener listener: HaksikListener, mealPlan: MealPlan) -> HaksikRouting
+    func build(withListener listener: HaksikListener) -> HaksikRouting
 }
 
 final class HaksikBuilder: Builder<HaksikDependency>,
@@ -41,13 +46,11 @@ final class HaksikBuilder: Builder<HaksikDependency>,
     }
 
     func build(
-        withListener listener: HaksikListener,
-        mealPlan: MealPlan
+        withListener listener: HaksikListener
     ) -> HaksikRouting {
         
         let component = HaksikComponent(
-            dependency: dependency,
-            mealPlan: mealPlan
+            dependency: dependency
         )
         let viewController = HaksikViewController()
         let interactor = HaksikInteractor(

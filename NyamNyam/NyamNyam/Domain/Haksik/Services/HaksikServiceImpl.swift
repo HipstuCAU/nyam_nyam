@@ -7,7 +7,6 @@
 
 import Foundation
 import RxSwift
-import RxCocoa
 
 protocol HaksikService {
     func fetchMealPlan() -> Single<MealPlan>

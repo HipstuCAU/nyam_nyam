@@ -12,7 +12,7 @@ import RxCocoa
 import Then
 
 enum RootPresentableAction {
-    case retryLoad
+    
 }
 
 protocol RootPresentableListener: AnyObject {
@@ -52,8 +52,7 @@ final class RootViewController: UIViewController,
     }
     
     private func bindUI() {
-        bindLoadingIndicator()
-        bindAlert()
+        
     }
     
     private func bind(listener: RootPresentableListener?) {
@@ -77,32 +76,32 @@ final class RootViewController: UIViewController,
 }
 // MARK: - Bind UI
 private extension RootViewController {
-    func bindLoadingIndicator() {
-        listener?.state.map(\.isLoading)
-            .distinctUntilChanged()
-            .bind(to: self.loadingIndicator.rx.isAnimating)
-            .disposed(by: disposeBag)
-    }
+//    func bindLoadingIndicator() {
+//        listener?.state.map(\.isLoading)
+//            .distinctUntilChanged()
+//            .bind(to: self.loadingIndicator.rx.isAnimating)
+//            .disposed(by: disposeBag)
+//    }
     
-    func bindAlert() {
-        listener?.state.map(\.alertInfo)
-            .compactMap({ $0 })
-            .distinctUntilChanged()
-            .observe(on: MainScheduler.instance)
-            .bind(with: self, onNext: { owner, alertInfo in
-                owner.showAlertOnWindow(
-                    alertInfo: alertInfo,
-                    actions: [UIAlertAction(
-                        title: "재시도",
-                        style: .default
-                    ) { [weak self] _ in
-                        self?.actionRelay.accept(.retryLoad)
-                    }]
-                )
-            })
-            .disposed(by: disposeBag)
-            
-    }
+//    func bindAlert() {
+//        listener?.state.map(\.alertInfo)
+//            .compactMap({ $0 })
+//            .distinctUntilChanged()
+//            .observe(on: MainScheduler.instance)
+//            .bind(with: self, onNext: { owner, alertInfo in
+//                owner.showAlertOnWindow(
+//                    alertInfo: alertInfo,
+//                    actions: [UIAlertAction(
+//                        title: "재시도",
+//                        style: .default
+//                    ) { [weak self] _ in
+//                        self?.actionRelay.accept(.retryLoad)
+//                    }]
+//                )
+//            })
+//            .disposed(by: disposeBag)
+//            
+//    }
 }
 
 // MARK: - Bind Action Relay

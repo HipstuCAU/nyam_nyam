@@ -23,7 +23,6 @@ protocol HaksikListener: AnyObject {
 }
 
 protocol HaksikInteractorDependency {
-    var mealPlan: MealPlan { get }
     var haksikService: HaksikService { get }
 }
 
@@ -61,7 +60,75 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
         super.willResignActive()
     }
     
+    enum Mutation {
+        case setMealPlan(MealPlan)
+        case setLoading(Bool)
+        case setRetryAlert(AlertInfo)
+    }
+    
     func sendAction(_ action: Action) {
         self.action.onNext(action)
+    }
+    
+    func mutate(action: Action) -> Observable<Mutation> {
+        switch action {
+        case .viewDidLoad:
+            return .empty()
+        case .retryLoad:
+            return .concat([
+                .just(.setLoading(true)),
+                self.fetchMealPlanTransform(),
+                .just(.setLoading(false))
+            ])
+        }
+    }
+    
+//    func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
+//        let applicationDidBecomeActive = dependency.applicationDidBecomeActiveRelay
+//            .withUnretained(self)
+//            .flatMap { owner, mutation -> Observable<Mutation> in
+//                return Observable.concat([
+//                    .just(.setLoading(true)),
+//                    owner.fetchMealPlanTransform(),
+//                    .just(.setLoading(false))
+//                ])
+//            }
+//
+//        return .merge(mutation, applicationDidBecomeActive)
+//    }
+    
+    func reduce(state: State, mutation: Mutation) -> State {
+        var state = state
+        
+        switch mutation {
+        case let .setMealPlan(mealPlan):
+            // TODO: Data를 통해 그리기
+            break
+            
+        case let .setRetryAlert(alertInfo):
+            state.alertInfo = alertInfo
+            
+        case let .setLoading(status):
+            state.isLoading = status
+        }
+        
+        return state
+    }
+    
+    private func fetchMealPlanTransform() -> Observable<Mutation> {
+        self.dependency.haksikService.fetchMealPlan()
+            .asObservable()
+            .map { mealPlan -> Mutation in
+                .setMealPlan(mealPlan)
+            }
+            .catchAndReturn(
+                .setRetryAlert(
+                    AlertInfo(
+                        type: .errorWithRetry,
+                        title: "식단 로딩 중 문제가 발생했어요",
+                        message: "인터넷 연결을 확인해주세요"
+                    )
+                )
+            )
     }
 }

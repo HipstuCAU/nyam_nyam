@@ -9,31 +9,13 @@ import RIBs
 import RxCocoa
 
 protocol RootDependency: Dependency {
-    var applicationDidBecomeActiveRelay: PublishRelay<Void> { get }
+    
 }
 
 final class RootComponent: Component<RootDependency>,
                            RootInteractorDependency,
                            HaksikDependency {
-    
-    let applicationDidBecomeActiveRelay: PublishRelay<Void>
-    
-    let haksikService: HaksikService
-    
     override init(dependency: RootDependency) {
-        
-        let remoteRepository = MockMealPlanJsonRemoteRepositoryImpl()
-        let localRepository = MealPlanJsonLocalRepositoryImpl()
-        
-        self.haksikService = HaksikServiceImpl(
-            repository: MealPlanCompositeRepositoryImpl(
-                remoteRepository: remoteRepository,
-                localRepository: localRepository
-            )
-        )
-        
-        self.applicationDidBecomeActiveRelay = dependency.applicationDidBecomeActiveRelay
-        
         super.init(dependency: dependency)
     }
 }
