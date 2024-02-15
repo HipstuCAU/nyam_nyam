@@ -53,18 +53,10 @@ struct Menu {
     
     init(from dto: MenuDTO) {
         self.menuType = dto.menuType
-        if let price = dto.price {
-            self.price = Int(price)
-        } else {
-            self.price = nil
-        }
+        self.price = dto.price.flatMap(Int.init)
         self.startTime = dto.startTime.convertToDate() ?? Date()
         self.endTime = dto.endTime.convertToDate() ?? Date()
         self.menu = dto.menu
-        if let calories = dto.calories {
-            self.calories = Double(calories)
-        } else {
-            self.calories = nil
-        }
+        self.calories = dto.calories.flatMap(Double.init)
     }
 }
