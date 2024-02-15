@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MealPlan: Equatable {
+struct MealPlan {
     let date: Date
     let cafeterias: [Cafeteria]
     
@@ -17,7 +17,7 @@ struct MealPlan: Equatable {
     }
 }
 
-struct Cafeteria: Equatable {
+struct Cafeteria {
     let cafeteriaID: String
     let meals: [Meal]
     
@@ -27,7 +27,7 @@ struct Cafeteria: Equatable {
     }
 }
 
-struct Meal: Equatable {
+struct Meal {
     let mealType: String
     let shouldShowTime: Bool
     let startTime: Date
@@ -43,7 +43,7 @@ struct Meal: Equatable {
     }
 }
 
-struct Menu: Equatable {
+struct Menu {
     let menuType: String
     let price: Int
     let startTime: Date
