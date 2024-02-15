@@ -8,15 +8,15 @@
 import Foundation
 import RxSwift
 
-protocol UniversityService {
+protocol UniversityInfoService {
     func getUniversityInfo(id: String) -> Single<UniversityInfo>
 }
 
-final class UniversityServiceImpl: UniversityService {
+final class UniversityInfoServiceImpl: UniversityInfoService {
     
-    private let universityRepository: UniversityRepository
+    private let universityRepository: UniversityInfoRepository
     
-    init(repository: UniversityRepository) {
+    init(repository: UniversityInfoRepository) {
         self.universityRepository = repository
     }
     

@@ -8,7 +8,6 @@
 import Foundation
 import RxSwift
 
-protocol UniversityRepository {
-    func fetchSavedUniversityID() -> Single<String>
+protocol UniversityInfoRepository {
     func fetchUniversityInfo(id: String) -> Single<UniversityInfoDTO>
 }

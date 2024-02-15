@@ -7,7 +7,12 @@
 
 import Foundation
 
-struct UserCampusInfo {
+struct UserCampus {
     let id: String
     let cafeteriaIDs: [String]
+    
+    init(from dto: UserCampusDTO) {
+        self.id = dto.id
+        self.cafeteriaIDs = dto.cafeteriaIDs
+    }
 }

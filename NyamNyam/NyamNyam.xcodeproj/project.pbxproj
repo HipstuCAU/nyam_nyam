@@ -69,26 +69,25 @@
 		AB62D61529C63ACC003A8DF8 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB62D61229C63ACC003A8DF8 /* Pretendard-Light.otf */; };
 		AB62D61829C74C8C003A8DF8 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB62D61729C74C8C003A8DF8 /* ToastView.swift */; };
 		AB8F41AD2B77CD8200231CEB /* CafeteriaInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41AC2B77CD8200231CEB /* CafeteriaInfo.swift */; };
-		AB8F41B02B77CE8400231CEB /* UniversityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41AF2B77CE8400231CEB /* UniversityRepository.swift */; };
+		AB8F41B02B77CE8400231CEB /* UniversityInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41AF2B77CE8400231CEB /* UniversityInfoRepository.swift */; };
 		AB8F41B32B77CEF700231CEB /* UniversityInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41B22B77CEF700231CEB /* UniversityInfoDTO.swift */; };
-		AB8F41B72B77DDF000231CEB /* UserDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41B62B77DDF000231CEB /* UserDataRepository.swift */; };
-		AB8F41BB2B77E2CB00231CEB /* MockCafeteriaRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41BA2B77E2CB00231CEB /* MockCafeteriaRepository.swift */; };
-		AB8F41BD2B78B9D900231CEB /* UserSettingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41BC2B78B9D900231CEB /* UserSettingService.swift */; };
+		AB8F41B72B77DDF000231CEB /* UserUniversityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41B62B77DDF000231CEB /* UserUniversityRepository.swift */; };
+		AB8F41BB2B77E2CB00231CEB /* MockUserUniversityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41BA2B77E2CB00231CEB /* MockUserUniversityRepository.swift */; };
 		AB8F41C02B78C7BD00231CEB /* CafeteriaInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41BF2B78C7BD00231CEB /* CafeteriaInfoDTO.swift */; };
 		AB8F41C42B79134700231CEB /* CampusInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41C32B79134700231CEB /* CampusInfoDTO.swift */; };
-		AB8F41C72B7BA3EC00231CEB /* DefaultUniversityInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41C62B7BA3EC00231CEB /* DefaultUniversityInfoDTO.swift */; };
+		AB8F41C72B7BA3EC00231CEB /* UserUniversityDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41C62B7BA3EC00231CEB /* UserUniversityDTO.swift */; };
 		AB8F41C92B7BC3AA00231CEB /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41C82B7BC3AA00231CEB /* AppError.swift */; };
 		AB8F41CB2B7BC82100231CEB /* CampusInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41CA2B7BC82100231CEB /* CampusInfo.swift */; };
-		AB8F41CD2B7BC94400231CEB /* OrderedUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41CC2B7BC94400231CEB /* OrderedUserInfo.swift */; };
-		AB8F41D12B7BDDAB00231CEB /* UserUniversityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41D02B7BDDAB00231CEB /* UserUniversityInfo.swift */; };
-		AB8F41D32B7BDDE300231CEB /* UserCampusInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41D22B7BDDE300231CEB /* UserCampusInfo.swift */; };
+		AB8F41D12B7BDDAB00231CEB /* UserUniversity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41D02B7BDDAB00231CEB /* UserUniversity.swift */; };
+		AB8F41D32B7BDDE300231CEB /* UserCampus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41D22B7BDDE300231CEB /* UserCampus.swift */; };
+		AB8F41DB2B7E105400231CEB /* UserCampusDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41DA2B7E105400231CEB /* UserCampusDTO.swift */; };
 		AB934C432B57A31900B14810 /* AlertPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB934C422B57A31900B14810 /* AlertPresentable.swift */; };
 		AB934C522B5E4B9F00B14810 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB934C512B5E4B9F00B14810 /* UIViewController+.swift */; };
 		AB934C562B5E8F9B00B14810 /* RIBs+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB934C552B5E8F9B00B14810 /* RIBs+.swift */; };
 		AB934C5B2B5F9DD400B14810 /* NavigationConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB934C5A2B5F9DD400B14810 /* NavigationConfigurable.swift */; };
 		AB9B399E29BB6A2600249C61 /* ContentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9B399D29BB6A2600249C61 /* ContentStackView.swift */; };
 		AB9B39A029BF535000249C61 /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9B399F29BF534F00249C61 /* DividerView.swift */; };
-		ABA0CC332B77AC9200B77A8B /* UniversityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA0CC322B77AC9200B77A8B /* UniversityService.swift */; };
+		ABA0CC332B77AC9200B77A8B /* UniversityInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA0CC322B77AC9200B77A8B /* UniversityInfoService.swift */; };
 		ABA0CC372B77C5CB00B77A8B /* MockUniversityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA0CC362B77C5CB00B77A8B /* MockUniversityRepository.swift */; };
 		ABA0CC3A2B77C5FB00B77A8B /* UniversityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA0CC392B77C5FB00B77A8B /* UniversityInfo.swift */; };
 		ABA0CC3C2B77C98200B77A8B /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA0CC3B2B77C98200B77A8B /* UserDataService.swift */; };
@@ -179,26 +178,25 @@
 		AB62D61229C63ACC003A8DF8 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
 		AB62D61729C74C8C003A8DF8 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
 		AB8F41AC2B77CD8200231CEB /* CafeteriaInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaInfo.swift; sourceTree = "<group>"; };
-		AB8F41AF2B77CE8400231CEB /* UniversityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityRepository.swift; sourceTree = "<group>"; };
+		AB8F41AF2B77CE8400231CEB /* UniversityInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInfoRepository.swift; sourceTree = "<group>"; };
 		AB8F41B22B77CEF700231CEB /* UniversityInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInfoDTO.swift; sourceTree = "<group>"; };
-		AB8F41B62B77DDF000231CEB /* UserDataRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataRepository.swift; sourceTree = "<group>"; };
-		AB8F41BA2B77E2CB00231CEB /* MockCafeteriaRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCafeteriaRepository.swift; sourceTree = "<group>"; };
-		AB8F41BC2B78B9D900231CEB /* UserSettingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingService.swift; sourceTree = "<group>"; };
+		AB8F41B62B77DDF000231CEB /* UserUniversityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUniversityRepository.swift; sourceTree = "<group>"; };
+		AB8F41BA2B77E2CB00231CEB /* MockUserUniversityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserUniversityRepository.swift; sourceTree = "<group>"; };
 		AB8F41BF2B78C7BD00231CEB /* CafeteriaInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaInfoDTO.swift; sourceTree = "<group>"; };
 		AB8F41C32B79134700231CEB /* CampusInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusInfoDTO.swift; sourceTree = "<group>"; };
-		AB8F41C62B7BA3EC00231CEB /* DefaultUniversityInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultUniversityInfoDTO.swift; sourceTree = "<group>"; };
+		AB8F41C62B7BA3EC00231CEB /* UserUniversityDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUniversityDTO.swift; sourceTree = "<group>"; };
 		AB8F41C82B7BC3AA00231CEB /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
 		AB8F41CA2B7BC82100231CEB /* CampusInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusInfo.swift; sourceTree = "<group>"; };
-		AB8F41CC2B7BC94400231CEB /* OrderedUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderedUserInfo.swift; sourceTree = "<group>"; };
-		AB8F41D02B7BDDAB00231CEB /* UserUniversityInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUniversityInfo.swift; sourceTree = "<group>"; };
-		AB8F41D22B7BDDE300231CEB /* UserCampusInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCampusInfo.swift; sourceTree = "<group>"; };
+		AB8F41D02B7BDDAB00231CEB /* UserUniversity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUniversity.swift; sourceTree = "<group>"; };
+		AB8F41D22B7BDDE300231CEB /* UserCampus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCampus.swift; sourceTree = "<group>"; };
+		AB8F41DA2B7E105400231CEB /* UserCampusDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCampusDTO.swift; sourceTree = "<group>"; };
 		AB934C422B57A31900B14810 /* AlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresentable.swift; sourceTree = "<group>"; };
 		AB934C512B5E4B9F00B14810 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		AB934C552B5E8F9B00B14810 /* RIBs+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RIBs+.swift"; sourceTree = "<group>"; };
 		AB934C5A2B5F9DD400B14810 /* NavigationConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfigurable.swift; sourceTree = "<group>"; };
 		AB9B399D29BB6A2600249C61 /* ContentStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentStackView.swift; sourceTree = "<group>"; };
 		AB9B399F29BF534F00249C61 /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
-		ABA0CC322B77AC9200B77A8B /* UniversityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityService.swift; sourceTree = "<group>"; };
+		ABA0CC322B77AC9200B77A8B /* UniversityInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInfoService.swift; sourceTree = "<group>"; };
 		ABA0CC362B77C5CB00B77A8B /* MockUniversityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUniversityRepository.swift; sourceTree = "<group>"; };
 		ABA0CC392B77C5FB00B77A8B /* UniversityInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInfo.swift; sourceTree = "<group>"; };
 		ABA0CC3B2B77C98200B77A8B /* UserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataService.swift; sourceTree = "<group>"; };
@@ -368,7 +366,8 @@
 		7A84056D2B4BCB8B00830F77 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				ABA0CC302B77AC3700B77A8B /* UserUniversity */,
+				AB8F41D42B7E056800231CEB /* UserData */,
+				ABA0CC302B77AC3700B77A8B /* UniversityInfo */,
 				7A8405712B4BD68D00830F77 /* Haksik */,
 			);
 			path = Domain;
@@ -394,8 +393,8 @@
 		7A84057A2B4D152500830F77 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				AB8F41B42B77D16F00231CEB /* UserData */,
-				ABA0CC342B77C58100B77A8B /* University */,
+				AB8F41B42B77D16F00231CEB /* UserUniversity */,
+				ABA0CC342B77C58100B77A8B /* UniversityInfo */,
 				7A84057B2B4D152E00830F77 /* MealPlan */,
 			);
 			path = Data;
@@ -518,7 +517,7 @@
 		AB8F41AE2B77CE6C00231CEB /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				AB8F41AF2B77CE8400231CEB /* UniversityRepository.swift */,
+				AB8F41AF2B77CE8400231CEB /* UniversityInfoRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -533,20 +532,20 @@
 			path = Entities;
 			sourceTree = "<group>";
 		};
-		AB8F41B42B77D16F00231CEB /* UserData */ = {
+		AB8F41B42B77D16F00231CEB /* UserUniversity */ = {
 			isa = PBXGroup;
 			children = (
 				AB8F41C52B7BA3DC00231CEB /* Entities */,
 				AB8F41B52B77DDC300231CEB /* Repositories */,
 				AB8F41B92B77E2A400231CEB /* Mock */,
 			);
-			path = UserData;
+			path = UserUniversity;
 			sourceTree = "<group>";
 		};
 		AB8F41B52B77DDC300231CEB /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				AB8F41B62B77DDF000231CEB /* UserDataRepository.swift */,
+				AB8F41B62B77DDF000231CEB /* UserUniversityRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -554,7 +553,7 @@
 		AB8F41B92B77E2A400231CEB /* Mock */ = {
 			isa = PBXGroup;
 			children = (
-				AB8F41BA2B77E2CB00231CEB /* MockCafeteriaRepository.swift */,
+				AB8F41BA2B77E2CB00231CEB /* MockUserUniversityRepository.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -562,7 +561,8 @@
 		AB8F41C52B7BA3DC00231CEB /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				AB8F41C62B7BA3EC00231CEB /* DefaultUniversityInfoDTO.swift */,
+				AB8F41C62B7BA3EC00231CEB /* UserUniversityDTO.swift */,
+				AB8F41DA2B7E105400231CEB /* UserCampusDTO.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -577,13 +577,38 @@
 			path = UniversityInfo;
 			sourceTree = "<group>";
 		};
-		AB8F41CF2B7BCCAB00231CEB /* UserUniversityInfo */ = {
+		AB8F41D42B7E056800231CEB /* UserData */ = {
 			isa = PBXGroup;
 			children = (
-				AB8F41D02B7BDDAB00231CEB /* UserUniversityInfo.swift */,
-				AB8F41D22B7BDDE300231CEB /* UserCampusInfo.swift */,
+				AB8F41D52B7E057200231CEB /* Models */,
+				AB8F41D72B7E0B6100231CEB /* Services */,
 			);
-			path = UserUniversityInfo;
+			path = UserData;
+			sourceTree = "<group>";
+		};
+		AB8F41D52B7E057200231CEB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AB8F41D62B7E057B00231CEB /* UserUniversityData */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AB8F41D62B7E057B00231CEB /* UserUniversityData */ = {
+			isa = PBXGroup;
+			children = (
+				AB8F41D02B7BDDAB00231CEB /* UserUniversity.swift */,
+				AB8F41D22B7BDDE300231CEB /* UserCampus.swift */,
+			);
+			path = UserUniversityData;
+			sourceTree = "<group>";
+		};
+		AB8F41D72B7E0B6100231CEB /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				ABA0CC3B2B77C98200B77A8B /* UserDataService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		AB934C412B57A30C00B14810 /* AlertPresentable */ = {
@@ -612,33 +637,31 @@
 			path = NavigationConfigurable;
 			sourceTree = "<group>";
 		};
-		ABA0CC302B77AC3700B77A8B /* UserUniversity */ = {
+		ABA0CC302B77AC3700B77A8B /* UniversityInfo */ = {
 			isa = PBXGroup;
 			children = (
 				ABA0CC382B77C5D700B77A8B /* Models */,
 				ABA0CC312B77AC5E00B77A8B /* Services */,
 			);
-			path = UserUniversity;
+			path = UniversityInfo;
 			sourceTree = "<group>";
 		};
 		ABA0CC312B77AC5E00B77A8B /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				ABA0CC322B77AC9200B77A8B /* UniversityService.swift */,
-				ABA0CC3B2B77C98200B77A8B /* UserDataService.swift */,
-				AB8F41BC2B78B9D900231CEB /* UserSettingService.swift */,
+				ABA0CC322B77AC9200B77A8B /* UniversityInfoService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
 		};
-		ABA0CC342B77C58100B77A8B /* University */ = {
+		ABA0CC342B77C58100B77A8B /* UniversityInfo */ = {
 			isa = PBXGroup;
 			children = (
 				AB8F41B12B77CECB00231CEB /* Entities */,
 				AB8F41AE2B77CE6C00231CEB /* Repositories */,
 				ABA0CC352B77C5AB00B77A8B /* Mock */,
 			);
-			path = University;
+			path = UniversityInfo;
 			sourceTree = "<group>";
 		};
 		ABA0CC352B77C5AB00B77A8B /* Mock */ = {
@@ -652,8 +675,6 @@
 		ABA0CC382B77C5D700B77A8B /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				AB8F41CC2B7BC94400231CEB /* OrderedUserInfo.swift */,
-				AB8F41CF2B7BCCAB00231CEB /* UserUniversityInfo */,
 				AB8F41CE2B7BCBA000231CEB /* UniversityInfo */,
 			);
 			path = Models;
@@ -1002,7 +1023,7 @@
 				2A429DA029BEBE1B0044A3E6 /* SetCafeteriaOrderTableViewCell.swift in Sources */,
 				7A84058B2B4F84DE00830F77 /* MealPlanRepository.swift in Sources */,
 				2A429DA329BF36C50044A3E6 /* SetCafeteriaOrderTitleView.swift in Sources */,
-				AB8F41B72B77DDF000231CEB /* UserDataRepository.swift in Sources */,
+				AB8F41B72B77DDF000231CEB /* UserUniversityRepository.swift in Sources */,
 				7A8405A82B5513D300830F77 /* AlertType.swift in Sources */,
 				7A8405872B4D657300830F77 /* FileError.swift in Sources */,
 				ABEAFBCF29AC9ED3002C3119 /* HomeViewController.swift in Sources */,
@@ -1013,6 +1034,7 @@
 				ABEAFC1F29AE6769002C3119 /* UserDefaults+.swift in Sources */,
 				2A429D9E29BEBE030044A3E6 /* SetCafeteriaOrderTableViewController.swift in Sources */,
 				7A8405932B4FC9B100830F77 /* MockMealPlanJsonRemoteRepository.swift in Sources */,
+				AB8F41DB2B7E105400231CEB /* UserCampusDTO.swift in Sources */,
 				7A8405732B4BDA6800830F77 /* RootState.swift in Sources */,
 				2A429D9929BDE2A40044A3E6 /* SettingListTableViewCell.swift in Sources */,
 				7A84059D2B54B7F300830F77 /* HaksikBuilder.swift in Sources */,
@@ -1026,7 +1048,6 @@
 				ABA0CC3A2B77C5FB00B77A8B /* UniversityInfo.swift in Sources */,
 				AB8F41B32B77CEF700231CEB /* UniversityInfoDTO.swift in Sources */,
 				AB2FDAB229B8D4B4001746DB /* ContentCarouselModuleViewController.swift in Sources */,
-				AB8F41BD2B78B9D900231CEB /* UserSettingService.swift in Sources */,
 				ABEAFC1B29AE24B2002C3119 /* CustomObservable.swift in Sources */,
 				2A429DAA29BF6B170044A3E6 /* SettingViewModel.swift in Sources */,
 				AB62D61829C74C8C003A8DF8 /* ToastView.swift in Sources */,
@@ -1043,9 +1064,9 @@
 				ABFC439429B44B1700EB9439 /* DateSelectView.swift in Sources */,
 				7A8405812B4D440500830F77 /* MealPlanJsonLocalRepository.swift in Sources */,
 				7A84058E2B4F8B4600830F77 /* MealPlan.swift in Sources */,
-				AB8F41D32B7BDDE300231CEB /* UserCampusInfo.swift in Sources */,
+				AB8F41D32B7BDDE300231CEB /* UserCampus.swift in Sources */,
 				ABA0CC3C2B77C98200B77A8B /* UserDataService.swift in Sources */,
-				AB8F41D12B7BDDAB00231CEB /* UserUniversityInfo.swift in Sources */,
+				AB8F41D12B7BDDAB00231CEB /* UserUniversity.swift in Sources */,
 				2A429D9529BDDB370044A3E6 /* SettingListTableViewController.swift in Sources */,
 				ABEAFC1829ADC2B0002C3119 /* OptionSelectModuleViewController.swift in Sources */,
 				7A8405792B4D14A700830F77 /* HaksikServiceImpl.swift in Sources */,
@@ -1053,11 +1074,11 @@
 				ABEAFC0A29ACA523002C3119 /* MealPlanJsonRemoteRepository.swift in Sources */,
 				2A429DA829BF62E80044A3E6 /* SetDefaultCampusView.swift in Sources */,
 				AB9B39A029BF535000249C61 /* DividerView.swift in Sources */,
-				AB8F41C72B7BA3EC00231CEB /* DefaultUniversityInfoDTO.swift in Sources */,
-				ABA0CC332B77AC9200B77A8B /* UniversityService.swift in Sources */,
+				AB8F41C72B7BA3EC00231CEB /* UserUniversityDTO.swift in Sources */,
+				ABA0CC332B77AC9200B77A8B /* UniversityInfoService.swift in Sources */,
 				ABEAFC0729ACA4E5002C3119 /* String+.swift in Sources */,
 				2A429DAE29C040D20044A3E6 /* Reachability.swift in Sources */,
-				AB8F41BB2B77E2CB00231CEB /* MockCafeteriaRepository.swift in Sources */,
+				AB8F41BB2B77E2CB00231CEB /* MockUserUniversityRepository.swift in Sources */,
 				AB2FDAAE29B84CC7001746DB /* CafeteriaButton.swift in Sources */,
 				7A8405A12B54D91B00830F77 /* HaksikPresentableState.swift in Sources */,
 				ABEAFC1D29AE6337002C3119 /* CampusSelectView.swift in Sources */,
@@ -1067,8 +1088,7 @@
 				ABFC439129AFA7C600EB9439 /* Pallete.swift in Sources */,
 				ABEAFBCD29AC9ED3002C3119 /* TempSceneDelegate.swift in Sources */,
 				AB8F41C92B7BC3AA00231CEB /* AppError.swift in Sources */,
-				AB8F41CD2B7BC94400231CEB /* OrderedUserInfo.swift in Sources */,
-				AB8F41B02B77CE8400231CEB /* UniversityRepository.swift in Sources */,
+				AB8F41B02B77CE8400231CEB /* UniversityInfoRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

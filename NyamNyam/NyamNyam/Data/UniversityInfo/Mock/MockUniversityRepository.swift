@@ -8,14 +8,7 @@
 import Foundation
 import RxSwift
 
-final class MockUniversityRepositoryImpl: UniversityRepository {
-    
-    func fetchSavedUniversityID() -> Single<String> {
-        return Single.create { single in
-            single(.success("K001"))
-            return Disposables.create()
-        }
-    }
+final class MockUniversityRepositoryImpl: UniversityInfoRepository {
     
     func fetchUniversityInfo(id: String) -> Single<UniversityInfoDTO> {
         return Single<UniversityInfoDTO>.create { single in
