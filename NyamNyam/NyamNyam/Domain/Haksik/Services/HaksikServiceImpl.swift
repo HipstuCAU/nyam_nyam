@@ -17,8 +17,6 @@ final class HaksikServiceImpl {
     
     private let repository: MealPlanRepository
     
-    private let disposeBag: DisposeBag = .init()
-    
     init(repository: MealPlanRepository) {
         self.repository = repository
     }

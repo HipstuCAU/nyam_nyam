@@ -26,7 +26,7 @@ final class RootComponent: Component<RootDependency>,
         let localRepository = MealPlanJsonLocalRepositoryImpl()
         
         self.haksikService = HaksikServiceImpl(
-            repository: MealPlanRepositoryImpl(
+            repository: MealPlanCompositeRepositoryImpl(
                 remoteRepository: remoteRepository,
                 localRepository: localRepository
             )
