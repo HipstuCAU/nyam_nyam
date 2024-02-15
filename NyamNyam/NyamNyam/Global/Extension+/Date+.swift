@@ -2,7 +2,7 @@
 //  Date+.swift
 //  NyamNyam
 //
-//  Created by Noah Park on 2023/02/27.
+//  Created by 박준홍 on 2023/02/27.
 //
 
 import Foundation
@@ -53,9 +53,9 @@ extension Date {
         return dateFormatter.string(from: self)
     }
     
-    func toFullTimeString() -> String {
+    func toStringWithTime() -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy.MM.dd HH:mm"
+        dateFormatter.dateFormat = "yyyy.MM.dd HH:mm:ss"
         return dateFormatter.string(from: self)
     }
     

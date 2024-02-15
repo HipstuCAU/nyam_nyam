@@ -2,7 +2,7 @@
 //  NyamNyamTests.swift
 //  NyamNyamTests
 //
-//  Created by Noah Park on 2023/02/27.
+//  Created by 박준홍 on 2023/02/27.
 //
 
 import XCTest
