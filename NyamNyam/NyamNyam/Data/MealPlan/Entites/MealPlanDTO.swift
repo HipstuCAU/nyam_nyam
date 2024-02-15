@@ -32,14 +32,14 @@ struct MenuDTO: Codable {
     let endTime: String
     let menu: [String]
     let calories: String
-    
+
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        menuType = (try? container.decode(String.self, forKey: .menuType)) ?? ""
-        price = (try? container.decode(String.self, forKey: .price)) ?? ""
-        startTime = (try? container.decode(String.self, forKey: .startTime)) ?? ""
-        endTime = (try? container.decode(String.self, forKey: .endTime)) ?? ""
+        menuType = (try container.decodeIfPresent(String.self, forKey: .menuType)) ?? ""
+        price = (try container.decodeIfPresent(String.self, forKey: .price)) ?? ""
+        startTime = (try container.decodeIfPresent(String.self, forKey: .startTime)) ?? ""
+        endTime = (try container.decodeIfPresent(String.self, forKey: .endTime)) ?? ""
         menu = try container.decode([String].self, forKey: .menu)
-        calories = (try? container.decode(String.self, forKey: .calories)) ?? ""
+        calories = (try container.decodeIfPresent(String.self, forKey: .calories)) ?? ""
     }
 }
