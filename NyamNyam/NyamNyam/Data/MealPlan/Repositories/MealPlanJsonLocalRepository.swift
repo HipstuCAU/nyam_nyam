@@ -23,7 +23,7 @@ final class MealPlanJsonLocalRepositoryImpl: MealPlanJsonLocalRepository {
                     fileName + ".json"
                 )
             else {
-                single(.failure(FileError.fileNotFound))
+                single(.failure(FileError.fileNotFound(fileName + ".json")))
                 return Disposables.create()
             }
             
@@ -53,7 +53,7 @@ final class MealPlanJsonLocalRepositoryImpl: MealPlanJsonLocalRepository {
                 name + ".json"
             )
         else {
-            throw FileError.fileNotFound
+            throw FileError.fileNotFound(name + ".json")
         }
         
         try jsonString.write(

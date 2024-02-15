@@ -1,5 +1,5 @@
 //
-//  NetworkError.swift
+//  FirebaseDataError.swift
 //  NyamNyam
 //
 //  Created by 박준홍 on 2024/01/09.
@@ -7,14 +7,10 @@
 
 import Foundation
 
-enum NetworkError: Error {
-    case networkError(Error)
-    
-    case serverError(statusCode: Int, error: Error)
+enum FirebaseDataError: Error {
+    case firestoreError(Error)
     
     case parsingError(Error)
-    
-    case firestoreError(Error)
     
     case noData
     
@@ -24,14 +20,10 @@ enum NetworkError: Error {
     
     var localizedDescription: String {
         switch self {
-        case let .networkError(error):
-            return "Network error: \(error.localizedDescription)"
-        case let .serverError(statusCode, error):
-            return "Server error with status code \(statusCode): \(error.localizedDescription)"
-        case .parsingError(let error):
-            return "Parsing error: \(error.localizedDescription)"
         case let .firestoreError(error):
             return "Firestore error: \(error.localizedDescription)"
+        case .parsingError(let error):
+            return "Parsing error: \(error.localizedDescription)"
         case .noData:
             return "No data available"
         case .invalidData:

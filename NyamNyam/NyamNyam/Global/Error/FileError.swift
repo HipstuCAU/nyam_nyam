@@ -8,7 +8,7 @@
 import Foundation
 
 enum FileError: Error {
-    case fileNotFound
+    case fileNotFound(String)
     
     case noData
     
@@ -28,8 +28,8 @@ enum FileError: Error {
             return "Invalid data format"
         case .unknownError:
             return "An unknown error occurred"
-        case .fileNotFound:
-            return "File not found"
+        case let .fileNotFound(path):
+            return "File not found at \(path)"
         case let .parsingError(error):
             return "Parsing error: \(error.localizedDescription)"
         case let .fileSaveError(error):

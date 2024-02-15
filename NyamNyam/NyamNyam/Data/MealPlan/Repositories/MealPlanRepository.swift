@@ -12,7 +12,7 @@ protocol MealPlanRepository {
     func fetchMealPlanData() -> Single<MealPlanDTO>
 }
 
-final class MealPlanRepositoryImpl: MealPlanRepository {
+final class MealPlanCompositeRepositoryImpl: MealPlanRepository {
     
     private let remoteRepository: MealPlanJsonRemoteRepository
     
@@ -92,7 +92,7 @@ final class MealPlanRepositoryImpl: MealPlanRepository {
 }
 
 // MARK: - for update strategy
-extension MealPlanRepositoryImpl {
+extension MealPlanCompositeRepositoryImpl {
     private func getValidityTime(hour: Int, minute: Int) -> Date? {
         let calendar = Calendar.current
         let now = Date()
