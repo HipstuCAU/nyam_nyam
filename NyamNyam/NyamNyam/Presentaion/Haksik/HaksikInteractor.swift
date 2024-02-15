@@ -23,7 +23,7 @@ protocol HaksikListener: AnyObject {
 }
 
 protocol HaksikInteractorDependency {
-    var mealPlan: MealPlan { get }
+    var mealPlans: [MealPlan] { get }
     var haksikService: HaksikService { get }
 }
 

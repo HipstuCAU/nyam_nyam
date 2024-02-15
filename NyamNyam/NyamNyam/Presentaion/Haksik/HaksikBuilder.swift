@@ -13,16 +13,16 @@ protocol HaksikDependency: Dependency {
 
 final class HaksikComponent: Component<HaksikDependency>,
                              HaksikInteractorDependency {
-    var mealPlan: MealPlan
+    var mealPlans: [MealPlan]
     
     let haksikService: HaksikService
     
     init(
         dependency: HaksikDependency,
-        mealPlan: MealPlan
+        mealPlans: [MealPlan]
     ) {
         self.haksikService = dependency.haksikService
-        self.mealPlan = mealPlan
+        self.mealPlans = mealPlans
         super.init(dependency: dependency)
     }
 }
@@ -30,7 +30,7 @@ final class HaksikComponent: Component<HaksikDependency>,
 // MARK: - Builder
 
 protocol HaksikBuildable: Buildable {
-    func build(withListener listener: HaksikListener, mealPlan: MealPlan) -> HaksikRouting
+    func build(withListener listener: HaksikListener, mealPlans: [MealPlan]) -> HaksikRouting
 }
 
 final class HaksikBuilder: Builder<HaksikDependency>,
@@ -42,12 +42,12 @@ final class HaksikBuilder: Builder<HaksikDependency>,
 
     func build(
         withListener listener: HaksikListener,
-        mealPlan: MealPlan
+        mealPlans: [MealPlan]
     ) -> HaksikRouting {
         
         let component = HaksikComponent(
             dependency: dependency,
-            mealPlan: mealPlan
+            mealPlans: mealPlans
         )
         let viewController = HaksikViewController()
         let interactor = HaksikInteractor(
