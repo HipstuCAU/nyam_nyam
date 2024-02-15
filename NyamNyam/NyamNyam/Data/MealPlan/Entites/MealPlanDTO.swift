@@ -26,20 +26,10 @@ struct MealDTO: Codable {
 }
 
 struct MenuDTO: Codable {
-    let menuType: String
-    let price: String
+    let menuType: String?
+    let price: String?
     let startTime: String
     let endTime: String
     let menu: [String]
-    let calories: String
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        menuType = (try container.decodeIfPresent(String.self, forKey: .menuType)) ?? ""
-        price = (try container.decodeIfPresent(String.self, forKey: .price)) ?? ""
-        startTime = (try container.decodeIfPresent(String.self, forKey: .startTime)) ?? ""
-        endTime = (try container.decodeIfPresent(String.self, forKey: .endTime)) ?? ""
-        menu = try container.decode([String].self, forKey: .menu)
-        calories = (try container.decodeIfPresent(String.self, forKey: .calories)) ?? ""
-    }
+    let calories: String?
 }

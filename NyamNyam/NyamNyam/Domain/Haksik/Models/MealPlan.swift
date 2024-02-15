@@ -44,19 +44,27 @@ struct Meal {
 }
 
 struct Menu {
-    let menuType: String
-    let price: Int
+    let menuType: String?
+    let price: Int?
     let startTime: Date
     let endTime: Date
     let menu: [String]
-    let calories: Double
+    let calories: Double?
     
     init(from dto: MenuDTO) {
         self.menuType = dto.menuType
-        self.price = Int(dto.price) ?? .zero
+        if let price = dto.price {
+            self.price = Int(price)
+        } else {
+            self.price = nil
+        }
         self.startTime = dto.startTime.convertToDate() ?? Date()
         self.endTime = dto.endTime.convertToDate() ?? Date()
         self.menu = dto.menu
-        self.calories = Double(dto.calories) ?? .zero
+        if let calories = dto.calories {
+            self.calories = Double(calories)
+        } else {
+            self.calories = nil
+        }
     }
 }
