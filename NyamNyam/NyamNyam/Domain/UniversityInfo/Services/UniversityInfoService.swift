@@ -22,27 +22,8 @@ final class UniversityInfoServiceImpl: UniversityInfoService {
     
     func getUniversityInfo(id: String) -> Single<UniversityInfo> {
         universityRepository.fetchUniversityInfo(id: id)
-            .map { universityDTO -> UniversityInfo in
-                return UniversityInfo(
-                    id: universityDTO.id,
-                    name: universityDTO.name,
-                    mainColor: universityDTO.mainColor,
-                    subColor: universityDTO.subColor,
-                    campusInfos: universityDTO.campusInfos.map { campusDTO -> CampusInfo in
-                        CampusInfo(
-                            id: campusDTO.id,
-                            name: campusDTO.name,
-                            cafeteriaInfos: campusDTO.cafeteriaInfos.map { cafeteriaDTO -> CafeteriaInfo in
-                                CafeteriaInfo(
-                                    id: cafeteriaDTO.id,
-                                    name: cafeteriaDTO.name,
-                                    location: cafeteriaDTO.location
-                                )
-                            }
-                        )
-                    }
-                    
-                )
+            .map { universityInfoDTO -> UniversityInfo in
+                UniversityInfo(from: universityInfoDTO)
             }
         
     }

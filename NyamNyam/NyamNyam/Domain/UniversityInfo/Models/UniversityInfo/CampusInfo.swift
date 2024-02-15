@@ -11,4 +11,10 @@ struct CampusInfo {
     let id: String
     let name: String
     let cafeteriaInfos: [CafeteriaInfo]
+    
+    init(from dto: CampusInfoDTO) {
+        self.id = dto.id
+        self.name = dto.name
+        self.cafeteriaInfos = dto.cafeteriaInfos.map { CafeteriaInfo(from: $0) }
+    }
 }

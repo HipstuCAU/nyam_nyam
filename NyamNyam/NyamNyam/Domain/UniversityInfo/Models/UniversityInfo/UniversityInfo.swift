@@ -13,4 +13,12 @@ struct UniversityInfo {
     let mainColor: String
     let subColor: String
     let campusInfos: [CampusInfo]
+    
+    init(from dto: UniversityInfoDTO) {
+        self.id = dto.id
+        self.name = dto.name
+        self.mainColor = dto.mainColor
+        self.subColor = dto.subColor
+        self.campusInfos = dto.campusInfos.map { CampusInfo(from: $0) }
+    }
 }
