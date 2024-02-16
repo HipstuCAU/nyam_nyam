@@ -20,8 +20,7 @@ protocol RootPresentable: Presentable {
 }
 
 protocol RootInteractorDependency {
-    var haksikService: HaksikService { get }
-    var applicationDidBecomeActiveRelay: PublishRelay<Void> { get }
+    
 }
 
 protocol RootListener: AnyObject {
@@ -74,28 +73,7 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
-        switch action {
-        case .retryLoad:
-            return .concat([
-                .just(.setLoading(true)),
-                self.fetchMealPlanTransform(),
-                .just(.setLoading(false))
-            ])
-        }
-    }
-    
-    func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
-        let applicationDidBecomeActive = dependency.applicationDidBecomeActiveRelay
-            .withUnretained(self)
-            .flatMap { owner, mutation -> Observable<Mutation> in
-                return Observable.concat([
-                    .just(.setLoading(true)),
-                    owner.fetchMealPlanTransform(),
-                    .just(.setLoading(false))
-                ])
-            }
-
-        return .merge(mutation, applicationDidBecomeActive)
+        
     }
     
     func reduce(state: State, mutation: Mutation) -> State {

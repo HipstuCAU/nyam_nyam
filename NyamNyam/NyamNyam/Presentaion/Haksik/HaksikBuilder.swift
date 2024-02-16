@@ -8,7 +8,7 @@
 import RIBs
 
 protocol HaksikDependency: Dependency {
-    var haksikService: HaksikService { get }
+    
 }
 
 final class HaksikComponent: Component<HaksikDependency>,

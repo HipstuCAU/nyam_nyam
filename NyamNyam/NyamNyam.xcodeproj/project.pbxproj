@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2A429D7929B99E460044A3E6 /* JsonManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429D7829B99E460044A3E6 /* JsonManager.swift */; };
-		2A429D7B29B9A06F0044A3E6 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429D7A29B9A06F0044A3E6 /* DataManager.swift */; };
 		2A429D8929BB95BA0044A3E6 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 2A429D8829BB95BA0044A3E6 /* FirebaseAnalytics */; };
 		2A429D8B29BB95BA0044A3E6 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 2A429D8A29BB95BA0044A3E6 /* FirebaseFirestore */; };
 		2A429D8D29BB95BA0044A3E6 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2A429D8C29BB95BA0044A3E6 /* FirebaseFirestoreSwift */; };
@@ -42,7 +40,7 @@
 		7A8405732B4BDA6800830F77 /* RootState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405722B4BDA6800830F77 /* RootState.swift */; };
 		7A8405762B4BDC2400830F77 /* ReactorKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7A8405752B4BDC2400830F77 /* ReactorKit */; };
 		7A8405792B4D14A700830F77 /* HaksikServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405782B4D14A700830F77 /* HaksikServiceImpl.swift */; };
-		7A84057F2B4D254400830F77 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A84057E2B4D254400830F77 /* NetworkError.swift */; };
+		7A84057F2B4D254400830F77 /* FirebaseDataError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A84057E2B4D254400830F77 /* FirebaseDataError.swift */; };
 		7A8405812B4D440500830F77 /* MealPlanJsonLocalRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405802B4D440500830F77 /* MealPlanJsonLocalRepository.swift */; };
 		7A8405872B4D657300830F77 /* FileError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405862B4D657300830F77 /* FileError.swift */; };
 		7A8405892B4F770200830F77 /* MealPlanMockData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A8405882B4F770200830F77 /* MealPlanMockData.json */; };
@@ -54,14 +52,12 @@
 		7A84059D2B54B7F300830F77 /* HaksikBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405992B54B7F300830F77 /* HaksikBuilder.swift */; };
 		7A84059E2B54B7F300830F77 /* HaksikInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A84059A2B54B7F300830F77 /* HaksikInteractor.swift */; };
 		7A8405A12B54D91B00830F77 /* HaksikPresentableState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405A02B54D91B00830F77 /* HaksikPresentableState.swift */; };
-		7A8405A52B54FCF500830F77 /* MutableMealPlanStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405A42B54FCF500830F77 /* MutableMealPlanStream.swift */; };
 		7A8405A82B5513D300830F77 /* AlertType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405A72B5513D300830F77 /* AlertType.swift */; };
 		7A8405AB2B5513FB00830F77 /* AlertInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A8405AA2B5513FB00830F77 /* AlertInfo.swift */; };
 		AB2D2C0129B8271C0015CB10 /* CafeteriaSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2D2C0029B8271C0015CB10 /* CafeteriaSelectView.swift */; };
 		AB2FDAAE29B84CC7001746DB /* CafeteriaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FDAAD29B84CC7001746DB /* CafeteriaButton.swift */; };
 		AB2FDAB229B8D4B4001746DB /* ContentCarouselModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FDAB129B8D4B4001746DB /* ContentCarouselModuleViewController.swift */; };
 		AB62D60729C48F8A003A8DF8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB62D60629C48F8A003A8DF8 /* GoogleService-Info.plist */; };
-		AB62D60929C5AF26003A8DF8 /* AlertManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB62D60829C5AF26003A8DF8 /* AlertManager.swift */; };
 		AB62D60B29C63A94003A8DF8 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB62D60A29C63A94003A8DF8 /* Pretendard-SemiBold.otf */; };
 		AB62D60C29C63A94003A8DF8 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB62D60A29C63A94003A8DF8 /* Pretendard-SemiBold.otf */; };
 		AB62D60D29C63A94003A8DF8 /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB62D60A29C63A94003A8DF8 /* Pretendard-SemiBold.otf */; };
@@ -72,13 +68,29 @@
 		AB62D61429C63ACC003A8DF8 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB62D61229C63ACC003A8DF8 /* Pretendard-Light.otf */; };
 		AB62D61529C63ACC003A8DF8 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB62D61229C63ACC003A8DF8 /* Pretendard-Light.otf */; };
 		AB62D61829C74C8C003A8DF8 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB62D61729C74C8C003A8DF8 /* ToastView.swift */; };
+		AB8F41AD2B77CD8200231CEB /* CafeteriaInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41AC2B77CD8200231CEB /* CafeteriaInfo.swift */; };
+		AB8F41B02B77CE8400231CEB /* UniversityInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41AF2B77CE8400231CEB /* UniversityInfoRepository.swift */; };
+		AB8F41B32B77CEF700231CEB /* UniversityInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41B22B77CEF700231CEB /* UniversityInfoDTO.swift */; };
+		AB8F41B72B77DDF000231CEB /* UserUniversityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41B62B77DDF000231CEB /* UserUniversityRepository.swift */; };
+		AB8F41BB2B77E2CB00231CEB /* MockUserUniversityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41BA2B77E2CB00231CEB /* MockUserUniversityRepository.swift */; };
+		AB8F41C02B78C7BD00231CEB /* CafeteriaInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41BF2B78C7BD00231CEB /* CafeteriaInfoDTO.swift */; };
+		AB8F41C42B79134700231CEB /* CampusInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41C32B79134700231CEB /* CampusInfoDTO.swift */; };
+		AB8F41C72B7BA3EC00231CEB /* UserUniversityDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41C62B7BA3EC00231CEB /* UserUniversityDTO.swift */; };
+		AB8F41C92B7BC3AA00231CEB /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41C82B7BC3AA00231CEB /* AppError.swift */; };
+		AB8F41CB2B7BC82100231CEB /* CampusInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41CA2B7BC82100231CEB /* CampusInfo.swift */; };
+		AB8F41D12B7BDDAB00231CEB /* UserUniversity.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41D02B7BDDAB00231CEB /* UserUniversity.swift */; };
+		AB8F41D32B7BDDE300231CEB /* UserCampus.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41D22B7BDDE300231CEB /* UserCampus.swift */; };
+		AB8F41DB2B7E105400231CEB /* UserCampusDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41DA2B7E105400231CEB /* UserCampusDTO.swift */; };
 		AB934C432B57A31900B14810 /* AlertPresentable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB934C422B57A31900B14810 /* AlertPresentable.swift */; };
 		AB934C522B5E4B9F00B14810 /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB934C512B5E4B9F00B14810 /* UIViewController+.swift */; };
 		AB934C562B5E8F9B00B14810 /* RIBs+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB934C552B5E8F9B00B14810 /* RIBs+.swift */; };
-		AB934C582B5E950300B14810 /* RootNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB934C572B5E950300B14810 /* RootNavigationController.swift */; };
 		AB934C5B2B5F9DD400B14810 /* NavigationConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB934C5A2B5F9DD400B14810 /* NavigationConfigurable.swift */; };
 		AB9B399E29BB6A2600249C61 /* ContentStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9B399D29BB6A2600249C61 /* ContentStackView.swift */; };
 		AB9B39A029BF535000249C61 /* DividerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9B399F29BF534F00249C61 /* DividerView.swift */; };
+		ABA0CC332B77AC9200B77A8B /* UniversityInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA0CC322B77AC9200B77A8B /* UniversityInfoService.swift */; };
+		ABA0CC372B77C5CB00B77A8B /* MockUniversityRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA0CC362B77C5CB00B77A8B /* MockUniversityRepository.swift */; };
+		ABA0CC3A2B77C5FB00B77A8B /* UniversityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA0CC392B77C5FB00B77A8B /* UniversityInfo.swift */; };
+		ABA0CC3C2B77C98200B77A8B /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA0CC3B2B77C98200B77A8B /* UserDataService.swift */; };
 		ABA5FFDF29C15D400029C81C /* TimeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA5FFDE29C15D400029C81C /* TimeLabelView.swift */; };
 		ABBDF69129B9C53C00E9347A /* CarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBDF69029B9C53C00E9347A /* CarouselCell.swift */; };
 		ABBDF69329BA328A00E9347A /* ExpandableMealCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBDF69229BA328900E9347A /* ExpandableMealCardView.swift */; };
@@ -122,8 +134,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2A429D7829B99E460044A3E6 /* JsonManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonManager.swift; sourceTree = "<group>"; };
-		2A429D7A29B9A06F0044A3E6 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		2A429D9129BDDA0B0044A3E6 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		2A429D9429BDDB370044A3E6 /* SettingListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListTableViewController.swift; sourceTree = "<group>"; };
 		2A429D9829BDE2A40044A3E6 /* SettingListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingListTableViewCell.swift; sourceTree = "<group>"; };
@@ -145,7 +155,7 @@
 		7A84056B2B4BC81400830F77 /* Reactive+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+.swift"; sourceTree = "<group>"; };
 		7A8405722B4BDA6800830F77 /* RootState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootState.swift; sourceTree = "<group>"; };
 		7A8405782B4D14A700830F77 /* HaksikServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaksikServiceImpl.swift; sourceTree = "<group>"; };
-		7A84057E2B4D254400830F77 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		7A84057E2B4D254400830F77 /* FirebaseDataError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDataError.swift; sourceTree = "<group>"; };
 		7A8405802B4D440500830F77 /* MealPlanJsonLocalRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlanJsonLocalRepository.swift; sourceTree = "<group>"; };
 		7A8405862B4D657300830F77 /* FileError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileError.swift; sourceTree = "<group>"; };
 		7A8405882B4F770200830F77 /* MealPlanMockData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MealPlanMockData.json; sourceTree = "<group>"; };
@@ -157,25 +167,39 @@
 		7A8405992B54B7F300830F77 /* HaksikBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaksikBuilder.swift; sourceTree = "<group>"; };
 		7A84059A2B54B7F300830F77 /* HaksikInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaksikInteractor.swift; sourceTree = "<group>"; };
 		7A8405A02B54D91B00830F77 /* HaksikPresentableState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HaksikPresentableState.swift; sourceTree = "<group>"; };
-		7A8405A42B54FCF500830F77 /* MutableMealPlanStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutableMealPlanStream.swift; sourceTree = "<group>"; };
 		7A8405A72B5513D300830F77 /* AlertType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertType.swift; sourceTree = "<group>"; };
 		7A8405AA2B5513FB00830F77 /* AlertInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertInfo.swift; sourceTree = "<group>"; };
 		AB2D2C0029B8271C0015CB10 /* CafeteriaSelectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaSelectView.swift; sourceTree = "<group>"; };
 		AB2FDAAD29B84CC7001746DB /* CafeteriaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaButton.swift; sourceTree = "<group>"; };
 		AB2FDAB129B8D4B4001746DB /* ContentCarouselModuleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCarouselModuleViewController.swift; sourceTree = "<group>"; };
 		AB62D60629C48F8A003A8DF8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		AB62D60829C5AF26003A8DF8 /* AlertManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertManager.swift; sourceTree = "<group>"; };
 		AB62D60A29C63A94003A8DF8 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		AB62D60E29C63AB7003A8DF8 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		AB62D61229C63ACC003A8DF8 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
 		AB62D61729C74C8C003A8DF8 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		AB8F41AC2B77CD8200231CEB /* CafeteriaInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaInfo.swift; sourceTree = "<group>"; };
+		AB8F41AF2B77CE8400231CEB /* UniversityInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInfoRepository.swift; sourceTree = "<group>"; };
+		AB8F41B22B77CEF700231CEB /* UniversityInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInfoDTO.swift; sourceTree = "<group>"; };
+		AB8F41B62B77DDF000231CEB /* UserUniversityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUniversityRepository.swift; sourceTree = "<group>"; };
+		AB8F41BA2B77E2CB00231CEB /* MockUserUniversityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserUniversityRepository.swift; sourceTree = "<group>"; };
+		AB8F41BF2B78C7BD00231CEB /* CafeteriaInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaInfoDTO.swift; sourceTree = "<group>"; };
+		AB8F41C32B79134700231CEB /* CampusInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusInfoDTO.swift; sourceTree = "<group>"; };
+		AB8F41C62B7BA3EC00231CEB /* UserUniversityDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUniversityDTO.swift; sourceTree = "<group>"; };
+		AB8F41C82B7BC3AA00231CEB /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		AB8F41CA2B7BC82100231CEB /* CampusInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CampusInfo.swift; sourceTree = "<group>"; };
+		AB8F41D02B7BDDAB00231CEB /* UserUniversity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUniversity.swift; sourceTree = "<group>"; };
+		AB8F41D22B7BDDE300231CEB /* UserCampus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCampus.swift; sourceTree = "<group>"; };
+		AB8F41DA2B7E105400231CEB /* UserCampusDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCampusDTO.swift; sourceTree = "<group>"; };
 		AB934C422B57A31900B14810 /* AlertPresentable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresentable.swift; sourceTree = "<group>"; };
 		AB934C512B5E4B9F00B14810 /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		AB934C552B5E8F9B00B14810 /* RIBs+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RIBs+.swift"; sourceTree = "<group>"; };
-		AB934C572B5E950300B14810 /* RootNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootNavigationController.swift; sourceTree = "<group>"; };
 		AB934C5A2B5F9DD400B14810 /* NavigationConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfigurable.swift; sourceTree = "<group>"; };
 		AB9B399D29BB6A2600249C61 /* ContentStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentStackView.swift; sourceTree = "<group>"; };
 		AB9B399F29BF534F00249C61 /* DividerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DividerView.swift; sourceTree = "<group>"; };
+		ABA0CC322B77AC9200B77A8B /* UniversityInfoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInfoService.swift; sourceTree = "<group>"; };
+		ABA0CC362B77C5CB00B77A8B /* MockUniversityRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUniversityRepository.swift; sourceTree = "<group>"; };
+		ABA0CC392B77C5FB00B77A8B /* UniversityInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInfo.swift; sourceTree = "<group>"; };
+		ABA0CC3B2B77C98200B77A8B /* UserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataService.swift; sourceTree = "<group>"; };
 		ABA5FFDE29C15D400029C81C /* TimeLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLabelView.swift; sourceTree = "<group>"; };
 		ABBDF69029B9C53C00E9347A /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
 		ABBDF69229BA328900E9347A /* ExpandableMealCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableMealCardView.swift; sourceTree = "<group>"; };
@@ -242,16 +266,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2A429D7729B99E350044A3E6 /* Manager */ = {
-			isa = PBXGroup;
-			children = (
-				2A429D7829B99E460044A3E6 /* JsonManager.swift */,
-				2A429D7A29B9A06F0044A3E6 /* DataManager.swift */,
-				AB62D60829C5AF26003A8DF8 /* AlertManager.swift */,
-			);
-			path = Manager;
-			sourceTree = "<group>";
-		};
 		2A429D9029BDD9F80044A3E6 /* Setting */ = {
 			isa = PBXGroup;
 			children = (
@@ -331,7 +345,6 @@
 			isa = PBXGroup;
 			children = (
 				7A84055D2B4BBAF900830F77 /* RootRouter.swift */,
-				AB934C572B5E950300B14810 /* RootNavigationController.swift */,
 				7A84055E2B4BBAF900830F77 /* RootViewController.swift */,
 				7A84055F2B4BBAF900830F77 /* RootBuilder.swift */,
 				7A8405602B4BBAF900830F77 /* RootInteractor.swift */,
@@ -353,6 +366,8 @@
 		7A84056D2B4BCB8B00830F77 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				AB8F41D42B7E056800231CEB /* UserData */,
+				ABA0CC302B77AC3700B77A8B /* UniversityInfo */,
 				7A8405712B4BD68D00830F77 /* Haksik */,
 			);
 			path = Domain;
@@ -378,6 +393,8 @@
 		7A84057A2B4D152500830F77 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				AB8F41B42B77D16F00231CEB /* UserUniversity */,
+				ABA0CC342B77C58100B77A8B /* UniversityInfo */,
 				7A84057B2B4D152E00830F77 /* MealPlan */,
 			);
 			path = Data;
@@ -405,7 +422,8 @@
 		7A8405852B4D656000830F77 /* Error */ = {
 			isa = PBXGroup;
 			children = (
-				7A84057E2B4D254400830F77 /* NetworkError.swift */,
+				AB8F41C82B7BC3AA00231CEB /* AppError.swift */,
+				7A84057E2B4D254400830F77 /* FirebaseDataError.swift */,
 				7A8405862B4D657300830F77 /* FileError.swift */,
 			);
 			path = Error;
@@ -496,6 +514,103 @@
 			path = Toast;
 			sourceTree = "<group>";
 		};
+		AB8F41AE2B77CE6C00231CEB /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				AB8F41AF2B77CE8400231CEB /* UniversityInfoRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		AB8F41B12B77CECB00231CEB /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				AB8F41B22B77CEF700231CEB /* UniversityInfoDTO.swift */,
+				AB8F41C32B79134700231CEB /* CampusInfoDTO.swift */,
+				AB8F41BF2B78C7BD00231CEB /* CafeteriaInfoDTO.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		AB8F41B42B77D16F00231CEB /* UserUniversity */ = {
+			isa = PBXGroup;
+			children = (
+				AB8F41C52B7BA3DC00231CEB /* Entities */,
+				AB8F41B52B77DDC300231CEB /* Repositories */,
+				AB8F41B92B77E2A400231CEB /* Mock */,
+			);
+			path = UserUniversity;
+			sourceTree = "<group>";
+		};
+		AB8F41B52B77DDC300231CEB /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				AB8F41B62B77DDF000231CEB /* UserUniversityRepository.swift */,
+			);
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		AB8F41B92B77E2A400231CEB /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				AB8F41BA2B77E2CB00231CEB /* MockUserUniversityRepository.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		AB8F41C52B7BA3DC00231CEB /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				AB8F41C62B7BA3EC00231CEB /* UserUniversityDTO.swift */,
+				AB8F41DA2B7E105400231CEB /* UserCampusDTO.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		AB8F41CE2B7BCBA000231CEB /* UniversityInfo */ = {
+			isa = PBXGroup;
+			children = (
+				ABA0CC392B77C5FB00B77A8B /* UniversityInfo.swift */,
+				AB8F41CA2B7BC82100231CEB /* CampusInfo.swift */,
+				AB8F41AC2B77CD8200231CEB /* CafeteriaInfo.swift */,
+			);
+			path = UniversityInfo;
+			sourceTree = "<group>";
+		};
+		AB8F41D42B7E056800231CEB /* UserData */ = {
+			isa = PBXGroup;
+			children = (
+				AB8F41D52B7E057200231CEB /* Models */,
+				AB8F41D72B7E0B6100231CEB /* Services */,
+			);
+			path = UserData;
+			sourceTree = "<group>";
+		};
+		AB8F41D52B7E057200231CEB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AB8F41D62B7E057B00231CEB /* UserUniversityData */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		AB8F41D62B7E057B00231CEB /* UserUniversityData */ = {
+			isa = PBXGroup;
+			children = (
+				AB8F41D02B7BDDAB00231CEB /* UserUniversity.swift */,
+				AB8F41D22B7BDDE300231CEB /* UserCampus.swift */,
+			);
+			path = UserUniversityData;
+			sourceTree = "<group>";
+		};
+		AB8F41D72B7E0B6100231CEB /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				ABA0CC3B2B77C98200B77A8B /* UserDataService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		AB934C412B57A30C00B14810 /* AlertPresentable */ = {
 			isa = PBXGroup;
 			children = (
@@ -520,6 +635,49 @@
 				AB934C5A2B5F9DD400B14810 /* NavigationConfigurable.swift */,
 			);
 			path = NavigationConfigurable;
+			sourceTree = "<group>";
+		};
+		ABA0CC302B77AC3700B77A8B /* UniversityInfo */ = {
+			isa = PBXGroup;
+			children = (
+				ABA0CC382B77C5D700B77A8B /* Models */,
+				ABA0CC312B77AC5E00B77A8B /* Services */,
+			);
+			path = UniversityInfo;
+			sourceTree = "<group>";
+		};
+		ABA0CC312B77AC5E00B77A8B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				ABA0CC322B77AC9200B77A8B /* UniversityInfoService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		ABA0CC342B77C58100B77A8B /* UniversityInfo */ = {
+			isa = PBXGroup;
+			children = (
+				AB8F41B12B77CECB00231CEB /* Entities */,
+				AB8F41AE2B77CE6C00231CEB /* Repositories */,
+				ABA0CC352B77C5AB00B77A8B /* Mock */,
+			);
+			path = UniversityInfo;
+			sourceTree = "<group>";
+		};
+		ABA0CC352B77C5AB00B77A8B /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				ABA0CC362B77C5CB00B77A8B /* MockUniversityRepository.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		ABA0CC382B77C5D700B77A8B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				AB8F41CE2B7BCBA000231CEB /* UniversityInfo */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		ABBDF68F29B9C52000E9347A /* Components */ = {
@@ -611,7 +769,6 @@
 			children = (
 				7A8405852B4D656000830F77 /* Error */,
 				2AD5A1E229C62C3B00DCAF5D /* Font */,
-				2A429D7729B99E350044A3E6 /* Manager */,
 				ABFC439029AFA7C600EB9439 /* Pallete.swift */,
 				ABEAFC0229ACA40E002C3119 /* Extension+ */,
 				2A429DAD29C040D20044A3E6 /* Reachability.swift */,
@@ -623,7 +780,6 @@
 			isa = PBXGroup;
 			children = (
 				7A84058D2B4F8B4600830F77 /* MealPlan.swift */,
-				7A8405A42B54FCF500830F77 /* MutableMealPlanStream.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -856,33 +1012,41 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A84059B2B54B7F300830F77 /* HaksikRouter.swift in Sources */,
-				7A84057F2B4D254400830F77 /* NetworkError.swift in Sources */,
+				7A84057F2B4D254400830F77 /* FirebaseDataError.swift in Sources */,
 				2A7489B22B4D981A00297CC7 /* MealPlanDTO.swift in Sources */,
 				ABFC439729B4515200EB9439 /* DateButton.swift in Sources */,
+				AB8F41CB2B7BC82100231CEB /* CampusInfo.swift in Sources */,
 				ABBDF69329BA328A00E9347A /* ExpandableMealCardView.swift in Sources */,
+				ABA0CC372B77C5CB00B77A8B /* MockUniversityRepository.swift in Sources */,
 				2A429D9229BDDA0B0044A3E6 /* SettingViewController.swift in Sources */,
 				7A8405612B4BBAF900830F77 /* RootRouter.swift in Sources */,
 				2A429DA029BEBE1B0044A3E6 /* SetCafeteriaOrderTableViewCell.swift in Sources */,
 				7A84058B2B4F84DE00830F77 /* MealPlanRepository.swift in Sources */,
 				2A429DA329BF36C50044A3E6 /* SetCafeteriaOrderTitleView.swift in Sources */,
+				AB8F41B72B77DDF000231CEB /* UserUniversityRepository.swift in Sources */,
 				7A8405A82B5513D300830F77 /* AlertType.swift in Sources */,
 				7A8405872B4D657300830F77 /* FileError.swift in Sources */,
 				ABEAFBCF29AC9ED3002C3119 /* HomeViewController.swift in Sources */,
+				AB8F41C42B79134700231CEB /* CampusInfoDTO.swift in Sources */,
 				7A84059E2B54B7F300830F77 /* HaksikInteractor.swift in Sources */,
 				AB934C522B5E4B9F00B14810 /* UIViewController+.swift in Sources */,
 				7A84056C2B4BC81400830F77 /* Reactive+.swift in Sources */,
 				ABEAFC1F29AE6769002C3119 /* UserDefaults+.swift in Sources */,
 				2A429D9E29BEBE030044A3E6 /* SetCafeteriaOrderTableViewController.swift in Sources */,
 				7A8405932B4FC9B100830F77 /* MockMealPlanJsonRemoteRepository.swift in Sources */,
+				AB8F41DB2B7E105400231CEB /* UserCampusDTO.swift in Sources */,
 				7A8405732B4BDA6800830F77 /* RootState.swift in Sources */,
 				2A429D9929BDE2A40044A3E6 /* SettingListTableViewCell.swift in Sources */,
 				7A84059D2B54B7F300830F77 /* HaksikBuilder.swift in Sources */,
+				AB8F41C02B78C7BD00231CEB /* CafeteriaInfoDTO.swift in Sources */,
 				7A8405632B4BBAF900830F77 /* RootBuilder.swift in Sources */,
 				7A8405692B4BBC1300830F77 /* AppDelegate.swift in Sources */,
 				ABEAFC0429ACA4B1002C3119 /* Date+.swift in Sources */,
 				2A429DAC29BF93BD0044A3E6 /* BackButtonView.swift in Sources */,
 				ABEAFC0D29ACA59E002C3119 /* HomeViewModel.swift in Sources */,
 				7A8405672B4BBBD100830F77 /* AppComponent.swift in Sources */,
+				ABA0CC3A2B77C5FB00B77A8B /* UniversityInfo.swift in Sources */,
+				AB8F41B32B77CEF700231CEB /* UniversityInfoDTO.swift in Sources */,
 				AB2FDAB229B8D4B4001746DB /* ContentCarouselModuleViewController.swift in Sources */,
 				ABEAFC1B29AE24B2002C3119 /* CustomObservable.swift in Sources */,
 				2A429DAA29BF6B170044A3E6 /* SettingViewModel.swift in Sources */,
@@ -896,13 +1060,13 @@
 				7A84059C2B54B7F300830F77 /* HaksikViewController.swift in Sources */,
 				AB9B399E29BB6A2600249C61 /* ContentStackView.swift in Sources */,
 				AB934C5B2B5F9DD400B14810 /* NavigationConfigurable.swift in Sources */,
-				AB934C582B5E950300B14810 /* RootNavigationController.swift in Sources */,
 				AB934C432B57A31900B14810 /* AlertPresentable.swift in Sources */,
-				2A429D7B29B9A06F0044A3E6 /* DataManager.swift in Sources */,
 				ABFC439429B44B1700EB9439 /* DateSelectView.swift in Sources */,
-				7A8405A52B54FCF500830F77 /* MutableMealPlanStream.swift in Sources */,
 				7A8405812B4D440500830F77 /* MealPlanJsonLocalRepository.swift in Sources */,
 				7A84058E2B4F8B4600830F77 /* MealPlan.swift in Sources */,
+				AB8F41D32B7BDDE300231CEB /* UserCampus.swift in Sources */,
+				ABA0CC3C2B77C98200B77A8B /* UserDataService.swift in Sources */,
+				AB8F41D12B7BDDAB00231CEB /* UserUniversity.swift in Sources */,
 				2A429D9529BDDB370044A3E6 /* SettingListTableViewController.swift in Sources */,
 				ABEAFC1829ADC2B0002C3119 /* OptionSelectModuleViewController.swift in Sources */,
 				7A8405792B4D14A700830F77 /* HaksikServiceImpl.swift in Sources */,
@@ -910,17 +1074,21 @@
 				ABEAFC0A29ACA523002C3119 /* MealPlanJsonRemoteRepository.swift in Sources */,
 				2A429DA829BF62E80044A3E6 /* SetDefaultCampusView.swift in Sources */,
 				AB9B39A029BF535000249C61 /* DividerView.swift in Sources */,
+				AB8F41C72B7BA3EC00231CEB /* UserUniversityDTO.swift in Sources */,
+				ABA0CC332B77AC9200B77A8B /* UniversityInfoService.swift in Sources */,
 				ABEAFC0729ACA4E5002C3119 /* String+.swift in Sources */,
 				2A429DAE29C040D20044A3E6 /* Reachability.swift in Sources */,
-				AB62D60929C5AF26003A8DF8 /* AlertManager.swift in Sources */,
+				AB8F41BB2B77E2CB00231CEB /* MockUserUniversityRepository.swift in Sources */,
 				AB2FDAAE29B84CC7001746DB /* CafeteriaButton.swift in Sources */,
 				7A8405A12B54D91B00830F77 /* HaksikPresentableState.swift in Sources */,
 				ABEAFC1D29AE6337002C3119 /* CampusSelectView.swift in Sources */,
 				ABBDF69129B9C53C00E9347A /* CarouselCell.swift in Sources */,
+				AB8F41AD2B77CD8200231CEB /* CafeteriaInfo.swift in Sources */,
 				ABA5FFDF29C15D400029C81C /* TimeLabelView.swift in Sources */,
-				2A429D7929B99E460044A3E6 /* JsonManager.swift in Sources */,
 				ABFC439129AFA7C600EB9439 /* Pallete.swift in Sources */,
 				ABEAFBCD29AC9ED3002C3119 /* TempSceneDelegate.swift in Sources */,
+				AB8F41C92B7BC3AA00231CEB /* AppError.swift in Sources */,
+				AB8F41B02B77CE8400231CEB /* UniversityInfoRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

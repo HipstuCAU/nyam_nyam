@@ -8,5 +8,6 @@
 import Foundation
 
 struct HaksikPresentableState {
-    
+    var isLoading: Bool = false
+    var alertInfo: AlertInfo? = nil
 }

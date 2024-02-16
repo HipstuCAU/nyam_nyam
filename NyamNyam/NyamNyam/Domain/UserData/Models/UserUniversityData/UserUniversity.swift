@@ -1,0 +1,20 @@
+//
+//  DefaultUniversityInfo.swift
+//  NyamNyam
+//
+//  Created by 박준홍 on 2/14/24.
+//
+
+import Foundation
+
+struct UserUniversity {
+    let id: String
+    let defaultCampusID: String
+    let userCampuses: [UserCampus]
+    
+    init(from dto: UserUniversityDTO) {
+        self.id = dto.id
+        self.defaultCampusID = dto.defaultCampusID
+        self.userCampuses = dto.userCampuses.map { UserCampus(from: $0) }
+    }
+}

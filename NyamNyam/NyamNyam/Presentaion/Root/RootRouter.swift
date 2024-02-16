@@ -14,7 +14,7 @@ protocol RootInteractable: Interactable,
 }
 
 protocol RootViewControllable: ViewControllable {
-    
+    func presentFullScreen(_: ViewControllable)
 }
 
 final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>,
@@ -41,8 +41,6 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>,
         guard attachedRouter == nil
         else { return }
         
-        detachHaksik()
-        
         let haksikRouter = haksikBuilder.build(
             withListener: self.interactor,
             mealPlans: mealPlans
@@ -55,15 +53,5 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>,
             
             
         })
-    }
-    
-    func detachHaksik() {
-        guard let attachedRouter
-        else { return }
-        
-        self.viewControllable.popToRoot(animated: false)
-        
-        self.detachChild(attachedRouter)
-        self.attachedRouter = nil
     }
 }

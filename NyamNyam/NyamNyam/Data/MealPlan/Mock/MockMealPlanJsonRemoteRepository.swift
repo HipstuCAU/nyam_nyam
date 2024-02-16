@@ -19,7 +19,7 @@ final class MockMealPlanJsonRemoteRepositoryImpl: MealPlanJsonRemoteRepository {
                 forResource: "MealPlanMockData",
                 ofType: "json"
             ) else {
-                single(.failure(FileError.fileNotFound))
+                single(.failure(FileError.fileNotFound("Bundle")))
                 return Disposables.create()
             }
             
