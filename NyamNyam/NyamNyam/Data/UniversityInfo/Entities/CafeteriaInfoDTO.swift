@@ -8,7 +8,7 @@
 import Foundation
 
 struct CafeteriaInfoDTO: Codable {
-    let id: String
+    let cafeteriaId: String
     var name: String
     let location: String?
 }

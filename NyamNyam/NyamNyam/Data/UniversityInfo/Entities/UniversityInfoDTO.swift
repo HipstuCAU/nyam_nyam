@@ -8,7 +8,7 @@
 import Foundation
 
 struct UniversityInfoDTO: Codable {
-    let id: String
+    let universityId: String
     let name: String
     let mainColor: String
     let subColor: String

@@ -8,7 +8,7 @@
 import Foundation
 
 struct CampusInfoDTO: Codable {
-    let id: String
+    let campusId: String
     let name: String
     let cafeteriaInfos: [CafeteriaInfoDTO]
 }

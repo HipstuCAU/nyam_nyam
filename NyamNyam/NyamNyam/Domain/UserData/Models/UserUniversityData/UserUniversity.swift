@@ -13,7 +13,7 @@ struct UserUniversity {
     let userCampuses: [UserCampus]
     
     init(from dto: UserUniversityDTO) {
-        self.id = dto.id
+        self.id = dto.universityId
         self.defaultCampusID = dto.defaultCampusID
         self.userCampuses = dto.userCampuses.map { UserCampus(from: $0) }
     }

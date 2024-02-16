@@ -13,7 +13,7 @@ struct CampusInfo {
     let cafeteriaInfos: [CafeteriaInfo]
     
     init(from dto: CampusInfoDTO) {
-        self.id = dto.id
+        self.id = dto.campusId
         self.name = dto.name
         self.cafeteriaInfos = dto.cafeteriaInfos.map { CafeteriaInfo(from: $0) }
     }

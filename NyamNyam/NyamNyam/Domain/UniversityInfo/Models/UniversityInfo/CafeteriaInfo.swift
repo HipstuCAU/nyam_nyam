@@ -13,7 +13,7 @@ struct CafeteriaInfo {
     let location: String?
     
     init(from dto: CafeteriaInfoDTO) {
-        self.id = dto.id
+        self.id = dto.cafeteriaId
         self.name = dto.name
         self.location = dto.location
     }

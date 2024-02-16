@@ -15,7 +15,7 @@ struct UniversityInfo {
     let campusInfos: [CampusInfo]
     
     init(from dto: UniversityInfoDTO) {
-        self.id = dto.id
+        self.id = dto.universityId
         self.name = dto.name
         self.mainColor = dto.mainColor
         self.subColor = dto.subColor

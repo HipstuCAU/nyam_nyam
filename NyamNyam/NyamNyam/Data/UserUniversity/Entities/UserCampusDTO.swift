@@ -8,6 +8,6 @@
 import Foundation
 
 struct UserCampusDTO {
-    let id: String
+    let campusId: String
     let cafeteriaIDs: [String]
 }

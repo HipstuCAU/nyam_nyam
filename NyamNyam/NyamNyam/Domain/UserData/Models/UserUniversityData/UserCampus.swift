@@ -12,7 +12,7 @@ struct UserCampus {
     let cafeteriaIDs: [String]
     
     init(from dto: UserCampusDTO) {
-        self.id = dto.id
+        self.id = dto.campusId
         self.cafeteriaIDs = dto.cafeteriaIDs
     }
 }

@@ -22,15 +22,15 @@ final class MockUserUniversityRepositoryImpl: UserUniversityRepository {
                 single(
                     .success(
                         UserUniversityDTO(
-                            id: "K001",
+                            universityId: "K001",
                             defaultCampusID: "K001001",
                             userCampuses: [
                                 UserCampusDTO(
-                                    id: "K001001",
+                                    campusId: "K001001",
                                     cafeteriaIDs: ["K001001002", "K001001001", "K001001005", "K001001004", "K001001003"]
                                 ),
                                 UserCampusDTO(
-                                    id: "K001002",
+                                    campusId: "K001002",
                                     cafeteriaIDs: ["K001002006", "K001002008", "K001002007"]
                                 ),
                             ]
@@ -41,15 +41,15 @@ final class MockUserUniversityRepositoryImpl: UserUniversityRepository {
                 single(
                     .success(
                         UserUniversityDTO(
-                            id: "K002",
+                            universityId: "K002",
                             defaultCampusID: "K002001",
                             userCampuses: [
                                 UserCampusDTO(
-                                    id: "K002001",
+                                    campusId: "K002001",
                                     cafeteriaIDs: ["K002001001", "K002001003", "K002001002", "K002001005", "K002001004", "K002001006"]
                                 ),
                                 UserCampusDTO(
-                                    id: "K002002",
+                                    campusId: "K002002",
                                     cafeteriaIDs: ["K002002008", "K002002009", "K002002007", "K002002010", "K002002006", "K002002011"]
                                 ),
                             ]
