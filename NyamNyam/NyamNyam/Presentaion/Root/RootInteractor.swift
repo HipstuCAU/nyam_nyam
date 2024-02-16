@@ -11,7 +11,8 @@ import RxSwift
 import RxCocoa
 
 protocol RootRouting: ViewableRouting {
-    func attachHaksik()
+    func attachHaksik(mealPlans: [MealPlan])
+    func detachHaksik()
 }
 
 protocol RootPresentable: Presentable {
@@ -61,7 +62,9 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
     }
     
     enum Mutation {
-        
+        case setMealPlans([MealPlan])
+        case setLoading(Bool)
+        case setRetryAlert(AlertInfo)
     }
     
     // MARK: - RootPresentableListener
@@ -75,6 +78,35 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
     
     func reduce(state: State, mutation: Mutation) -> State {
         var state = state
+        
+        switch mutation {
+        case let .setMealPlans(mealPlans):
+            router?.attachHaksik(mealPlans: mealPlans)
+            
+        case let .setRetryAlert(alertInfo):
+            state.alertInfo = alertInfo
+            
+        case let .setLoading(status):
+            state.isLoading = status
+        }
+        
         return state
+    }
+    
+    private func fetchMealPlanTransform() -> Observable<Mutation> {
+        self.dependency.haksikService.fetchMealPlans()
+            .asObservable()
+            .map { mealPlans -> Mutation in
+                .setMealPlans(mealPlans)
+            }
+            .catchAndReturn(
+                .setRetryAlert(
+                    AlertInfo(
+                        type: .errorWithRetry,
+                        title: "식단 로딩 중 문제가 발생했어요",
+                        message: "인터넷 연결을 확인해주세요"
+                    )
+                )
+            )
     }
 }

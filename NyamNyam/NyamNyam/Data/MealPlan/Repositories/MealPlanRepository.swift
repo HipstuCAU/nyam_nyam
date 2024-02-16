@@ -9,7 +9,7 @@ import Foundation
 import RxSwift
 
 protocol MealPlanRepository {
-    func fetchMealPlanData() -> Single<MealPlanDTO>
+    func fetchMealPlanData() -> Single<[MealPlanDTO]>
 }
 
 final class MealPlanCompositeRepositoryImpl: MealPlanRepository {
@@ -36,7 +36,7 @@ final class MealPlanCompositeRepositoryImpl: MealPlanRepository {
         self.localRepository = localRepository
     }
     
-    func fetchMealPlanData() -> Single<MealPlanDTO> {
+    func fetchMealPlanData() -> Single<[MealPlanDTO]> {
         let fetchedJsonString: Single<String>
         
         // 업데이트가 된 적 있고, 업데이트가 아직 유효한 경우
@@ -80,7 +80,7 @@ final class MealPlanCompositeRepositoryImpl: MealPlanRepository {
                 
                 do {
                     return try JSONDecoder().decode(
-                        MealPlanDTO.self,
+                        [MealPlanDTO].self,
                         from: jsonData
                     )
                 } catch {

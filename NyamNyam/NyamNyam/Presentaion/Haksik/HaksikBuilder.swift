@@ -13,21 +13,16 @@ protocol HaksikDependency: Dependency {
 
 final class HaksikComponent: Component<HaksikDependency>,
                              HaksikInteractorDependency {
+    var mealPlans: [MealPlan]
     
     let haksikService: HaksikService
     
-    override init(dependency: HaksikDependency) {
-        
-        let remoteRepository = MockMealPlanJsonRemoteRepositoryImpl()
-        let localRepository = MealPlanJsonLocalRepositoryImpl()
-        
-        self.haksikService = HaksikServiceImpl(
-            repository: MealPlanCompositeRepositoryImpl(
-                remoteRepository: remoteRepository,
-                localRepository: localRepository
-            )
-        )
-        
+    init(
+        dependency: HaksikDependency,
+        mealPlans: [MealPlan]
+    ) {
+        self.haksikService = dependency.haksikService
+        self.mealPlans = mealPlans
         super.init(dependency: dependency)
     }
 }
@@ -35,7 +30,7 @@ final class HaksikComponent: Component<HaksikDependency>,
 // MARK: - Builder
 
 protocol HaksikBuildable: Buildable {
-    func build(withListener listener: HaksikListener) -> HaksikRouting
+    func build(withListener listener: HaksikListener, mealPlans: [MealPlan]) -> HaksikRouting
 }
 
 final class HaksikBuilder: Builder<HaksikDependency>,
@@ -46,11 +41,13 @@ final class HaksikBuilder: Builder<HaksikDependency>,
     }
 
     func build(
-        withListener listener: HaksikListener
+        withListener listener: HaksikListener,
+        mealPlans: [MealPlan]
     ) -> HaksikRouting {
         
         let component = HaksikComponent(
-            dependency: dependency
+            dependency: dependency,
+            mealPlans: mealPlans
         )
         let viewController = HaksikViewController()
         let interactor = HaksikInteractor(
