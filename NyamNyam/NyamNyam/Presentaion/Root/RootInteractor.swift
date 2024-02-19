@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 protocol RootRouting: ViewableRouting {
-    func attachHaksik(mealPlan: MealPlan)
+    func attachHaksik(mealPlans: [MealPlan])
     func detachHaksik()
 }
 
@@ -20,8 +20,7 @@ protocol RootPresentable: Presentable {
 }
 
 protocol RootInteractorDependency {
-    var haksikService: HaksikService { get }
-    var applicationDidBecomeActiveRelay: PublishRelay<Void> { get }
+    
 }
 
 protocol RootListener: AnyObject {
@@ -63,7 +62,7 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
     }
     
     enum Mutation {
-        case setMealPlan(MealPlan)
+        case setMealPlans([MealPlan])
         case setLoading(Bool)
         case setRetryAlert(AlertInfo)
     }
@@ -74,36 +73,15 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
-        switch action {
-        case .retryLoad:
-            return .concat([
-                .just(.setLoading(true)),
-                self.fetchMealPlanTransform(),
-                .just(.setLoading(false))
-            ])
-        }
-    }
-    
-    func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
-        let applicationDidBecomeActive = dependency.applicationDidBecomeActiveRelay
-            .withUnretained(self)
-            .flatMap { owner, mutation -> Observable<Mutation> in
-                return Observable.concat([
-                    .just(.setLoading(true)),
-                    owner.fetchMealPlanTransform(),
-                    .just(.setLoading(false))
-                ])
-            }
-
-        return .merge(mutation, applicationDidBecomeActive)
+        
     }
     
     func reduce(state: State, mutation: Mutation) -> State {
         var state = state
         
         switch mutation {
-        case let .setMealPlan(mealPlan):
-            router?.attachHaksik(mealPlan: mealPlan)
+        case let .setMealPlans(mealPlans):
+            router?.attachHaksik(mealPlans: mealPlans)
             
         case let .setRetryAlert(alertInfo):
             state.alertInfo = alertInfo
@@ -116,10 +94,10 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
     }
     
     private func fetchMealPlanTransform() -> Observable<Mutation> {
-        self.dependency.haksikService.fetchMealPlan()
+        self.dependency.haksikService.fetchMealPlans()
             .asObservable()
-            .map { mealPlan -> Mutation in
-                .setMealPlan(mealPlan)
+            .map { mealPlans -> Mutation in
+                .setMealPlans(mealPlans)
             }
             .catchAndReturn(
                 .setRetryAlert(
