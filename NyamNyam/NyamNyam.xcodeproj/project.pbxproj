@@ -24,6 +24,7 @@
 		2A429DAA29BF6B170044A3E6 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429DA929BF6B170044A3E6 /* SettingViewModel.swift */; };
 		2A429DAC29BF93BD0044A3E6 /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429DAB29BF93BD0044A3E6 /* BackButtonView.swift */; };
 		2A429DAE29C040D20044A3E6 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429DAD29C040D20044A3E6 /* Reachability.swift */; };
+		2A50C8BA2B9B692D002FA3C3 /* GoogleMobileAds in Frameworks */ = {isa = PBXBuildFile; productRef = 2A50C8B92B9B692D002FA3C3 /* GoogleMobileAds */; };
 		AB2D2C0129B8271C0015CB10 /* CafeteriaSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2D2C0029B8271C0015CB10 /* CafeteriaSelectView.swift */; };
 		AB2FDAAE29B84CC7001746DB /* CafeteriaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FDAAD29B84CC7001746DB /* CafeteriaButton.swift */; };
 		AB2FDAB229B8D4B4001746DB /* ContentCarouselModuleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FDAB129B8D4B4001746DB /* ContentCarouselModuleViewController.swift */; };
@@ -152,6 +153,7 @@
 			files = (
 				2A429D8929BB95BA0044A3E6 /* FirebaseAnalytics in Frameworks */,
 				ABEAFC1029ACB1FF002C3119 /* SnapKit in Frameworks */,
+				2A50C8BA2B9B692D002FA3C3 /* GoogleMobileAds in Frameworks */,
 				2A429D8B29BB95BA0044A3E6 /* FirebaseFirestore in Frameworks */,
 				2A429D8D29BB95BA0044A3E6 /* FirebaseFirestoreSwift in Frameworks */,
 			);
@@ -249,6 +251,13 @@
 			path = SetDefaultCampusModule;
 			sourceTree = "<group>";
 		};
+		2A50C8B82B9B692D002FA3C3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2AD5A1E229C62C3B00DCAF5D /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -304,6 +313,7 @@
 				ABEAFBE029AC9ED4002C3119 /* NyamNyamTests */,
 				ABEAFBEA29AC9ED4002C3119 /* NyamNyamUITests */,
 				ABEAFBC829AC9ED3002C3119 /* Products */,
+				2A50C8B82B9B692D002FA3C3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -489,6 +499,7 @@
 				2A429D8829BB95BA0044A3E6 /* FirebaseAnalytics */,
 				2A429D8A29BB95BA0044A3E6 /* FirebaseFirestore */,
 				2A429D8C29BB95BA0044A3E6 /* FirebaseFirestoreSwift */,
+				2A50C8B92B9B692D002FA3C3 /* GoogleMobileAds */,
 			);
 			productName = NyamNyam;
 			productReference = ABEAFBC729AC9ED3002C3119 /* NyamNyam.app */;
@@ -565,6 +576,7 @@
 			packageReferences = (
 				ABEAFC0E29ACB1FF002C3119 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				2A429D8729BB95BA0044A3E6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				2A50C8B72B9B647B002FA3C3 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */,
 			);
 			productRefGroup = ABEAFBC829AC9ED3002C3119 /* Products */;
 			projectDirPath = "";
@@ -1040,6 +1052,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2A429D8729BB95BA0044A3E6 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseFirestoreSwift;
+		};
+		2A50C8B92B9B692D002FA3C3 /* GoogleMobileAds */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2A50C8B72B9B647B002FA3C3 /* XCRemoteSwiftPackageReference "swift-package-manager-google-mobile-ads" */;
+			productName = GoogleMobileAds;
 		};
 		ABEAFC0F29ACB1FF002C3119 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
