@@ -6,9 +6,11 @@
 //
 
 import UIKit
+
+import GoogleMobileAds
 import SnapKit
 
-final class HomeViewController: UIViewController {
+final class HomeViewController: UIViewController, GADBannerViewDelegate {
     let viewModel = HomeViewModel()
     lazy var optionSelectModule = OptionSelectModuleViewController(viewModel: viewModel)
     lazy var contentCarouselModule = ContentCarouselModuleViewController(viewModel: viewModel)
@@ -19,6 +21,31 @@ final class HomeViewController: UIViewController {
         button.addTarget(self, action: #selector(settingButtonPressed), for: .touchUpInside)
         return button
     }()
+    
+    let adBottomBannerView = GADBannerView(adSize: GADAdSizeBanner, origin: .zero)
+    
+    private func setAdBannerView() {
+        self.view.addSubview(adBottomBannerView)
+        
+        adBottomBannerView.rootViewController = self
+        adBottomBannerView.delegate = self
+        
+        
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+        let width = windowScene.coordinateSpace.bounds.size.width
+        adBottomBannerView.adSize = GADCurrentOrientationAnchoredAdaptiveBannerAdSizeWithWidth(width)
+        adBottomBannerView.backgroundColor = .clear
+        
+        adBottomBannerView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.width.equalTo(adBottomBannerView.adSize.size.width)
+            make.height.equalTo(adBottomBannerView.adSize.size.height)
+        }
+        
+        adBottomBannerView.adUnitID = AdmobBanner.appBottom.unitID
+        adBottomBannerView.load(GADRequest())
+    }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         if #available(iOS 13, *) {
@@ -36,6 +63,7 @@ final class HomeViewController: UIViewController {
         setContentCarouselModuleLayout()
         setSettingButtonLayout()
         setNetworkAlert()
+        setAdBannerView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
