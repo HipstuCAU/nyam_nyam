@@ -18,12 +18,6 @@ final class MealPlanCompositeRepositoryImpl: MealPlanRepository {
     
     private let localRepository: MealPlanJsonLocalRepository
     
-    private let localFileName = "CAUMeals"
-    
-    private let remoteCollectionName = "CAU_Haksik"
-    
-    private let remoteDocumentName = "CAU_Cafeteria_Menu"
-    
     private var updateValidityTime: Date? {
         self.getValidityTime(hour: 2, minute: 30)
     }
@@ -45,26 +39,18 @@ final class MealPlanCompositeRepositoryImpl: MealPlanRepository {
            lastUpdateTime >= updateValidityTime {
             // local
             fetchedJsonString = self.localRepository
-                .fetchMealPlanJsonString(
-                    fileName: localFileName
-                )
+                .fetchMealPlanJsonString()
                 .debug("📁 local fetch Json")
         } else {
             // remote + create file to local
             fetchedJsonString = self.remoteRepository
-                .fetchMealPlanJsonString(
-                    collection: remoteCollectionName,
-                    document: remoteDocumentName
-                )
+                .fetchMealPlanJsonString()
                 .debug("📡 remote fetch Json")
                 .do(onSuccess: { [weak self] jsonStr in
                     guard let self else { return }
                     do {
                         try self.localRepository
-                            .createMealPlanJsonFileWith(
-                                jsonString: jsonStr,
-                                fileName: self.localFileName
-                            )
+                            .createMealPlanJsonFileWith(jsonString: jsonStr)
                     } catch {
                         throw FileError.fileSaveError(error)
                     }

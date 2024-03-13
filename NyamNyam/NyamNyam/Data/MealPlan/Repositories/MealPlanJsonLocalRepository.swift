@@ -10,20 +10,32 @@ import RxSwift
 import Firebase
 
 protocol MealPlanJsonLocalRepository {
-    func fetchMealPlanJsonString(fileName: String) -> Single<String>
-    func createMealPlanJsonFileWith(jsonString: String, fileName name: String) throws
+    func fetchMealPlanJsonString() -> Single<String>
+    func createMealPlanJsonFileWith(jsonString: String) throws
 }
 
 final class MealPlanJsonLocalRepositoryImpl: MealPlanJsonLocalRepository {
-    func fetchMealPlanJsonString(fileName: String) -> Single<String> {
-        return Single<String>.create { single in
+    private let localFileName: String
+    
+    init(localFileName: String) {
+        self.localFileName = localFileName
+    }
+    
+    func fetchMealPlanJsonString() -> Single<String> {
+        return Single<String>.create { [weak self] single in
+            
+            guard let self
+            else {
+                single(.failure(FileError.unknownError))
+                return Disposables.create()
+            }
             
             guard let filename = self.getDocumentsDirectory()?
                 .appendingPathComponent(
-                    fileName + ".json"
+                    localFileName + ".json"
                 )
             else {
-                single(.failure(FileError.fileNotFound(fileName + ".json")))
+                single(.failure(FileError.fileNotFound(localFileName + ".json")))
                 return Disposables.create()
             }
             
@@ -43,17 +55,14 @@ final class MealPlanJsonLocalRepositoryImpl: MealPlanJsonLocalRepository {
         }
     }
     
-    func createMealPlanJsonFileWith(
-        jsonString: String,
-        fileName name: String
-    ) throws {
+    func createMealPlanJsonFileWith(jsonString: String) throws {
         
         guard let filename = getDocumentsDirectory()?
             .appendingPathComponent(
-                name + ".json"
+                localFileName + ".json"
             )
         else {
-            throw FileError.fileNotFound(name + ".json")
+            throw FileError.fileNotFound(localFileName + ".json")
         }
         
         try jsonString.write(

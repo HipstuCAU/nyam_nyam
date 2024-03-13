@@ -10,17 +10,34 @@ import RxSwift
 import Firebase
 
 protocol MealPlanJsonRemoteRepository {
-    func fetchMealPlanJsonString(collection: String, document: String) -> Single<String>
+    func fetchMealPlanJsonString() -> Single<String>
 }
 
 final class MealPlanJsonRemoteRepositoryImpl: MealPlanJsonRemoteRepository {
     
-    func fetchMealPlanJsonString(
+    private let collection: String
+    
+    private let document: String
+    
+    init(
         collection: String,
         document: String
-    ) -> Single<String> {
+    ) {
+        self.collection = collection
+        self.document = document
+    }
+    
+    
+    func fetchMealPlanJsonString() -> Single<String> {
         
-        return Single<String>.create { single in
+        return Single<String>.create { [weak self] single in
+            
+            guard let self 
+            else {
+                single(.failure(FirebaseDataError.unknownError))
+                return Disposables.create()
+            }
+            
             let db = Firestore.firestore()
             let docRef = db.collection(collection).document(document)
 

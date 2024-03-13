@@ -19,10 +19,26 @@ final class HaksikComponent: Component<HaksikDependency>,
         dependency: HaksikDependency,
         mealPlans: [MealPlan]
     ) {
+        let localFileName = "CAUMeals"
+        
+        let remoteCollectionName = "CAU_Haksik"
+        
+        let remoteDocumentName: String
+        #if DEBUG
+        remoteDocumentName = "Test_Doc"
+        #else
+        remoteDocumentName = "CAU_Cafeteria_Menu"
+        #endif
+        
         haksikService = HaksikServiceImpl(
             repository: MealPlanCompositeRepositoryImpl(
-                remoteRepository: MealPlanJsonRemoteRepositoryImpl(),
-                localRepository: MealPlanJsonLocalRepositoryImpl()
+                remoteRepository: MealPlanJsonRemoteRepositoryImpl(
+                    collection: remoteCollectionName,
+                    document: remoteDocumentName
+                ),
+                localRepository: MealPlanJsonLocalRepositoryImpl(
+                    localFileName: localFileName
+                )
             )
         )
         super.init(dependency: dependency)
