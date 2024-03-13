@@ -2,17 +2,20 @@
 //  HaksikService.swift
 //  NyamNyam
 //
-//  Created by Sdaq on 2024/01/09.
+//  Created by 박준홍 on 2024/01/09.
 //
 
 import Foundation
 import RxSwift
-import RxCocoa
+
+protocol HaksikService {
+    func fetchMealPlans() -> Single<[MealPlan]>
+}
 
 final class HaksikServiceImpl {
     
     private let repository: MealPlanRepository
-    
+  
     private let disposeBag: DisposeBag = .init()
     
     init(repository: MealPlanRepository) {
@@ -21,12 +24,11 @@ final class HaksikServiceImpl {
 }
 
 // MARK: - Meal plan repository
-extension HaksikServiceImpl {
-    
-    func fetchMealPlan() -> Single<MealPlan> {
-        repository.fetchMealPlanData()
-            .map { _ in
-                MealPlan()
+extension HaksikServiceImpl: HaksikService {
+    func fetchMealPlans() -> Single<[MealPlan]> {
+        return repository.fetchMealPlanData()
+            .flatMap { mealPlanDTOs in
+                return Single.just(mealPlanDTOs.map { MealPlan(from: $0) })
             }
     }
 }

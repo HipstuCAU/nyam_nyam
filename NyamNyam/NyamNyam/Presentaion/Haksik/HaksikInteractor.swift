@@ -23,7 +23,6 @@ protocol HaksikListener: AnyObject {
 }
 
 protocol HaksikInteractorDependency {
-    var mealPlans: [MealPlan] { get }
     var haksikService: HaksikService { get }
 }
 
@@ -62,7 +61,7 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
     }
     
     enum Mutation {
-        case setMealPlan(MealPlan)
+        case setMealPlan([MealPlan])
         case setLoading(Bool)
         case setRetryAlert(AlertInfo)
     }
@@ -84,25 +83,11 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
         }
     }
     
-//    func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
-//        let applicationDidBecomeActive = dependency.applicationDidBecomeActiveRelay
-//            .withUnretained(self)
-//            .flatMap { owner, mutation -> Observable<Mutation> in
-//                return Observable.concat([
-//                    .just(.setLoading(true)),
-//                    owner.fetchMealPlanTransform(),
-//                    .just(.setLoading(false))
-//                ])
-//            }
-//
-//        return .merge(mutation, applicationDidBecomeActive)
-//    }
-    
     func reduce(state: State, mutation: Mutation) -> State {
         var state = state
         
         switch mutation {
-        case let .setMealPlan(mealPlan):
+        case let .setMealPlan(mealPlans):
             // TODO: Data를 통해 그리기
             break
             
@@ -117,10 +102,10 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
     }
     
     private func fetchMealPlanTransform() -> Observable<Mutation> {
-        self.dependency.haksikService.fetchMealPlan()
+        self.dependency.haksikService.fetchMealPlans()
             .asObservable()
-            .map { mealPlan -> Mutation in
-                .setMealPlan(mealPlan)
+            .map { mealPlans -> Mutation in
+                .setMealPlan(mealPlans)
             }
             .catchAndReturn(
                 .setRetryAlert(

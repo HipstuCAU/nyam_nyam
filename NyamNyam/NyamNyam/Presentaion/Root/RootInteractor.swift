@@ -12,7 +12,6 @@ import RxCocoa
 
 protocol RootRouting: ViewableRouting {
     func attachHaksik(mealPlans: [MealPlan])
-    func detachHaksik()
 }
 
 protocol RootPresentable: Presentable {
@@ -91,22 +90,5 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
         }
         
         return state
-    }
-    
-    private func fetchMealPlanTransform() -> Observable<Mutation> {
-        self.dependency.haksikService.fetchMealPlans()
-            .asObservable()
-            .map { mealPlans -> Mutation in
-                .setMealPlans(mealPlans)
-            }
-            .catchAndReturn(
-                .setRetryAlert(
-                    AlertInfo(
-                        type: .errorWithRetry,
-                        title: "식단 로딩 중 문제가 발생했어요",
-                        message: "인터넷 연결을 확인해주세요"
-                    )
-                )
-            )
     }
 }

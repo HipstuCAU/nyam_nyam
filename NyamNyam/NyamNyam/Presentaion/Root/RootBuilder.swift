@@ -15,6 +15,7 @@ protocol RootDependency: Dependency {
 final class RootComponent: Component<RootDependency>,
                            RootInteractorDependency,
                            HaksikDependency {
+    
     override init(dependency: RootDependency) {
         super.init(dependency: dependency)
     }

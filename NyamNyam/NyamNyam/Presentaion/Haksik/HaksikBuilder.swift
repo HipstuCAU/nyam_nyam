@@ -13,16 +13,18 @@ protocol HaksikDependency: Dependency {
 
 final class HaksikComponent: Component<HaksikDependency>,
                              HaksikInteractorDependency {
-    var mealPlans: [MealPlan]
-    
     let haksikService: HaksikService
     
     init(
         dependency: HaksikDependency,
         mealPlans: [MealPlan]
     ) {
-        self.haksikService = dependency.haksikService
-        self.mealPlans = mealPlans
+        haksikService = HaksikServiceImpl(
+            repository: MealPlanCompositeRepositoryImpl(
+                remoteRepository: MealPlanJsonRemoteRepositoryImpl(),
+                localRepository: MealPlanJsonLocalRepositoryImpl()
+            )
+        )
         super.init(dependency: dependency)
     }
 }
