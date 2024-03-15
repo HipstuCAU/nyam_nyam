@@ -79,6 +79,10 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
                 self.fetchMealPlanTransform(),
                 .just(.setLoading(false)),
             ])
+            
+        case .appWillEnterForeground:
+            print("app will enter Foreground")
+            return .empty()
         }
     }
     
@@ -119,4 +123,7 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
                 )
             })
     }
+    
+//    private func fetchUserUniversityTransform() -> Observable<Mutation> {
+//    }
 }

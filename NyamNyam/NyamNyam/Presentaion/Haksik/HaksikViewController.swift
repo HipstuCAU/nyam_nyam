@@ -12,6 +12,7 @@ import UIKit
 import SkeletonView
 
 enum HaksikPresentableAction {
+    case appWillEnterForeground
     case viewDidAppear
     case retryLoad
 }
@@ -97,6 +98,17 @@ private extension HaksikViewController {
             .map { _ in .viewDidAppear }
             .bind(to: self.actionRelay)
             .disposed(by: disposeBag)
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(willEnterForeground),
+            name: UIApplication.willEnterForegroundNotification,
+            object: nil
+        )
+    }
+    
+    @objc func willEnterForeground() {
+        actionRelay.accept(.appWillEnterForeground)
     }
 }
 
