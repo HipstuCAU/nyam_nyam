@@ -15,8 +15,12 @@ protocol RootDependency: Dependency {
 final class RootComponent: Component<RootDependency>,
                            RootInteractorDependency,
                            HaksikDependency {
+    let userDataService: UserDataService
     
     override init(dependency: RootDependency) {
+        userDataService = UserDataServiceImpl(
+            userUniversityRepository: MockUserUniversityRepositoryImpl()
+        )
         super.init(dependency: dependency)
     }
 }

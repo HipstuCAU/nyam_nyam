@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct CafeteriaInfo {
+struct CafeteriaInfo: Equatable {
     let id: String
     let name: String
     let location: String?

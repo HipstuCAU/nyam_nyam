@@ -39,6 +39,18 @@ final class HaksikViewController: UIViewController,
     
     private let actionRelay: PublishRelay<HaksikPresentableListener.Action> = .init()
     
+    private let campusTitleView: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = .clear
+        label.textColor = Pallete.gray900.color
+        label.textAlignment = .left
+        label.font = Pretendard.bold.size(28.0)
+        label.isSkeletonable = true
+        label.skeletonTextLineHeight = .relativeToFont
+        label.text = " "
+        return label
+    }()
+    
     override func viewDidLoad() {
         view.backgroundColor = Pallete.cauBlue.color
         deactivateNavigation()
@@ -48,28 +60,53 @@ final class HaksikViewController: UIViewController,
     }
     
     private func bindUI() {
-        listener?.state.map(\.isLoading)
-            .distinctUntilChanged()
-            .bind(onNext: { loadingStatus in
-                print(loadingStatus)
-            })
-            .disposed(by: disposeBag)
+        guard let listener else { return }
         
-        listener?.state.map(\.alertInfo)
+        let userData = listener.state.map(\.userUniversityData)
             .distinctUntilChanged()
             .compactMap({ $0 })
-            .bind(onNext: { alertInfo in
+        
+        let universityInfo = listener.state.map(\.universityInfo)
+            .distinctUntilChanged()
+            .compactMap({ $0 })
+        
+        Observable.combineLatest(userData, universityInfo)
+            .bind(with: self) { owner, data in
+                let (userData, universityInfo) = data
+                let campusID = userData.defaultCampusID
+                let campusTitle = universityInfo.campusInfos
+                    .first { $0.id == campusID }?
+                    .name
+                owner.campusTitleView.hideSkeleton()
+                owner.campusTitleView.text = campusTitle
+            }
+            .disposed(by: disposeBag)
+            
+        
+        listener.state.map(\.isLoading)
+            .distinctUntilChanged()
+            .bind(with: self) { owner, loadingStatus in
+                if loadingStatus {
+                    owner.view.showAnimatedSkeleton()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        listener.state.map(\.alertInfo)
+            .distinctUntilChanged()
+            .compactMap({ $0 })
+            .bind(with: self) { owner, alertInfo in
                 let retryAction = UIAlertAction(
                     title: "재시도",
                     style: .default
-                ) { [weak self] _ in
-                    self?.actionRelay.accept(.retryLoad)
+                ) { [weak owner] _ in
+                    owner?.actionRelay.accept(.retryLoad)
                 }
-                self.showAlertOnWindow(
+                owner.showAlertOnWindow(
                     alertInfo: alertInfo,
                     actions: [retryAction]
                 )
-            })
+            }
             .disposed(by: disposeBag)
     }
     
@@ -114,6 +151,28 @@ private extension HaksikViewController {
 
 private extension HaksikViewController {
     func configureUI() {
-        
+        setBackgroundGradient()
+        setCampusTitleView()
+    }
+    
+    private func setBackgroundGradient() {
+        view.isSkeletonable = true
+        let layer = CAGradientLayer()
+        layer.colors = [
+            UIColor.white.cgColor,
+            Pallete.bgBlue.color?.cgColor ?? UIColor.blue
+        ]
+        layer.frame.size = view.frame.size
+        layer.locations = [0.0, 1.0]
+        view.layer.insertSublayer(layer, at: 0)
+    }
+    
+    func setCampusTitleView() {
+        view.addSubview(campusTitleView)
+        campusTitleView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().offset(-20)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(9)
+        }
     }
 }

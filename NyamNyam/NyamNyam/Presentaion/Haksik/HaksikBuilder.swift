@@ -8,12 +8,16 @@
 import RIBs
 
 protocol HaksikDependency: Dependency {
-    
+    var userDataService: UserDataService { get }
 }
 
 final class HaksikComponent: Component<HaksikDependency>,
                              HaksikInteractorDependency {
     let haksikService: HaksikService
+    
+    let userDataService: UserDataService
+    
+    let universityInfoService: UniversityInfoService
     
     override init(dependency: HaksikDependency) {
         let localFileName = "CAUMeals"
@@ -38,6 +42,13 @@ final class HaksikComponent: Component<HaksikDependency>,
                 )
             )
         )
+        
+        userDataService = dependency.userDataService
+        
+        universityInfoService = UniversityInfoServiceImpl(
+            repository: MockUniversityRepositoryImpl()
+        )
+        
         super.init(dependency: dependency)
     }
 }

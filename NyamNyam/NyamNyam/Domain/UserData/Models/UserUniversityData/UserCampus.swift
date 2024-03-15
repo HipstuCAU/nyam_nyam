@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserCampus {
+struct UserCampus: Equatable {
     let id: String
     let cafeteriaIDs: [String]
     

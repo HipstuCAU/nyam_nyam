@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UniversityInfo {
+struct UniversityInfo: Equatable {
     let id: String
     let name: String
     let mainColor: String
