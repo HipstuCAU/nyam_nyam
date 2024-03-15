@@ -15,10 +15,7 @@ final class HaksikComponent: Component<HaksikDependency>,
                              HaksikInteractorDependency {
     let haksikService: HaksikService
     
-    init(
-        dependency: HaksikDependency,
-        mealPlans: [MealPlan]
-    ) {
+    override init(dependency: HaksikDependency) {
         let localFileName = "CAUMeals"
         
         let remoteCollectionName = "CAU_Haksik"
@@ -48,7 +45,7 @@ final class HaksikComponent: Component<HaksikDependency>,
 // MARK: - Builder
 
 protocol HaksikBuildable: Buildable {
-    func build(withListener listener: HaksikListener, mealPlans: [MealPlan]) -> HaksikRouting
+    func build(withListener listener: HaksikListener) -> HaksikRouting
 }
 
 final class HaksikBuilder: Builder<HaksikDependency>,
@@ -59,13 +56,11 @@ final class HaksikBuilder: Builder<HaksikDependency>,
     }
 
     func build(
-        withListener listener: HaksikListener,
-        mealPlans: [MealPlan]
+        withListener listener: HaksikListener
     ) -> HaksikRouting {
         
         let component = HaksikComponent(
-            dependency: dependency,
-            mealPlans: mealPlans
+            dependency: dependency
         )
         let viewController = HaksikViewController()
         let interactor = HaksikInteractor(

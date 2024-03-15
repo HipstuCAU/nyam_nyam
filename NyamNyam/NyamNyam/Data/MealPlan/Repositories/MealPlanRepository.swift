@@ -9,10 +9,12 @@ import Foundation
 import RxSwift
 
 protocol MealPlanRepository {
-    func fetchMealPlanData() -> Single<[MealPlanDTO]>
+    func fetchMealPlanData() -> Single<MealPlansDTO>
 }
 
 final class MealPlanCompositeRepositoryImpl: MealPlanRepository {
+    
+    private let logger = LoggingService(label: "hipstu.NyamNyam")
     
     private let remoteRepository: MealPlanJsonRemoteRepository
     
@@ -30,50 +32,68 @@ final class MealPlanCompositeRepositoryImpl: MealPlanRepository {
         self.localRepository = localRepository
     }
     
-    func fetchMealPlanData() -> Single<[MealPlanDTO]> {
+    func fetchMealPlanData() -> Single<MealPlansDTO> {
         let fetchedJsonString: Single<String>
         
-        // 업데이트가 된 적 있고, 업데이트가 아직 유효한 경우
         if let lastUpdateTime = UserDefaults().lastUpdate?.toDateWithTime(),
            let updateValidityTime = updateValidityTime,
            lastUpdateTime >= updateValidityTime {
-            // local
+        
             fetchedJsonString = self.localRepository
                 .fetchMealPlanJsonString()
                 .debug("📁 local fetch Json")
         } else {
-            // remote + create file to local
+            
             fetchedJsonString = self.remoteRepository
                 .fetchMealPlanJsonString()
                 .debug("📡 remote fetch Json")
                 .do(onSuccess: { [weak self] jsonStr in
                     guard let self else { return }
+                    logger.log(
+                        level: .info,
+                        message: .init(stringLiteral: jsonStr)
+                    )
                     do {
                         try self.localRepository
-                            .createMealPlanJsonFileWith(jsonString: jsonStr)
+                            .createMealPlanJsonFileWith(
+                                jsonString: jsonStr
+                            )
                     } catch {
+                        logger.log(
+                            level: .error,
+                            message: .init(stringLiteral: error.localizedDescription)
+                        )
                         throw FileError.fileSaveError(error)
                     }
                 })
         }
         
         return fetchedJsonString
-            .map { jsonString in
+            .map { [weak self] jsonString in
+                guard let self 
+                else {
+                    throw FileError.unknownError
+                }
                 guard let jsonData = jsonString.data(using: .utf8)
                 else {
+                    try localRepository.deleteMealPlanJsonFile()
                     throw FileError.invalidData
                 }
                 
                 do {
                     return try JSONDecoder().decode(
-                        [MealPlanDTO].self,
+                        MealPlansDTO.self,
                         from: jsonData
                     )
                 } catch {
+                    logger.log(
+                        level: .error,
+                        message: .init(stringLiteral: error.localizedDescription)
+                    )
+                    try localRepository.deleteMealPlanJsonFile()
                     throw FileError.parsingError(error)
                 }
             }
-            .debug("fetch result")
     }
 }
 

@@ -7,6 +7,14 @@
 
 import Foundation
 
+struct MealPlansDTO: Codable {
+    let mealPlans: [MealPlanDTO]
+    
+    enum CodingKeys: String, CodingKey {
+        case mealPlans = "results"
+    }
+}
+
 struct MealPlanDTO: Codable {
     let date: String
     let cafeterias: [CafeteriaDTO]

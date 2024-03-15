@@ -27,8 +27,8 @@ final class HaksikServiceImpl {
 extension HaksikServiceImpl: HaksikService {
     func fetchMealPlans() -> Single<[MealPlan]> {
         return repository.fetchMealPlanData()
-            .flatMap { mealPlanDTOs in
-                return Single.just(mealPlanDTOs.map { MealPlan(from: $0) })
+            .flatMap { mealplansDTO in
+                Single.just(mealplansDTO.mealPlans.map { MealPlan(from: $0) })
             }
     }
 }

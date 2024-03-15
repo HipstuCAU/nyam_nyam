@@ -16,8 +16,7 @@ protocol HaksikViewControllable: ViewControllable {
    
 }
 
-final class HaksikRouter: ViewableRouter<HaksikInteractable,
-                          HaksikViewControllable>,
+final class HaksikRouter: ViewableRouter<HaksikInteractable, HaksikViewControllable>,
                           HaksikRouting {
     
     override init(

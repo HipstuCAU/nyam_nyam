@@ -14,7 +14,7 @@ protocol RootInteractable: Interactable,
 }
 
 protocol RootViewControllable: ViewControllable {
-    func presentFullScreen(_: ViewControllable)
+    func presentFullScreenPage(viewControllable: ViewControllable)
 }
 
 final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>,
@@ -37,21 +37,18 @@ final class RootRouter: LaunchRouter<RootInteractable, RootViewControllable>,
         interactor.router = self
     }
     
-    func attachHaksik(mealPlans: [MealPlan]) {
+    func attachHaksik() {
         guard attachedRouter == nil
         else { return }
         
         let haksikRouter = haksikBuilder.build(
-            withListener: self.interactor,
-            mealPlans: mealPlans
+            withListener: self.interactor
         )
         self.attachChild(haksikRouter)
         self.attachedRouter = haksikRouter
         
-        //TODO: - 추후 변경되어야하는 부분, 테스트를 위해서 .present 를 사용했습니다.
-        self.viewControllable.present(haksikRouter.viewControllable, animated: false, completion: {
-            
-            
-        })
+        viewController.presentFullScreenPage(
+            viewControllable: haksikRouter.viewControllable
+        )
     }
 }

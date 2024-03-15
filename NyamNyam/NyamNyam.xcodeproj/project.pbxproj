@@ -21,7 +21,7 @@
 		2A429DAA29BF6B170044A3E6 /* SettingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429DA929BF6B170044A3E6 /* SettingViewModel.swift */; };
 		2A429DAC29BF93BD0044A3E6 /* BackButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429DAB29BF93BD0044A3E6 /* BackButtonView.swift */; };
 		2A429DAE29C040D20044A3E6 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A429DAD29C040D20044A3E6 /* Reachability.swift */; };
-		2A7489B22B4D981A00297CC7 /* MealPlanDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7489B12B4D981A00297CC7 /* MealPlanDTO.swift */; };
+		2A7489B22B4D981A00297CC7 /* MealPlansDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A7489B12B4D981A00297CC7 /* MealPlansDTO.swift */; };
 		7A8405472B4BB9DD00830F77 /* RIBs in Frameworks */ = {isa = PBXBuildFile; productRef = 7A8405462B4BB9DD00830F77 /* RIBs */; };
 		7A84054A2B4BBA0C00830F77 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 7A8405492B4BBA0C00830F77 /* RxCocoa */; };
 		7A84054C2B4BBA0C00830F77 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7A84054B2B4BBA0C00830F77 /* RxSwift */; };
@@ -92,6 +92,9 @@
 		ABA0CC3C2B77C98200B77A8B /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA0CC3B2B77C98200B77A8B /* UserDataService.swift */; };
 		ABA5FFDF29C15D400029C81C /* TimeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABA5FFDE29C15D400029C81C /* TimeLabelView.swift */; };
 		ABB6160F2BA082E600D0BD7B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABB6160E2BA082E600D0BD7B /* GoogleService-Info.plist */; };
+		ABB616122BA244FB00D0BD7B /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = ABB616112BA244FB00D0BD7B /* Logging */; };
+		ABB616152BA2493600D0BD7B /* LoggingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB616142BA2493600D0BD7B /* LoggingService.swift */; };
+		ABB616182BA4396200D0BD7B /* SkeletonView in Frameworks */ = {isa = PBXBuildFile; productRef = ABB616172BA4396200D0BD7B /* SkeletonView */; };
 		ABBDF69129B9C53C00E9347A /* CarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBDF69029B9C53C00E9347A /* CarouselCell.swift */; };
 		ABBDF69329BA328A00E9347A /* ExpandableMealCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBDF69229BA328900E9347A /* ExpandableMealCardView.swift */; };
 		ABEAFBCB29AC9ED3002C3119 /* TempAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFBCA29AC9ED3002C3119 /* TempAppDelegate.swift */; };
@@ -145,7 +148,7 @@
 		2A429DA929BF6B170044A3E6 /* SettingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewModel.swift; sourceTree = "<group>"; };
 		2A429DAB29BF93BD0044A3E6 /* BackButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackButtonView.swift; sourceTree = "<group>"; };
 		2A429DAD29C040D20044A3E6 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		2A7489B12B4D981A00297CC7 /* MealPlanDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlanDTO.swift; sourceTree = "<group>"; };
+		2A7489B12B4D981A00297CC7 /* MealPlansDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlansDTO.swift; sourceTree = "<group>"; };
 		7A84055D2B4BBAF900830F77 /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
 		7A84055E2B4BBAF900830F77 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		7A84055F2B4BBAF900830F77 /* RootBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootBuilder.swift; sourceTree = "<group>"; };
@@ -201,6 +204,7 @@
 		ABA0CC3B2B77C98200B77A8B /* UserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataService.swift; sourceTree = "<group>"; };
 		ABA5FFDE29C15D400029C81C /* TimeLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLabelView.swift; sourceTree = "<group>"; };
 		ABB6160E2BA082E600D0BD7B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ABB616142BA2493600D0BD7B /* LoggingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggingService.swift; sourceTree = "<group>"; };
 		ABBDF69029B9C53C00E9347A /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
 		ABBDF69229BA328900E9347A /* ExpandableMealCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableMealCardView.swift; sourceTree = "<group>"; };
 		ABEAFBC729AC9ED3002C3119 /* NyamNyam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NyamNyam.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -235,7 +239,9 @@
 			files = (
 				7A84055B2B4BBA8A00830F77 /* RxMoya in Frameworks */,
 				7A8405512B4BBA3200830F77 /* NeedleFoundation in Frameworks */,
+				ABB616122BA244FB00D0BD7B /* Logging in Frameworks */,
 				7A8405592B4BBA8A00830F77 /* Moya in Frameworks */,
+				ABB616182BA4396200D0BD7B /* SkeletonView in Frameworks */,
 				7A8405562B4BBA5A00830F77 /* Then in Frameworks */,
 				7A84054A2B4BBA0C00830F77 /* RxCocoa in Frameworks */,
 				7A8405762B4BDC2400830F77 /* ReactorKit in Frameworks */,
@@ -414,7 +420,7 @@
 		7A8405822B4D5BCF00830F77 /* Entites */ = {
 			isa = PBXGroup;
 			children = (
-				2A7489B12B4D981A00297CC7 /* MealPlanDTO.swift */,
+				2A7489B12B4D981A00297CC7 /* MealPlansDTO.swift */,
 			);
 			path = Entites;
 			sourceTree = "<group>";
@@ -680,6 +686,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		ABB616132BA2492300D0BD7B /* Logging */ = {
+			isa = PBXGroup;
+			children = (
+				ABB616142BA2493600D0BD7B /* LoggingService.swift */,
+			);
+			path = Logging;
+			sourceTree = "<group>";
+		};
 		ABBDF68F29B9C52000E9347A /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -767,6 +781,7 @@
 		ABEAFBFE29ACA051002C3119 /* Global */ = {
 			isa = PBXGroup;
 			children = (
+				ABB616132BA2492300D0BD7B /* Logging */,
 				7A8405852B4D656000830F77 /* Error */,
 				2AD5A1E229C62C3B00DCAF5D /* Font */,
 				ABFC439029AFA7C600EB9439 /* Pallete.swift */,
@@ -875,6 +890,8 @@
 				7A8405582B4BBA8A00830F77 /* Moya */,
 				7A84055A2B4BBA8A00830F77 /* RxMoya */,
 				7A8405752B4BDC2400830F77 /* ReactorKit */,
+				ABB616112BA244FB00D0BD7B /* Logging */,
+				ABB616172BA4396200D0BD7B /* SkeletonView */,
 			);
 			productName = NyamNyam;
 			productReference = ABEAFBC729AC9ED3002C3119 /* NyamNyam.app */;
@@ -957,6 +974,8 @@
 				7A8405542B4BBA5A00830F77 /* XCRemoteSwiftPackageReference "Then" */,
 				7A8405572B4BBA8A00830F77 /* XCRemoteSwiftPackageReference "Moya" */,
 				7A8405742B4BDC2400830F77 /* XCRemoteSwiftPackageReference "ReactorKit" */,
+				ABB616102BA244FB00D0BD7B /* XCRemoteSwiftPackageReference "swift-log" */,
+				ABB616162BA4396200D0BD7B /* XCRemoteSwiftPackageReference "SkeletonView" */,
 			);
 			productRefGroup = ABEAFBC829AC9ED3002C3119 /* Products */;
 			projectDirPath = "";
@@ -1012,8 +1031,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A84059B2B54B7F300830F77 /* HaksikRouter.swift in Sources */,
+				ABB616152BA2493600D0BD7B /* LoggingService.swift in Sources */,
 				7A84057F2B4D254400830F77 /* FirebaseDataError.swift in Sources */,
-				2A7489B22B4D981A00297CC7 /* MealPlanDTO.swift in Sources */,
+				2A7489B22B4D981A00297CC7 /* MealPlansDTO.swift in Sources */,
 				ABFC439729B4515200EB9439 /* DateButton.swift in Sources */,
 				AB8F41CB2B7BC82100231CEB /* CampusInfo.swift in Sources */,
 				ABBDF69329BA328A00E9347A /* ExpandableMealCardView.swift in Sources */,
@@ -1493,6 +1513,22 @@
 				minimumVersion = 3.0.0;
 			};
 		};
+		ABB616102BA244FB00D0BD7B /* XCRemoteSwiftPackageReference "swift-log" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-log.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.4;
+			};
+		};
+		ABB616162BA4396200D0BD7B /* XCRemoteSwiftPackageReference "SkeletonView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Juanpe/SkeletonView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.30.4;
+			};
+		};
 		ABEAFC0E29ACB1FF002C3119 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
@@ -1563,6 +1599,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7A8405742B4BDC2400830F77 /* XCRemoteSwiftPackageReference "ReactorKit" */;
 			productName = ReactorKit;
+		};
+		ABB616112BA244FB00D0BD7B /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ABB616102BA244FB00D0BD7B /* XCRemoteSwiftPackageReference "swift-log" */;
+			productName = Logging;
+		};
+		ABB616172BA4396200D0BD7B /* SkeletonView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ABB616162BA4396200D0BD7B /* XCRemoteSwiftPackageReference "SkeletonView" */;
+			productName = SkeletonView;
 		};
 		ABEAFC0F29ACB1FF002C3119 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;

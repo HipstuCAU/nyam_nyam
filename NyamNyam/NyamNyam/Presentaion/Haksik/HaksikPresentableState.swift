@@ -8,6 +8,7 @@
 import Foundation
 
 struct HaksikPresentableState {
+    var mealPlans: [MealPlan]? = nil
     var isLoading: Bool = false
     var alertInfo: AlertInfo? = nil
 }

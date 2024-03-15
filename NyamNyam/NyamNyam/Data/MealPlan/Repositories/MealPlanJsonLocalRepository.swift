@@ -12,6 +12,7 @@ import Firebase
 protocol MealPlanJsonLocalRepository {
     func fetchMealPlanJsonString() -> Single<String>
     func createMealPlanJsonFileWith(jsonString: String) throws
+    func deleteMealPlanJsonFile() throws
 }
 
 final class MealPlanJsonLocalRepositoryImpl: MealPlanJsonLocalRepository {
@@ -72,6 +73,24 @@ final class MealPlanJsonLocalRepositoryImpl: MealPlanJsonLocalRepository {
         )
         
         UserDefaults().lastUpdate = Date().toStringWithTime()
+    }
+    
+    func deleteMealPlanJsonFile() throws {
+        guard let filename = getDocumentsDirectory()?
+            .appendingPathComponent(
+                localFileName + ".json"
+            )
+        else {
+            throw FileError.fileNotFound(localFileName + ".json")
+        }
+        
+        do {
+            try FileManager.default.removeItem(at: filename)
+        } catch {
+            throw FileError.fileDeleteError(error)
+        }
+        
+        UserDefaults().lastUpdate = nil
     }
 }
 

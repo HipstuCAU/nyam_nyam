@@ -72,13 +72,12 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
     
     func mutate(action: Action) -> Observable<Mutation> {
         switch action {
-        case .viewDidLoad:
-            return .empty()
-        case .retryLoad:
+            
+        case .viewDidAppear, .retryLoad:
             return .concat([
                 .just(.setLoading(true)),
                 self.fetchMealPlanTransform(),
-                .just(.setLoading(false))
+                .just(.setLoading(false)),
             ])
         }
     }
@@ -87,9 +86,9 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
         var state = state
         
         switch mutation {
+            
         case let .setMealPlan(mealPlans):
-            // TODO: Data를 통해 그리기
-            break
+            state.mealPlans = mealPlans
             
         case let .setRetryAlert(alertInfo):
             state.alertInfo = alertInfo
@@ -107,14 +106,17 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
             .map { mealPlans -> Mutation in
                 .setMealPlan(mealPlans)
             }
-            .catchAndReturn(
-                .setRetryAlert(
-                    AlertInfo(
-                        type: .errorWithRetry,
-                        title: "식단 로딩 중 문제가 발생했어요",
-                        message: "인터넷 연결을 확인해주세요"
+            .catch({ error in
+                print(error)
+                return .just(
+                    .setRetryAlert(
+                        AlertInfo(
+                            type: .errorWithRetry,
+                            title: "식단 로딩 중 문제가 발생했어요",
+                            message: "인터넷 연결을 확인해주세요"
+                        )
                     )
                 )
-            )
+            })
     }
 }

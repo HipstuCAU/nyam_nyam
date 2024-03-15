@@ -9,10 +9,7 @@ import Foundation
 import RxSwift
 
 final class MockMealPlanJsonRemoteRepositoryImpl: MealPlanJsonRemoteRepository {
-    func fetchMealPlanJsonString(
-        collection: String,
-        document: String
-    ) -> Single<String> {
+    func fetchMealPlanJsonString() -> Single<String> {
         
         return Single<String>.create { single in
             guard let path = Bundle.main.path(

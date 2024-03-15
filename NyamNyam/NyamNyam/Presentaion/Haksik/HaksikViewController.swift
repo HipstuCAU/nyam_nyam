@@ -9,9 +9,10 @@ import RIBs
 import RxSwift
 import RxCocoa
 import UIKit
+import SkeletonView
 
 enum HaksikPresentableAction {
-    case viewDidLoad
+    case viewDidAppear
     case retryLoad
 }
 
@@ -28,7 +29,8 @@ protocol HaksikPresentableListener: AnyObject {
 final class HaksikViewController: UIViewController,
                                   HaksikPresentable,
                                   HaksikViewControllable,
-                                  NavigationConfigurable {
+                                  NavigationConfigurable,
+                                  AlertPresentable {
 
     weak var listener: HaksikPresentableListener?
     
@@ -47,9 +49,27 @@ final class HaksikViewController: UIViewController,
     private func bindUI() {
         listener?.state.map(\.isLoading)
             .distinctUntilChanged()
-            .bind(onNext: { print($0) })
+            .bind(onNext: { loadingStatus in
+                print(loadingStatus)
+            })
             .disposed(by: disposeBag)
-            
+        
+        listener?.state.map(\.alertInfo)
+            .distinctUntilChanged()
+            .compactMap({ $0 })
+            .bind(onNext: { alertInfo in
+                let retryAction = UIAlertAction(
+                    title: "재시도",
+                    style: .default
+                ) { [weak self] _ in
+                    self?.actionRelay.accept(.retryLoad)
+                }
+                self.showAlertOnWindow(
+                    alertInfo: alertInfo,
+                    actions: [retryAction]
+                )
+            })
+            .disposed(by: disposeBag)
     }
     
     private func bind(listener: HaksikPresentableListener?) {
@@ -73,8 +93,8 @@ private extension HaksikViewController {
 // MARK: - Bind Actions
 private extension HaksikViewController {
     func bindActions() {
-        self.rx.viewDidLoad
-            .map { .viewDidLoad }
+        self.rx.viewDidAppear
+            .map { _ in .viewDidAppear }
             .bind(to: self.actionRelay)
             .disposed(by: disposeBag)
     }

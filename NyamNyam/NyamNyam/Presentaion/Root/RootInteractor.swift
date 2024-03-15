@@ -11,7 +11,7 @@ import RxSwift
 import RxCocoa
 
 protocol RootRouting: ViewableRouting {
-    func attachHaksik(mealPlans: [MealPlan])
+    func attachHaksik()
 }
 
 protocol RootPresentable: Presentable {
@@ -72,23 +72,15 @@ final class RootInteractor: PresentableInteractor<RootPresentable>,
     }
     
     func mutate(action: Action) -> Observable<Mutation> {
-        
+        switch action {
+        case .viewDidLoad:
+            router?.attachHaksik()
+            return .empty()
+        }
     }
     
     func reduce(state: State, mutation: Mutation) -> State {
         var state = state
-        
-        switch mutation {
-        case let .setMealPlans(mealPlans):
-            router?.attachHaksik(mealPlans: mealPlans)
-            
-        case let .setRetryAlert(alertInfo):
-            state.alertInfo = alertInfo
-            
-        case let .setLoading(status):
-            state.isLoading = status
-        }
-        
         return state
     }
 }
