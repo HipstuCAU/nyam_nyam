@@ -39,16 +39,24 @@ final class HaksikViewController: UIViewController,
     
     private let actionRelay: PublishRelay<HaksikPresentableListener.Action> = .init()
     
-    private let campusTitleView: UILabel = {
-        let label = UILabel()
-        label.backgroundColor = .clear
-        label.textColor = Pallete.gray900.color
-        label.textAlignment = .left
-        label.font = Pretendard.bold.size(28.0)
-        label.isSkeletonable = true
-        label.skeletonTextLineHeight = .relativeToFont
-        label.text = " "
-        return label
+    private let campusTitleView: CampusTitleView = {
+        let view = CampusTitleView()
+        view.isSkeletonable = true
+        return view
+    }()
+    
+    private let datePickerBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.isSkeletonable = true
+        return view
+    }()
+    
+    private let cafeteriaPickerBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.isSkeletonable = true
+        return view
     }()
     
     override func viewDidLoad() {
@@ -62,36 +70,38 @@ final class HaksikViewController: UIViewController,
     private func bindUI() {
         guard let listener else { return }
         
-        let userData = listener.state.map(\.userUniversityData)
+        listener.state.map(\.isLoading)
             .distinctUntilChanged()
+            .bind(with: self) { owner, loadingStatus in
+                if loadingStatus {
+                    owner.campusTitleView.dismissCampusTitle()
+                    owner.view.showAnimatedSkeleton()
+                } else {
+                    owner.view.hideSkeleton()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        let userData = listener.state.map(\.userUniversityData)
             .compactMap({ $0 })
         
         let universityInfo = listener.state.map(\.universityInfo)
-            .distinctUntilChanged()
             .compactMap({ $0 })
         
-        Observable.combineLatest(userData, universityInfo)
+        Observable
+            .combineLatest(userData, universityInfo)
             .bind(with: self) { owner, data in
                 let (userData, universityInfo) = data
                 let campusID = userData.defaultCampusID
                 let campusTitle = universityInfo.campusInfos
                     .first { $0.id == campusID }?
                     .name
-                owner.campusTitleView.hideSkeleton()
-                owner.campusTitleView.text = campusTitle
+                owner.campusTitleView.setCampusTitle(
+                    title: campusTitle
+                )
             }
             .disposed(by: disposeBag)
             
-        
-        listener.state.map(\.isLoading)
-            .distinctUntilChanged()
-            .bind(with: self) { owner, loadingStatus in
-                if loadingStatus {
-                    owner.view.showAnimatedSkeleton()
-                }
-            }
-            .disposed(by: disposeBag)
-        
         listener.state.map(\.alertInfo)
             .distinctUntilChanged()
             .compactMap({ $0 })
@@ -152,7 +162,9 @@ private extension HaksikViewController {
 private extension HaksikViewController {
     func configureUI() {
         setBackgroundGradient()
-        setCampusTitleView()
+        setCampusTitleViewLayout()
+        setDatePickerViewLayout()
+        setCafeteriaPickerViewLayout()
     }
     
     private func setBackgroundGradient() {
@@ -167,12 +179,31 @@ private extension HaksikViewController {
         view.layer.insertSublayer(layer, at: 0)
     }
     
-    func setCampusTitleView() {
+    func setCampusTitleViewLayout() {
         view.addSubview(campusTitleView)
         campusTitleView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
+            make.trailing.equalToSuperview().offset(-80)
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(9)
+            make.height.equalTo(40)
+        }
+    }
+    
+    func setDatePickerViewLayout() {
+        view.addSubview(datePickerBackgroundView)
+        datePickerBackgroundView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(campusTitleView.snp.bottom).offset(12)
+            make.height.equalTo(73)
+        }
+    }
+    
+    func setCafeteriaPickerViewLayout() {
+        view.addSubview(cafeteriaPickerBackgroundView)
+        cafeteriaPickerBackgroundView.snp.makeConstraints { make in
+            make.leading.trailing.equalToSuperview()
+            make.top.equalTo(datePickerBackgroundView.snp.bottom).offset(14)
+            make.height.equalTo(40)
         }
     }
 }

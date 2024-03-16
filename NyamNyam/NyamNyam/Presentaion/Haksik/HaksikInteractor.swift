@@ -138,6 +138,7 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
         dependency.userDataService.getUserUniversityID()
             .asObservable()
             .withUnretained(self)
+            .delay(.milliseconds(300), scheduler: MainScheduler.instance)
             .flatMap { owner, id in
                 owner.dependency.userDataService
                     .getUserUniversity(universityId: id)
@@ -164,6 +165,7 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
         dependency.userDataService.getUserUniversityID()
             .asObservable()
             .withUnretained(self)
+            .delay(.milliseconds(300), scheduler: MainScheduler.instance)
             .flatMap { owner, id in
                 owner.dependency.universityInfoService
                     .getUniversityInfo(id: id)
