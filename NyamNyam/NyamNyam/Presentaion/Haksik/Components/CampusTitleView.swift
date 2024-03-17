@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import SkeletonView
 
 final class CampusTitleView: UIView {
     private let campusTitleLabel: UILabel = {

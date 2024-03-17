@@ -45,9 +45,8 @@ final class HaksikViewController: UIViewController,
         return view
     }()
     
-    private let datePickerBackgroundView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
+    private let datePickerView: DatePickerView = {
+        let view = DatePickerView()
         view.isSkeletonable = true
         return view
     }()
@@ -75,6 +74,7 @@ final class HaksikViewController: UIViewController,
             .bind(with: self) { owner, loadingStatus in
                 if loadingStatus {
                     owner.campusTitleView.dismissCampusTitle()
+                    owner.datePickerView.dismissDatePickerButtons()
                     owner.view.showAnimatedSkeleton()
                 } else {
                     owner.view.hideSkeleton()
@@ -98,6 +98,10 @@ final class HaksikViewController: UIViewController,
                     .name
                 owner.campusTitleView.setCampusTitle(
                     title: campusTitle
+                )
+                owner.datePickerView.setDatePickerButtons(
+                    startDate: Date(),
+                    for: 7
                 )
             }
             .disposed(by: disposeBag)
@@ -190,8 +194,8 @@ private extension HaksikViewController {
     }
     
     func setDatePickerViewLayout() {
-        view.addSubview(datePickerBackgroundView)
-        datePickerBackgroundView.snp.makeConstraints { make in
+        view.addSubview(datePickerView)
+        datePickerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(campusTitleView.snp.bottom).offset(12)
             make.height.equalTo(73)
@@ -202,7 +206,7 @@ private extension HaksikViewController {
         view.addSubview(cafeteriaPickerBackgroundView)
         cafeteriaPickerBackgroundView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(datePickerBackgroundView.snp.bottom).offset(14)
+            make.top.equalTo(datePickerView.snp.bottom).offset(14)
             make.height.equalTo(40)
         }
     }

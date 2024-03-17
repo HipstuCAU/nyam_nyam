@@ -8,6 +8,26 @@
 import Foundation
 
 extension Date {
+    // 날짜를 뽑는 메소드 ex) 2024.03.08이면 "8" 반환
+    func extractDay() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d"
+        return dateFormatter.string(from: self)
+    }
+
+    // 요일 축약형 (한국)을 뽑는 메소드 ex) 2024.03.08.Fri이면 "금" 반환
+    func extractWeekday() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEE"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        return dateFormatter.string(from: self)
+    }
+    
+    // 날짜 (day)를 더하는 메소드
+    func adding(days: Int) -> Date {
+        return Calendar.current.date(byAdding: .day, value: days, to: self) ?? Date()
+    }
+
     
     func makeKoreanDate() -> Date {
         let ret = self.addingTimeInterval(TimeInterval(TimeZone.autoupdatingCurrent.secondsFromGMT(for: self)))
