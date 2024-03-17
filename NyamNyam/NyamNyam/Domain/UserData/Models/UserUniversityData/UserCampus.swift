@@ -8,6 +8,7 @@
 import Foundation
 
 struct UserCampus: Equatable {
+    private let dataIdentifier = UUID()
     let id: String
     let cafeteriaIDs: [String]
     

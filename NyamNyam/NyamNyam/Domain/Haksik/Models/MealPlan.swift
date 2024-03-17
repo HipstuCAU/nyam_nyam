@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct MealPlan {
+struct MealPlan: Equatable {
+    private let dataIdentifier = UUID()
     let date: Date
     let cafeterias: [Cafeteria]
     
@@ -17,7 +18,8 @@ struct MealPlan {
     }
 }
 
-struct Cafeteria {
+struct Cafeteria: Equatable {
+    private let dataIdentifier = UUID()
     let cafeteriaID: String
     let meals: [Meal]
     
@@ -27,35 +29,37 @@ struct Cafeteria {
     }
 }
 
-struct Meal {
+struct Meal: Equatable {
+    private let dataIdentifier = UUID()
     let mealType: String
     let shouldShowTime: Bool
-    let startTime: Date
-    let endTime: Date
+    let startTime: String
+    let endTime: String
     let menus: [Menu]
     
     init(from dto: MealDTO) {
         self.mealType = dto.mealType
         self.shouldShowTime = dto.shouldShowTime
-        self.startTime = dto.startTime.convertToDate() ?? Date()
-        self.endTime = dto.endTime.convertToDate() ?? Date()
+        self.startTime = dto.startTime
+        self.endTime = dto.endTime
         self.menus = dto.menus.map { Menu(from: $0) }
     }
 }
 
-struct Menu {
+struct Menu: Equatable {
+    private let dataIdentifier = UUID()
     let menuType: String?
     let price: Int?
-    let startTime: Date
-    let endTime: Date
+    let startTime: String
+    let endTime: String
     let menu: [String]
     let calories: Double?
     
     init(from dto: MenuDTO) {
         self.menuType = dto.menuType
         self.price = dto.price.flatMap(Int.init)
-        self.startTime = dto.startTime.convertToDate() ?? Date()
-        self.endTime = dto.endTime.convertToDate() ?? Date()
+        self.startTime = dto.startTime
+        self.endTime = dto.endTime
         self.menu = dto.menu
         self.calories = dto.calories.flatMap(Double.init)
     }
