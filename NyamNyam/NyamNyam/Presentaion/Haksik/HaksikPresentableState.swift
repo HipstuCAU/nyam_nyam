@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ReactorKit
 
 struct HaksikPresentableState {
     var mealPlans: [MealPlan]? = nil
@@ -13,4 +14,5 @@ struct HaksikPresentableState {
     var universityInfo: UniversityInfo? = nil
     var isLoading: Bool = false
     var alertInfo: AlertInfo? = nil
+    var selectedDate: Date? = nil
 }

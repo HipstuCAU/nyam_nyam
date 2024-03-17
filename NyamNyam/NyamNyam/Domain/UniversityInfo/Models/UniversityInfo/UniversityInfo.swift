@@ -8,6 +8,7 @@
 import Foundation
 
 struct UniversityInfo: Equatable {
+    private let dataIdentifier = UUID()
     let id: String
     let name: String
     let mainColor: String

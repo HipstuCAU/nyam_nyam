@@ -10,11 +10,13 @@ import RxSwift
 import RxCocoa
 import UIKit
 import SkeletonView
+import ReactorKit
 
 enum HaksikPresentableAction {
     case appWillEnterForeground
     case viewDidAppear
     case retryLoad
+    case dateSelected(Date?)
 }
 
 protocol HaksikPresentableListener: AnyObject {
@@ -71,6 +73,7 @@ final class HaksikViewController: UIViewController,
         
         listener.state.map(\.isLoading)
             .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
             .bind(with: self) { owner, loadingStatus in
                 if loadingStatus {
                     owner.campusTitleView.dismissCampusTitle()
@@ -84,14 +87,21 @@ final class HaksikViewController: UIViewController,
         
         let userData = listener.state.map(\.userUniversityData)
             .compactMap({ $0 })
+            .distinctUntilChanged()
         
         let universityInfo = listener.state.map(\.universityInfo)
             .compactMap({ $0 })
+            .distinctUntilChanged()
+        
+        let mealPlans = listener.state.map(\.mealPlans)
+            .compactMap({ $0 })
+            .distinctUntilChanged()
         
         Observable
-            .combineLatest(userData, universityInfo)
+            .zip(userData, universityInfo, mealPlans)
+            .observe(on: MainScheduler.asyncInstance)
             .bind(with: self) { owner, data in
-                let (userData, universityInfo) = data
+                let (userData, universityInfo, _) = data
                 let campusID = userData.defaultCampusID
                 let campusTitle = universityInfo.campusInfos
                     .first { $0.id == campusID }?
@@ -101,7 +111,8 @@ final class HaksikViewController: UIViewController,
                 )
                 owner.datePickerView.setDatePickerButtons(
                     startDate: Date(),
-                    for: 7
+                    for: 7,
+                    selectedDate: listener.currentState.selectedDate
                 )
             }
             .disposed(by: disposeBag)
@@ -109,6 +120,7 @@ final class HaksikViewController: UIViewController,
         listener.state.map(\.alertInfo)
             .distinctUntilChanged()
             .compactMap({ $0 })
+            .observe(on: MainScheduler.instance)
             .bind(with: self) { owner, alertInfo in
                 let retryAction = UIAlertAction(
                     title: "재시도",
@@ -120,6 +132,14 @@ final class HaksikViewController: UIViewController,
                     alertInfo: alertInfo,
                     actions: [retryAction]
                 )
+            }
+            .disposed(by: disposeBag)
+        
+        listener.state.map(\.selectedDate)
+            .distinctUntilChanged()
+            .compactMap { $0 }
+            .bind(with: self) { owner, date in
+                print(date)
             }
             .disposed(by: disposeBag)
     }
@@ -156,6 +176,11 @@ private extension HaksikViewController {
             name: UIApplication.willEnterForegroundNotification,
             object: nil
         )
+        
+        self.datePickerView.selectedDateRelay
+            .map { date in .dateSelected(date) }
+            .bind(to: self.actionRelay)
+            .disposed(by: disposeBag)
     }
     
     @objc func willEnterForeground() {

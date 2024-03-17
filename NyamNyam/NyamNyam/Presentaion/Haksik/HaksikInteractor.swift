@@ -5,6 +5,7 @@
 //  Created by 박준홍 on 2024/01/15.
 //
 
+import Foundation
 import RIBs
 import ReactorKit
 import RxSwift
@@ -68,6 +69,7 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
         case setUniversityInfo(UniversityInfo)
         case setLoading(Bool)
         case setRetryAlert(AlertInfo)
+        case setSelectedDate(Date?)
     }
     
     func sendAction(_ action: Action) {
@@ -87,6 +89,9 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
                 ]),
                 .just(.setLoading(false)),
             ])
+            
+        case let .dateSelected(date):
+            return .just(.setSelectedDate(date))
         }
     }
     
@@ -109,6 +114,9 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
             
         case let .setLoading(status):
             state.isLoading = status
+            
+        case let .setSelectedDate(date):
+            state.selectedDate = date
         }
         
         return state
@@ -138,7 +146,7 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
         dependency.userDataService.getUserUniversityID()
             .asObservable()
             .withUnretained(self)
-            .delay(.milliseconds(300), scheduler: MainScheduler.instance)
+//            .delay(.milliseconds(300), scheduler: MainScheduler.instance)
             .flatMap { owner, id in
                 owner.dependency.userDataService
                     .getUserUniversity(universityId: id)
@@ -148,7 +156,6 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
                 .setUserUniversityData(userUniversity)
             }
             .catch({ error in
-                print(error)
                 return .just(
                     .setRetryAlert(
                         AlertInfo(
@@ -165,7 +172,7 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
         dependency.userDataService.getUserUniversityID()
             .asObservable()
             .withUnretained(self)
-            .delay(.milliseconds(300), scheduler: MainScheduler.instance)
+//            .delay(.milliseconds(1300), scheduler: MainScheduler.instance)
             .flatMap { owner, id in
                 owner.dependency.universityInfoService
                     .getUniversityInfo(id: id)

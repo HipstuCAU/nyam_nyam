@@ -8,6 +8,7 @@
 import Foundation
 
 struct UserUniversity: Equatable {
+    private let dataIdentifier = UUID()
     let id: String
     let defaultCampusID: String
     let userCampuses: [UserCampus]

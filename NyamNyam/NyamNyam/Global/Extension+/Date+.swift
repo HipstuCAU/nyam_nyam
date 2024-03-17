@@ -27,6 +27,16 @@ extension Date {
     func adding(days: Int) -> Date {
         return Calendar.current.date(byAdding: .day, value: days, to: self) ?? Date()
     }
+    
+    // 한국 시간대(KST)로 이 날짜의 자정(00:00)으로 설정하는 메소드
+    func toMidnight() -> Date? {
+        guard let koreaTimeZone = TimeZone(identifier: "Asia/Seoul") else { return nil }
+        var calendar = Calendar.current
+        calendar.timeZone = koreaTimeZone
+        let components = calendar.dateComponents([.year, .month, .day], from: self)
+        let midnight = calendar.date(from: components)
+        return midnight
+    }
 
     
     func makeKoreanDate() -> Date {

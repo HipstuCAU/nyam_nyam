@@ -7,23 +7,63 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 final class DatePickerView: UIView {
     
+    private let disposeBag: DisposeBag = .init()
+    
+    private var buttonDisposeBag: DisposeBag = .init()
+    
     private var dayButtons: [DayPickerButton] = []
+    
+    private let selectStatusBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = Pallete.cauBlue.color
+        view.layer.cornerRadius = 15.0
+        return view
+    }()
+    
+    let selectedDateRelay: BehaviorRelay<Date?> = .init(value: nil)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        self.backgroundColor = Pallete.blueBackground.color
+        
+        selectedDateRelay
+            .compactMap({ $0 })
+            .bind(with: self) { owner, date in
+                for button in owner.dayButtons {
+                    if button.date == date {
+                        button.selectStatus = true
+                        owner.selectStatusBackgroundView.snp.remakeConstraints { make in
+                            make.directionalEdges.equalTo(button.snp.directionalEdges)
+                        }
+                        UIView.animate(withDuration: 0.15) {
+                            self.layoutIfNeeded()
+                        }
+                    } else {
+                        button.selectStatus = false
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setDatePickerButtons(startDate: Date, for days: Int) {
+    func setDatePickerButtons(startDate: Date, for days: Int, selectedDate: Date?) {
         dismissDatePickerButtons()
         
+        self.addSubview(selectStatusBackgroundView)
+        
         guard days > 0 else { return }
+        
+        let startDate = startDate.toMidnight() ?? Date()
         
         let buttonWidth: CGFloat = 30.0
         let totalWidth: CGFloat = self.bounds.width
@@ -45,6 +85,13 @@ final class DatePickerView: UIView {
                 frame: .zero,
                 date: addedDate
             )
+            
+            dayPickerButton.rx.tap
+                .bind(with: self) { owner, _ in
+                    owner.selectedDateRelay.accept(addedDate)
+                }
+                .disposed(by: buttonDisposeBag)
+            
             dayButtons.append(dayPickerButton)
         }
         
@@ -63,6 +110,23 @@ final class DatePickerView: UIView {
             }
             previousButton = dayButton
         }
+        
+        if let matchingButton = dayButtons.filter({ $0.date == selectedDate }).first {
+            self.selectStatusBackgroundView.snp.makeConstraints { make in
+                make.directionalEdges.equalTo(matchingButton.snp.directionalEdges)
+            }
+            self.layoutIfNeeded()
+            self.selectedDateRelay.accept(selectedDate)
+        } else {
+            
+            if let firstButton = dayButtons.first {
+                self.selectStatusBackgroundView.snp.makeConstraints { make in
+                    make.directionalEdges.equalTo(firstButton.snp.directionalEdges)
+                }
+            }
+            self.layoutIfNeeded()
+            self.selectedDateRelay.accept(startDate)
+        }
     }
     
     func dismissDatePickerButtons() {
@@ -70,16 +134,20 @@ final class DatePickerView: UIView {
             dayButton.removeFromSuperview()
         }
         dayButtons.removeAll()
+        buttonDisposeBag = DisposeBag()
+        selectStatusBackgroundView.removeFromSuperview()
     }
 }
 
 final class DayPickerButton: UIButton {
     
-    private let date: Date
+    let date: Date
     
-    private var selectStatus: Bool = false {
+    var selectStatus: Bool = false {
         didSet {
             dayLabel.textColor =  selectStatus ?
+                .white : Pallete.invalidButtonText.color
+            weekDayLabel.textColor =  selectStatus ?
                 .white : Pallete.invalidButtonText.color
         }
     }
