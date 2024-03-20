@@ -53,9 +53,8 @@ final class HaksikViewController: UIViewController,
         return view
     }()
     
-    private let cafeteriaPickerBackgroundView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .clear
+    private let cafeteriaPickerView: CafeteriaPickerView = {
+        let view = CafeteriaPickerView()
         view.isSkeletonable = true
         return view
     }()
@@ -78,6 +77,7 @@ final class HaksikViewController: UIViewController,
                 if loadingStatus {
                     owner.campusTitleView.dismissCampusTitle()
                     owner.datePickerView.dismissDatePickerButtons()
+                    owner.cafeteriaPickerView.dismissCafetreiaPickerContent()
                     owner.view.showAnimatedSkeleton()
                 } else {
                     owner.view.hideSkeleton()
@@ -103,9 +103,10 @@ final class HaksikViewController: UIViewController,
             .bind(with: self) { owner, data in
                 let (userData, universityInfo, _) = data
                 let campusID = userData.defaultCampusID
-                let campusTitle = universityInfo.campusInfos
-                    .first { $0.id == campusID }?
-                    .name
+                let currentCampus = universityInfo.campusInfos
+                    .first { $0.id == campusID }
+                let campusTitle = currentCampus?.name
+                let cafeteriaInfos = currentCampus?.cafeteriaInfos ?? []
                 owner.campusTitleView.setCampusTitle(
                     title: campusTitle
                 )
@@ -113,6 +114,10 @@ final class HaksikViewController: UIViewController,
                     startDate: Date(),
                     for: 7,
                     selectedDate: listener.currentState.selectedDate
+                )
+                owner.cafeteriaPickerView.createCafeteriaPicerContent(
+                    cafeteras: cafeteriaInfos,
+                    selectedCafeteriaID: nil
                 )
             }
             .disposed(by: disposeBag)
@@ -228,8 +233,8 @@ private extension HaksikViewController {
     }
     
     func setCafeteriaPickerViewLayout() {
-        view.addSubview(cafeteriaPickerBackgroundView)
-        cafeteriaPickerBackgroundView.snp.makeConstraints { make in
+        view.addSubview(cafeteriaPickerView)
+        cafeteriaPickerView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(datePickerView.snp.bottom).offset(14)
             make.height.equalTo(40)
