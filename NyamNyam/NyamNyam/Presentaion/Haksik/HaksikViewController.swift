@@ -144,6 +144,7 @@ final class HaksikViewController: UIViewController,
         
         listener.state.map(\.selectedDate)
             .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
             .compactMap { $0 }
             .bind(with: self) { owner, date in
                 print(date)
@@ -151,7 +152,7 @@ final class HaksikViewController: UIViewController,
             .disposed(by: disposeBag)
         
         listener.state.map(\.selectedCafeteriaID)
-            .observe(on: MainScheduler.asyncInstance)
+            .observe(on: MainScheduler.instance)
             .compactMap { $0 }
             .bind(with: self) { owner, cafeteriaID in
                 let userData = owner.listener?.currentState
