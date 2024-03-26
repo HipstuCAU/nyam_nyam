@@ -18,6 +18,8 @@ final class DatePickerView: UIView {
     
     private var dayButtons: [DayPickerButton] = []
     
+    private var firstLoaded: Bool = true
+    
     private let selectStatusBackgroundView: UIView = {
         let view = UIView()
         view.backgroundColor = Pallete.cauBlue.color
@@ -29,25 +31,13 @@ final class DatePickerView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         self.backgroundColor = Pallete.blueBackground.color
-        
         selectedDateRelay
             .compactMap({ $0 })
             .bind(with: self) { owner, date in
-                for button in owner.dayButtons {
-                    if button.date == date {
-                        button.selectStatus = true
-                        owner.selectStatusBackgroundView.snp.remakeConstraints { make in
-                            make.directionalEdges.equalTo(button.snp.directionalEdges)
-                        }
-                        UIView.animate(withDuration: 0.15) {
-                            self.layoutIfNeeded()
-                        }
-                    } else {
-                        button.selectStatus = false
-                    }
-                }
+                owner.setSelectStatusBackgroundViewLayout(
+                    newDate: date
+                )
             }
             .disposed(by: disposeBag)
     }
@@ -56,33 +46,62 @@ final class DatePickerView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setDatePickerButtons(
+    func createDatePickerContent(
         startDate: Date,
         for days: Int,
         selectedDate: Date?
     ) {
-        dismissDatePickerButtons()
-        
-        self.addSubview(selectStatusBackgroundView)
-        
         guard days > 0 else { return }
+        dismissDatePickerContent()
         
-        let startDate = startDate.toMidnight() ?? Date()
+        let startDate: Date = startDate.toMidnight() ?? Date()
         
-        let buttonWidth: CGFloat = 30.0
-        let totalWidth: CGFloat = self.bounds.width
-        let totalSpace = totalWidth - (buttonWidth * CGFloat(days))
-        let spaceBlock = totalSpace / CGFloat(4 + ((days - 1) * 3))
-        
-        let screenToButtonSpace: CGFloat = spaceBlock * 2
-        
-        let buttonToButtonSpace: CGFloat
-        if days > 1 {
-            buttonToButtonSpace = spaceBlock * 3
-        } else {
-            buttonToButtonSpace = 0
+        createDateButtons(
+            startDate: startDate,
+            for: days
+        )
+        setDateButtonslayout(for: days)
+        setFirstSelectedButton(
+            startDate: startDate,
+            selectedDate: selectedDate
+        )
+    }
+    
+    func dismissDatePickerContent() {
+        for dayButton in dayButtons {
+            dayButton.removeFromSuperview()
         }
-        
+        firstLoaded = true
+        dayButtons.removeAll()
+        buttonDisposeBag = DisposeBag()
+        selectStatusBackgroundView.removeFromSuperview()
+    }
+    
+    private func setSelectStatusBackgroundViewLayout(newDate date: Date) {
+        for button in self.dayButtons {
+            if button.date == date {
+                button.selectStatus = true
+                self.selectStatusBackgroundView.snp.remakeConstraints { make in
+                    make.directionalEdges.equalTo(button.snp.directionalEdges)
+                }
+                if !firstLoaded {
+                    UIView.animate(withDuration: 0.3) {
+                        self.layoutIfNeeded()
+                    }
+                }
+            } else {
+                button.selectStatus = false
+            }
+        }
+        firstLoaded = false
+    }
+}
+
+extension DatePickerView {
+    private func createDateButtons(
+        startDate: Date,
+        for days: Int
+    ) {
         for day in 0..<days {
             let addedDate = startDate.adding(days: day)
             let dayPickerButton = DayPickerButton(
@@ -98,9 +117,25 @@ final class DatePickerView: UIView {
             
             dayButtons.append(dayPickerButton)
         }
+    }
+    
+    private  func setDateButtonslayout(for days: Int) {
+        let buttonWidth: CGFloat = 30.0
+        let totalWidth: CGFloat = self.bounds.width
+        let totalSpace = totalWidth - (buttonWidth * CGFloat(days))
+        let spaceBlock = totalSpace / CGFloat(4 + ((days - 1) * 3))
         
+        let screenToButtonSpace: CGFloat = spaceBlock * 2
+        
+        let buttonToButtonSpace: CGFloat
+        if days > 1 {
+            buttonToButtonSpace = spaceBlock * 3
+        } else {
+            buttonToButtonSpace = 0
+        }
+        
+        self.addSubview(selectStatusBackgroundView)
         var previousButton: DayPickerButton? = nil
-        
         for dayButton in dayButtons {
             self.addSubview(dayButton)
             dayButton.snp.makeConstraints { make in
@@ -114,31 +149,14 @@ final class DatePickerView: UIView {
             }
             previousButton = dayButton
         }
-        
-        if let matchingButton = dayButtons.filter({ $0.date == selectedDate }).first {
-            self.selectStatusBackgroundView.snp.makeConstraints { make in
-                make.directionalEdges.equalTo(matchingButton.snp.directionalEdges)
-            }
-            self.layoutIfNeeded()
-            self.selectedDateRelay.accept(selectedDate)
-        } else {
-            
-            if let firstButton = dayButtons.first {
-                self.selectStatusBackgroundView.snp.makeConstraints { make in
-                    make.directionalEdges.equalTo(firstButton.snp.directionalEdges)
-                }
-            }
-            self.layoutIfNeeded()
-            self.selectedDateRelay.accept(startDate)
-        }
+        layoutIfNeeded()
     }
     
-    func dismissDatePickerButtons() {
-        for dayButton in dayButtons {
-            dayButton.removeFromSuperview()
+    private func setFirstSelectedButton(startDate: Date, selectedDate: Date?) {
+        if dayButtons.filter({ $0.date == selectedDate }).isEmpty {
+            self.selectedDateRelay.accept(startDate)
+        } else {
+            self.selectedDateRelay.accept(selectedDate)
         }
-        dayButtons.removeAll()
-        buttonDisposeBag = DisposeBag()
-        selectStatusBackgroundView.removeFromSuperview()
     }
 }

@@ -15,4 +15,5 @@ struct HaksikPresentableState {
     var isLoading: Bool = false
     var alertInfo: AlertInfo? = nil
     var selectedDate: Date? = nil
+    var selectedCafeteriaID: String? = nil
 }

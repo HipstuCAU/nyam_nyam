@@ -27,11 +27,11 @@ final class CampusTitleView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setCampusTitle(title: String?) {
+    func createCampusTitleContent(title: String?) {
         campusTitleLabel.text = title
     }
     
-    func dismissCampusTitle() {
+    func dismissCampusTitleContent() {
         campusTitleLabel.text = nil
     }
     

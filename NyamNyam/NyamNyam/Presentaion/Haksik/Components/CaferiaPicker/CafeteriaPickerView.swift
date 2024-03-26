@@ -12,13 +12,15 @@ import RxCocoa
 
 final class CafeteriaPickerView: UIScrollView {
     
-    private let disposeBag: DisposeBag = .init()
+    private let pickerDisposeBag: DisposeBag = .init()
     
     private var buttonsDisposeBag: DisposeBag = .init()
     
     private var cafeteriaButtons: [CafeteriaButton] = []
     
     let selectedCafeteriaIDRelay: BehaviorRelay<String?> = .init(value: nil)
+    
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -30,15 +32,16 @@ final class CafeteriaPickerView: UIScrollView {
             .observe(on: MainScheduler.instance)
             .bind(with: self) { owner, id in
                 for idx in 0..<owner.cafeteriaButtons.count {
-                    if owner.cafeteriaButtons[idx].cafeteriaInfo.id == id {
-                        owner.cafeteriaButtons[idx].selectStatus = true
+                    let button = owner.cafeteriaButtons[idx]
+                    if button.cafeteriaInfo.id == id {
+                        button.selectStatus = true
                         owner.setScrollOffsetBy(idx: idx, isAnimated: true)
                     } else {
-                        owner.cafeteriaButtons[idx].selectStatus = false
+                        button.selectStatus = false
                     }
                 }
             }
-            .disposed(by: disposeBag)
+            .disposed(by: pickerDisposeBag)
     }
     
     required init?(coder: NSCoder) {
@@ -61,64 +64,15 @@ final class CafeteriaPickerView: UIScrollView {
         self.contentLayoutGuide.snp.removeConstraints()
     }
     
-    func createCafeteriaPicerContent(
-        cafeteras: [CafeteriaInfo],
+    func createCafeteriaPicerkContent(
+        cafeterias: [CafeteriaInfo],
         selectedCafeteriaID: String?
     ) {
+        guard cafeterias.count > 0 else { return }
         dismissCafetreiaPickerContent()
-
-        guard cafeteras.count > 0 else { return }
-        
-        for cafetera in cafeteras {
-            let button = CafeteriaButton(
-                cafeteriaInfo: cafetera
-            )
-            
-            button.rx.tap
-                .observe(on: MainScheduler.instance)
-                .bind(with: self) { owner, _ in
-                    owner.selectedCafeteriaIDRelay.accept(cafetera.id)
-                }
-                .disposed(by: buttonsDisposeBag)
-            
-            self.cafeteriaButtons.append(button)
-        }
-        
-        var previousButton: CafeteriaButton? = nil
-        
-        for cafeteriaButton in cafeteriaButtons {
-            self.addSubview(cafeteriaButton)
-            cafeteriaButton.snp.makeConstraints { make in
-                make.height.equalTo(39)
-                make.centerY.equalToSuperview()
-                if let previousButton {
-                    make.leading.equalTo(previousButton.snp.trailing).offset(7)
-                } else {
-                    make.leading.equalToSuperview().offset(16)
-                }
-            }
-            previousButton = cafeteriaButton
-        }
-        
-        if let previousButton {
-            self.contentLayoutGuide.snp.makeConstraints { make in
-                make.top.leading.bottom.equalToSuperview()
-                make.trailing.equalTo(previousButton.snp.trailing).offset(16)
-            }
-        }
-        
-        if let selectedButton = cafeteriaButtons.first(where: { $0.cafeteriaInfo.id == selectedCafeteriaID }) {
-            self.selectedCafeteriaIDRelay.accept(selectedButton.cafeteriaInfo.id)
-            self.setScrollOffsetBy(
-                idx: cafeteriaButtons.firstIndex(of: selectedButton) ?? 0,
-                isAnimated: false
-            )
-        } else {
-            if let firstButton = cafeteriaButtons.first {
-                self.selectedCafeteriaIDRelay.accept(firstButton.cafeteriaInfo.id)
-                self.setScrollOffsetBy(idx: 0, isAnimated: false)
-            }
-        }
+        createCafeteriaButtons(cafeterias: cafeterias)
+        setCafeteriaButtonsLayout()
+        setFirstSelectedButton(selectedCafeteriaID: selectedCafeteriaID)
     }
     
     private func setScrollOffsetBy(idx: Int, isAnimated: Bool) {
@@ -136,42 +90,61 @@ final class CafeteriaPickerView: UIScrollView {
     }
 }
 
-final class CafeteriaButton: UIButton {
-    let cafeteriaInfo: CafeteriaInfo
-    
-    private lazy var cafeteriaLabel: UILabel = {
-        let label = UILabel()
-        label.text = cafeteriaInfo.name
-        label.font = Pretendard.semiBold.size(15.25)
-        return label
-    }()
-    
-    var selectStatus: Bool = false {
-        didSet {
-            cafeteriaLabel.textColor = selectStatus ?
-                .white : Pallete.cafeteriaText.color
+extension CafeteriaPickerView {
+    private func createCafeteriaButtons(cafeterias: [CafeteriaInfo]) {
+        for cafetera in cafeterias {
+            let button = CafeteriaButton(
+                cafeteriaInfo: cafetera
+            )
             
-            self.backgroundColor = selectStatus ?
-            Pallete.cauBlue.color : Pallete.bgBlue.color
+            button.rx.tap
+                .observe(on: MainScheduler.instance)
+                .bind(with: self) { owner, _ in
+                    owner.selectedCafeteriaIDRelay.accept(cafetera.id)
+                }
+                .disposed(by: buttonsDisposeBag)
+            
+            self.cafeteriaButtons.append(button)
         }
     }
     
-    init(cafeteriaInfo: CafeteriaInfo) {
-        self.cafeteriaInfo = cafeteriaInfo
-        super.init(frame: .zero)
+    private func setCafeteriaButtonsLayout() {
+        var previousButton: CafeteriaButton? = nil
         
-        self.layer.cornerRadius = 20.0
+        for cafeteriaButton in cafeteriaButtons {
+            self.addSubview(cafeteriaButton)
+            cafeteriaButton.snp.makeConstraints { make in
+                make.height.equalTo(39)
+                make.bottom.equalToSuperview()
+                if let previousButton {
+                    make.leading.equalTo(previousButton.snp.trailing).offset(7)
+                } else {
+                    make.leading.equalToSuperview().offset(16)
+                }
+            }
+            previousButton = cafeteriaButton
+        }
         
-        self.addSubview(cafeteriaLabel)
-        cafeteriaLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.leading.equalToSuperview().offset(17.25)
-            make.trailing.equalToSuperview().offset(-17.25)
+        if let previousButton {
+            self.contentLayoutGuide.snp.makeConstraints { make in
+                make.top.leading.bottom.equalToSuperview()
+                make.trailing.equalTo(previousButton.snp.trailing).offset(16)
+            }
         }
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    private func setFirstSelectedButton(selectedCafeteriaID: String?) {
+        if let selectedButton = cafeteriaButtons.first(where: { $0.cafeteriaInfo.id == selectedCafeteriaID }) {
+            self.selectedCafeteriaIDRelay.accept(selectedButton.cafeteriaInfo.id)
+            self.setScrollOffsetBy(
+                idx: cafeteriaButtons.firstIndex(of: selectedButton) ?? 0,
+                isAnimated: false
+            )
+        } else {
+            if let firstButton = cafeteriaButtons.first {
+                self.selectedCafeteriaIDRelay.accept(firstButton.cafeteriaInfo.id)
+                self.setScrollOffsetBy(idx: 0, isAnimated: false)
+            }
+        }
     }
 }
-

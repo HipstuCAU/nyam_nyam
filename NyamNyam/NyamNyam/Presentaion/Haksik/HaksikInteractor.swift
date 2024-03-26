@@ -70,6 +70,7 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
         case setLoading(Bool)
         case setRetryAlert(AlertInfo)
         case setSelectedDate(Date?)
+        case setSelectedCafeteriaID(String?)
     }
     
     func sendAction(_ action: Action) {
@@ -92,6 +93,9 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
             
         case let .dateSelected(date):
             return .just(.setSelectedDate(date))
+            
+        case let .cafeteriaSelected(id):
+            return .just(.setSelectedCafeteriaID(id))
         }
     }
     
@@ -117,6 +121,9 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
             
         case let .setSelectedDate(date):
             state.selectedDate = date
+            
+        case let .setSelectedCafeteriaID(id):
+            state.selectedCafeteriaID = id
         }
         
         return state
@@ -146,7 +153,7 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
         dependency.userDataService.getUserUniversityID()
             .asObservable()
             .withUnretained(self)
-//            .delay(.milliseconds(300), scheduler: MainScheduler.instance)
+            .delay(.seconds(3), scheduler: MainScheduler.instance)
             .flatMap { owner, id in
                 owner.dependency.userDataService
                     .getUserUniversity(universityId: id)

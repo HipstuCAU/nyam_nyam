@@ -17,6 +17,7 @@ enum HaksikPresentableAction {
     case viewDidAppear
     case retryLoad
     case dateSelected(Date?)
+    case cafeteriaSelected(String?)
 }
 
 protocol HaksikPresentableListener: AnyObject {
@@ -44,6 +45,7 @@ final class HaksikViewController: UIViewController,
     private let campusTitleView: CampusTitleView = {
         let view = CampusTitleView()
         view.isSkeletonable = true
+        view.skeletonCornerRadius = 10.0
         return view
     }()
     
@@ -53,9 +55,22 @@ final class HaksikViewController: UIViewController,
         return view
     }()
     
+    private let cafeteriaPickerBackgroundView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.isSkeletonable = true
+        return view
+    }()
+    
     private let cafeteriaPickerView: CafeteriaPickerView = {
         let view = CafeteriaPickerView()
+        return view
+    }()
+    
+    private let locationTitleView: LocationTitleView = {
+        let view = LocationTitleView()
         view.isSkeletonable = true
+        view.skeletonCornerRadius = 10.0
         return view
     }()
     
@@ -75,9 +90,7 @@ final class HaksikViewController: UIViewController,
             .observe(on: MainScheduler.instance)
             .bind(with: self) { owner, loadingStatus in
                 if loadingStatus {
-                    owner.campusTitleView.dismissCampusTitle()
-                    owner.datePickerView.dismissDatePickerButtons()
-                    owner.cafeteriaPickerView.dismissCafetreiaPickerContent()
+                    owner.dismissViewContent()
                     owner.view.showAnimatedSkeleton()
                 } else {
                     owner.view.hideSkeleton()
@@ -101,23 +114,12 @@ final class HaksikViewController: UIViewController,
             .zip(userData, universityInfo, mealPlans)
             .observe(on: MainScheduler.asyncInstance)
             .bind(with: self) { owner, data in
-                let (userData, universityInfo, _) = data
-                let campusID = userData.defaultCampusID
-                let currentCampus = universityInfo.campusInfos
-                    .first { $0.id == campusID }
-                let campusTitle = currentCampus?.name
-                let cafeteriaInfos = currentCampus?.cafeteriaInfos ?? []
-                owner.campusTitleView.setCampusTitle(
-                    title: campusTitle
-                )
-                owner.datePickerView.setDatePickerButtons(
-                    startDate: Date(),
-                    for: 7,
-                    selectedDate: listener.currentState.selectedDate
-                )
-                owner.cafeteriaPickerView.createCafeteriaPicerContent(
-                    cafeteras: cafeteriaInfos,
-                    selectedCafeteriaID: nil
+                let (userData, universityInfo, mealPlans) = data
+                owner.createViewContent(
+                    listener: listener,
+                    userData: userData,
+                    universityInfo: universityInfo,
+                    mealPlans: mealPlans
                 )
             }
             .disposed(by: disposeBag)
@@ -147,6 +149,29 @@ final class HaksikViewController: UIViewController,
                 print(date)
             }
             .disposed(by: disposeBag)
+        
+        listener.state.map(\.selectedCafeteriaID)
+            .observe(on: MainScheduler.asyncInstance)
+            .compactMap { $0 }
+            .bind(with: self) { owner, cafeteriaID in
+                let userData = owner.listener?.currentState
+                    .userUniversityData
+                let universityInfo = owner.listener?.currentState.universityInfo
+                
+                let campusId = userData?.defaultCampusID
+                
+                let location = universityInfo?.campusInfos
+                    .first(where: { $0.id == campusId })?
+                    .cafeteriaInfos
+                    .first(where: { $0.id == cafeteriaID })?
+                    .location
+                
+                owner.locationTitleView.createLocationTitleContent(
+                    location
+                )
+            }
+            .disposed(by: disposeBag)
+        
     }
     
     private func bind(listener: HaksikPresentableListener?) {
@@ -186,10 +211,49 @@ private extension HaksikViewController {
             .map { date in .dateSelected(date) }
             .bind(to: self.actionRelay)
             .disposed(by: disposeBag)
+        
+        self.cafeteriaPickerView.selectedCafeteriaIDRelay
+            .map { id in .cafeteriaSelected(id) }
+            .bind(to: self.actionRelay)
+            .disposed(by: disposeBag)
     }
     
     @objc func willEnterForeground() {
         actionRelay.accept(.appWillEnterForeground)
+    }
+}
+
+private extension HaksikViewController {
+    func createViewContent(
+        listener: HaksikPresentableListener,
+        userData: UserUniversity,
+        universityInfo: UniversityInfo,
+        mealPlans: [MealPlan]
+    ) {
+        let campusID = userData.defaultCampusID
+        let currentCampus = universityInfo.campusInfos
+            .first { $0.id == campusID }
+        let campusTitle = currentCampus?.name
+        let cafeteriaInfos = currentCampus?.cafeteriaInfos ?? []
+        self.campusTitleView.createCampusTitleContent(
+            title: campusTitle
+        )
+        self.datePickerView.createDatePickerContent(
+            startDate: Date(),
+            for: 7,
+            selectedDate: listener.currentState.selectedDate
+        )
+        self.cafeteriaPickerView.createCafeteriaPicerkContent(
+            cafeterias: cafeteriaInfos,
+            selectedCafeteriaID: listener.currentState.selectedCafeteriaID
+        )
+    }
+    
+    func dismissViewContent() {
+        campusTitleView.dismissCampusTitleContent()
+        datePickerView.dismissDatePickerContent()
+        cafeteriaPickerView.dismissCafetreiaPickerContent()
+        locationTitleView.dismissLocationTitleContent()
     }
 }
 
@@ -199,6 +263,7 @@ private extension HaksikViewController {
         setCampusTitleViewLayout()
         setDatePickerViewLayout()
         setCafeteriaPickerViewLayout()
+        setLocationTitleViewLayout()
     }
     
     private func setBackgroundGradient() {
@@ -233,11 +298,25 @@ private extension HaksikViewController {
     }
     
     func setCafeteriaPickerViewLayout() {
-        view.addSubview(cafeteriaPickerView)
-        cafeteriaPickerView.snp.makeConstraints { make in
+        view.addSubview(cafeteriaPickerBackgroundView)
+        cafeteriaPickerBackgroundView.snp.makeConstraints { make in
             make.leading.trailing.equalToSuperview()
-            make.top.equalTo(datePickerView.snp.bottom).offset(14)
-            make.height.equalTo(40)
+            make.top.equalTo(datePickerView.snp.bottom)
+            make.height.equalTo(54)
+        }
+        cafeteriaPickerBackgroundView.addSubview(cafeteriaPickerView)
+        cafeteriaPickerView.snp.makeConstraints { make in
+            make.directionalEdges.equalToSuperview()
+        }
+    }
+    
+    func setLocationTitleViewLayout() {
+        view.addSubview(locationTitleView)
+        locationTitleView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(30)
+            make.top.equalTo(cafeteriaPickerBackgroundView.snp.bottom).offset(8)
+            make.trailing.equalToSuperview().offset(-70)
+            make.height.equalTo(22)
         }
     }
 }

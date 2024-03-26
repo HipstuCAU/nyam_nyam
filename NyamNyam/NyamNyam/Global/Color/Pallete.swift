@@ -28,6 +28,7 @@ enum Pallete: String {
     case invalidButton
     case invalidButtonText
     case cafeteriaText
+    case locationText
 }
 
 extension Pallete {
