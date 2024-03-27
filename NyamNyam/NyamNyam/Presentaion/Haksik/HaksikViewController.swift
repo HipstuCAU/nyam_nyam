@@ -248,7 +248,12 @@ private extension HaksikViewController {
         self.datePickerView.createDatePickerContent(
             startDate: Date(),
             for: 7,
-            selectedDate: listener.currentState.selectedDate
+            selectedDate: listener.currentState.selectedDate,
+            fetchedDates: mealPlans.filter({ mealPlan in
+                mealPlan.cafeterias.filter({ cafeteria in
+                     currentCampus?.cafeteriaInfos.map({$0.id}).contains(cafeteria.cafeteriaID) ?? false
+                }).count > 0
+            }).map { $0.date }
         )
         self.cafeteriaPickerView.createCafeteriaPicerkContent(
             cafeterias: cafeteriaInfos,

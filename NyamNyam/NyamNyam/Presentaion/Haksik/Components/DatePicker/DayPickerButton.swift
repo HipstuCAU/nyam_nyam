@@ -12,12 +12,19 @@ final class DayPickerButton: UIButton {
     
     let date: Date
     
+    let isAvailable: Bool
+    
     var selectStatus: Bool = false {
         didSet {
-            dayLabel.textColor =  selectStatus ?
-                .white : Pallete.invalidButtonText.color
-            weekDayLabel.textColor =  selectStatus ?
-                .white : Pallete.invalidButtonText.color
+            if isAvailable {
+                dayLabel.textColor =  selectStatus ?
+                    .white : Pallete.textBlack.color
+                weekDayLabel.textColor =  selectStatus ?
+                    .white : Pallete.textBlack.color
+            } else {
+                dayLabel.textColor = Pallete.invalidButtonText.color
+                weekDayLabel.textColor = Pallete.invalidButtonText.color
+            }
         }
     }
     
@@ -39,9 +46,11 @@ final class DayPickerButton: UIButton {
     
     init(
         frame: CGRect,
-        date: Date
+        date: Date,
+        isAvailable: Bool
     ) {
         self.date = date
+        self.isAvailable = isAvailable
         super.init(frame: frame)
         setButtonLayout()
     }

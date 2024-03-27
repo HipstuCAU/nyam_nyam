@@ -29,6 +29,8 @@ final class DatePickerView: UIView {
     
     let selectedDateRelay: BehaviorRelay<Date?> = .init(value: nil)
     
+    let invalidDateRelay: BehaviorRelay<Void?> = .init(value: nil)
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = Pallete.blueBackground.color
@@ -49,7 +51,8 @@ final class DatePickerView: UIView {
     func createDatePickerContent(
         startDate: Date,
         for days: Int,
-        selectedDate: Date?
+        selectedDate: Date?,
+        fetchedDates: [Date]
     ) {
         guard days > 0 else { return }
         dismissDatePickerContent()
@@ -58,7 +61,8 @@ final class DatePickerView: UIView {
         
         createDateButtons(
             startDate: startDate,
-            for: days
+            for: days,
+            fetchedDates: fetchedDates
         )
         setDateButtonslayout(for: days)
         setFirstSelectedButton(
@@ -100,18 +104,24 @@ final class DatePickerView: UIView {
 extension DatePickerView {
     private func createDateButtons(
         startDate: Date,
-        for days: Int
+        for days: Int,
+        fetchedDates: [Date]
     ) {
         for day in 0..<days {
             let addedDate = startDate.adding(days: day)
             let dayPickerButton = DayPickerButton(
                 frame: .zero,
-                date: addedDate
+                date: addedDate,
+                isAvailable: fetchedDates.contains(addedDate)
             )
             
             dayPickerButton.rx.tap
                 .bind(with: self) { owner, _ in
-                    owner.selectedDateRelay.accept(addedDate)
+                    if dayPickerButton.isAvailable {
+                        owner.selectedDateRelay.accept(addedDate)
+                    } else {
+                        owner.invalidDateRelay.accept(())
+                    }
                 }
                 .disposed(by: buttonDisposeBag)
             
