@@ -67,8 +67,7 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
         case setLoading(Bool)
         case setRetryAlert(AlertInfo)
         case setSelectedDate(Date?)
-        case setSelectedCafeteriaID(String?)
-        case setLocationTitle(String?)
+        case setSelectedCafeteria(String?)
         case setFetchedHaskikData([MealPlan], UserUniversity, UniversityInfo)
     }
     
@@ -90,10 +89,7 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
             return .just(.setSelectedDate(date))
             
         case let .cafeteriaSelected(id):
-            return .merge([
-                .just(.setSelectedCafeteriaID(id)),
-                .just(.setLocationTitle(id))
-            ])
+            return .just(.setSelectedCafeteria(id))
         }
     }
     
@@ -110,18 +106,14 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
         case let .setSelectedDate(date):
             state.selectedDate = date
             
-        case let .setSelectedCafeteriaID(id):
-            state.selectedCafeteriaID = id
-            
-        case let .setLocationTitle(id):
+        case let .setSelectedCafeteria(id):
             let userData = currentState.userUniversityData
             let universityInfo = currentState.universityInfo
             let campusId = userData?.defaultCampusID
-            state.locationTitle = universityInfo?.campusInfos
+            state.selectedCafeteria = universityInfo?.campusInfos
                 .first(where: { $0.id == campusId })?
                 .cafeteriaInfos
-                .first(where: { $0.id == id })?
-                .location
+                .first(where: { $0.id == id })
             
         case let .setFetchedHaskikData(mealPlans, userData, universityInfo):
             let campusID = userData.defaultCampusID
@@ -164,7 +156,7 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
             dependency.userDataService.getUserUniversityID()
                 .asObservable()
                 .withUnretained(self)
-                .delay(.milliseconds(500), scheduler: MainScheduler.instance)
+                .delay(.milliseconds(300), scheduler: MainScheduler.instance)
                 .flatMap { owner, id in
                     owner.dependency.universityInfoService
                         .getUniversityInfo(id: id)

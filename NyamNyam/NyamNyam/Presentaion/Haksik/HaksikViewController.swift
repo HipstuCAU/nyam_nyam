@@ -101,8 +101,6 @@ final class HaksikViewController: UIViewController,
             }
             .disposed(by: disposeBag)
         
-
-        
         listener.state.map(\.campusTitle)
             .compactMap({ $0 })
             .distinctUntilChanged()
@@ -135,11 +133,10 @@ final class HaksikViewController: UIViewController,
             .bind(with: self) { owner, cafeteriaInfos in
                 owner.cafeteriaPickerView.createCafeteriaPicerkContent(
                     cafeterias: cafeteriaInfos,
-                    selectedCafeteriaID: listener.currentState.selectedCafeteriaID
+                    selectedCafeteriaID: listener.currentState.selectedCafeteria?.id
                 )
             }
             .disposed(by: disposeBag)
-        
             
         listener.state.map(\.alertInfo)
             .distinctUntilChanged()
@@ -168,21 +165,14 @@ final class HaksikViewController: UIViewController,
             }
             .disposed(by: disposeBag)
         
-        listener.state.map(\.selectedCafeteriaID)
+        listener.state.map(\.selectedCafeteria)
             .distinctUntilChanged()
             .observe(on: MainScheduler.instance)
             .compactMap { $0 }
-            .bind(with: self) { owner, title in
+            .bind(with: self) { owner, cafeteria in
+                owner.locationTitleView.createLocationTitleContent(cafeteria.location)
                 owner.triggerRigidFeedback()
-            }
-            .disposed(by: disposeBag)
-        
-        listener.state.map(\.locationTitle)
-            .distinctUntilChanged()
-            .observe(on: MainScheduler.instance)
-            .compactMap { $0 }
-            .bind(with: self) { owner, title in
-                owner.locationTitleView.createLocationTitleContent(title)
+                
             }
             .disposed(by: disposeBag)
         
