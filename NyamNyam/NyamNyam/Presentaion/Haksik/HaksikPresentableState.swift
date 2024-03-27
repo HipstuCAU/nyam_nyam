@@ -12,12 +12,13 @@ struct HaksikPresentableState {
     var mealPlans: [MealPlan]? = nil
     var userUniversityData: UserUniversity? = nil
     var universityInfo: UniversityInfo? = nil
+    
     var isLoading: Bool = false
     var alertInfo: AlertInfo? = nil
-    
     var selectedDate: Date? = nil
     var selectedCafeteriaID: String? = nil
     var campusTitle: String? = nil
     var availableDates: [Date]? = nil
     var cafeteriaInfos: [CafeteriaInfo]? = nil
+    var locationTitle: String? = nil
 }

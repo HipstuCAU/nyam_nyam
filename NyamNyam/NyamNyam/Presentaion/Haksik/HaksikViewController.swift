@@ -91,7 +91,6 @@ final class HaksikViewController: UIViewController,
             .observe(on: MainScheduler.instance)
             .bind(with: self) { owner, loadingStatus in
                 if loadingStatus {
-                    owner.dismissViewContent()
                     owner.view.showAnimatedSkeleton(
                         usingColor: Pallete.bgBlue.color ?? .gray
                     )
@@ -102,31 +101,45 @@ final class HaksikViewController: UIViewController,
             }
             .disposed(by: disposeBag)
         
-        let userData = listener.state.map(\.userUniversityData)
+
+        
+        listener.state.map(\.campusTitle)
             .compactMap({ $0 })
             .distinctUntilChanged()
-        
-        let universityInfo = listener.state.map(\.universityInfo)
-            .compactMap({ $0 })
-            .distinctUntilChanged()
-        
-        let mealPlans = listener.state.map(\.mealPlans)
-            .compactMap({ $0 })
-            .distinctUntilChanged()
-        
-        Observable
-            .zip(userData, universityInfo, mealPlans)
             .observe(on: MainScheduler.asyncInstance)
-            .bind(with: self) { owner, data in
-                let (userData, universityInfo, mealPlans) = data
-                owner.createViewContent(
-                    listener: listener,
-                    userData: userData,
-                    universityInfo: universityInfo,
-                    mealPlans: mealPlans
+            .bind(with: self) { owner, title in
+                owner.campusTitleView.createCampusTitleContent(
+                    title: title
                 )
             }
             .disposed(by: disposeBag)
+        
+        listener.state.map(\.availableDates)
+            .compactMap({ $0 })
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.asyncInstance)
+            .bind(with: self) { owner, availableDates in
+                owner.datePickerView.createDatePickerContent(
+                    startDate: Date(),
+                    for: 7,
+                    selectedDate: listener.currentState.selectedDate,
+                    fetchedDates: availableDates
+                )
+            }
+            .disposed(by: disposeBag)
+        
+        listener.state.map(\.cafeteriaInfos)
+            .compactMap({ $0 })
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.asyncInstance)
+            .bind(with: self) { owner, cafeteriaInfos in
+                owner.cafeteriaPickerView.createCafeteriaPicerkContent(
+                    cafeterias: cafeteriaInfos,
+                    selectedCafeteriaID: listener.currentState.selectedCafeteriaID
+                )
+            }
+            .disposed(by: disposeBag)
+        
             
         listener.state.map(\.alertInfo)
             .distinctUntilChanged()
@@ -159,23 +172,17 @@ final class HaksikViewController: UIViewController,
             .distinctUntilChanged()
             .observe(on: MainScheduler.instance)
             .compactMap { $0 }
-            .bind(with: self) { owner, cafeteriaID in
-                let userData = owner.listener?.currentState
-                    .userUniversityData
-                let universityInfo = owner.listener?.currentState.universityInfo
-                
-                let campusId = userData?.defaultCampusID
-                
-                let location = universityInfo?.campusInfos
-                    .first(where: { $0.id == campusId })?
-                    .cafeteriaInfos
-                    .first(where: { $0.id == cafeteriaID })?
-                    .location
-                
-                owner.locationTitleView.createLocationTitleContent(
-                    location
-                )
+            .bind(with: self) { owner, title in
                 owner.triggerRigidFeedback()
+            }
+            .disposed(by: disposeBag)
+        
+        listener.state.map(\.locationTitle)
+            .distinctUntilChanged()
+            .observe(on: MainScheduler.instance)
+            .compactMap { $0 }
+            .bind(with: self) { owner, title in
+                owner.locationTitleView.createLocationTitleContent(title)
             }
             .disposed(by: disposeBag)
         
@@ -227,44 +234,6 @@ private extension HaksikViewController {
     
     @objc func willEnterForeground() {
         actionRelay.accept(.appWillEnterForeground)
-    }
-}
-
-private extension HaksikViewController {
-    func createViewContent(
-        listener: HaksikPresentableListener,
-        userData: UserUniversity,
-        universityInfo: UniversityInfo,
-        mealPlans: [MealPlan]
-    ) {
-        let campusID = userData.defaultCampusID
-        let currentCampus = universityInfo.campusInfos
-            .first { $0.id == campusID }
-        let campusTitle = currentCampus?.name
-        let cafeteriaInfos = currentCampus?.cafeteriaInfos ?? []
-        self.campusTitleView.createCampusTitleContent(
-            title: campusTitle
-        )
-        self.datePickerView.createDatePickerContent(
-            startDate: Date(),
-            for: 7,
-            selectedDate: listener.currentState.selectedDate,
-            fetchedDates: mealPlans.filter({ mealPlan in
-                mealPlan.cafeterias.filter({ cafeteria in
-                     currentCampus?.cafeteriaInfos.map({$0.id}).contains(cafeteria.cafeteriaID) ?? false
-                }).count > 0
-            }).map { $0.date }
-        )
-        self.cafeteriaPickerView.createCafeteriaPicerkContent(
-            cafeterias: cafeteriaInfos,
-            selectedCafeteriaID: listener.currentState.selectedCafeteriaID
-        )
-    }
-    
-    func dismissViewContent() {
-        campusTitleView.dismissCampusTitleContent()
-        datePickerView.dismissDatePickerContent()
-        cafeteriaPickerView.dismissCafetreiaPickerContent()
     }
 }
 

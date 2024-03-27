@@ -64,13 +64,12 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
     }
     
     enum Mutation {
-        case setMealPlan([MealPlan])
-        case setUserUniversityData(UserUniversity)
-        case setUniversityInfo(UniversityInfo)
         case setLoading(Bool)
         case setRetryAlert(AlertInfo)
         case setSelectedDate(Date?)
         case setSelectedCafeteriaID(String?)
+        case setLocationTitle(String?)
+        case setFetchedHaskikData([MealPlan], UserUniversity, UniversityInfo)
     }
     
     func sendAction(_ action: Action) {
@@ -83,11 +82,7 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
         case .viewDidAppear, .retryLoad, .appWillEnterForeground:
             return .concat([
                 .just(.setLoading(true)),
-                .merge([
-                    self.fetchUserUniversityTransform(),
-                    self.fetchUniversityInfoTransform(),
-                    self.fetchMealPlanTransform()
-                ]),
+                self.fetchHaksikDataTransform(),
                 .just(.setLoading(false)),
             ])
             
@@ -95,7 +90,10 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
             return .just(.setSelectedDate(date))
             
         case let .cafeteriaSelected(id):
-            return .just(.setSelectedCafeteriaID(id))
+            return .merge([
+                .just(.setSelectedCafeteriaID(id)),
+                .just(.setLocationTitle(id))
+            ])
         }
     }
     
@@ -103,16 +101,6 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
         var state = state
         
         switch mutation {
-            
-        case let .setMealPlan(mealPlans):
-            state.mealPlans = mealPlans
-            
-        case let .setUserUniversityData(userUniversityData):
-            state.userUniversityData = userUniversityData
-            
-        case let .setUniversityInfo(universityInfo):
-            state.universityInfo = universityInfo
-            
         case let .setRetryAlert(alertInfo):
             state.alertInfo = alertInfo
             
@@ -124,79 +112,78 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
             
         case let .setSelectedCafeteriaID(id):
             state.selectedCafeteriaID = id
+            
+        case let .setLocationTitle(id):
+            let userData = currentState.userUniversityData
+            let universityInfo = currentState.universityInfo
+            let campusId = userData?.defaultCampusID
+            state.locationTitle = universityInfo?.campusInfos
+                .first(where: { $0.id == campusId })?
+                .cafeteriaInfos
+                .first(where: { $0.id == id })?
+                .location
+            
+        case let .setFetchedHaskikData(mealPlans, userData, universityInfo):
+            let campusID = userData.defaultCampusID
+            let currentCampus = universityInfo.campusInfos
+                .first { $0.id == campusID }
+            
+            state.mealPlans = mealPlans
+            state.userUniversityData = userData
+            state.universityInfo = universityInfo
+            state.campusTitle = currentCampus?.name
+            state.cafeteriaInfos = currentCampus?.cafeteriaInfos ?? []
+            state.availableDates = mealPlans
+                .filter({ mealPlan in
+                    mealPlan.cafeterias
+                        .filter({ cafeteria in
+                            currentCampus?.cafeteriaInfos
+                                .map({$0.id})
+                                .contains(cafeteria.cafeteriaID) ?? false
+                        })
+                        .count > 0
+                })
+                .map { $0.date }
         }
         
         return state
     }
     
-    private func fetchMealPlanTransform() -> Observable<Mutation> {
-        self.dependency.haksikService.fetchMealPlans()
-            .asObservable()
-            .delay(.milliseconds(500), scheduler: MainScheduler.instance)
-            .map { mealPlans -> Mutation in
-                .setMealPlan(mealPlans)
-            }
-            .catch({ error in
-                print(error)
-                return .just(
-                    .setRetryAlert(
-                        AlertInfo(
-                            type: .errorWithRetry,
-                            title: "식단 로딩 중 문제가 발생했어요",
-                            message: "인터넷 연결을 확인해주세요"
-                        )
+    private func fetchHaksikDataTransform() -> Observable<Mutation> {
+        Observable.zip(
+            dependency.haksikService.fetchMealPlans()
+                .asObservable(),
+            dependency.userDataService.getUserUniversityID()
+                .asObservable()
+                .withUnretained(self)
+                .flatMap { owner, id in
+                    owner.dependency.userDataService
+                        .getUserUniversity(universityId: id)
+                        .asObservable()
+                },
+            dependency.userDataService.getUserUniversityID()
+                .asObservable()
+                .withUnretained(self)
+                .delay(.milliseconds(500), scheduler: MainScheduler.instance)
+                .flatMap { owner, id in
+                    owner.dependency.universityInfoService
+                        .getUniversityInfo(id: id)
+                        .asObservable()
+                }
+        )
+        .map { mealPlans, userUniversity, universityInfo -> Mutation in
+            .setFetchedHaskikData(mealPlans, userUniversity, universityInfo)
+        }
+        .catch({ error in
+            return .just(
+                .setRetryAlert(
+                    AlertInfo(
+                        type: .errorWithRetry,
+                        title: "식단 로딩 중 문제가 발생했어요",
+                        message: "인터넷 연결을 확인해주세요"
                     )
                 )
-            })
-    }
-    
-    private func fetchUserUniversityTransform() -> Observable<Mutation> {
-        dependency.userDataService.getUserUniversityID()
-            .asObservable()
-            .withUnretained(self)
-            .flatMap { owner, id in
-                owner.dependency.userDataService
-                    .getUserUniversity(universityId: id)
-                    .asObservable()
-            }
-            .map { userUniversity in
-                .setUserUniversityData(userUniversity)
-            }
-            .catch({ error in
-                return .just(
-                    .setRetryAlert(
-                        AlertInfo(
-                            type: .errorWithRetry,
-                            title: "식단 로딩 중 문제가 발생했어요",
-                            message: "인터넷 연결을 확인해주세요"
-                        )
-                    )
-                )
-            })
-    }
-    
-    private func fetchUniversityInfoTransform() -> Observable<Mutation> {
-        dependency.userDataService.getUserUniversityID()
-            .asObservable()
-            .withUnretained(self)
-            .flatMap { owner, id in
-                owner.dependency.universityInfoService
-                    .getUniversityInfo(id: id)
-                    .asObservable()
-            }
-            .map { universityInfo in
-                .setUniversityInfo(universityInfo)
-            }
-            .catch({ error in
-                return .just(
-                    .setRetryAlert(
-                        AlertInfo(
-                            type: .errorWithRetry,
-                            title: "식단 로딩 중 문제가 발생했어요",
-                            message: "인터넷 연결을 확인해주세요"
-                        )
-                    )
-                )
-            })
+            )
+        })
     }
 }
