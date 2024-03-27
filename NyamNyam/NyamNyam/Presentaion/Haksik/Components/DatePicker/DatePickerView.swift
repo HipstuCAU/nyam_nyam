@@ -85,7 +85,7 @@ final class DatePickerView: UIView {
                     make.directionalEdges.equalTo(button.snp.directionalEdges)
                 }
                 if !firstLoaded {
-                    UIView.animate(withDuration: 0.3) {
+                    UIView.animate(withDuration: 0.2) {
                         self.layoutIfNeeded()
                     }
                 }

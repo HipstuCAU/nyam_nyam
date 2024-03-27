@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import RxSwift
 import RxCocoa
+import SkeletonView
 
 final class CafeteriaPickerView: UIScrollView {
     
@@ -19,8 +20,6 @@ final class CafeteriaPickerView: UIScrollView {
     private var cafeteriaButtons: [CafeteriaButton] = []
     
     let selectedCafeteriaIDRelay: BehaviorRelay<String?> = .init(value: nil)
-    
-    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -96,6 +95,8 @@ extension CafeteriaPickerView {
             let button = CafeteriaButton(
                 cafeteriaInfo: cafetera
             )
+            
+            button.isSkeletonable = true
             
             button.rx.tap
                 .observe(on: MainScheduler.instance)

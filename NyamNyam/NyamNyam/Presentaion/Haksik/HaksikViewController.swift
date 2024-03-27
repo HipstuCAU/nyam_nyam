@@ -34,7 +34,8 @@ final class HaksikViewController: UIViewController,
                                   HaksikPresentable,
                                   HaksikViewControllable,
                                   NavigationConfigurable,
-                                  AlertPresentable {
+                                  AlertPresentable,
+                                  WithHaptikFeedback {
 
     weak var listener: HaksikPresentableListener?
     
@@ -91,9 +92,12 @@ final class HaksikViewController: UIViewController,
             .bind(with: self) { owner, loadingStatus in
                 if loadingStatus {
                     owner.dismissViewContent()
-                    owner.view.showAnimatedSkeleton()
+                    owner.view.showAnimatedSkeleton(
+                        usingColor: Pallete.bgBlue.color ?? .gray
+                    )
                 } else {
                     owner.view.hideSkeleton()
+                    owner.triggerCompleteFeedback()
                 }
             }
             .disposed(by: disposeBag)
@@ -147,11 +151,12 @@ final class HaksikViewController: UIViewController,
             .observe(on: MainScheduler.instance)
             .compactMap { $0 }
             .bind(with: self) { owner, date in
-                print(date)
+                owner.triggerFeedback()
             }
             .disposed(by: disposeBag)
         
         listener.state.map(\.selectedCafeteriaID)
+            .distinctUntilChanged()
             .observe(on: MainScheduler.instance)
             .compactMap { $0 }
             .bind(with: self) { owner, cafeteriaID in
@@ -170,6 +175,7 @@ final class HaksikViewController: UIViewController,
                 owner.locationTitleView.createLocationTitleContent(
                     location
                 )
+                owner.triggerRigidFeedback()
             }
             .disposed(by: disposeBag)
         
@@ -254,7 +260,6 @@ private extension HaksikViewController {
         campusTitleView.dismissCampusTitleContent()
         datePickerView.dismissDatePickerContent()
         cafeteriaPickerView.dismissCafetreiaPickerContent()
-        locationTitleView.dismissLocationTitleContent()
     }
 }
 

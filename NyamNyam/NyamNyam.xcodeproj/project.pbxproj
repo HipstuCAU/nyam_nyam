@@ -102,6 +102,7 @@
 		ABB616272BA8288A00D0BD7B /* DayPickerButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB616262BA8288A00D0BD7B /* DayPickerButton.swift */; };
 		ABB6162B2BB05E5200D0BD7B /* CafeteriaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB6162A2BB05E5200D0BD7B /* CafeteriaButton.swift */; };
 		ABB616492BB302F300D0BD7B /* LocationTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB616482BB302F300D0BD7B /* LocationTitleView.swift */; };
+		ABB6164C2BB3CECA00D0BD7B /* WithHaptikFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB6164B2BB3CECA00D0BD7B /* WithHaptikFeedback.swift */; };
 		ABBDF69129B9C53C00E9347A /* CarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBDF69029B9C53C00E9347A /* CarouselCell.swift */; };
 		ABBDF69329BA328A00E9347A /* ExpandableMealCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBDF69229BA328900E9347A /* ExpandableMealCardView.swift */; };
 		ABEAFBCB29AC9ED3002C3119 /* TempAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFBCA29AC9ED3002C3119 /* TempAppDelegate.swift */; };
@@ -219,6 +220,7 @@
 		ABB616262BA8288A00D0BD7B /* DayPickerButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayPickerButton.swift; sourceTree = "<group>"; };
 		ABB6162A2BB05E5200D0BD7B /* CafeteriaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaButton.swift; sourceTree = "<group>"; };
 		ABB616482BB302F300D0BD7B /* LocationTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTitleView.swift; sourceTree = "<group>"; };
+		ABB6164B2BB3CECA00D0BD7B /* WithHaptikFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithHaptikFeedback.swift; sourceTree = "<group>"; };
 		ABBDF69029B9C53C00E9347A /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
 		ABBDF69229BA328900E9347A /* ExpandableMealCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableMealCardView.swift; sourceTree = "<group>"; };
 		ABEAFBC729AC9ED3002C3119 /* NyamNyam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NyamNyam.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -643,6 +645,7 @@
 		AB934C442B57A3E700B14810 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				ABB6164A2BB3CEAE00D0BD7B /* HaptikFeedback */,
 				AB934C592B5F9DAE00B14810 /* NavigationConfigurable */,
 				AB934C412B57A30C00B14810 /* AlertPresentable */,
 			);
@@ -769,6 +772,14 @@
 				ABB616482BB302F300D0BD7B /* LocationTitleView.swift */,
 			);
 			path = LocationTitle;
+			sourceTree = "<group>";
+		};
+		ABB6164A2BB3CEAE00D0BD7B /* HaptikFeedback */ = {
+			isa = PBXGroup;
+			children = (
+				ABB6164B2BB3CECA00D0BD7B /* WithHaptikFeedback.swift */,
+			);
+			path = HaptikFeedback;
 			sourceTree = "<group>";
 		};
 		ABBDF68F29B9C52000E9347A /* Components */ = {
@@ -1157,6 +1168,7 @@
 				2A429D9B29BE12F50044A3E6 /* SettingWebViewController.swift in Sources */,
 				7A8405622B4BBAF900830F77 /* RootViewController.swift in Sources */,
 				ABB616272BA8288A00D0BD7B /* DayPickerButton.swift in Sources */,
+				ABB6164C2BB3CECA00D0BD7B /* WithHaptikFeedback.swift in Sources */,
 				7A8405642B4BBAF900830F77 /* RootInteractor.swift in Sources */,
 				7A8405AB2B5513FB00830F77 /* AlertInfo.swift in Sources */,
 				ABB616492BB302F300D0BD7B /* LocationTitleView.swift in Sources */,

@@ -132,6 +132,7 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
     private func fetchMealPlanTransform() -> Observable<Mutation> {
         self.dependency.haksikService.fetchMealPlans()
             .asObservable()
+            .delay(.milliseconds(500), scheduler: MainScheduler.instance)
             .map { mealPlans -> Mutation in
                 .setMealPlan(mealPlans)
             }
@@ -153,7 +154,6 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
         dependency.userDataService.getUserUniversityID()
             .asObservable()
             .withUnretained(self)
-            .delay(.seconds(3), scheduler: MainScheduler.instance)
             .flatMap { owner, id in
                 owner.dependency.userDataService
                     .getUserUniversity(universityId: id)
@@ -179,7 +179,6 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
         dependency.userDataService.getUserUniversityID()
             .asObservable()
             .withUnretained(self)
-//            .delay(.milliseconds(1300), scheduler: MainScheduler.instance)
             .flatMap { owner, id in
                 owner.dependency.universityInfoService
                     .getUniversityInfo(id: id)
