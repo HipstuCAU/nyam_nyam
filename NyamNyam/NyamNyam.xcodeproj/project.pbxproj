@@ -103,6 +103,8 @@
 		ABB6162B2BB05E5200D0BD7B /* CafeteriaButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB6162A2BB05E5200D0BD7B /* CafeteriaButton.swift */; };
 		ABB616492BB302F300D0BD7B /* LocationTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB616482BB302F300D0BD7B /* LocationTitleView.swift */; };
 		ABB6164C2BB3CECA00D0BD7B /* WithHaptikFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB6164B2BB3CECA00D0BD7B /* WithHaptikFeedback.swift */; };
+		ABB6164F2BB409A000D0BD7B /* SelectedCafeteriaID.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB6164E2BB409A000D0BD7B /* SelectedCafeteriaID.swift */; };
+		ABB616512BB40DA200D0BD7B /* SelectedDateStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB616502BB40DA200D0BD7B /* SelectedDateStream.swift */; };
 		ABBDF69129B9C53C00E9347A /* CarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBDF69029B9C53C00E9347A /* CarouselCell.swift */; };
 		ABBDF69329BA328A00E9347A /* ExpandableMealCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBDF69229BA328900E9347A /* ExpandableMealCardView.swift */; };
 		ABEAFBCB29AC9ED3002C3119 /* TempAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFBCA29AC9ED3002C3119 /* TempAppDelegate.swift */; };
@@ -221,6 +223,8 @@
 		ABB6162A2BB05E5200D0BD7B /* CafeteriaButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaButton.swift; sourceTree = "<group>"; };
 		ABB616482BB302F300D0BD7B /* LocationTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTitleView.swift; sourceTree = "<group>"; };
 		ABB6164B2BB3CECA00D0BD7B /* WithHaptikFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithHaptikFeedback.swift; sourceTree = "<group>"; };
+		ABB6164E2BB409A000D0BD7B /* SelectedCafeteriaID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCafeteriaID.swift; sourceTree = "<group>"; };
+		ABB616502BB40DA200D0BD7B /* SelectedDateStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedDateStream.swift; sourceTree = "<group>"; };
 		ABBDF69029B9C53C00E9347A /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
 		ABBDF69229BA328900E9347A /* ExpandableMealCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableMealCardView.swift; sourceTree = "<group>"; };
 		ABEAFBC729AC9ED3002C3119 /* NyamNyam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NyamNyam.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -496,6 +500,7 @@
 				7A8405992B54B7F300830F77 /* HaksikBuilder.swift */,
 				7A84059A2B54B7F300830F77 /* HaksikInteractor.swift */,
 				7A8405A02B54D91B00830F77 /* HaksikPresentableState.swift */,
+				ABB6164D2BB4098400D0BD7B /* Streams */,
 				ABB6161E2BA57FBC00D0BD7B /* Components */,
 			);
 			path = Haksik;
@@ -780,6 +785,15 @@
 				ABB6164B2BB3CECA00D0BD7B /* WithHaptikFeedback.swift */,
 			);
 			path = HaptikFeedback;
+			sourceTree = "<group>";
+		};
+		ABB6164D2BB4098400D0BD7B /* Streams */ = {
+			isa = PBXGroup;
+			children = (
+				ABB6164E2BB409A000D0BD7B /* SelectedCafeteriaID.swift */,
+				ABB616502BB40DA200D0BD7B /* SelectedDateStream.swift */,
+			);
+			path = Streams;
 			sourceTree = "<group>";
 		};
 		ABBDF68F29B9C52000E9347A /* Components */ = {
@@ -1151,6 +1165,7 @@
 				2A429D9929BDE2A40044A3E6 /* SettingListTableViewCell.swift in Sources */,
 				7A84059D2B54B7F300830F77 /* HaksikBuilder.swift in Sources */,
 				AB8F41C02B78C7BD00231CEB /* CafeteriaInfoDTO.swift in Sources */,
+				ABB616512BB40DA200D0BD7B /* SelectedDateStream.swift in Sources */,
 				7A8405632B4BBAF900830F77 /* RootBuilder.swift in Sources */,
 				7A8405692B4BBC1300830F77 /* AppDelegate.swift in Sources */,
 				ABEAFC0429ACA4B1002C3119 /* Date+.swift in Sources */,
@@ -1196,6 +1211,7 @@
 				2A429DAE29C040D20044A3E6 /* Reachability.swift in Sources */,
 				AB8F41BB2B77E2CB00231CEB /* MockUserUniversityRepository.swift in Sources */,
 				AB2FDAAE29B84CC7001746DB /* CafeteriaButtons.swift in Sources */,
+				ABB6164F2BB409A000D0BD7B /* SelectedCafeteriaID.swift in Sources */,
 				7A8405A12B54D91B00830F77 /* HaksikPresentableState.swift in Sources */,
 				ABEAFC1D29AE6337002C3119 /* CampusSelectView.swift in Sources */,
 				ABBDF69129B9C53C00E9347A /* CarouselCell.swift in Sources */,

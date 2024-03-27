@@ -27,6 +27,8 @@ protocol HaksikInteractorDependency {
     var haksikService: HaksikService { get }
     var userDataService: UserDataService { get }
     var universityInfoService: UniversityInfoService { get }
+    var selectedCafeteriaIDStream: MutableSelectedCafeteriaIDStream { get }
+    var selectedDateStream: MutableSelectedDateStream { get }
 }
 
 final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
@@ -86,11 +88,29 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
             ])
             
         case let .dateSelected(date):
-            return .just(.setSelectedDate(date))
+            dependency.selectedDateStream.updateDate(with: date)
+            return .empty()
             
         case let .cafeteriaSelected(id):
-            return .just(.setSelectedCafeteria(id))
+            dependency.selectedCafeteriaIDStream.updateID(with: id)
+            return .empty()
         }
+    }
+    
+    func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
+        let didSelectCafeteria = dependency.selectedCafeteriaIDStream
+            .selectedID
+            .map { id -> Mutation in
+                .setSelectedCafeteria(id)
+            }
+        
+        let didSelectDate = dependency.selectedDateStream
+            .selectedDate
+            .map { date -> Mutation in
+                .setSelectedDate(date)
+            }
+        
+        return .merge([mutation, didSelectCafeteria, didSelectDate])
     }
     
     func reduce(state: State, mutation: Mutation) -> State {

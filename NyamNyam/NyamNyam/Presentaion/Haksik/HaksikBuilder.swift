@@ -19,6 +19,10 @@ final class HaksikComponent: Component<HaksikDependency>,
     
     let universityInfoService: UniversityInfoService
     
+    let selectedCafeteriaIDStream: MutableSelectedCafeteriaIDStream
+    
+    let selectedDateStream: MutableSelectedDateStream
+    
     override init(dependency: HaksikDependency) {
         let localFileName = "CAUMeals"
         
@@ -48,6 +52,10 @@ final class HaksikComponent: Component<HaksikDependency>,
         universityInfoService = UniversityInfoServiceImpl(
             repository: MockUniversityRepositoryImpl()
         )
+        
+        selectedCafeteriaIDStream = SelectedCafeteriaIDStreamImpl()
+        
+        selectedDateStream = SelectedDateStreamImpl()
         
         super.init(dependency: dependency)
     }
