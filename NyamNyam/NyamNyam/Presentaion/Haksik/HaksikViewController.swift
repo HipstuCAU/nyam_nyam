@@ -36,7 +36,7 @@ final class HaksikViewController: UIViewController,
                                   NavigationConfigurable,
                                   AlertPresentable,
                                   WithHaptikFeedback {
-
+    
     weak var listener: HaksikPresentableListener?
     
     private let disposeBag: DisposeBag = .init()
@@ -75,8 +75,13 @@ final class HaksikViewController: UIViewController,
         return view
     }()
     
+    private let cardsSkeletonView: CardsSkeletonView = {
+        let view = CardsSkeletonView()
+        view.isSkeletonable = true
+        return view
+    }()
+    
     override func viewDidLoad() {
-        view.backgroundColor = Pallete.cauBlue.color
         deactivateNavigation()
         configureUI()
         bindUI()
@@ -196,6 +201,27 @@ private extension HaksikViewController {
     }
 }
 
+extension HaksikViewController {
+    func showMealPlanCards(mealPlanCards: ViewControllable) {
+        let uiviewController = mealPlanCards.uiviewController
+        addChild(uiviewController)
+        view.addSubview(uiviewController.view)
+        uiviewController.didMove(toParent: self)
+        
+        uiviewController.view.snp.makeConstraints { make in
+            make.top.equalTo(locationTitleView.snp.bottom).offset(10)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+    
+    func dismissMealPlanCards(mealPlanCards: ViewControllable) {
+        let uiviewController = mealPlanCards.uiviewController
+        uiviewController.willMove(toParent: nil)
+        uiviewController.view.removeFromSuperview()
+        uiviewController.removeFromParent()
+    }
+}
+
 // MARK: - Bind Actions
 private extension HaksikViewController {
     func bindActions() {
@@ -234,6 +260,7 @@ private extension HaksikViewController {
         setDatePickerViewLayout()
         setCafeteriaPickerViewLayout()
         setLocationTitleViewLayout()
+        setCardsSkeletonView()
     }
     
     private func setBackgroundGradient() {
@@ -287,6 +314,14 @@ private extension HaksikViewController {
             make.top.equalTo(cafeteriaPickerBackgroundView.snp.bottom).offset(8)
             make.trailing.equalToSuperview().offset(-70)
             make.height.equalTo(22)
+        }
+    }
+    
+    func setCardsSkeletonView() {
+        view.addSubview(cardsSkeletonView)
+        cardsSkeletonView.snp.makeConstraints { make in
+            make.top.equalTo(locationTitleView.snp.bottom).offset(10)
+            make.leading.trailing.bottom.equalToSuperview()
         }
     }
 }

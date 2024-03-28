@@ -12,7 +12,8 @@ import RxSwift
 import RxCocoa
 
 protocol HaksikRouting: ViewableRouting {
-    
+    func attachMealPlanCards(mealPlans: [MealPlan], cafeteriasID: [String])
+    func detachMealPlanCards()
 }
 
 protocol HaksikPresentable: Presentable {
@@ -27,8 +28,8 @@ protocol HaksikInteractorDependency {
     var haksikService: HaksikService { get }
     var userDataService: UserDataService { get }
     var universityInfoService: UniversityInfoService { get }
-    var selectedCafeteriaIDStream: MutableSelectedCafeteriaIDStream { get }
-    var selectedDateStream: MutableSelectedDateStream { get }
+    var mutableSelectedCafeteriaIDStream: MutableSelectedCafeteriaIDStream { get }
+    var mutableSelectedDateStream: MutableSelectedDateStream { get }
 }
 
 final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
@@ -71,6 +72,8 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
         case setSelectedDate(Date?)
         case setSelectedCafeteria(String?)
         case setFetchedHaskikData([MealPlan], UserUniversity, UniversityInfo)
+        case attachMealPlanCards
+        case detachMealPlanCards
     }
     
     func sendAction(_ action: Action) {
@@ -83,28 +86,30 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
         case .viewDidAppear, .retryLoad, .appWillEnterForeground:
             return .concat([
                 .just(.setLoading(true)),
+                .just(.detachMealPlanCards),
                 self.fetchHaksikDataTransform(),
+                .just(.attachMealPlanCards),
                 .just(.setLoading(false)),
             ])
             
         case let .dateSelected(date):
-            dependency.selectedDateStream.updateDate(with: date)
+            dependency.mutableSelectedDateStream.updateDate(with: date)
             return .empty()
             
         case let .cafeteriaSelected(id):
-            dependency.selectedCafeteriaIDStream.updateID(with: id)
+            dependency.mutableSelectedCafeteriaIDStream.updateID(with: id)
             return .empty()
         }
     }
     
     func transform(mutation: Observable<Mutation>) -> Observable<Mutation> {
-        let didSelectCafeteria = dependency.selectedCafeteriaIDStream
+        let didSelectCafeteria = dependency.mutableSelectedCafeteriaIDStream
             .selectedID
             .map { id -> Mutation in
                 .setSelectedCafeteria(id)
             }
         
-        let didSelectDate = dependency.selectedDateStream
+        let didSelectDate = dependency.mutableSelectedDateStream
             .selectedDate
             .map { date -> Mutation in
                 .setSelectedDate(date)
@@ -139,13 +144,16 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
             let campusID = userData.defaultCampusID
             let currentCampus = universityInfo.campusInfos
                 .first { $0.id == campusID }
-            
-            state.mealPlans = mealPlans
-            state.userUniversityData = userData
-            state.universityInfo = universityInfo
-            state.campusTitle = currentCampus?.name
-            state.cafeteriaInfos = currentCampus?.cafeteriaInfos ?? []
-            state.availableDates = mealPlans
+            let userCafeteriaIDs = userData.userCampuses
+                .filter({ $0.id == userData.defaultCampusID })
+                .first?
+                .cafeteriaIDs
+            let userCafeteriaInfos = userCafeteriaIDs?.compactMap { id in currentCampus?.cafeteriaInfos.first(
+                where: { info in
+                    info.id == id
+                })
+            }
+            let availableDates =  mealPlans
                 .filter({ mealPlan in
                     mealPlan.cafeterias
                         .filter({ cafeteria in
@@ -156,8 +164,27 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
                         .count > 0
                 })
                 .map { $0.date }
+            
+            state.mealPlans = mealPlans
+            state.userUniversityData = userData
+            state.universityInfo = universityInfo
+            state.campusTitle = currentCampus?.name
+            state.cafeteriaInfos = userCafeteriaInfos
+            state.availableDates = availableDates
+            
+        case .attachMealPlanCards:
+            if let mealPlans = state.mealPlans,
+               let cafeteriaInfos = state.cafeteriaInfos {
+                router?.attachMealPlanCards(
+                    mealPlans: mealPlans,
+                    cafeteriasID: cafeteriaInfos.map { $0.id }
+                )
+            }
+            
+        case .detachMealPlanCards:
+            router?.detachMealPlanCards()
+            
         }
-        
         return state
     }
     
@@ -176,7 +203,7 @@ final class HaksikInteractor: PresentableInteractor<HaksikPresentable>,
             dependency.userDataService.getUserUniversityID()
                 .asObservable()
                 .withUnretained(self)
-                .delay(.milliseconds(300), scheduler: MainScheduler.instance)
+                .delay(.milliseconds(900), scheduler: MainScheduler.instance)
                 .flatMap { owner, id in
                     owner.dependency.universityInfoService
                         .getUniversityInfo(id: id)

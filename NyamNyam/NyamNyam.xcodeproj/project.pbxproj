@@ -67,6 +67,8 @@
 		AB62D61429C63ACC003A8DF8 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB62D61229C63ACC003A8DF8 /* Pretendard-Light.otf */; };
 		AB62D61529C63ACC003A8DF8 /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = AB62D61229C63ACC003A8DF8 /* Pretendard-Light.otf */; };
 		AB62D61829C74C8C003A8DF8 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB62D61729C74C8C003A8DF8 /* ToastView.swift */; };
+		AB7B54F52BB5AB2900F6189D /* MealPlanCardsPresentableState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7B54F42BB5AB2900F6189D /* MealPlanCardsPresentableState.swift */; };
+		AB7B54F82BB5C92E00F6189D /* CardsSkeletonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7B54F72BB5C92E00F6189D /* CardsSkeletonView.swift */; };
 		AB8F41AD2B77CD8200231CEB /* CafeteriaInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41AC2B77CD8200231CEB /* CafeteriaInfo.swift */; };
 		AB8F41B02B77CE8400231CEB /* UniversityInfoRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41AF2B77CE8400231CEB /* UniversityInfoRepository.swift */; };
 		AB8F41B32B77CEF700231CEB /* UniversityInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8F41B22B77CEF700231CEB /* UniversityInfoDTO.swift */; };
@@ -105,6 +107,10 @@
 		ABB6164C2BB3CECA00D0BD7B /* WithHaptikFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB6164B2BB3CECA00D0BD7B /* WithHaptikFeedback.swift */; };
 		ABB6164F2BB409A000D0BD7B /* SelectedCafeteriaID.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB6164E2BB409A000D0BD7B /* SelectedCafeteriaID.swift */; };
 		ABB616512BB40DA200D0BD7B /* SelectedDateStream.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB616502BB40DA200D0BD7B /* SelectedDateStream.swift */; };
+		ABB616572BB411C900D0BD7B /* MealPlanCardsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB616532BB411C900D0BD7B /* MealPlanCardsRouter.swift */; };
+		ABB616582BB411C900D0BD7B /* MealPlanCardsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB616542BB411C900D0BD7B /* MealPlanCardsViewController.swift */; };
+		ABB616592BB411C900D0BD7B /* MealPlanCardsBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB616552BB411C900D0BD7B /* MealPlanCardsBuilder.swift */; };
+		ABB6165A2BB411C900D0BD7B /* MealPlanCardsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABB616562BB411C900D0BD7B /* MealPlanCardsInteractor.swift */; };
 		ABBDF69129B9C53C00E9347A /* CarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBDF69029B9C53C00E9347A /* CarouselCell.swift */; };
 		ABBDF69329BA328A00E9347A /* ExpandableMealCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBDF69229BA328900E9347A /* ExpandableMealCardView.swift */; };
 		ABEAFBCB29AC9ED3002C3119 /* TempAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEAFBCA29AC9ED3002C3119 /* TempAppDelegate.swift */; };
@@ -189,6 +195,8 @@
 		AB62D60E29C63AB7003A8DF8 /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
 		AB62D61229C63ACC003A8DF8 /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
 		AB62D61729C74C8C003A8DF8 /* ToastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToastView.swift; sourceTree = "<group>"; };
+		AB7B54F42BB5AB2900F6189D /* MealPlanCardsPresentableState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlanCardsPresentableState.swift; sourceTree = "<group>"; };
+		AB7B54F72BB5C92E00F6189D /* CardsSkeletonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsSkeletonView.swift; sourceTree = "<group>"; };
 		AB8F41AC2B77CD8200231CEB /* CafeteriaInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CafeteriaInfo.swift; sourceTree = "<group>"; };
 		AB8F41AF2B77CE8400231CEB /* UniversityInfoRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInfoRepository.swift; sourceTree = "<group>"; };
 		AB8F41B22B77CEF700231CEB /* UniversityInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversityInfoDTO.swift; sourceTree = "<group>"; };
@@ -225,6 +233,10 @@
 		ABB6164B2BB3CECA00D0BD7B /* WithHaptikFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WithHaptikFeedback.swift; sourceTree = "<group>"; };
 		ABB6164E2BB409A000D0BD7B /* SelectedCafeteriaID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCafeteriaID.swift; sourceTree = "<group>"; };
 		ABB616502BB40DA200D0BD7B /* SelectedDateStream.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedDateStream.swift; sourceTree = "<group>"; };
+		ABB616532BB411C900D0BD7B /* MealPlanCardsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlanCardsRouter.swift; sourceTree = "<group>"; };
+		ABB616542BB411C900D0BD7B /* MealPlanCardsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlanCardsViewController.swift; sourceTree = "<group>"; };
+		ABB616552BB411C900D0BD7B /* MealPlanCardsBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlanCardsBuilder.swift; sourceTree = "<group>"; };
+		ABB616562BB411C900D0BD7B /* MealPlanCardsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealPlanCardsInteractor.swift; sourceTree = "<group>"; };
 		ABBDF69029B9C53C00E9347A /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
 		ABBDF69229BA328900E9347A /* ExpandableMealCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableMealCardView.swift; sourceTree = "<group>"; };
 		ABEAFBC729AC9ED3002C3119 /* NyamNyam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NyamNyam.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -480,6 +492,7 @@
 				7A8405652B4BBBA600830F77 /* AppStart */,
 				7A84055C2B4BBAC800830F77 /* Root */,
 				7A8405962B54B7DE00830F77 /* Haksik */,
+				ABB616522BB4116F00D0BD7B /* MealPlanCards */,
 			);
 			path = Presentaion;
 			sourceTree = "<group>";
@@ -539,6 +552,14 @@
 				AB62D61729C74C8C003A8DF8 /* ToastView.swift */,
 			);
 			path = Toast;
+			sourceTree = "<group>";
+		};
+		AB7B54F62BB5C90C00F6189D /* CardsSkelton */ = {
+			isa = PBXGroup;
+			children = (
+				AB7B54F72BB5C92E00F6189D /* CardsSkeletonView.swift */,
+			);
+			path = CardsSkelton;
 			sourceTree = "<group>";
 		};
 		AB8F41AE2B77CE6C00231CEB /* Repositories */ = {
@@ -741,6 +762,7 @@
 				ABB6162C2BB069EE00D0BD7B /* CampusTitle */,
 				ABB616252BA8286100D0BD7B /* DatePicker */,
 				ABB616282BA828A700D0BD7B /* CaferiaPicker */,
+				AB7B54F62BB5C90C00F6189D /* CardsSkelton */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -794,6 +816,18 @@
 				ABB616502BB40DA200D0BD7B /* SelectedDateStream.swift */,
 			);
 			path = Streams;
+			sourceTree = "<group>";
+		};
+		ABB616522BB4116F00D0BD7B /* MealPlanCards */ = {
+			isa = PBXGroup;
+			children = (
+				ABB616532BB411C900D0BD7B /* MealPlanCardsRouter.swift */,
+				ABB616542BB411C900D0BD7B /* MealPlanCardsViewController.swift */,
+				ABB616552BB411C900D0BD7B /* MealPlanCardsBuilder.swift */,
+				ABB616562BB411C900D0BD7B /* MealPlanCardsInteractor.swift */,
+				AB7B54F42BB5AB2900F6189D /* MealPlanCardsPresentableState.swift */,
+			);
+			path = MealPlanCards;
 			sourceTree = "<group>";
 		};
 		ABBDF68F29B9C52000E9347A /* Components */ = {
@@ -1151,9 +1185,12 @@
 				7A8405A82B5513D300830F77 /* AlertType.swift in Sources */,
 				ABB616222BA5917D00D0BD7B /* DatePickerView.swift in Sources */,
 				7A8405872B4D657300830F77 /* FileError.swift in Sources */,
+				AB7B54F52BB5AB2900F6189D /* MealPlanCardsPresentableState.swift in Sources */,
 				ABB616242BA826A000D0BD7B /* CafeteriaPickerView.swift in Sources */,
+				ABB616572BB411C900D0BD7B /* MealPlanCardsRouter.swift in Sources */,
 				ABEAFBCF29AC9ED3002C3119 /* HomeViewController.swift in Sources */,
 				AB8F41C42B79134700231CEB /* CampusInfoDTO.swift in Sources */,
+				ABB616592BB411C900D0BD7B /* MealPlanCardsBuilder.swift in Sources */,
 				7A84059E2B54B7F300830F77 /* HaksikInteractor.swift in Sources */,
 				AB934C522B5E4B9F00B14810 /* UIViewController+.swift in Sources */,
 				7A84056C2B4BC81400830F77 /* Reactive+.swift in Sources */,
@@ -1200,12 +1237,15 @@
 				AB8F41D12B7BDDAB00231CEB /* UserUniversity.swift in Sources */,
 				2A429D9529BDDB370044A3E6 /* SettingListTableViewController.swift in Sources */,
 				ABEAFC1829ADC2B0002C3119 /* OptionSelectModuleViewController.swift in Sources */,
+				ABB616582BB411C900D0BD7B /* MealPlanCardsViewController.swift in Sources */,
 				7A8405792B4D14A700830F77 /* HaksikService.swift in Sources */,
 				ABEAFBCB29AC9ED3002C3119 /* TempAppDelegate.swift in Sources */,
 				ABEAFC0A29ACA523002C3119 /* MealPlanJsonRemoteRepository.swift in Sources */,
 				2A429DA829BF62E80044A3E6 /* SetDefaultCampusView.swift in Sources */,
 				AB9B39A029BF535000249C61 /* DividerView.swift in Sources */,
 				AB8F41C72B7BA3EC00231CEB /* UserUniversityDTO.swift in Sources */,
+				ABB6165A2BB411C900D0BD7B /* MealPlanCardsInteractor.swift in Sources */,
+				AB7B54F82BB5C92E00F6189D /* CardsSkeletonView.swift in Sources */,
 				ABA0CC332B77AC9200B77A8B /* UniversityInfoService.swift in Sources */,
 				ABEAFC0729ACA4E5002C3119 /* String+.swift in Sources */,
 				2A429DAE29C040D20044A3E6 /* Reachability.swift in Sources */,

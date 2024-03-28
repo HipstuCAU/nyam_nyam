@@ -12,16 +12,25 @@ protocol HaksikDependency: Dependency {
 }
 
 final class HaksikComponent: Component<HaksikDependency>,
-                             HaksikInteractorDependency {
+                             HaksikInteractorDependency,
+                             MealPlanCardsDependency {
     let haksikService: HaksikService
     
     let userDataService: UserDataService
     
     let universityInfoService: UniversityInfoService
     
-    let selectedCafeteriaIDStream: MutableSelectedCafeteriaIDStream
+    let mutableSelectedCafeteriaIDStream: MutableSelectedCafeteriaIDStream
     
-    let selectedDateStream: MutableSelectedDateStream
+    let mutableSelectedDateStream: MutableSelectedDateStream
+    
+    var selectedCafeteriaIDStream: SelectedCafeteriaIDStream {
+        mutableSelectedCafeteriaIDStream
+    }
+    
+    var selectedDateStream: SelectedDateStream {
+        mutableSelectedDateStream
+    }
     
     override init(dependency: HaksikDependency) {
         let localFileName = "CAUMeals"
@@ -53,9 +62,9 @@ final class HaksikComponent: Component<HaksikDependency>,
             repository: MockUniversityRepositoryImpl()
         )
         
-        selectedCafeteriaIDStream = SelectedCafeteriaIDStreamImpl()
+        mutableSelectedCafeteriaIDStream = SelectedCafeteriaIDStreamImpl()
         
-        selectedDateStream = SelectedDateStreamImpl()
+        mutableSelectedDateStream = SelectedDateStreamImpl()
         
         super.init(dependency: dependency)
     }
@@ -88,9 +97,14 @@ final class HaksikBuilder: Builder<HaksikDependency>,
         )
         interactor.listener = listener
         
+        let mealPlanCardsBuilder = MealPlanCardsBuilder(
+            dependency: component
+        )
+        
         return HaksikRouter(
             interactor: interactor,
-            viewController: viewController
+            viewController: viewController,
+            mealPlanCardsBuilder: mealPlanCardsBuilder
         )
     }
 }
